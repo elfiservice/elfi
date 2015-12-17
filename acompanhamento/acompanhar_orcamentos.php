@@ -74,8 +74,8 @@ display: inline-block;
 <link rel="stylesheet" href="../tabela/demo_page.css">  
 <link rel="stylesheet" href="../tabela/demo_table.css">  
 
-		<script type="text/javascript" language="javascript" src="../tabela/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="../tabela/jquery.dataTables.js"></script>
+		<script type="text/javascript"  src="../tabela/jquery.js"></script>
+		<script type="text/javascript"  src="../tabela/jquery.dataTables.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$('#example').dataTable();
@@ -253,84 +253,84 @@ display: inline-block;
 <div id="menu">
 <ul>
 
-<li><a href="#" onclick="window.open('novo_orc_aprovado.php?id_orc=&msg_erro=', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-Novo orc. aprovado
-</a>
-</li>
-<li><a href="#" onclick="window.open('relatorios.php?ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-Relatórios
-</a>
-</li>
-<li><a href="#" onclick="window.open('link_pesquisa_satisfacao.php?mes=fev&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-Link Pesquisa
-</a>
-</li>
-<li><a href="#" onclick="window.open('email_situacao_orc.php', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-Enviar Situação Orc.
-</a>
-</li>
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=jan&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-JAN
-</a>
-</li>
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=fev&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-FEV
-</a>
-</li>
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=mar&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-MAR
-</a>
-</li>
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=abr&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-ABR
-</a>
-</li>
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=mai&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-MAI
-</a>
-</li>
-
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=jun&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-JUN
-</a>
-</li>
-
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=jul&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-JUL
-</a>
-</li>
-
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=ago&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-AGO
-</a>
-</li>
-
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=set&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-SET
-</a>
-</li>
-
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=out&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-OUT
-</a>
-</li>
-
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=nov&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-NOV
-</a>
-</li>
-
-<li><a href="#" onclick="window.open('acompanhamento.php?mes=dez&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-DEZ
-</a>
-</li>
-
+	<li><a href="#" onclick="window.open('novo_orc_aprovado.php?id_orc=&msg_erro=', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	Novo orc. aprovado
+	</a>
+	</li>
+	<li><a href="#" onclick="window.open('relatorios.php?ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	Relatórios
+	</a>
+	</li>
+	<li><a href="#" onclick="window.open('link_pesquisa_satisfacao.php?mes=fev&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	Link Pesquisa
+	</a>
+	</li>
+	<li><a href="#" onclick="window.open('email_situacao_orc.php', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	Enviar Situação Orc.
+	</a>
+	</li>
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=jan&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	JAN
+	</a>
+	</li>
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=fev&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	FEV
+	</a>
+	</li>
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=mar&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	MAR
+	</a>
+	</li>
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=abr&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	ABR
+	</a>
+	</li>
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=mai&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	MAI
+	</a>
+	</li>
+	
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=jun&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	JUN
+	</a>
+	</li>
+	
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=jul&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	JUL
+	</a>
+	</li>
+	
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=ago&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	AGO
+	</a>
+	</li>
+	
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=set&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	SET
+	</a>
+	</li>
+	
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=out&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	OUT
+	</a>
+	</li>
+	
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=nov&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	NOV
+	</a>
+	</li>
+	
+	<li><a href="#" onclick="window.open('acompanhamento.php?mes=dez&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+	DEZ
+	</a>
+	</li>
+</ul>
 </div>
 
 <div id="situacao_orc">
 
             <fieldset>
-            <legend><h3>Programados</h3></legend>
+            <legend><b>Programados</b></legend>
 			
 <TABLE  class="display" id="example2">
 <thead>

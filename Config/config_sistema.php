@@ -10,7 +10,7 @@
 $local_serve = "localhost"; 	 // local do servidor
 $usuario_serve = "root";		 // nome do usuario
 $senha_serve = "";			 	 // senha
-$banco_de_dados = "sistema_elfi"; 	 // nome do banco de dados
+$banco_de_dados = "elfiserv_sistema_elfi"; 	 // nome do banco de dados
 
 $conn = @mysql_connect($local_serve,$usuario_serve,$senha_serve) or die ("O servidor não responde!");
 
