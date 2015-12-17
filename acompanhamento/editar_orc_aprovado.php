@@ -6,23 +6,24 @@
         include_once "../Config/config_sistema.php"; 
 
 		
-				        $id_orc = "";
+		$id_orc = "";
         if(isSet ($_GET['id_orc'])) {
         
              $id_orc = $_GET['id_orc'];
         } 
 		
-			$sql_nome_user = mysql_query("SELECT * FROM acompanhamento WHERE id = '$id_orc'") or die (mysql_error()); 
+			$sql_nome_user = mysql_query("SELECT * FROM orcamentos WHERE id = '$id_orc'") or die (mysql_error()); 
 			$linha_usuario = mysql_fetch_object($sql_nome_user);
                 
-                $cliente = $linha_usuario->cliente;
+                $cliente = $linha_usuario->razao_social_contr;
 				$atividade = $linha_usuario->atividade;
 				$classificacao = $linha_usuario->classificacao;
-				$inf_servicos = $linha_usuario->inf_servicos;
-				$novo_cliente = $linha_usuario->novo_cliente;
+				$inf_servicos = $linha_usuario->descricao_servico_orc;
+				//$novo_cliente = $linha_usuario->novo_cliente;
 				$n_orc = $linha_usuario->n_orc;
-				$prazo_exec = $linha_usuario->prazo_exec;
-				$email = $linha_usuario->email;
+				$ano_orc = $linha_usuario->ano_orc;
+				$prazo_exec = $linha_usuario->prazo_exec_orc;
+				$email = $linha_usuario->email_contr;
 				$data_aprovada = $linha_usuario->data_aprovada;
 				
 				$data_inicio = $linha_usuario->data_inicio;
@@ -31,7 +32,7 @@
 				$nao_conformidade = $linha_usuario->nao_conformidade;
 				$obs_n_conformidad = $linha_usuario->obs_n_conformidad;
 				$client_insatisfeito = $linha_usuario->client_insatisfeito;
-				$vr_proposta_aprovada = $linha_usuario->vr_orc;
+				$vr_proposta_aprovada = $linha_usuario->vr_total_orc;
 				
 				
 				
@@ -95,7 +96,7 @@ display: inline-block;
 	
 	</style>
 
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
    function mascaraData(campoData){
               var data = campoData.value;
               if (data.length == 2){
@@ -220,7 +221,7 @@ display: inline-block;
 		
 		</div>
         <form action="acompanhar_orcamentos.php" method="post" enctype="multipart/form-data" name="formlogin">
-						<table align="center">
+						<table>
 						
 							<tr style = "vertical-align: top;">
 								<td COLSPAN="2" height = "20" style = "padding: 0 0 0 11px;">
@@ -277,7 +278,7 @@ display: inline-block;
 
 
 <a href="javascript:history.back();" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a>
- <script language="JavaScript">
+ <script>
 <!--
 
 /***********************************************
@@ -349,42 +350,29 @@ function formCheck(formobj){
             <form name="clientForm" method="post" action="salvar_orc_editado.php" onsubmit="return formCheck(this);">       
 
             <fieldset>
-            <legend><h3>Dados</h3></legend>
+            <legend><b>Dados</b></legend>
                 <table border="0">
                                 <tbody>
 
                                     <tr align="left">
-                                        <td><label for="clientID">Cliente: </label></br>
-                                            <select id="clientID" name="clientID">
-                                                <option value="<?php echo $cliente; ?>"><?php echo $cliente; ?></option>
-                                                    <?php
-                                                            $sql = "SELECT razao_social
-                                                                            FROM clientes
-                                                                            ORDER BY razao_social";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
-                                                                    echo '<option id="clientID" value="'.$row['razao_social'].'">'.$row['razao_social'].'</option>';
-                                                            }
-                                                    ?>
-                                                            
-                                           </select>
-                                            
+                                        <td><label for="clientID">Cliente: </label><br>
+                 								<?php echo $cliente; ?>                                            
                                         </td>
 
                                     </tr>
                                 <tr align="left">
                                     
-                                    <td><label for="n_orc">Nº Orçamento:</label></br>
-                                    <input name="n_orc" id="n_orc" value="<?php echo $n_orc; ?>" size="10" maxlength="8">
-                                    
+                                    <td><label for="n_orc">Nº Orçamento:</label><br>
+                                    <!-- input name="n_orc" id="n_orc" value="<?php echo $n_orc; ?>" size="10" maxlength="8"-->
+                                    <?php echo $n_orc; //por o ANO depois ?>
                                     </td>
                                  
                                     
                                     
                                 </tr> 
-                                <tr align="left">
+                                <!-- tr align="left">
                                     
-                                    <td><label for="novo_cliente">Novo cliente? :</label></br>
+                                    <td><label for="novo_cliente">Novo cliente? :</label><br>
 									<?php
 								if ($novo_cliente == 's') {
 
@@ -401,43 +389,32 @@ function formCheck(formobj){
 									}
 									?>
 									
-									</td>
+									</td-->
                                  
                                     
                                     
                                 </tr> 	
+
 								<tr align="left">
                                     
-                                    <td><label for="prz_execucao">Prazo execução:</label></br>
-										<input type="number" value="<?php echo $prazo_exec; ?>" name="prz_execucao" id="prz_execucao" size="3" maxlength="3">
-                                    
-                                    </td>
-                                 
-                                    
-                                    
-                                </tr> 
-								<tr align="left">
-                                    
-                                    <td><label for="data_aprovada">Data Aprovado:</label></br>
-										<input type="text" value="<?php echo $data_aprovada; ?>" name="data" id="data" maxlength="10" >
-                                    
+                                    <td><label for="data_aprovada">Data Aprovado:</label><br>
+										<!-- input type="text" value="<?php echo $data_aprovada; ?>" name="data" id="data" maxlength="10" -->
+                                    	<?php $data = explode("-", $data_aprovada);
+                                    			echo $data[2]."/".$data[1]."/".$data[0];	
+                                    	?>
                                     </td>
 									
-									<td><label for="data_inicio">Data Inicio:</label></br>
+									<td><label for="data_inicio">Data Inicio:</label><br>
 										<input type="text" value="<?php echo $data_inicio; ?>" name="data_inicio" id="data_inicio" maxlength="10" >
                                     
                                     </td>
 									
-									<td><label for="data_aprovada">Data Conclusao:</label></br>
+									<td><label for="data_aprovada">Data Conclusao:</label><br>
 										<input type="text" value="<?php echo $data_conclusao; ?>" name="data_conclusao" id="data_conclusao" maxlength="10" >
                                     
                                     </td>
                                  
-                                    
-                                    
-                               
-
-                                    <td><label for="nao_conformidade">Não conformidades? :</label></br>
+                                    <td><label for="nao_conformidade">Não conformidades? :</label><br>
 									<?php
 								if ($nao_conformidade == 's') {
 
@@ -455,7 +432,7 @@ function formCheck(formobj){
 									?>
 									
 									</td>
-								<td><label for="nao_conformidade">Cliente insatisfeito? :</label></br>
+								<td><label for="nao_conformidade">Cliente insatisfeito? :</label><br>
 									<?php
 								if ($client_insatisfeito == 's') {
 
@@ -477,10 +454,7 @@ function formCheck(formobj){
 
                                 <tr align="left">
                                     
-                                    <td><label for="email_orc">Email:</label></br>
-                                    <input name="email_orc" value="<?php echo $email; ?>" id="email_orc" size="20" maxlength="255">
-                                    
-                                    </td>
+								
                                  
                                     
                                     
@@ -488,112 +462,33 @@ function formCheck(formobj){
                                 </tbody>
                 </table>
            </fieldset>
-
-
-		   
-                 
-           <fieldset>
-            <legend><h3>Classificação da Atividade</h3></legend>
-            
-             <table border="0">
-                                <tbody>
-
-
-
-                               <tr align="left">
-                                    <td><label for="atividade" size="20">Atividade</label>
-                                    
-                                            
-
-                                            
-                                    </td>
-
-                                    <td><label for="classificacao">Classificação:</label>
-                                     
-                                    </td>
-                                    
-                                    
-                                </tr>
-                                <tr align="left">
-                                    
-                                    <td>
-                                        <select id="" name="atividade1">
-                                                <option name="" value="<?php echo $atividade; ?>" ><?php echo $atividade; ?> </option>
-                                                    <?php
-                                                            $sql = "SELECT *
-                                                                            FROM orc_atividades
-                                                                            ORDER BY atividade";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
-                                                                    echo '<option id="" value="'.utf8_encode($row['atividade']).'" >'. utf8_encode($row['atividade']).'</option>';
-                                                             }
-                                                    ?>
-                                                       
-                                         </select>
-                                    
-                                    </td>
-                                     <td>
-                                        <select id="" name="classificacao1">
-                                                <option value="<?php echo $classificacao; ?>" ><?php echo $classificacao; ?></option>
-                                                    <?php
-                                                            $sql = "SELECT *
-                                                                            FROM orc_classificacao_ativid
-                                                                            ORDER BY classificacao";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
-                                                                    echo '<option id="" value="'.utf8_encode($row['classificacao']).'" >'.utf8_encode($row['classificacao']).'</option>';
-                                                             }
-                                                    ?>
-                                                       
-                                         </select>
-                                    
-                                    </td>
-                                 
-                                    
-                                    
-                                </tr>
-                              
-                                </tbody>
-                </table>
-            
-           </fieldset>
-                    
-                    
-          <fieldset>
-              <legend><h3>Descrição dos Serviços</h3></legend>
-            
-            
-                         <textarea onfocus="init();" rows="1" cols="100" style="height:1em;" id="text" name="descricao_servicos"><?php echo $inf_servicos; ?></textarea>
-                  								
-							</br>
-									<label for="email_orc">OBS da não conformidade:</label></br>
+           
+                     <fieldset>
+ 				
+									<label >OBS da não conformidade:</label>
 									<textarea  rows="1" cols="100" style="height:1em;" id="text" name="obs_n_conformidad"><?php echo $obs_n_conformidad; ?></textarea>
 							    
                          
           </fieldset>
-                    
-					
-			          <fieldset>
-              <legend><h3>Valor da Proposta</h3></legend>
-            
-            
-                  <input name="vr_proposta_aprovada" id="vr_proposta_aprovada" value="<?php echo $vr_proposta_aprovada; ?>" size="15" maxlength="15">        
-                  
-          </fieldset>		
+           
 
-                  
-               
-                    
 						<table border="0">
                             
                                <tr align="left">
                                     <td>
                                         
 
-                                        <input type="submit" value="Salvar Orçamento" name="salvar_orc" />
+                                        <input type="submit" value="Atualizar Orçamento" name="salvar_orc" />
                                         <input type="hidden" value="<?php echo date('Y'); ?>" name="ano_atual_orc" hidden="hidden" />
                                         <input type="hidden" name="usuario" value="<?php echo $logOptions_id; ?>" readonly="readonly" />
 										<input type="hidden" name="id_orc" value="<?php echo $id_orc; ?>" readonly="readonly" />
+										<input type="hidden" name="data" value="<?php echo $data_aprovada; ?>" readonly="readonly" />
+										<input type="hidden" name="prz_execucao" value="<?php echo $prazo_exec; ?>" readonly="readonly" />
+										<input type="hidden" name="email_orc" value="<?php echo $email; ?>" readonly="readonly" />
+										<input type="hidden" name="descricao_servicos" value="<?php echo $inf_servicos; ?>" readonly="readonly" />
+										<input type="hidden" name="vr_proposta_aprovada" value="<?php echo $vr_proposta_aprovada; ?>" readonly="readonly" />
+										<input type="hidden" name="clientID" value="<?php echo $cliente; ?>" readonly="readonly" />
+										<input type="hidden" name="n_orc" value="<?php echo $n_orc; ?>" readonly="readonly" />
                                      
                                     </td>
 
@@ -609,15 +504,7 @@ function formCheck(formobj){
 				
 				
               </div>
-			  <div class="thepet" style="text-align: center;">
 
-					<form name="clientFormexcluir" method="post" action="excluir_orc.php" > 
-					
-						<input type="submit" value="EXCLUIR Orçamento" name="excluir_orc" />
-						<input type="hidden" name="id_orc" value="<?php echo $id_orc; ?>" readonly="readonly" />
-					
-					</form>
-			</div>
 <?php
 }
 
