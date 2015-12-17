@@ -196,7 +196,7 @@ display: inline-block;
 		
 		</div>
         <form action="acompanhar_orcamentos.php" method="post" enctype="multipart/form-data" name="formlogin">
-						<table align="center">
+						<table >
 						
 							<tr style = "vertical-align: top;">
 								<td COLSPAN="2" height = "20" style = "padding: 0 0 0 11px;">
@@ -354,7 +354,7 @@ display: inline-block;
 			
 <?php
 		$data_hj = date('Y-m-d');
-       $sql = "SELECT * FROM acompanhamento WHERE data_inicio > '$data_hj' AND data_conclusao = '0000-00-00' ORDER BY id";
+       $sql = "SELECT * FROM orcamentos WHERE data_inicio > '$data_hj' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado' ORDER BY id";
         $res = mysql_query( $sql );
          while ( $row = mysql_fetch_assoc( $res ) ) {
 		 
@@ -370,13 +370,13 @@ display: inline-block;
 	  <TR>
 		<td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a><br>
 		<a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
-	    <Td><?php echo $row['cliente']; ?></Td>
+	    <Td><?php echo $row['razao_social_contr']; ?></Td>
 		<TD><?php echo $row['atividade']; ?></TD>
 		<TD><?php echo $row['classificacao']; ?></TD>
-		<TD><?php echo $row['inf_servicos']; ?></TD>
-		<TD><?php echo $row['novo_cliente']; ?></TD>
-		<TD><?php echo $row['n_orc']; ?></TD>
-		<TD><?php echo $row['prazo_exec']; ?></TD>
+		<TD><?php echo $row['descricao_servico_orc']; ?></TD>
+		<TD><?php //echo $row['novo_cliente']; ?></TD>
+		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
+		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
 		<TD><?php echo $row['data_aprovada']; ?></TD>
 		<TD><?php echo $row['data_inicio']; ?></TD>
 		<TD><?php echo $row['data_conclusao']; ?></TD>
@@ -394,7 +394,7 @@ display: inline-block;
 
 
             <fieldset>
-            <legend><h3>Em Execução</h3></legend>
+            <legend><b>Em Execução</b></legend>
 			
 <TABLE  class="display" id="example">
 <thead>
@@ -417,7 +417,7 @@ display: inline-block;
   <tbody>
 			
 <?php
-       $sql = "SELECT * FROM acompanhamento WHERE data_inicio <= '$data_hj' AND data_inicio <> '0000-00-00' AND data_conclusao = '0000-00-00' ORDER BY id";
+       $sql = "SELECT * FROM orcamentos WHERE data_inicio <= '$data_hj' AND data_inicio <> '0000-00-00' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado' ORDER BY id";
         $res = mysql_query( $sql );
          while ( $row = mysql_fetch_assoc( $res ) ) {
 		 
@@ -431,13 +431,13 @@ display: inline-block;
 	  <TR>
 		<td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a><br>
 		<a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
-	    <Td><?php echo $row['cliente']; ?></Td>
+	    <Td><?php echo $row['razao_social_contr']; ?></Td>
 		<TD><?php echo $row['atividade']; ?></TD>
 		<TD><?php echo $row['classificacao']; ?></TD>
-		<TD><?php echo $row['inf_servicos']; ?></TD>
-		<TD><?php echo $row['novo_cliente']; ?></TD>
-		<TD><?php echo $row['n_orc']; ?></TD>
-		<TD><?php echo $row['prazo_exec']; ?></TD>
+		<TD><?php echo $row['descricao_servico_orc']; ?></TD>
+		<TD><?php //echo $row['novo_cliente']; ?></TD>
+		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
+		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
 		<TD><?php echo $row['data_aprovada']; ?></TD>
 		<TD><?php echo $row['data_inicio']; ?></TD>
 		<TD><?php echo $row['data_conclusao']; ?></TD>
@@ -455,7 +455,7 @@ display: inline-block;
 			
 			
             <fieldset>
-            <legend><h3>Aguardando Programação</h3></legend>
+            <legend><b>Aguardando Programação</b></legend>
 			
 <TABLE  class="display" id="example3">
 <thead>
@@ -478,7 +478,7 @@ display: inline-block;
   <tbody>
 			
 <?php
-       $sql = "SELECT * FROM acompanhamento WHERE data_inicio = '0000-00-00' AND data_conclusao = '0000-00-00' ORDER BY id";
+       $sql = "SELECT * FROM orcamentos WHERE data_inicio = '0000-00-00' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado'  ORDER BY id";
         $res = mysql_query( $sql );
          while ( $row = mysql_fetch_assoc( $res ) ) {
 		 
@@ -491,13 +491,13 @@ display: inline-block;
 	  <TR>
 		<td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a><br>
 		<a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
-	    <Td><?php echo $row['cliente']; ?></Td>
+	    <Td><?php echo $row['razao_social_contr']; ?></Td>
 		<TD><?php echo $row['atividade']; ?></TD>
 		<TD><?php echo $row['classificacao']; ?></TD>
-		<TD><?php echo $row['inf_servicos']; ?></TD>
-		<TD><?php echo $row['novo_cliente']; ?></TD>
-		<TD><?php echo $row['n_orc']; ?></TD>
-		<TD><?php echo $row['prazo_exec']; ?></TD>
+		<TD><?php echo $row['descricao_servico_orc']; ?></TD>
+		<TD><?php //echo $row['novo_cliente']; ?></TD>
+		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
+		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
 		<TD><?php echo $row['data_aprovada']; ?></TD>
 		<TD><?php echo $row['data_inicio']; ?></TD>
 		<TD><?php echo $row['data_conclusao']; ?></TD>
