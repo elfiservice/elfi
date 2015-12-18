@@ -216,11 +216,11 @@ if (isset ($_POST['clientID']))
 			$email3 = "edson@elfiservice.com.br";
 			$email4 = "armando@elfiservice.com.br";
 		
-			$imagem_nome="";
-			$arquivo=fopen($imagem_nome,'r');
-			$contents = fread($arquivo, filesize($imagem_nome));
-			$encoded_attach = chunk_split(base64_encode($contents));
-			fclose($arquivo);
+			//$imagem_nome="";
+			//$arquivo=fopen($imagem_nome,'r');
+			//$contents = fread($arquivo, filesize($imagem_nome));
+			//$encoded_attach = chunk_split(base64_encode($contents));
+			//fclose($arquivo);
 			$limitador = "_=======". date('YmdHms'). time() . "=======_";
 		
 			$mailheaders = "From: junior@elfiservice.com.br\r\n";
@@ -309,10 +309,10 @@ if (isset ($_POST['clientID']))
 			$msg_body .= "Content-type: text/html; charset=utf-8\r\n";
 			$msg_body .= "$texto";
 			$msg_body .= "--$limitador\r\n";
-			$msg_body .= "Content-type: image/jpeg; name=\"$imagem_nome\"\r\n";
+			//$msg_body .= "Content-type: image/jpeg; name=\"$imagem_nome\"\r\n";
 			$msg_body .= "Content-Transfer-Encoding: base64\r\n";
 			$msg_body .= "Content-ID: <$cid>\r\n";
-			$msg_body .= "\n$encoded_attach\r\n";
+			//$msg_body .= "\n$encoded_attach\r\n";
 			$msg_body .= "--$limitador--\r\n";
 		
 		
@@ -483,7 +483,7 @@ exit();
           * 
   */
     }else {
-    	echo "erro";
+    	echo "erro na verificação de existencia do Orçamento";
     }
     
     
