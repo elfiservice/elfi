@@ -18,10 +18,10 @@
              $id_orc = $_GET['id_orc'];
         } 
 	
-		$sql_acompa_orc = mysql_query("SELECT * FROM acompanhamento WHERE id='$id_orc'") or die (mysql_error()); 
+		$sql_acompa_orc = mysql_query("SELECT * FROM orcamentos WHERE id='$id_orc'") or die (mysql_error()); 
 		$linha = mysql_fetch_object($sql_acompa_orc);
                 
-                $cliente = $linha->cliente;
+                $cliente = $linha->razao_social_contr;
 				$n_orc = $linha->n_orc;
 				$data_hj = date('Y-m-d');
 
