@@ -472,8 +472,22 @@ if (isset ($_POST['clientID']))
 alert ("OrÃ§amento editado com Sucesso!");
 </script>
     
-<a href="javascript:window.history.go(-2)">Voltar</a>
-<!--a href="novo_orc_aprovado.php?id_orc=&msg_erro=#" target="_self">Voltar</a-->
+
+ <script type="text/javascript">
+//função usada para carregar o código
+function fecha() {
+//fechando a janela atual ( popup )
+window.close();
+//dando um refresh na página principal
+//opener.location.href=opener.location.href;
+/* ou assim:*/ 
+window.opener.location.reload();
+
+//document.location="Cores.htm"
+//fim da função
+}
+</script>
+<a href="javascript:void(0)" onclick="fecha()">fechar</a>
 
 
 <?php

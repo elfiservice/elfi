@@ -254,7 +254,7 @@ display: inline-block;
 <ul>
 
 	<li><a href="#" onclick="window.open('novo_orc_aprovado.php?id_orc=&msg_erro=', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-	Novo orc. aprovado
+	Voltar
 	</a>
 	</li>
 	<li><a href="#" onclick="window.open('relatorios.php?ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">

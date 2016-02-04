@@ -277,9 +277,9 @@ display: inline-block;
 
 
 
-<a href="javascript:history.back();" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a>
- <script>
-<!--
+<a href="javascript:void(0)" onclick="fecha()">Fechar</a>
+
+ <!--
 
 /***********************************************
 * Required field(s) validation v1.10- By NavSurf
