@@ -10,7 +10,8 @@
 if (!isset($_SESSION['idx'])) { 
   if (!isset($_COOKIE['idCookie'])) {
 
-		include_once '../conectar.php';
+		//include_once '../conectar.php';
+  	header("location: ../index.php");
   }
 } else {
 

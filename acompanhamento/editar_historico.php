@@ -25,7 +25,36 @@
 				$descricao = $linha->descricao;
 				$data_hj = date('Y-m-d');
 
-	
+
+				
+				
+	//------ CHECK IF THE USER IS LOGGED IN OR NOT AND GIVE APPROPRIATE OUTPUT -------
+				if (!isset($_SESSION['idx'])) {
+					if (!isset($_COOKIE['idCookie'])) {
+				
+						 
+						echo "Você não esta logado!";
+				
+						 
+						?>
+						  		 <script type="text/javascript">
+								//função usada para carregar o código
+								function fecha() {
+								//fechando a janela atual ( popup )
+								window.close();
+								//dando um refresh na página principal
+								//opener.location.href=opener.location.href;
+								/* ou assim:*/ 
+								window.opener.location.reload();
+								
+								//document.location="Cores.htm"
+								//fim da função
+								}
+								</script>
+								<a href="javascript:void(0)" onclick="fecha()">fechar</a>
+						  	<?php 
+				  }
+				} else {
 
 ?>
 
@@ -118,10 +147,10 @@ display: inline-block;
             <legend><h3>Dados</h3></legend>
 				<form action="salvar_historico_editado.php" method="post" enctype="multipart/form-data" name="formAgenda">
 				Data: 	<?php echo $data_hj; ?>
-</br></br>
+
 				<label for="email_orc">DescriÃ§Ã£o:</label></br>
 				<textarea  rows="3" cols="100" id="text" name="descricao_historico"><?php echo $descricao; ?></textarea>
-							    </br></br>
+							    
 				<input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="logar" value="Salvar" id="logar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  />
                  <input type="hidden" value="<?php echo $data_hj; ?>" name="dia_hoje" hidden="hidden" />
                  <input type="hidden" name="usuario" value="<?php echo $logOptions_id; ?>" readonly="readonly" />
@@ -136,3 +165,8 @@ display: inline-block;
 
 </body>
 </html>
+
+<?php 
+	}
+	
+?>
