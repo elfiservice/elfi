@@ -1,21 +1,30 @@
 <?php
- 
-//echo date('Y')+2 .'<br>';
+
+// echo date('Y')+2 .'<br>';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-        include "checkuserlog.php";
+include "checkuserlog.php";
 
-        include_once "Config/config_sistema.php"; 
+include_once "Config/config_sistema.php";
 
-        $dyn_www = $_SERVER['HTTP_HOST'];  
 
-        $menu = "";
-        if(isSet ($_GET['id_menu'])) {
-        
-             $menu = $_GET['id_menu'];
-        } 
+if (! isset ( $_SESSION ['idx'] )) {
+	if (! isset ( $_COOKIE ['idCookie'] )) {
+
+		// include_once '../conectar.php';
+		header ( "location: index.php" );
+	}
+} else {
+
+$dyn_www = $_SERVER ['HTTP_HOST'];
+
+$menu = "";
+if (isSet ( $_GET ['id_menu'] )) {
+	
+	$menu = $_GET ['id_menu'];
+}
 ?>
 
 
@@ -23,41 +32,35 @@
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="pt"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="pt"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="pt"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="pt"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Sistema ELFI | Técnico</title>
-        
-	<meta name="description" content="">
-	<meta name="author" content="Elfi Service">
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="pt">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Sistema ELFI | Técnico</title>
 
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="estilos.css">    
+<meta name="description" content="">
+<meta name="author" content="Elfi Service">
 
-    <script src="js/jquery.min.js" type="text/javascript"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="estilos.css">
+
+<script src="js/jquery.min.js" type="text/javascript"></script>
 
 
-       
-    
+
+<!-- Mostra colaborador Logado -->
 <script type="text/javascript">
-// Chama aba Seu Estado
 $(document).ready(function() {
-
 $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo $logOptions_id;?>');
-
-
 });
-
 </script>
-
+<!-- FIM Mostra colaborador Logado -->
 
 <!-- Menus dorp down  -->
-
 <link rel="stylesheet" type="text/css" href="js/menus/anylinkmenu.css" />
-
 <script type="text/javascript" src="js/menus/menucontents.js"></script>
-
 <script type="text/javascript" src="js/menus/anylinkmenu.js">
 
 /***********************************************
@@ -67,7 +70,6 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
 ***********************************************/
 
 </script>
-
 <script type="text/javascript">
 
 //anylinkmenu.init("menu_anchors_class") //Pass in the CSS class of anchor links (that contain a sub menu)
@@ -79,8 +81,8 @@ anylinkmenu.init("menuanchorclass")
 <!--
 Inicio menu colaps (esconder ou mostrar) Vertical
 -->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript" src="js/esconder_mostrar/ddaccordion.js">
 
 /***********************************************
@@ -90,21 +92,17 @@ Inicio menu colaps (esconder ou mostrar) Vertical
 ***********************************************/
 
 </script>
-
-
 <style type="text/css">
-	.mypets{ /*header of 1st demo*/
+.mypets { /*header of 1st demo*/
 	cursor: hand;
 	cursor: pointer;
 	padding: 2px 5px;
+}
 
-	}
-
-	.openpet{ /*class added to contents of 1st demo when they are open*/
+.openpet { /*class added to contents of 1st demo when they are open*/
 	border-bottom: 2px solid #012B8B;
-	}
+}
 </style>
-
 <script type="text/javascript">
 
 //Initialize first demo:
@@ -136,12 +134,14 @@ FINAL Inicio menu colaps (esconder ou mostrar) Vertical
 
 
 <!-- Tabela  -->
-<link rel="stylesheet" href="tabela/demo_page.css">  
-<link rel="stylesheet" href="tabela/demo_table.css">  
+<link rel="stylesheet" href="tabela/demo_page.css">
+<link rel="stylesheet" href="tabela/demo_table.css">
 
-		<script type="text/javascript" language="javascript" src="tabela/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="tabela/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" language="javascript"
+	src="tabela/jquery.js"></script>
+<script type="text/javascript" language="javascript"
+	src="tabela/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$('#example').dataTable();
 			} );
@@ -150,7 +150,7 @@ FINAL Inicio menu colaps (esconder ou mostrar) Vertical
 
 <!--  Busca cliente para Auto Preenchimento  -->
 <script type="text/javascript" src="js/buscacliente/ajax.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 
 	var ajax = new sack();
 	var currentClientID=false;
@@ -195,7 +195,6 @@ planet.innerHTML = "<input onClick=\"return mostra_form_obra()\" name=\"submit\"
 //window.onload = cara;
 
 </script>
-
 <script type="text/javascript">
 
 function mostra_form_obra() {
@@ -288,7 +287,7 @@ function init () {
 
 
 
-</script>        
+</script>
 <script type="text/javascript">
 var observe2;
 if (window.attachEvent) {
@@ -324,7 +323,7 @@ function init2 () {
 
 
 
-</script>            
+</script>
 
 <!-- soma valores do serviço e materiais no ORçamento  -->
 <!--script language="javascript">
@@ -351,7 +350,7 @@ document.getElementById("total_orc") = preco + material - desconto;
 }
 </SCRIPT-->
 
- <script>
+<script>
         $(document).ready ( function () {
             $("#btn1").click ( function () {
               var resultVal = 0.0;
@@ -363,16 +362,16 @@ document.getElementById("total_orc") = preco + material - desconto;
         });
     </script>
 
-<!-- FIM  soma valores do serviço e materiais no ORçamento  -->    
+<!-- FIM  soma valores do serviço e materiais no ORçamento  -->
 
 
 <!--
 MAscaras em campos
 -->
-
 <script src="js/jquery.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/mascara/jquery.meio.mask.js" charset="utf-8"></script>
-<script type="text/javascript" >
+<script type="text/javascript" src="js/mascara/jquery.meio.mask.js"
+	charset="utf-8"></script>
+<script type="text/javascript">
   (function($){
     // call setMask function on the document.ready event
       $(function(){
@@ -384,23 +383,16 @@ MAscaras em campos
 <!--
 FIM  MAscaras em campos
 -->
-  
+
 <!--
  SOMA campos
 -->
-
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
-
-	<!--// load jQuery Plug-ins //-->
-
-	<script type="text/javascript" src=""></script>
-
-	<script type="text/javascript" src="js/calcular/jquery.calculation.js"></script>
-
-
-
-	<script type="text/javascript">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<!--// load jQuery Plug-ins //-->
+<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="js/calcular/jquery.calculation.js"></script>
+<script type="text/javascript">
 
 	var bIsFirebugReady = (!!window.console && !!window.console.log);
 
@@ -478,8 +470,6 @@ FIM  MAscaras em campos
 
 			);
 
-
-
 			// this calculates the average for some text nodes
 
 			$("#idTotalTextAvg").click(
@@ -488,9 +478,6 @@ FIM  MAscaras em campos
 
 					// get the average of the elements
 					var avg = $(".textAvg").avg();
-
-
-
 					// update the total
 					$("#totalTextAvg").text(avg.toString());
 
@@ -530,240 +517,85 @@ FIM  MAscaras em campos
 	}
 
 	</script>
-
-
-
 <!--
 fim SOMA CAMPOS em campos
 -->
 
-    
+
 </head>
 <body>
+
+
+	<div
+		style="background: url(imagens/topo1.png) repeat-x; padding: 5px 0px 30px 0px;">
+	</div>
 	
-        
-        <div  style="background: url(imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;">
-		</div>
-	
-
-    <?php
-
-
-		//------ CHECK IF THE USER IS LOGGED IN OR NOT AND GIVE APPROPRIATE OUTPUT -------
-		//$logOptions = ''; // Initialize the logOptions variable that gets printed to the page
-		// If the session variable and cookie variable are not set this code runs
-		if (!isset($_SESSION['idx'])) { 
-		  if (!isset($_COOKIE['idCookie'])) {
-
-		// Initialize some vars
-
-		$link_estado = "";
-		$errorMsg = '';
-		$email = '';
-		$pass = '';
-		$remember = '';
-		if (isset($_POST['email'])) {
-			
-			$email = $_POST['email'];
-			$pass = $_POST['pass'];
-			if (isset($_POST['remember'])) {
-				$remember = $_POST['remember'];
-			}
-			$email = stripslashes($email);
-			$pass = stripslashes($pass);
-			$email = strip_tags($email);
-			$pass = strip_tags($pass);
-			
-			// error handling conditional checks go here
-			if ((!$email) || (!$pass)) { 
-
-				$errorMsg = 'Preencha por favor ambos os campos';
-
-
-			} else { // Error handling is complete so process the info if no errors
-				include 'Config/config_sistema.php'; // Connect to the database
-				$email = mysql_real_escape_string($email); // After we connect, we secure the string before adding to query
-				//$pass = mysql_real_escape_string($pass); // After we connect, we secure the string before adding to query
-				$pass = md5($pass); // Add MD5 Hash to the password variable they supplied after filtering it
-				// Make the SQL query
-				$sql = mysql_query("SELECT * FROM colaboradores WHERE Email='$email' AND Senha='$pass' ") or die (mysql_error()); 
-				$login_check = mysql_num_rows($sql);
-				// If login check number is greater than 0 (meaning they do exist and are activated)
-				if($login_check > 0){ 
-						while($row = mysql_fetch_array($sql)){
-							
-							// Pleae note: Adam removed all of the session_register() functions cuz they were deprecated and
-							// he made the scripts to where they operate universally the same on all modern PHP versions(PHP 4.0  thru 5.3+)
-							// Create session var for their raw id
-							$id = $row["id_colaborador"];   
-							$_SESSION['id'] = $id;
-							// Create the idx session var
-							$_SESSION['idx'] = base64_encode("g4p3h9xfn8sq03hs2234$id");
-							// Create session var for their username
-							$username = $row["Login"];
-							$_SESSION['Login'] = $username;
-
-							mysql_query("UPDATE colaboradores SET last_log_date=now() WHERE id_colaborador = '$id' LIMIT 1");
-				
-						} // close while
-			
-						// Remember Me Section
-						if($remember == "yes"){
-							$encryptedID = base64_encode("g4enm2c0c4y3dn3727553$id");
-							setcookie("idCookie", $encryptedID, time()+60*60*24*100, "/"); // Cookie set to expire in about 30 days
-							setcookie("passCookie", $pass, time()+60*60*24*100, "/"); // Cookie set to expire in about 30 days
-						} 
-						// All good they are logged in, send them to homepage then exit script
-						
-							$_SESSION['email'] = $email;
-							$_SESSION['pass'] = $pass;
-						
-						$header = header("location: index.php"); 
-						
-						
-						exit();
-			
-				} else { // Run this code if login_check is equal to 0 meaning they do not exist
-					$errorMsg = "Dados incorretos, por favor tente novamente";
-
-				}
-
-
-			} // Close else after error checks
-
-			
-		} //Close if (isset ($_POST['uname'])){
-        ?>
-        
-
-		<div >
-			
-			<h2 style="text-align: center;" >
-			
-				Acesso ao Sistema Integrado da ELFI SERVICE para os Colaboradores	
-				
-			</h2>
-		
-		</div>
-        <form action="index.php" method="post" enctype="multipart/form-data" name="formlogin">
-						<table align="center">
-						
-							<tr style = "vertical-align: top;">
-								<td COLSPAN="2" height = "20" style = "padding: 0 0 0 11px;">
-									<span style="font: 11px verdana, arial, helvetica, sans-serif; color: red; width:0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"> <?php echo $errorMsg; ?> </span>
-								</td>
-							</tr>
-							<tr>
-								<td style = "padding: 0 0 0 11px;">
-									<span style=" color:#012B8B; font: 12px 'lucida grande',tahoma,verdana,arial,sans-serif;  text-align: center;">Email </span>
-								</td>
-								
-								<td style = "padding: 0 0 0 11px;">
-									<span style=" color:#012B8B; font: 12px 'lucida grande',tahoma,verdana,arial,sans-serif;  text-align: right;">Senha </span>
-								</td>
-							</tr>
-							
-							<tr>
-								<td style = "padding: 0 0 0 11px;">
-									<label for="textfield"></label>
-									<input name="email" type="text" id="email" maxlength="200" style=" width: 169px; border:1px dotted #ffffff;  background-color: #F0F2F9" />
-								</td>
-								<td style = "padding: 0 0 0 11px;">
-									<label for="label"></label>
-									<input name="pass" type="password" id="pass" maxlength="16"  style=" width: 169px; border:1px dotted #ffffff; background-color: #F0F2F9" />
-								</td>
-								<td style = "padding: 0 0 0 11px;">
-								<label for="Submit"></label>
-								<input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="logar" value="Entrar" id="logar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  />
-								</td>								
-							</tr>						
-							
-							<tr>
-								<td style = "padding: 0 0 0 11px;">
-									<input name="remember" type="checkbox" id="remember" value="yes" />
-									<span style=" color:#012B8B; font: 11px 'lucida grande',tahoma,verdana,arial,sans-serif; text-align: right;">Mantenha-me conectado</span>
-								</td>
-								<td style = "padding: 0 0 0 11px;">
-									<a href="senha.php" class="style3" style="cursor:pointer; color:#012B8B; font: 11px 'lucida grande',tahoma,verdana,arial,sans-serif;">Esqueceu sua Senha?</a>
-								</td>
-							</tr>
-						</table>
-								
-	
-	
-
-	</form>
-
-       <?php
-  }
-} else {
 
     
-    ?>
-    
-    <h2 style="text-align: center;" >Técnico</h2>
-        <div style="">
-            
-            <div id="colaborador_logado">
-                
-            </div>
-                 
-            <div style="float: right">
+    <h2 style="text-align: center;">Técnico</h2>
+	<div style="">
+
+		<div id="colaborador_logado"></div>
+
+		<div style="float: right">
                 <?php
-                echo $logOptions;
-                ?>
+					echo $logOptions;
+					?>
             </div>
-        </div>
+	</div>
         
 <?php
-  			$consulta_colab = mysql_query("select * from colaboradores where id_colaborador = '$logOptions_id'");
-			$linha_colab = mysql_fetch_object($consulta_colab);
+					$consulta_colab = mysql_query ( "select * from colaboradores where id_colaborador = '$logOptions_id'" );
+					$linha_colab = mysql_fetch_object ( $consulta_colab );
+					
+					$tipo_conta = $linha_colab->tipo;
+					
+					if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh") 
 
-                        $tipo_conta = $linha_colab->tipo;
-
-
-    if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh")
-        
-    {
-?>
+					{
+						?>
 	   
-	<div style="margin:20px 0px 20px 0px;">
-        <div class="barra_menu" style="background: #012B8B; text-align:center; padding:5px 0px 0px 0px;">
+	<div style="margin: 20px 0px 20px 0px;">
+		<div class="barra_menu"
+			style="background: #012B8B; text-align: center; padding: 5px 0px 0px 0px;">
 		</div>
-		
-        <div id="menu_paginas">
-            <ul>
-                <li><a href="#" class="menuanchorclass myownclass" rel="tecnico_cadastro">Cadastro</a></li>
-                <li><a href="#" class="menuanchorclass myownclass" rel="tecnico_orcamento">Orçamento</a></li>
-                <li><a href="acompanhamento/acompanhar_orcamentos.php" class="menuanchorclass myownclass" rel="">Acompanhamento Orc. Aprovados</a></li>
-            </ul>
-        </div>
-            
-        <div class="barra_menu" style="background: #012B8B; text-align:center; padding:5px 0px 0px 0px;">
+
+		<div id="menu_paginas">
+			<ul>
+				<li><a href="#" class="menuanchorclass myownclass"
+					rel="tecnico_cadastro">Cadastro</a></li>
+				<li><a href="#" class="menuanchorclass myownclass"
+					rel="tecnico_orcamento">Orçamento</a></li>
+				<li><a href="acompanhamento/acompanhar_orcamentos.php"
+					class="menuanchorclass myownclass" rel="">Acompanhamento Orc.
+						Aprovados</a></li>
+			</ul>
 		</div>
-            
-            
-            
-        </div>
-        
-        
-        
-        <div style="margin:20px 0px 20px 0px;">
+
+		<div class="barra_menu"
+			style="background: #012B8B; text-align: center; padding: 5px 0px 0px 0px;">
+		</div>
+
+
+
+	</div>
+
+
+
+	<div style="margin: 20px 0px 20px 0px;">
             
 <?php
+						
+						// Menu novo orçamento
+						if ($menu == "orcamento") {
+							
+							// echo "";
+							
+							?>
             
-            
- //Menu novo orçamento           
-    if ($menu == "orcamento")
-    {
+<!-- Cadastrar novos Clientes -->
 
-        //echo "";
-               
-?>
-            
-<!-- Cadastrar novos Clientes -->  
- 
- <script language="JavaScript">
+		<script language="JavaScript">
 <!--
 
 /***********************************************
@@ -827,432 +659,366 @@ function formCheck(formobj){
 }
 // -->
 </script>
- 
 
- 
-            <h3 class="mypets">Novo Orçamento (clique aqui)</h3>
-           
-            <div class="thepet" style="text-align: center;">
-                
-                 
-                
-                <form name="clientForm" method="post" action="salvar_novo_orc.php" onsubmit="return formCheck(this);">       
 
-            <fieldset>
-            <legend><h3>Contratante</h3></legend>
-                <table border="0">
-                                <tbody>
 
-                                    <tr align="left">
-                                        <td><label for="clientID">Cliente:</label></br>
-                                            <select id="clientID" name="clientID">
-                                                <option value=""></option>
+		<h3 class="mypets">Novo Orçamento (clique aqui)</h3>
+
+		<div class="thepet" style="text-align: center;">
+
+
+
+			<form name="clientForm" method="post" action="salvar_novo_orc.php"
+				onsubmit="return formCheck(this);">
+
+				<fieldset>
+					<legend>
+						<h3>Contratante</h3>
+					</legend>
+					<table border="0">
+						<tbody>
+
+							<tr align="left">
+								<td><label for="clientID">Cliente:</label></br> <select
+									id="clientID" name="clientID">
+										<option value=""></option>
                                                     <?php
-                                                            $sql = "SELECT razao_social
-                                                                            FROM clientes
-                                                                            ORDER BY razao_social";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
-                                                                    echo '<option id="clientID" value="'.$row['razao_social'].'">'.$row['razao_social'].'</option>';
-                                                            }
-                                                    ?>
+							$sql = "SELECT razao_social FROM clientes ORDER BY razao_social";
+							$res = mysql_query ( $sql );
+							while ( $row = mysql_fetch_assoc ( $res ) ) {
+								echo '<option id="clientID" value="' . $row ['razao_social'] . '">' . $row ['razao_social'] . '</option>';
+							}
+							?>
                                                             
-                                           </select>
-                                            
-                                        </td>
-                                    </tr>
-                                  <tr align="left">
-                                      <td><label for="razao_social">Razão Social:</label></br>
-                                        <input name="razao_social" id="razao_social" size="60" maxlength="255">
-                                      </td>
+                                           </select></td>
+							</tr>
+							<tr align="left">
+								<td><label for="razao_social">Razão Social:</label></br> <input
+									name="razao_social" id="razao_social" size="60" maxlength="255">
+								</td>
 
-                                      <td><label for="cnpj">CNPJ:</label></br>
-                                        <input name="cnpj" id="cnpj" alt="" size="20" maxlength="255">
-                                    </td>
-                                </tr>
-                                  <tr align="left">
-                                    <td><label for="endereco">Endereço:</label></br>
-                                    <input name="endereco" id="endereco" size="60" maxlength="255"></td>
-                                  </tr>
-                                  <tr align="left">
-                                    <td><label for="bairro">Bairro:</label></br>
-                                    <input name="bairro" id="bairro" size="20" maxlength="255">
-                                    
-                                    </td>
-                                    
-                                   <td><label for="city">Cidade:</label></br>
-                                    <input name="city" id="city" size="20" maxlength="255">
-                                    
-                                    </td>
-                                    <td><label for="estado">Estado:</label></br>
-                                    <input name="estado" id="estado" size="20" maxlength="255">
-                                    
-                                    </td>
-                                    
-                                </tr>
-                                <tr align="left">
-                                    
-                                    <td><label for="cep">CEP:</label></br>
-                                    <input name="cep" id="cep" size="20" maxlength="15">
-                                    
-                                    </td>
-                                     <td><label for="tel">Telefone:</label></br>
-                                    <input name="tel" id="tel" size="20" maxlength="15">
-                                    
-                                    </td>
-                                     <td><label for="cel">Celular:</label></br>
-                                    <input name="cel" id="cel" size="20" maxlength="15">
-                                    
-                                    </td>                                   
-                                    
-                                    
-                                </tr>
-                                <tr align="left">
-                                    
-                                    <td><label for="email_orc">Email:</label></br>
-                                    <input name="email_orc" id="email_orc" size="20" maxlength="255">
-                                    
-                                    </td>
-                                 
-                                    
-                                    
-                                </tr>                                
-                                </tbody>
-                </table>
-           </fieldset>
+								<td><label for="cnpj">CNPJ:</label></br> <input name="cnpj"
+									id="cnpj" alt="" size="20" maxlength="255"></td>
+							</tr>
+							<tr align="left">
+								<td><label for="endereco">Endereço:</label></br> <input
+									name="endereco" id="endereco" size="60" maxlength="255"></td>
+							</tr>
+							<tr align="left">
+								<td><label for="bairro">Bairro:</label></br> <input
+									name="bairro" id="bairro" size="20" maxlength="255"></td>
 
-          <fieldset>
-              <legend><h3>Contato</h3></legend>
-            
-            
-                         <input id="contato_clint" name="contato_clint" size="80" maxlength="100" />
-                         
-                         
-          </fieldset>                     
-                    
-                    
-                    
-            <fieldset>
-            <legend><h3>Local da obra</h3></legend>
-            
-            <div id="form_local_obra">
-            <input onClick="return retira_form_obra()" name="submit" type="submit" value="Os dados da contratante é o mesmo da Obra."  />
-            
-                <table border="0">
-                                <tbody>
+								<td><label for="city">Cidade:</label></br> <input name="city"
+									id="city" size="20" maxlength="255"></td>
+								<td><label for="estado">Estado:</label></br> <input
+									name="estado" id="estado" size="20" maxlength="255"></td>
+
+							</tr>
+							<tr align="left">
+
+								<td><label for="cep">CEP:</label></br> <input name="cep"
+									id="cep" size="20" maxlength="15"></td>
+								<td><label for="tel">Telefone:</label></br> <input name="tel"
+									id="tel" size="20" maxlength="15"></td>
+								<td><label for="cel">Celular:</label></br> <input name="cel"
+									id="cel" size="20" maxlength="15"></td>
 
 
-                                  <tr align="left">
-                                      <td><label for="razao_social2">Razão Social:</label></br>
-                                        <input name="razao_social2" id="razao_social2" size="60" maxlength="255">
-                                      </td>
+							</tr>
+							<tr align="left">
 
-                                      <td><label for="cnpj2">CNPJ:</label></br>
-                                        <input name="cnpj2" id="cnpj2" size="20" alt="cnpj" maxlength="22">
-                                    </td>
-                                </tr>
-                                  <tr align="left">
-                                    <td><label for="endereco2">Endereço:</label></br>
-                                    <input name="endereco2" id="endereco2" size="60" maxlength="255"></td>
-                                  </tr>
-                                  <tr align="left">
-                                    <td><label for="bairro2">Bairro:</label></br>
-                                    <input name="bairro2" id="bairro2" size="20" maxlength="255">
-                                    
-                                    </td>
-                                    
-                                   <td><label for="city2">Cidade:</label></br>
-                                    <input name="city2" id="city2" size="20" maxlength="255">
-                                    
-                                    </td>
-                                    <td><label for="estado2">Estado:</label></br>
-                                    <input name="estado2" id="estado2" size="20" maxlength="255">
-                                    
-                                    </td>
-                                    
-                                </tr>
-                                <tr align="left">
-                                    
-                                    <td><label for="cep2">CEP:</label></br>
-                                    <input name="cep2" id="cep2" alt="cep"  size="20" maxlength="12">
-                                    
-                                    </td>
-                                     <td><label for="tel2">Telefone:</label></br>
-                                    <input name="tel2" id="tel2" size="20" alt="phone" maxlength="15">
-                                    
-                                    </td>
-                                     <td><label for="cel2">Celular:</label></br>
-                                    <input name="cel2" id="cel2" size="20" alt="cel" maxlength="15">
-                                    
-                                    </td>                                   
-                                    
-                                    
-                                </tr>
-                                <tr align="left">
-                                    
-                                    <td><label for="email_orc2">Email:</label></br>
-                                    <input name="email_orc2" id="email_orc2" size="20" maxlength="255">
-                                    
-                                    </td>
-                                 
-                                    
-                                    
-                                </tr>                                
-                                </tbody>
-                </table>
-            
-            </div>
-           </fieldset>                    
-                 
-           <fieldset>
-            <legend><h3>Classificação da Atividade</h3></legend>
-            
-             <table border="0">
-                                <tbody>
+								<td><label for="email_orc">Email:</label></br> <input
+									name="email_orc" id="email_orc" size="20" maxlength="255"></td>
 
 
 
-                               <tr align="left">
-                                    <td><label for="atividade" size="20">Atividade</label>
-                                    
-                                            
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
 
-                                            
-                                    </td>
+				<fieldset>
+					<legend>
+						<h3>Contato</h3>
+					</legend>
 
-                                    <td><label for="classificacao">Classificação:</label>
-                                     
-                                    </td>
-                                    
-                                   <td><label for="quantidade">Quantidade:</label>
-                                    
-                                    </td>
-                                    <td><label for="unidade">Unidade:</label>
-                                    </td>
-                                    
-                                </tr>
-                                <tr align="left">
-                                    
-                                    <td>
-                                        <select id="" name="atividade1">
-                                                <option name="" value="" > </option>
+
+					<input id="contato_clint" name="contato_clint" size="80"
+						maxlength="100" />
+
+
+				</fieldset>
+
+
+
+				<fieldset>
+					<legend>
+						<h3>Local da obra</h3>
+					</legend>
+
+					<div id="form_local_obra">
+						<input onClick="return retira_form_obra()" name="submit"
+							type="submit" value="Os dados da contratante é o mesmo da Obra." />
+
+						<table border="0">
+							<tbody>
+
+
+								<tr align="left">
+									<td><label for="razao_social2">Razão Social:</label></br> <input
+										name="razao_social2" id="razao_social2" size="60"
+										maxlength="255"></td>
+
+									<td><label for="cnpj2">CNPJ:</label></br> <input name="cnpj2"
+										id="cnpj2" size="20" alt="cnpj" maxlength="22"></td>
+								</tr>
+								<tr align="left">
+									<td><label for="endereco2">Endereço:</label></br> <input
+										name="endereco2" id="endereco2" size="60" maxlength="255"></td>
+								</tr>
+								<tr align="left">
+									<td><label for="bairro2">Bairro:</label></br> <input
+										name="bairro2" id="bairro2" size="20" maxlength="255"></td>
+
+									<td><label for="city2">Cidade:</label></br> <input name="city2"
+										id="city2" size="20" maxlength="255"></td>
+									<td><label for="estado2">Estado:</label></br> <input
+										name="estado2" id="estado2" size="20" maxlength="255"></td>
+
+								</tr>
+								<tr align="left">
+
+									<td><label for="cep2">CEP:</label></br> <input name="cep2"
+										id="cep2" alt="cep" size="20" maxlength="12"></td>
+									<td><label for="tel2">Telefone:</label></br> <input name="tel2"
+										id="tel2" size="20" alt="phone" maxlength="15"></td>
+									<td><label for="cel2">Celular:</label></br> <input name="cel2"
+										id="cel2" size="20" alt="cel" maxlength="15"></td>
+
+
+								</tr>
+								<tr align="left">
+
+									<td><label for="email_orc2">Email:</label></br> <input
+										name="email_orc2" id="email_orc2" size="20" maxlength="255"></td>
+
+
+
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>
+						<h3>Classificação da Atividade</h3>
+					</legend>
+
+					<table border="0">
+						<tbody>
+
+
+
+							<tr align="left">
+								<td><label for="atividade" size="20">Atividade</label></td>
+
+								<td><label for="classificacao">Classificação:</label></td>
+
+								<td><label for="quantidade">Quantidade:</label></td>
+								<td><label for="unidade">Unidade:</label></td>
+
+							</tr>
+							<tr align="left">
+
+								<td><select id="" name="atividade1">
+										<option name="" value=""></option>
                                                     <?php
-                                                            $sql = "SELECT *
-                                                                            FROM orc_atividades
-                                                                            ORDER BY atividade";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
-                                                                    echo '<option id="" value="'.utf8_encode($row['atividade']).'" >'. utf8_encode($row['atividade']).'</option>';
-                                                             }
-                                                    ?>
+							$sql = "SELECT * FROM orc_atividades ORDER BY atividade";
+							$res = mysql_query ( $sql );
+							while ( $row = mysql_fetch_assoc ( $res ) ) {
+								echo '<option id="" value="' . utf8_encode ( $row ['atividade'] ) . '" >' . utf8_encode ( $row ['atividade'] ) . '</option>';
+							}
+							?>
                                                        
-                                         </select>
-                                    
-                                    </td>
-                                     <td>
-                                        <select id="" name="classificacao1">
-                                                <option value="" ></option>
+                                         </select></td>
+								<td><select id="" name="classificacao1">
+										<option value=""></option>
                                                     <?php
-                                                            $sql = "SELECT *
-                                                                            FROM orc_classificacao_ativid
-                                                                            ORDER BY classificacao";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
-                                                                    echo '<option id="" value="'.utf8_encode($row['classificacao']).'" >'.utf8_encode($row['classificacao']).'</option>';
-                                                             }
-                                                    ?>
+							$sql = "SELECT * FROM orc_classificacao_ativid ORDER BY classificacao";
+							$res = mysql_query ( $sql );
+							while ( $row = mysql_fetch_assoc ( $res ) ) {
+								echo '<option id="" value="' . utf8_encode ( $row ['classificacao'] ) . '" >' . utf8_encode ( $row ['classificacao'] ) . '</option>';
+							}?>
                                                        
-                                         </select>
-                                    
-                                    </td>
-                                     <td>
-                                    <input name="quantidade1" id="" size="10" maxlength="10">
-                                    
-                                    </td>  
-                                     <td>
-                                        <select id="" name="unidade1">
-                                                <option value="" ></option>
+                                         </select></td>
+								<td><input name="quantidade1" id="" size="10" maxlength="10"></td>
+								<td><select id="" name="unidade1">
+										<option value=""></option>
                                                     <?php
-                                                            $sql = "SELECT *
-                                                                            FROM orc_unidades
-                                                                            ORDER BY unidade";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
-                                                                    echo '<option id="" value="'.utf8_encode($row['unidade']).'" >'.utf8_encode($row['unidade']).'</option>';
-                                                             }
-                                                    ?>
+							$sql = "SELECT * FROM orc_unidades ORDER BY unidade";
+							$res = mysql_query ( $sql );
+							while ( $row = mysql_fetch_assoc ( $res ) ) {
+								echo '<option id="" value="' . utf8_encode ( $row ['unidade'] ) . '" >' . utf8_encode ( $row ['unidade'] ) . '</option>';
+							}?>
                                                        
-                                         </select>
-                                    
-                                    </td>                                    
-                                    
-                                    
-                                </tr>
-                              
-                                </tbody>
-                </table>
-            
-           </fieldset>
-                    
-                    
-          <fieldset>
-              <legend><h3>Descrição dos Serviços</h3></legend>
-            
-            
-                         <textarea onfocus="init();" rows="1" cols="100" style="height:1em;" id="text" name="descricao_servicos"></textarea>
-                         
-                         
-          </fieldset>
-                    
-          <fieldset>
-              <legend><h3>Condições</h3></legend>
-            
-                         <table border="0">
-                            
-                               <tr align="left">
-                                    <td><label for="execucao_orc" size="20"> Prazo execução</label>
-                                       
-                                    </td>
+                                         </select></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
 
-                                    <td><label for="validade_orc">Validade</label>
-                                     
-                                    </td>
-                                    
-                                   <td><label for="pagamento_orc">Pagamento</label>
-                                    
-                                    </td>
-                                    
-                                </tr>
-                                 <tr align="left">
-                                    <td>
-                                       <input name="execucao_orc" id="execucao_orc" size="5" maxlength="3"> dias
-                                    </td>
-                                       
-                                    <td>
-                                      <input name="validade_orc" id="validade_orc" size="5" maxlength="3"> dias
-                                    </td>
-                                    
-                                   <td>
-                                     <input name="pagamento_orc" id="pagamento_orc" size="80" maxlength="80">
-                                    </td>
-                                    
-                                </tr>
-                         </table>
-    
-          </fieldset>
-  
-                    
-          <fieldset>
-              <legend><h3>Observações</h3></legend>
-            
-            
-                         <textarea onfocus="init2();" rows="1" cols="100" style="height:1em;" id="text2" name="observacoes_servico"></textarea>
-                         
-                         
-          </fieldset>                    
 
-          <fieldset>
-              <legend><h3>Em caso dúvida / Negociações</h3></legend>
-            
-                         <input name="duvida_orc" id="duvida_orc" size="50" maxlength="50">
-                         
-          </fieldset>                    
+				<fieldset>
+					<legend>
+						<h3>Descrição dos Serviços</h3>
+					</legend>
 
-          <fieldset>
-              <legend><h3>Valor</h3></legend>
-            
-                         <table border="0">
-                            
-                               <tr align="left">
-                                    <td><label for="vr_servico_orc" size="20"> Valor do serviço</label>
-                                       
-                                    </td>
 
-                                    <td><label for="vr_material_orc">Valor do material</label>
-                                     
-                                    </td>
-                                    
+					<textarea onfocus="init();" rows="1" cols="100"
+						style="height: 1em;" id="text" name="descricao_servicos"></textarea>
 
-                                    
-                                   <td><label for="total_orc">Total da proposta</label>
-                                    
-                                    </td>                                    
-                                    
-                                </tr>
-                                 <tr align="left">
-                                    <td>
-                                       <input onchange="soma11()" name="sum_vr_servico_orc" id="vr_servico_orc" alt="decimal" size="15" maxlength="15"> 
-                                    </td>
-                                       
-                                    <td>
-                                      <input onchange="soma11()" name="sum_vr_material_orc" id="vr_material_orc" alt="decimal" size="15" maxlength="15"> 
-                                    </td>
-                                    
-                                   <td>
-                                     R$
 
-				<input type="text" name="totalSum" id="totalSum" value="" size="15" readonly="readonly" />
-                                    </td>
-                                    
-                                    
-                                </tr>
-                         </table>
-                         
-          </fieldset>                     
-                    
-                                           <table border="0">
-                            
-                               <tr align="left">
-                                    <td>
-                                        
+				</fieldset>
 
-                                        <input type="submit" value="Salvar novo Orçamento" name="salvar_orc" />
-                                        <input type="hidden" value="<?php echo date('Y'); ?>" name="ano_atual_orc" hidden="hidden" />
-                                        <input type="hidden" name="usuario" value="<?php echo $logOptions_id; ?>" readonly="readonly" />
-                                     
-                                    </td>
+				<fieldset>
+					<legend>
+						<h3>Condições</h3>
+					</legend>
 
-                                 
-                                    
-                                </tr>
+					<table border="0">
 
-                         </table>
-                </form>
-                
-              </div>	  
+						<tr align="left">
+							<td><label for="execucao_orc" size="20"> Prazo execução</label>
+
+							</td>
+
+							<td><label for="validade_orc">Validade</label></td>
+
+							<td><label for="pagamento_orc">Pagamento</label></td>
+
+						</tr>
+						<tr align="left">
+							<td><input name="execucao_orc" id="execucao_orc" size="5"
+								maxlength="3"> dias</td>
+
+							<td><input name="validade_orc" id="validade_orc" size="5"
+								maxlength="3"> dias</td>
+
+							<td><input name="pagamento_orc" id="pagamento_orc" size="80"
+								maxlength="80"></td>
+
+						</tr>
+					</table>
+
+				</fieldset>
+
+
+				<fieldset>
+					<legend>
+						<h3>Observações</h3>
+					</legend>
+
+
+					<textarea onfocus="init2();" rows="1" cols="100"
+						style="height: 1em;" id="text2" name="observacoes_servico"></textarea>
+
+
+				</fieldset>
+
+				<fieldset>
+					<legend>
+						<h3>Em caso dúvida / Negociações</h3>
+					</legend>
+
+					<input name="duvida_orc" id="duvida_orc" size="50" maxlength="50">
+
+				</fieldset>
+
+				<fieldset>
+					<legend>
+						<h3>Valor</h3>
+					</legend>
+
+					<table border="0">
+
+						<tr align="left">
+							<td><label for="vr_servico_orc" size="20"> Valor do serviço</label>
+
+							</td>
+
+							<td><label for="vr_material_orc">Valor do material</label></td>
+
+
+
+							<td><label for="total_orc">Total da proposta</label></td>
+
+						</tr>
+						<tr align="left">
+							<td><input onchange="soma11()" name="sum_vr_servico_orc"
+								id="vr_servico_orc" alt="decimal" size="15" maxlength="15"></td>
+
+							<td><input onchange="soma11()" name="sum_vr_material_orc"
+								id="vr_material_orc" alt="decimal" size="15" maxlength="15"></td>
+
+							<td>R$ <input type="text" name="totalSum" id="totalSum" value=""
+								size="15" readonly="readonly" />
+							</td>
+
+
+						</tr>
+					</table>
+
+				</fieldset>
+
+				<table border="0">
+
+					<tr align="left">
+						<td><input type="submit" value="Salvar novo Orçamento"
+							name="salvar_orc" /> <input type="hidden"
+							value="<?php echo date('Y'); ?>" name="ano_atual_orc"
+							hidden="hidden" /> <input type="hidden" name="usuario"
+							value="<?php echo $logOptions_id; ?>" readonly="readonly" /></td>
+
+
+
+					</tr>
+
+				</table>
+			</form>
+
+		</div>	  
 
                
-            <?php   
-
-            } 
-            
-//Menu novo orçamento     
-            if ($menu == "editar_orcamento")
-            {
-            
-            ?>
+            <?php
+						}
+						
+						// Menu novo orçamento
+						if ($menu == "editar_orcamento") {
+							
+							?>
 
                 
                
-                            <iframe width="1000px" height="500px" frameborder="2" src="visualizar_orcamentos.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
+                            <iframe width="1000px" height="500px"
+			frameborder="2"
+			src="visualizar_orcamentos.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
             
                 
            <?php
-           
-            }
-         
-		   
-//Menu Acompanhamento
-            if ($menu == "acompanhar_orc")
-            {
-            
-            ?>
-				<iframe width="1000px" height="500px" frameborder="2" src="visualizar_acompanhamento_orc.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
+						}
+						
+						// Menu Acompanhamento
+						if ($menu == "acompanhar_orc") {
+							
+							?>
+				<iframe width="1000px" height="500px" frameborder="2"
+			src="visualizar_acompanhamento_orc.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
       
            <?php
-           
-            }
-           ?>		   
+						}
+						?>		   
                 
         </div>	
 		
@@ -1260,23 +1026,16 @@ function formCheck(formobj){
         
         
 	<?php
-            
-    }else {
-        
-       echo "Acesso restrito.";
-        
-        
-          }
-    }
-   
-?>	
-
-			
-			<footer>
-			
-
+					} else {
+						
+						echo "Acesso restrito.";
+					}
+				}
 				
-			</footer>       
-        
-    </body>
+				?>	
+
+			
+			<footer> </footer>
+
+</body>
 </html>

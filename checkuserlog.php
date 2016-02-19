@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 //-----------------------------------------------------------------------------------------------------------------------------------
 include_once "Config/config_sistema.php"; 
-$dyn_www = $_SERVER['HTTP_HOST'].'/sistemaelfi/colaboradores'; 
+$dyn_www = $_SERVER['HTTP_HOST'].'/site ELFI/colaboradores'; 
 //$dyn_www = $_SERVER['HTTP_HOST'].'/colaboradores'; 
 //------ CHECK IF THE USER IS LOGGED IN OR NOT AND GIVE APPROPRIATE OUTPUT -------
 $logOptions = ''; // Initialize the logOptions variable that gets printed to the page
