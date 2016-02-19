@@ -1030,7 +1030,7 @@ function formCheck(formobj){
 						
 						echo "Acesso restrito.";
 					}
-				}
+
 				
 				?>	
 
@@ -1039,3 +1039,4 @@ function formCheck(formobj){
 
 </body>
 </html>
+<?php } ?>
