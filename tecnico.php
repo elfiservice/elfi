@@ -561,9 +561,6 @@ fim SOMA CAMPOS em campos
 					rel="tecnico_cadastro">Cadastro</a></li>
 				<li><a href="#" class="menuanchorclass myownclass"
 					rel="tecnico_orcamento">Orçamento</a></li>
-				<li><a href="acompanhamento/acompanhar_orcamentos.php"
-					class="menuanchorclass myownclass" rel="">Acompanhamento Orc.
-						Aprovados</a></li>
 			</ul>
 		</div>
 

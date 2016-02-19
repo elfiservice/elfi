@@ -86,7 +86,8 @@ tecnico_orcamento.cols={divclass:'column', inlinestyle:''} //menu.cols if define
 tecnico_orcamento.items=[
 	["Novo", "tecnico.php?id_menu=orcamento"],
         ["Editar", "tecnico.php?id_menu=editar_orcamento"],
-		["Acompanhamento", "tecnico.php?id_menu=acompanhar_orc"]
+		["Não Aprovados", "tecnico.php?id_menu=acompanhar_orc"],
+		["Aprovados", "acompanhamento/acompanhar_orcamentos.php"]
 
 	
 ]
