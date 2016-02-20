@@ -986,7 +986,7 @@ function formCheck(formobj){
             <?php
 						}
 						
-						// Menu novo orçamento
+// Menu novo orçamento
 						if ($menu == "editar_orcamento") {
 							
 							?>
@@ -1001,12 +1001,12 @@ function formCheck(formobj){
            <?php
 						}
 						
-						// Menu Acompanhamento
+// Menu Acompanhamento
 						if ($menu == "acompanhar_orc") {
 							
 							?>
 				<iframe width="1000px" height="500px" frameborder="2"
-			src="visualizar_acompanhamento_orc.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
+			src="acompanhamento_nao_aprovado/acompanhar_orc_n_aprovados.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
       
            <?php
 						}
