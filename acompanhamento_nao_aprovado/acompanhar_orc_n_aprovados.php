@@ -7,7 +7,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	if (!isset($_COOKIE['idCookie'])) {
 
 		//header("location: ../index.php");
-		echo "Voc� n�o esta Logado!!";
+		echo "Você não esta Logado!!";
 	}
 } else {
         $ano_orc = "";
@@ -95,7 +95,7 @@ body {
           <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
                                 <thead>
                                     <tr>
-                                            <th>Nº ORC</th>
+                                            <th>N° ORC</th>
                                             <th>Colaborador</th>
                                             <th>Data do ultimo Contato</th>                                            
                                          
@@ -108,7 +108,7 @@ body {
                                             <th>Contato</th>                                            
                                             <th>Telefone</th>
                                             <th>Celular</th>
-                                            <th>Email Técnico</th>
+                                            <th>Email técnico</th>
 
                                     </tr>
                                 </thead>
@@ -132,7 +132,25 @@ body {
                                         </td>                                        
 
                                         <td>
-                                            <?php echo "data";?>
+                                            <?php if ($row['data_ultimo_cont_cliente'] == "0000-00-00"){
+                                            				echo"Não teve contato";
+                                            	
+                                            			}else{ 
+                                            				
+                                            				// Define os valores a serem usados
+                                            				$data_inicial = $row['data_ultimo_cont_cliente'];
+                                            				$data_final = date('y-m-d');
+                                            				// Usa a função strtotime() e pega o timestamp das duas datas:
+                                            				$time_inicial = strtotime($data_inicial);
+                                            				$time_final = strtotime($data_final);
+                                            				// Calcula a diferença de segundos entre as duas datas:
+                                            				$diferenca = $time_final - $time_inicial; // 19522800 segundos
+                                            				// Calcula a diferença de dias
+                                            				$dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
+                                            				
+                                            		
+                                            				echo date('d/m/Y', strtotime($data_inicial)) ." à ". $dias ." dias";  
+                                            			}?>
                                         </td>    
                                           
                                         <td>
@@ -163,10 +181,25 @@ body {
 
 
                                                                                 <td>
-                                           <?php echo $row['data_adicionado_orc'];?>
+                                           <?php echo date('d/m/Y H:m', strtotime($row['data_adicionado_orc'])) ;?>
                                         </td> 
                                                                                 <td>
-                                           <?php echo $row['data_adicionado_orc']; //alterar ?>
+                                           <?php 
+                                           // Define os valores a serem usados
+                                           $data_inicial = $row['data_adicionado_orc'];
+                                           $data_final = date('y-m-d');
+                                           // Usa a função strtotime() e pega o timestamp das duas datas:
+                                           $time_inicial = strtotime($data_inicial);
+                                           $time_final = strtotime($data_final);
+                                           // Calcula a diferença de segundos entre as duas datas:
+                                           $diferenca = $time_final - $time_inicial; // 19522800 segundos
+                                           // Calcula a diferença de dias
+                                           $dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
+                                           
+                                           
+                                           echo " à ". $dias ." dias";
+                                           
+                                          ?>
                                         </td> 
                                                                                                                         <td>
                                            <?php echo $row['contato_clint'];?>
