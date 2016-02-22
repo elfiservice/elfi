@@ -3,7 +3,7 @@ include "../checkuserlog.php";
 include_once "../Config/config_sistema.php"; 
 //include_once ("salvar_alteracao_orcamento.php");
 
-if (!isset($_SESSION['idx'])) {
+if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	if (!isset($_COOKIE['idCookie'])) {
 
 		//header("location: ../index.php");
@@ -97,17 +97,14 @@ body {
                                     <tr>
                                             <th>Nº ORC</th>
                                             <th>Colaborador</th>
-                                            <th>Situação</th>                                            
+                                            <th>Data do ultimo Contato</th>                                            
+                                         
                                             <th>Editar</th>
                                             <th>Razão Social / Nome</th>
-                                            <th>Classificação</th>
+
                                             <th>Data do ORC</th>
-                                            <th>CNPJ</th>
-                                            <th>Endereço</th>
-                                            <th>Bairro</th>
-                                            <th>Estado</th>
-                                            <th>Cidade</th>
-                                            <th>CEP</th>
+                                            <th>Dias do Orc. Adicionado</th>
+
                                             <th>Contato</th>                                            
                                             <th>Telefone</th>
                                             <th>Celular</th>
@@ -133,10 +130,11 @@ body {
                                         <td>
                                             <?php echo $row['colaborador_orc'];?>
                                         </td>                                        
-                                        <td>
-                                            <?php echo $row['situacao_orc'];?>
 
-                                        </td>                                           
+                                        <td>
+                                            <?php echo "data";?>
+                                        </td>    
+                                          
                                         <td>
                                             
                                             <!--form name="editar_cliente" action="editar_orcamento.php?id_cliente=<?php echo $row['id'];?>&msg_erro=" method="POST" enctype="multipart/form-data">
@@ -163,30 +161,12 @@ body {
                                             <?php echo $row['razao_social_contr'];?>
                                         </td>
 
-                                        <td>
-                                            <?php echo $row['atividade'].'-'.$row['classificacao'];?>
-                                        </td>
+
                                                                                 <td>
                                            <?php echo $row['data_adicionado_orc'];?>
                                         </td> 
                                                                                 <td>
-                                           <?php echo $row['cnpj_contr'];?>
-                                        </td> 
-
-                                                                                <td>
-                                           <?php echo $row['endereco_contr'];?>
-                                        </td> 
-                                                                                <td>
-                                           <?php echo $row['bairro_contr'];?>
-                                        </td> 
-                                                                                <td>
-                                           <?php echo utf8_encode($row['estado_contr']);?>
-                                        </td> 
-                                                                                <td>
-                                           <?php echo utf8_encode($row['cidade_contr']);?>
-                                        </td>
-                                                                                                                        <td>
-                                           <?php echo $row['cep_contr'];?>
+                                           <?php echo $row['data_adicionado_orc']; //alterar ?>
                                         </td> 
                                                                                                                         <td>
                                            <?php echo $row['contato_clint'];?>

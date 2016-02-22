@@ -1,26 +1,24 @@
 <?php
-
 include "checkuserlog.php";
 
 include_once "Config/config_sistema.php";
 
-
 if (! isset ( $_SESSION ['idx'] )) {
 	if (! isset ( $_COOKIE ['idCookie'] )) {
-
+		
 		// include_once '../conectar.php';
 		header ( "location: index.php" );
 	}
 } else {
-
-$dyn_www = $_SERVER ['HTTP_HOST'];
-
-$menu = "";
-if (isSet ( $_GET ['id_menu'] )) {
 	
-	$menu = $_GET ['id_menu'];
-}
-?>
+	$dyn_www = $_SERVER ['HTTP_HOST'];
+	
+	$menu = "";
+	if (isSet ( $_GET ['id_menu'] )) {
+		
+		$menu = $_GET ['id_menu'];
+	}
+	?>
 
 
 <!doctype html>
@@ -524,31 +522,31 @@ fim SOMA CAMPOS em campos
 	<div
 		style="background: url(imagens/topo1.png) repeat-x; padding: 5px 0px 30px 0px;">
 	</div>
-	
 
-    
-    <h2 style="text-align: center;">Técnico</h2>
+
+
+	<h2 style="text-align: center;">Técnico</h2>
 	<div style="">
 
 		<div id="colaborador_logado"></div>
 
 		<div style="float: right">
                 <?php
-					echo $logOptions;
-					?>
+	echo $logOptions;
+	?>
             </div>
 	</div>
         
 <?php
-					$consulta_colab = mysql_query ( "select * from colaboradores where id_colaborador = '$logOptions_id'" );
-					$linha_colab = mysql_fetch_object ( $consulta_colab );
-					
-					$tipo_conta = $linha_colab->tipo;
-					
-					if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh") 
+	$consulta_colab = mysql_query ( "select * from colaboradores where id_colaborador = '$logOptions_id'" );
+	$linha_colab = mysql_fetch_object ( $consulta_colab );
+	
+	$tipo_conta = $linha_colab->tipo;
+	
+	if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh") 
 
-					{
-						?>
+	{
+		?>
 	   
 	<div style="margin: 20px 0px 20px 0px;">
 		<div class="barra_menu"
@@ -577,13 +575,13 @@ fim SOMA CAMPOS em campos
 	<div style="margin: 20px 0px 20px 0px;">
             
 <?php
-						
-						// Menu novo orçamento
-						if ($menu == "orcamento") {
-							
-							// echo "";
-							
-							?>
+		
+		// Menu novo orçamento
+		if ($menu == "orcamento") {
+			
+			// echo "";
+			
+			?>
             
 <!-- Cadastrar novos Clientes -->
 
@@ -675,12 +673,12 @@ function formCheck(formobj){
 									id="clientID" name="clientID">
 										<option value=""></option>
                                                     <?php
-							$sql = "SELECT razao_social FROM clientes ORDER BY razao_social";
-							$res = mysql_query ( $sql );
-							while ( $row = mysql_fetch_assoc ( $res ) ) {
-								echo '<option id="clientID" value="' . $row ['razao_social'] . '">' . $row ['razao_social'] . '</option>';
-							}
-							?>
+			$sql = "SELECT razao_social FROM clientes ORDER BY razao_social";
+			$res = mysql_query ( $sql );
+			while ( $row = mysql_fetch_assoc ( $res ) ) {
+				echo '<option id="clientID" value="' . $row ['razao_social'] . '">' . $row ['razao_social'] . '</option>';
+			}
+			?>
                                                             
                                            </select></td>
 							</tr>
@@ -827,33 +825,35 @@ function formCheck(formobj){
 								<td><select id="" name="atividade1">
 										<option name="" value=""></option>
                                                     <?php
-							$sql = "SELECT * FROM orc_atividades ORDER BY atividade";
-							$res = mysql_query ( $sql );
-							while ( $row = mysql_fetch_assoc ( $res ) ) {
-								echo '<option id="" value="' . utf8_encode ( $row ['atividade'] ) . '" >' . utf8_encode ( $row ['atividade'] ) . '</option>';
-							}
-							?>
+			$sql = "SELECT * FROM orc_atividades ORDER BY atividade";
+			$res = mysql_query ( $sql );
+			while ( $row = mysql_fetch_assoc ( $res ) ) {
+				echo '<option id="" value="' . utf8_encode ( $row ['atividade'] ) . '" >' . utf8_encode ( $row ['atividade'] ) . '</option>';
+			}
+			?>
                                                        
                                          </select></td>
 								<td><select id="" name="classificacao1">
 										<option value=""></option>
                                                     <?php
-							$sql = "SELECT * FROM orc_classificacao_ativid ORDER BY classificacao";
-							$res = mysql_query ( $sql );
-							while ( $row = mysql_fetch_assoc ( $res ) ) {
-								echo '<option id="" value="' . utf8_encode ( $row ['classificacao'] ) . '" >' . utf8_encode ( $row ['classificacao'] ) . '</option>';
-							}?>
+			$sql = "SELECT * FROM orc_classificacao_ativid ORDER BY classificacao";
+			$res = mysql_query ( $sql );
+			while ( $row = mysql_fetch_assoc ( $res ) ) {
+				echo '<option id="" value="' . utf8_encode ( $row ['classificacao'] ) . '" >' . utf8_encode ( $row ['classificacao'] ) . '</option>';
+			}
+			?>
                                                        
                                          </select></td>
 								<td><input name="quantidade1" id="" size="10" maxlength="10"></td>
 								<td><select id="" name="unidade1">
 										<option value=""></option>
                                                     <?php
-							$sql = "SELECT * FROM orc_unidades ORDER BY unidade";
-							$res = mysql_query ( $sql );
-							while ( $row = mysql_fetch_assoc ( $res ) ) {
-								echo '<option id="" value="' . utf8_encode ( $row ['unidade'] ) . '" >' . utf8_encode ( $row ['unidade'] ) . '</option>';
-							}?>
+			$sql = "SELECT * FROM orc_unidades ORDER BY unidade";
+			$res = mysql_query ( $sql );
+			while ( $row = mysql_fetch_assoc ( $res ) ) {
+				echo '<option id="" value="' . utf8_encode ( $row ['unidade'] ) . '" >' . utf8_encode ( $row ['unidade'] ) . '</option>';
+			}
+			?>
                                                        
                                          </select></td>
 							</tr>
@@ -984,12 +984,12 @@ function formCheck(formobj){
 
                
             <?php
-						}
-						
-// Menu novo orçamento
-						if ($menu == "editar_orcamento") {
-							
-							?>
+		}
+		
+		// Menu novo orçamento
+		if ($menu == "editar_orcamento") {
+			
+			?>
 
                 
                
@@ -999,18 +999,19 @@ function formCheck(formobj){
             
                 
            <?php
-						}
-						
-// Menu Acompanhamento
-						if ($menu == "acompanhar_orc") {
-							
-							?>
-				<iframe width="1000px" height="500px" frameborder="2"
+		}
+		
+		// Menu Acompanhamento
+		if ($menu == "acompanhar_orc") {
+			
+			?>
+			<h3>Acompanhamento Orçamento Aguaradando Aprovação</h3>
+		<iframe width="1000px" height="500px" frameborder="2"
 			src="acompanhamento_nao_aprovado/acompanhar_orc_n_aprovados.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
       
            <?php
-						}
-						?>		   
+		}
+		?>		   
                 
         </div>	
 		
@@ -1018,13 +1019,12 @@ function formCheck(formobj){
         
         
 	<?php
-					} else {
-						
-						echo "Acesso restrito.";
-					}
-
-				
-				?>	
+	} else {
+		
+		echo "Acesso restrito.";
+	}
+	
+	?>	
 
 			
 			<footer> </footer>
