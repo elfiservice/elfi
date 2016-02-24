@@ -96,7 +96,7 @@ body {
                                 <thead>
                                     <tr>
                                             <th>N° ORC</th>
-                                            <th>Colaborador</th>
+                                            <!-- th>Quem acompanha</th-->
                                             <th>Data do ultimo Contato</th>                                            
                                          
                                             <th>Editar</th>
@@ -127,9 +127,9 @@ body {
                                         <td>
                                             <?php echo $row['n_orc'].'.'.$row['ano_orc'];?>
                                         </td>
-                                        <td>
+                                        <!-- td>
                                             <?php echo $row['colaborador_orc'];?>
-                                        </td>                                        
+                                        </td-->                                        
 
                                         <td>
                                             <?php if ($row['data_ultimo_cont_cliente'] == "0000-00-00"){
@@ -149,7 +149,7 @@ body {
                                             				$dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
                                             				
                                             		
-                                            				echo date('d/m/Y', strtotime($data_inicial)) ." à ". $dias ." dias";  
+                                            				echo date('d/m/Y', strtotime($data_inicial)) ." à ". $dias ." dias por <b>".$row['colab_ultimo_contato_client']."</b>";  
                                             			}?>
                                         </td>    
                                           
