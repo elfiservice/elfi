@@ -18,6 +18,7 @@ if (!isset($_SESSION['idx'])) {
 	}
 	
 	include_once '../includes/sql_dados_orc_por_id.php';
+	include_once '../includes/sql_dados_user_por_id.php';
 	//echo "$linha_orc->n_orc";
 
 ?>
@@ -55,7 +56,60 @@ if (!isset($_SESSION['idx'])) {
 <fieldset>
 	<legend><b>Dados do Contato de hoje</b></legend>
 	Data do contato: <b><?php echo date('d/m/Y');?></b>
-    	
+    <form action=".php" method="post" enctype="multipart/form-data" name="formH_acomp_n_aprovados">
+		<table>
+			<tr>
+				<td>Colaborador ELFI: </td>
+				<td><input type="text" value="<?php echo $linha_user->Login; ?>" name="colab_elfi" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<td>Contato no Cliente:</td>
+				<td><input type="text" value="" name="contato_cliente"  /></td>
+			</tr>
+			<tr>
+				<td>Telefone do Cliente:</td>
+				<td><input type="text" value="" name="tel_cliente"  /></td>
+			</tr>
+			<tr>
+				<td>Conversado:</td>
+				<td><textarea  rows="3" cols="100" id="text" name="conversado"></textarea></td>
+			</tr>
+			<tr>
+				<td><input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="salvar" value="Salvar" id="salvar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  /></td>
+			</tr>
+		</table>
+	</form>				
+</fieldset>
+<fieldset>
+	<legend><b>Historico de Contato com Cliente</b></legend>
+	<TABLE  class="display" id="example2">
+		<thead>
+  			<TR>
+  				<TH></TH>
+    			<TH>Data</TH>
+    			<TH>DescriÃ§Ã£o</TH>
+    			<TH>Colaborador</TH>
+    		</TR>
+  		</thead>
+  		<tbody>
+			
+		<?php
+			//$data_hj = date('Y-m-d');
+       		$sql = "SELECT * FROM historico_orc_aprovado WHERE id_acompanhamento = '$id_orc' ORDER BY id DESC";
+        	$res = mysql_query( $sql );
+         while ( $row = mysql_fetch_assoc( $res ) ) {
+		?>
+	  		<TR>
+				<td><a href="#" onclick="window.open('editar_historico.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a><br></td>
+	    		<Td><?php echo $row['data']; ?></Td>
+				<TD><?php echo $row['descricao']; ?></TD>
+				<TD><?php echo $row['colaborador']; ?></TD>
+			</tr>
+		<?php
+			}
+		?>
+		</tbody>
+	</TABLE>
 </fieldset>
 	      
 </body>
