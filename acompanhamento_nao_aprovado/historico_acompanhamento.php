@@ -55,9 +55,12 @@ if (!isset($_SESSION['idx'])) {
 </fieldset>	
 <fieldset>
 	<legend><b>Dados do Contato de hoje</b></legend>
-	Data do contato: <b><?php echo date('d/m/Y');?></b>
     <form action=".php" method="post" enctype="multipart/form-data" name="formH_acomp_n_aprovados">
 		<table>
+			<tr>
+				<td>Data do contato:</td>
+				<td><b><?php echo date('d/m/Y');?></b></td>
+			</tr>
 			<tr>
 				<td>Colaborador ELFI: </td>
 				<td><input type="text" value="<?php echo $linha_user->Login; ?>" name="colab_elfi" readonly="readonly" /></td>
@@ -87,23 +90,27 @@ if (!isset($_SESSION['idx'])) {
   			<TR>
   				<TH></TH>
     			<TH>Data</TH>
-    			<TH>DescriÃ§Ã£o</TH>
-    			<TH>Colaborador</TH>
+    			<TH>Colaborador ELFI</TH>
+    			<TH>Contato Cliente</TH>
+    			<TH>Telefone Cliente</TH>
+    			<TH>Conversa</TH>
     		</TR>
   		</thead>
   		<tbody>
 			
 		<?php
 			//$data_hj = date('Y-m-d');
-       		$sql = "SELECT * FROM historico_orc_aprovado WHERE id_acompanhamento = '$id_orc' ORDER BY id DESC";
+       		$sql = "SELECT * FROM historico_orc_n_aprovado WHERE id_orc = '$linha_orc->n_orc' ORDER BY id DESC";
         	$res = mysql_query( $sql );
          while ( $row = mysql_fetch_assoc( $res ) ) {
 		?>
 	  		<TR>
 				<td><a href="#" onclick="window.open('editar_historico.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a><br></td>
-	    		<Td><?php echo $row['data']; ?></Td>
-				<TD><?php echo $row['descricao']; ?></TD>
-				<TD><?php echo $row['colaborador']; ?></TD>
+	    		<Td><?php echo $row['dia_do_contato']; ?></Td>
+				<TD><?php echo $row['colab_elfi']; ?></TD>
+				<TD><?php echo $row['contato_cliente']; ?></TD>
+				<TD><?php echo $row['tel_cliente']; ?></TD>
+				<TD><?php echo $row['conversa']; ?></TD>
 			</tr>
 		<?php
 			}
