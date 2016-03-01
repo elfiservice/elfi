@@ -923,7 +923,7 @@ function formCheck(formobj){
               <legend><h3>Descrição dos Serviços</h3></legend>
             
             
-                         <textarea onfocus="init();" rows="1" cols="100" style="height:1em;" id="text" name="descricao_servicos"><?php echo $linha_orc->descricao_servico_orc; ?></textarea>
+                         <textarea onfocus="init();" rows="1" cols="100" style="height:1em;" id="text" name="descricao_servicos"><?php echo strip_tags($linha_orc->descricao_servico_orc) ; ?></textarea>
                          
                          
           </fieldset>

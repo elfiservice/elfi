@@ -2,12 +2,12 @@
 include "../checkuserlog.php";
 include_once "../Config/config_sistema.php";
 
-if (!isset($_SESSION['idx'])) {
+if (!isset($_SESSION['idx'])) { //testa se a sessão existe
 	if (!isset($_COOKIE['idCookie'])) {
 
 		//include_once '../conectar.php';
 		//header("location: ../index.php");
-		echo "Voc� n�o esta logado!";
+		echo "Você não esta logado!";
 	}
 } else {
 	
@@ -55,7 +55,7 @@ if (!isset($_SESSION['idx'])) {
 </fieldset>	
 <fieldset>
 	<legend><b>Dados do Contato de hoje</b></legend>
-    <form action=".php" method="post" enctype="multipart/form-data" name="formH_acomp_n_aprovados">
+    <form action="salvar/historico.php" method="post" enctype="multipart/form-data" name="formH_acomp_n_aprovados">
 		<table>
 			<tr>
 				<td>Data do contato:</td>
@@ -78,7 +78,10 @@ if (!isset($_SESSION['idx'])) {
 				<td><textarea  rows="3" cols="100" id="text" name="conversado"></textarea></td>
 			</tr>
 			<tr>
-				<td><input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="salvar" value="Salvar" id="salvar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  /></td>
+				<td><input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="salvar" value="Salvar" id="salvar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  />
+				    <input type="hidden" name="id_usuario" value="<?php echo $linha_user->id_colaborador; ?>" readonly="readonly" />
+					<input type="hidden" name="id_orc" value="<?php echo $linha_orc->id; ?>" readonly="readonly" />
+				</td>
 			</tr>
 		</table>
 	</form>				
@@ -100,13 +103,13 @@ if (!isset($_SESSION['idx'])) {
 			
 		<?php
 			//$data_hj = date('Y-m-d');
-       		$sql = "SELECT * FROM historico_orc_n_aprovado WHERE id_orc = '$linha_orc->n_orc' ORDER BY id DESC";
+       		$sql = "SELECT * FROM historico_orc_n_aprovado WHERE id_orc = '$linha_orc->id' ORDER BY id DESC";
         	$res = mysql_query( $sql );
          while ( $row = mysql_fetch_assoc( $res ) ) {
 		?>
 	  		<TR>
-				<td><a href="#" onclick="window.open('editar_historico.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a><br></td>
-	    		<Td><?php echo $row['dia_do_contato']; ?></Td>
+				<td><a href="#" onclick="window.open('editar_historico_n_aprovado.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a><br></td>
+	    		<Td><?php echo date('d/m/Y à\s H:m', strtotime($row['dia_do_contato'])); ?></Td>
 				<TD><?php echo $row['colab_elfi']; ?></TD>
 				<TD><?php echo $row['contato_cliente']; ?></TD>
 				<TD><?php echo $row['tel_cliente']; ?></TD>

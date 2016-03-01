@@ -217,7 +217,7 @@ mail($email4,"Historico Propostas ELFI - sistema",$msg_body, $mailheaders);
      
      
      ?>
-                    <script type="text/javascript" >
+<script type="text/javascript" >
 alert ("Historico adicionado com Sucesso!");
 </script>
     
