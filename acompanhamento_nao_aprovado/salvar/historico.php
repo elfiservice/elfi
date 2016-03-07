@@ -13,9 +13,12 @@ if (isset ($_POST['colab_elfi']))
 	$id_orc 			= $_POST['id_orc'];
 	
 	// Adiciona no BD 
-	$sql = mysql_query("INSERT INTO historico_orc_n_aprovado (id_orc, dia_do_contato, colab_elfi, contato_cliente, tel_cliente,	conversa)
-		VALUES('$id_orc','$data_hj', '$colab_elfi','$contato_cliente','$tel_cliente','$conversado')")
-		or die (mysql_error("Houve um erro ao tentar Adicionar no BD."));
+	mysql_query("INSERT INTO historico_orc_n_aprovado (id_orc, dia_do_contato, 	id_colab, colab_elfi, contato_cliente, tel_cliente,	conversa)
+				VALUES('$id_orc','$data_hj','$id_usuario','$colab_elfi','$contato_cliente','$tel_cliente','$conversado')")
+				or die (mysql_error("Houve um erro ao tentar Adicionar no BD."));
+	
+	mysql_query("UPDATE orcamentos SET data_ultimo_cont_cliente = '$data_hj' WHERE id ='$id_orc'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações (tabela Orcamentos)"));
+	mysql_query("UPDATE orcamentos SET 	colab_ultimo_contato_client = '$colab_elfi' WHERE id ='$id_orc'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações (tabela Orcamentos)"));
 
 ?>
 		<script type="text/javascript" >

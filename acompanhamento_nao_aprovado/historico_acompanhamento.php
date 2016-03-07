@@ -108,7 +108,10 @@ if (!isset($_SESSION['idx'])) { //testa se a sessão existe
          while ( $row = mysql_fetch_assoc( $res ) ) {
 		?>
 	  		<TR>
-				<td><a href="#" onclick="window.open('editar_historico_n_aprovado.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a><br></td>
+				<td><a href="#" onclick="window.open('editar_historico_n_aprovado.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a>
+					<br>
+					<a href="#" onclick="window.open('excluir_historico_n_aprovado.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">excluir</a>
+				</td>
 	    		<Td><?php echo date('d/m/Y à\s H:m', strtotime($row['dia_do_contato'])); ?></Td>
 				<TD><?php echo $row['colab_elfi']; ?></TD>
 				<TD><?php echo $row['contato_cliente']; ?></TD>

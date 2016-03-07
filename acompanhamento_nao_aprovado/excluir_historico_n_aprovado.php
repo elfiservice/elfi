@@ -45,39 +45,27 @@ if (!isset($_SESSION['idx'])) { //testa se a sess�o existe
 <div  style="background: url(../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"></div>
 <a href="javascript:window.history.go(-1)" target="_self">Voltar</a>
 <div id="">
-	<h3> Editando Histórico Orçamento não Aprovado</h3>
+	<h3> Deseja realmente excluir esse historico?</h3>
 
 </div>
 
 <fieldset>
 	<legend><h3>Dados</h3></legend>
-		<form action="salvar/historico_editado.php" method="post" enctype="multipart/form-data" name="formEditarOrcNAprovado">
+		<form action="salvar/historico_excluido.php" method="post" enctype="multipart/form-data" name="formEditarOrcNAprovado">
 			<table>
 				<tr>
 					<td>Data do contato:</td>
 					<td><b><?php echo date('d/m/Y à\s H:m', strtotime($linha_orc_n_aprovado->dia_do_contato));?></b></td>
 				</tr>
 				<tr>
-					<td>Colaborador ELFI: </td>
-					<td><input type="text" value="<?php echo $linha_orc_n_aprovado->colab_elfi; ?>" name="colab_elfi" readonly="readonly" /></td>
-				</tr>
-				<tr>
-					<td>Contato no Cliente:</td>
-					<td><input type="text" value="<?php echo $linha_orc_n_aprovado->contato_cliente; ?>" name="contato_cliente"  /></td>
-				</tr>
-				<tr>
-					<td>Telefone do Cliente:</td>
-					<td><input type="text" value="<?php echo $linha_orc_n_aprovado->tel_cliente; ?>" name="tel_cliente"  /></td>
-				</tr>
-				<tr>
 					<td>Conversado:</td>
-					<td><textarea  rows="3" cols="50" id="text" name="conversado"><?php echo strip_tags($linha_orc_n_aprovado->conversa); ?></textarea></td>
+					<td><textarea  rows="3" cols="50" id="text" name="conversado" readonly="readonly" ><?php echo strip_tags($linha_orc_n_aprovado->conversa); ?></textarea></td>
 				</tr>
 			</table>			
 			
-			<input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="salvar" value="Salvar" id="salvar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  />
+			<input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="excluir" value="Excluir" id="excluir" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8;"  />
         	
-        	<input type="hidden" name="id_usuario_BD" value="<?php echo $linha_orc_n_aprovado->id_colab;  ?>" readonly="readonly" />
+  			<input type="hidden" name="id_usuario_BD" value="<?php echo $linha_orc_n_aprovado->id_colab;  ?>" readonly="readonly" />
         	<input type="hidden" name="id_usuario_logado" value="<?php echo $logOptions_id;  ?>" readonly="readonly" />
 			<input type="hidden" name="id_orc" value="<?php echo $linha_orc_n_aprovado->id_orc; ?>" readonly="readonly" />
 			<input type="hidden" name="id_historico" value="<?php echo $linha_orc_n_aprovado->id; ?>" readonly="readonly" />				
