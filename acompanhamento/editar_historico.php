@@ -12,7 +12,7 @@
 	$ano_atual = date('Y');   
 
 	
-	        $id_historico = "";
+	    $id_historico = "";
         if(isSet ($_GET['id_historico'])) {
         
              $id_historico = $_GET['id_historico'];

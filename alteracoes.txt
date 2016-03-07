@@ -1,3 +1,7 @@
 no BD
 Alterado estrutura da tabela -> orcamentos
 Feita a tablea -> historico_orc_n_aprovado
+
+Histotico do Desenvolvimento:
+01/03: no GIT -> continuar fazendo o botão Editar de cada histotico na tebela de Tratar Historico nao aprovados
+02/03: fazer o botão excluir
