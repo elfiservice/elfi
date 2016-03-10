@@ -1,5 +1,7 @@
 <?php
 
+include '../classes/dao/UsuarioDAO.class.php';
+
 class Usuario{
 	
 	private $id;
@@ -12,17 +14,20 @@ class Usuario{
 	private $email;
 	
 
-	
-	public function __construct($pId, $pLogin, $pSenha, $pCpf, $pTipo, $pUlti_data_logado, $pEmail, $pEmail_ativado){
+
+	public function Usuario($id){
+		$userDAO = new UsuarioDAO();
+		$linha_user = $userDAO->buscarUsuario($id);
 		
-		$this->id = $pId;
-		$this->login = $pLogin;
-		$this->senha = $pSenha;
-		$this->cpf = $pCpf;
-		$this->tipo = $pTipo;
-		$this->ultima_data_logado = $pUlti_data_logado;
-		$this->email = $pEmail;
-		$this->email_ativado = $pEmail_ativado;
+		$this->id = $linha_user->id_colaborador;
+		$this->login = 	$linha_user->Login;
+		$this->senha = $linha_user->Senha;
+		$this->cpf = $linha_user->cpf;
+		$this->tipo = $linha_user->tipo;
+		$this->ultima_data_logado =  $linha_user->last_log_date;
+		$this->email = $linha_user->Email;
+		$this->email_ativado = $linha_user->email_activated;
+		
 		
 	}
 	
@@ -91,20 +96,6 @@ class Usuario{
 	}	
 	
 	
-	public static function buscaUser($id) {
-		$sql_user = mysql_query("SELECT * FROM colaboradores WHERE 	id_colaborador='$id'") or die (mysql_error());
-		$linha_user = mysql_fetch_object($sql_user);
-		$user = new Usuario($linha_user->id_colaborador, 
-							$linha_user->Login,
-							$linha_user->Senha,
-							$linha_user->cpf,
-							$linha_user->tipo,
-							$linha_user->last_log_date,
-							$linha_user->Email,
-							$linha_user->email_activated);
-		
-		return $user;
-	}
 	
 }
 
