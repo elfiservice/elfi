@@ -10,6 +10,12 @@ class ClienteDAO {
 		$linha = mysql_fetch_object($sql);
 		return $linha;
 	}
+	
+	public function buscarClientePorRazaoSocial($razaoSocial){
+		$sql = mysql_query("SELECT * FROM clientes WHERE 	razao_social ='$razaoSocial'") or die (mysql_error());
+		$linha = mysql_fetch_object($sql);
+		return $linha;
+	}
 }
 
 ?>

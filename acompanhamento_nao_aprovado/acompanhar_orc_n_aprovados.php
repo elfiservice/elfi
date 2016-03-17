@@ -1,6 +1,7 @@
 <?php
 include "../checkuserlog.php";
 include_once "../Config/config_sistema.php"; 
+include_once "../classes/controller/ClienteCtrl.class.php";
 //include_once ("salvar_alteracao_orcamento.php");
 
 if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
@@ -22,7 +23,14 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
         	$ano_orc_selec = $_POST['ano'];
         } 
         
+        $cliente = new ClienteCtrl();
+
+
+        
+        
+        
 ?>
+
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="pt"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="pt"> <![endif]-->
@@ -155,11 +163,7 @@ body {
                                           
                                         <td>
                                             
-                                            <!--form name="editar_cliente" action="editar_orcamento.php?id_cliente=<?php echo $row['id'];?>&msg_erro=" method="POST" enctype="multipart/form-data">
-                                                
-                                                <input type="submit" value="Editar" name="enviar_lembrete" />
-                                                
-                                            </form-->
+
 											
 												<a href="#" onclick="window.open('../editar_orcamento.php?id_orc=<?php echo $row['id'];?>&msg_erro=', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
 												Editar
@@ -176,7 +180,21 @@ body {
                                         </td>
  
                                         <td>
-                                            <?php echo $row['razao_social_contr'];?>
+                                        		<?php
+                                        		$clienteUnico = $cliente->buscarClientePorRazaoSocial($row['razao_social_contr']);
+                                        		if($clienteUnico == null){
+                                        			 echo $row['razao_social_contr'];
+                                        		}else{
+                                        		?>
+                                        			<a href="#" onclick="window.open('../cliente/perfil.php?id_cliente=<?php echo $clienteUnico->getId();  ?>&tipo_cliente=<?php echo $clienteUnico->getTipo() ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+														<?php echo $row['razao_social_contr'];?>
+													</a>
+												<?php 	  
+                                    	   		}
+                                        		?>
+                                            
+                                         
+                                            
                                         </td>
 
 

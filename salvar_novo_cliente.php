@@ -137,7 +137,7 @@ if (isset ($_POST['razao_social']))
                */
                
              
-             $tipo = "Pessoa Fisica";
+             $tipo = "PF";
              //$tipo = utf8_encode($tipo);
          }  else  {
              //echo "Pessoa Juridica!!";
@@ -156,7 +156,7 @@ if (isset ($_POST['razao_social']))
                }
              */
              
-             $tipo = "Pessoa Juridica";
+             $tipo = "PJ";
              //$tipo = utf8_encode($tipo);
          }
          
