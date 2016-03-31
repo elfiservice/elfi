@@ -1,6 +1,6 @@
 <?php
 
-include '../classes/dao/UsuarioDAO.class.php';
+//include '../classes/dao/UsuarioDAO.class.php';
 
 class Usuario{
 	
@@ -15,18 +15,16 @@ class Usuario{
 	
 
 
-	public function Usuario($id){
-		$userDAO = new UsuarioDAO();
-		$linha_user = $userDAO->buscarUsuario($id);
-		
-		$this->id = $linha_user->id_colaborador;
-		$this->login = 	$linha_user->Login;
-		$this->senha = $linha_user->Senha;
-		$this->cpf = $linha_user->cpf;
-		$this->tipo = $linha_user->tipo;
-		$this->ultima_data_logado =  $linha_user->last_log_date;
-		$this->email = $linha_user->Email;
-		$this->email_ativado = $linha_user->email_activated;
+	public function Usuario($id, $login, $senha, $cpf, $tipo, $ultimaDataLog, $emailAtivado, $email){
+	
+		$this->id = $id;
+		$this->login = 	$login;
+		$this->senha = $senha;
+		$this->cpf = $cpf;
+		$this->tipo = $tipo;
+		$this->ultima_data_logado =  $ultimaDataLog;
+		$this->email = $email;
+		$this->email_ativado = $emailAtivado;
 		
 		
 	}

@@ -1,7 +1,7 @@
 <?php
 include "../checkuserlog.php";
 include_once "../Config/config_sistema.php";
-include_once "../classes/model/Usuario.class.php";
+include_once "../classes/controller/UsuarioCtrl.class.php";
 include_once "../classes/controller/OrcamentosCtrl.class.php";
 
 if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
@@ -18,7 +18,8 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 		$id_user = $_GET['id_user'];
 	}
 	
-	$usuario_logado = new Usuario($id_user);
+	$usuario_logado = new UsuarioCtrl();
+	$user = $usuario_logado->buscarUserPorId($id_user);
 	$orc_ctrl = new OrcamentoCtrl();
 
 
@@ -42,35 +43,35 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 <body>
 <div  style="background: url(../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"></div>
 <fieldset>
-	<legend><b>Dados do Usuario: <?php echo $usuario_logado->getLogin();?></b></legend>
+	<legend><b>Dados do Usuario: <?php echo $user->getLogin();?></b></legend>
 		<table>
 			<tr>
 				<td>Email:</td>
-				<td><?php echo $usuario_logado->getEmail();?></td>
+				<td><?php echo $user->getEmail();?></td>
 			</tr>
 			<tr>
 				<td>CPF:</td>
-				<td><?php if($logOptions_id == $id_user){echo $usuario_logado->getCpf();}?></td>
+				<td><?php if($logOptions_id == $id_user){echo $user->getCpf();}?></td>
 			</tr>
 			<tr>
 				<td>Ultimo Log:</td>
-				<td><?php echo $usuario_logado->getUltDataLogado();?></td>
+				<td><?php echo date('d/m/Y \á\s H:m', strtotime($user->getUltDataLogado()));?></td>
 			</tr>
 			<tr>
 				<td>Nº de Orçamentos feitos:</td>
-				<td><?php echo $orc_ctrl->nDeOrcPorUsuario($usuario_logado->getLogin());?></td>
+				<td><?php echo $orc_ctrl->nDeOrcPorUsuario($user->getLogin());?></td>
 			</tr>
 			<tr>
 				<td>Nº de Orçamentos que esta acompanhando:</td>
-				<td><?php echo $orc_ctrl->nOrcUsuarioAcompanhando($usuario_logado->getLogin());?></td>
+				<td><?php echo $orc_ctrl->nOrcUsuarioAcompanhando($user->getLogin());?></td>
 			</tr>
 			<tr>
 				<td>Nº de Hitoricos em Orçamentos Não Aprovados:</td>
-				<td><?php echo $orc_ctrl->nOrcNAprovadoPorUsuarioAcompanhando($usuario_logado->getLogin());?></td>
+				<td><?php echo $orc_ctrl->nOrcNAprovadoPorUsuarioAcompanhando($user->getLogin());?></td>
 			</tr>
 			<tr>
 				<td>Nº de Historicos em Orçamentos Aprovados:</td>
-				<td><?php echo $orc_ctrl->nOrcAprovadoPorUsuarioAcompanhando($usuario_logado->getLogin());?></td>
+				<td><?php echo $orc_ctrl->nOrcAprovadoPorUsuarioAcompanhando($user->getLogin());?></td>
 			</tr>
 			
 		</table>

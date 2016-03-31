@@ -11,5 +11,11 @@ class UsuarioDAO{
 		$linha_user = mysql_fetch_object($sql_user);
 		return $linha_user;
 	}
+	
+	public function buscarUsuarioLogin($login){
+		$sql_user = mysql_query("SELECT * FROM colaboradores WHERE 	Login='$login'") or die (mysql_error());
+		$linha_user = mysql_fetch_object($sql_user);
+		return $linha_user;
+	}
 }
 ?>

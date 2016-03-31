@@ -2,6 +2,7 @@
 include "../checkuserlog.php";
 include_once "../Config/config_sistema.php"; 
 include_once "../classes/controller/ClienteCtrl.class.php";
+include_once "../classes/controller/UsuarioCtrl.class.php";
 //include_once ("salvar_alteracao_orcamento.php");
 
 if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
@@ -25,7 +26,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
         
         $cliente = new ClienteCtrl();
 
-
+        $usuario = new UsuarioCtrl();
         
         
         
@@ -156,9 +157,17 @@ body {
                                             				// Calcula a diferença de dias
                                             				$dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
                                             				
-                                            		
-                                            				echo date('d/m/Y', strtotime($data_inicial)) ." à ". $dias ." dias por <b>".$row['colab_ultimo_contato_client']."</b>";  
-                                            			}?>
+                                            				
+                                            				$user = $usuario->buscarUserPorLogin($row['colab_ultimo_contato_client']);
+                                            				
+                                            				echo date('d/m/Y', strtotime($data_inicial)) ." à ". $dias ." dias por ";
+                                            				
+                                            				?>
+                                            				 <a href="#" onclick="window.open('../usuario/perfil.php?id_user=<?php echo $user->getId();  ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+                                            							<?php echo $row['colab_ultimo_contato_client'];?>
+                                            				</a>
+                                            			<?php 	}?>
+                                            			
                                         </td>    
                                           
                                         <td>
