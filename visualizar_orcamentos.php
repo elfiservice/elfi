@@ -73,10 +73,10 @@ alert ("Orçamento ID <?php echo $ident_orc;?> atualizado para situação <?php 
 	<meta name="author" content="Elfi Service">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="estilos1.css">    
+    <link rel="stylesheet" href="estilos.css">    
 
 
-		<style type="text/css">
+		<!-- style type="text/css">
 
 body {
     color: #012B8B;
@@ -92,7 +92,7 @@ body {
 	    margin: 0 auto;
 	width:1000px;
 }
-		</style>
+		</style-->
     
     
 <!-- Tabela  -->

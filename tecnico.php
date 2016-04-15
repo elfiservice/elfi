@@ -993,8 +993,7 @@ function formCheck(formobj){
 
                 
                
-                            <iframe width="1000px" height="500px"
-			frameborder="2"
+                            <iframe class="iframeStyle" 
 			src="visualizar_orcamentos.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
             
                 
@@ -1006,7 +1005,7 @@ function formCheck(formobj){
 			
 			?>
 			<h3>Acompanhamento Orçamento Aguaradando Aprovação</h3>
-		<iframe width="1000px" height="500px" frameborder="2"
+		<iframe class="iframeStyle" 
 			src="acompanhamento_nao_aprovado/acompanhar_orc_n_aprovados.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
       
            <?php

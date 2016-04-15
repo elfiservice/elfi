@@ -32,7 +32,7 @@ if (!isset($_SESSION['idx'])) {
 	<meta name="author" content="Elfi Service">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../estilos.css">
 	
 	<style type="text/css">
 		#menu {

@@ -46,26 +46,10 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	<meta name="author" content="Elfi Service">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="../estilos1.css">    
+    <link rel="stylesheet" href="../estilos.css">    
 
 
-<style type="text/css">
 
-body {
-    color: #012B8B;
-    direction: ltr;
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
-	
-    font-size: 12px;
-    margin: 0;
-    
-    padding: 0;
-    text-align: left;
-    unicode-bidi: embed;
-	    margin: 0 auto;
-	width:1000px;
-}
-		</style>
     
     
 <!-- Tabela  -->
