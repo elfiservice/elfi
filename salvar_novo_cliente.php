@@ -1,4 +1,6 @@
 <?php
+
+include_once "/includes/funcoes.php";
 /*
 class validar
 {
@@ -143,6 +145,7 @@ if (isset ($_POST['razao_social']))
              //echo "Pessoa Juridica!!";
              //echo $_POST['cnpj'];
              $cnpj_cpf = $_POST['cnpj'];
+
              
              /*
              if($validate->cnpj($cnpj_cpf)){
@@ -249,8 +252,12 @@ if (isset ($_POST['razao_social']))
 		$linha_usuario = mysql_fetch_object($sql_nome_user);
                 
                 $nome_usuario = $linha_usuario->Login;
+    
+   	//limpa CPF e CNPJ
+          $cnpj_cpf =  limpaCPF_CNPJ($cnpj_cpf);
+
                 
-         
+              
 
     // Add user info into the database table for the main site table
      $sql = mysql_query("INSERT INTO clientes (usuario, razao_social, nome_fantasia, classificacao, data_inclusao, ie, endereco, bairro, estado, cidade, cep, tel, cel, fax, email_tec, email_adm_fin, cnpj_cpf, tipo) 

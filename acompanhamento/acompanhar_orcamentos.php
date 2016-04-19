@@ -226,9 +226,9 @@ display: inline-block;
 		<TD><?php //echo $row['novo_cliente']; ?></TD>
 		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
 		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
-		<TD><?php echo $row['data_aprovada']; ?></TD>
-		<TD><?php echo $row['data_inicio']; ?></TD>
-		<TD><?php echo $row['data_conclusao']; ?></TD>
+		<TD><?php echo date('d/m/Y', strtotime($row['data_aprovada'])); ?></TD>
+		<TD><?php echo date('d/m/Y', strtotime($row['data_inicio'])); ?></TD>
+		<TD><?php echo "--"; ?></TD>
 		
 	</tr>
 
@@ -275,7 +275,7 @@ display: inline-block;
 		        $sql_n_orc = mysql_query("SELECT * FROM historico_orc_aprovado WHERE id_acompanhamento = '$id_orc'");
 				$n_orc_check = mysql_num_rows($sql_n_orc); 
 		 
-		 
+		// $data = new DateTime($row['data_conclusao']);
 ?>
 	  <TR>
 		<td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">atualizar</a><br>
@@ -287,9 +287,9 @@ display: inline-block;
 		<TD><?php //echo $row['novo_cliente']; ?></TD>
 		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
 		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
-		<TD><?php echo $row['data_aprovada']; ?></TD>
-		<TD><?php echo $row['data_inicio']; ?></TD>
-		<TD><?php echo $row['data_conclusao']; ?></TD>
+		<TD><?php echo date('d/m/Y', strtotime($row['data_aprovada'])); ?></TD>
+		<TD><?php echo date('d/m/Y', strtotime($row['data_inicio'])); ?></TD>
+		<TD><?php echo "--"; ?></TD>
 		
 	</tr>
 
@@ -347,9 +347,9 @@ display: inline-block;
 		<TD><?php //echo $row['novo_cliente']; ?></TD>
 		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
 		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
-		<TD><?php echo $row['data_aprovada']; ?></TD>
-		<TD><?php echo $row['data_inicio']; ?></TD>
-		<TD><?php echo $row['data_conclusao']; ?></TD>
+		<TD><?php echo date('d/m/Y', strtotime($row['data_aprovada'])); ?></TD>
+		<TD><?php echo "--"; ?></TD>
+		<TD><?php echo "--"; ?></TD>
 		
 	</tr>
 
