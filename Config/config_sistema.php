@@ -1,11 +1,4 @@
 <?php
-//////////////////////////////////////////////
-// Sistema de cadastro						//
-// Autor: Diego Gomes Araujo				//
-// E-mail: diegogomesaraujo@hotmail.com		//
-// Versão: 1.0								//
-//////////////////////////////////////////////
-
 // faz conexão com o servidor MySQL
 $local_serve = "localhost"; 	 // local do servidor
 $usuario_serve = "root";		 // nome do usuario
@@ -20,12 +13,9 @@ $db = @mysql_select_db($banco_de_dados,$conn)
 	
 // dados do administrador são de estrema importancia que sem eles
 // o adminstrador não tera acesso as paginas de administração
-$login_admin = "elfiservice";  			// nome do administrador
-$senha_admin = "sapato44";						// senha administrador
-$email_admin = "elfiservice@hotmail.com";  // email do administrador
+$login_admin = "";  			// nome do administrador
+$senha_admin = "";						// senha administrador
+$email_admin = "";  // email do administrador
 
-// dados para contato com o autor
-// Por favor manter os direitos autorais
-$nome_autor = "Diego Gomes Araujo";
-$email_autor = "diegogomesaraujo@hotmail.com";
+
 ?>
