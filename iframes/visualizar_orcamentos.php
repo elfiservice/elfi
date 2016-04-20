@@ -1,13 +1,7 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-        include "checkuserlog.php";
-
-        include_once "Config/config_sistema.php"; 
-        
+        include "../checkuserlog.php";
+        include_once "../Config/config_sistema.php"; 
+        include_once "../classes/controller/UsuarioCtrl.class.php";
         
          //include_once ("salvar_alteracao_orcamento.php");
 
@@ -53,7 +47,7 @@ alert ("Orçamento ID <?php echo $ident_orc;?> atualizado para situação <?php 
         } 
         
         
-
+        $usuario = new UsuarioCtrl();
 ?>
 
 
@@ -73,7 +67,7 @@ alert ("Orçamento ID <?php echo $ident_orc;?> atualizado para situação <?php 
 	<meta name="author" content="Elfi Service">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="estilos.css">    
+    <link rel="stylesheet" href="../estilos.css">    
 
 
 		<!-- style type="text/css">
@@ -96,16 +90,7 @@ body {
     
     
 <!-- Tabela  -->
-<link rel="stylesheet" href="tabela/demo_page.css">  
-<link rel="stylesheet" href="tabela/demo_table.css">  
-
-		<script type="text/javascript" language="javascript" src="tabela/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="tabela/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#example').dataTable();
-			} );
-		</script>
+<?php include_once '../includes/tabela_no_head.php';?>
 
 
     </head>
@@ -174,7 +159,12 @@ body {
                                             <?php echo $row['n_orc'].'.'.$row['ano_orc'];?>
                                         </td>
                                         <td>
-                                            <?php echo $row['colaborador_orc'];?>
+                                            <?php //echo $row['colaborador_orc'];
+            									$user = $usuario->buscarUserPorLogin($row['colaborador_orc']);
+            								?>
+                                            <a href="#" onclick="window.open('../usuario/perfil.php?id_user=<?php echo $user->getId();  ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+                                            	<?php echo $row['colaborador_orc'];?>
+                                            </a>                                            
                                         </td>                                        
                                         <td>
                                             
@@ -183,7 +173,7 @@ body {
                                                 
                                                 <select name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
 													<option value="<?php echo $row['situacao_orc'];?>"><?php echo $row['situacao_orc'];?></option>
-													<?php include "lista_situacao_orc.php"; ?>
+													<?php include "../lista_situacao_orc.php"; ?>
 												</select>
 												
 												<input type="submit" value="Alterar" name="alterar_situacao" />

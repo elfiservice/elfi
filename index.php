@@ -13,6 +13,8 @@
 		  if (!isset($_COOKIE['idCookie'])) {
 
 			include_once 'conectar.php';
+			//header("location: conectar.php");
+			//exit();
   }
 } else {
 

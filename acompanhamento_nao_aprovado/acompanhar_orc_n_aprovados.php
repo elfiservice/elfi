@@ -53,16 +53,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
     
     
 <!-- Tabela  -->
-<link rel="stylesheet" href="../tabela/demo_page.css">  
-<link rel="stylesheet" href="../tabela/demo_table.css">  
-
-		<script type="text/javascript" language="javascript" src="../tabela/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="../tabela/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#example').dataTable();
-			} );
-		</script>
+<?php include_once '../includes/tabela_no_head.php';?>
     </head>
     <body>
 

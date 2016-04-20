@@ -10,6 +10,7 @@
 		if (isset($_POST['email'])) {
 			
 			$email = $_POST['email'];
+			//echo $email;
 			$pass = $_POST['pass'];
 			if (isset($_POST['remember'])) {
 				$remember = $_POST['remember'];
@@ -26,7 +27,9 @@
 
 
 			} else { // Error handling is complete so process the info if no errors
-				//include 'Config/config_sistema.php'; // Connect to the database
+				//echo "oi";
+				session_start();
+				include 'Config/config_sistema.php'; // Connect to the database
 				$email = mysql_real_escape_string($email); // After we connect, we secure the string before adding to query
 				//$pass = mysql_real_escape_string($pass); // After we connect, we secure the string before adding to query
 				$pass = md5($pass); // Add MD5 Hash to the password variable they supplied after filtering it
@@ -78,6 +81,8 @@
 
 			
 		} //Close if (isset ($_POST['uname'])){
+		
+		//echo $_POST['email'];
         ?>
 
 <!doctype html>
@@ -113,12 +118,12 @@
 			
 			<h2 style="text-align: center;" >
 			
-				Acesso ao Sistema Integrado da ELFI SERVICE para os Colaboradores	
+				Acesso ao Sistema Integrado da ELFI SERVICE para os Colaboradores
 				
 			</h2>
 		
 		</div>
-        <form action="index.php" method="post" enctype="multipart/form-data" name="formlogin">
+        <form action="conectar.php" method="POST" enctype="multipart/form-data" name="formlogin">
 						<table align="center">
 						
 							<tr style = "vertical-align: top;">

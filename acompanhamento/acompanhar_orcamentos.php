@@ -11,7 +11,8 @@ if (!isset($_SESSION['idx'])) {
   if (!isset($_COOKIE['idCookie'])) {
 
 		//include_once '../conectar.php';
-  	header("location: ../index.php");
+  	//header("location: ../conectar.php");
+  	echo "Você não esta conectado <a href=\"../index.php\">Conectar</a>";
   }
 } else {
 	$ano_atual = date('Y');
@@ -74,24 +75,7 @@ display: inline-block;
 	</style>
 
 <!-- Tabela  -->
-<link rel="stylesheet" href="../tabela/demo_page.css">  
-<link rel="stylesheet" href="../tabela/demo_table.css">  
-
-		<script type="text/javascript"  src="../tabela/jquery.js"></script>
-		<script type="text/javascript"  src="../tabela/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#example').dataTable();
-			} );
-			
-						$(document).ready(function() {
-				$('#example2').dataTable();
-			} );
-
-						$(document).ready(function() {
-				$('#example3').dataTable();
-			} );			
-		</script>
+<?php include_once '../includes/tabela_no_head.php';?>
 	
 	
 	</head>

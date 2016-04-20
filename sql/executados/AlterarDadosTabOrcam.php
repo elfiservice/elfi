@@ -1,6 +1,6 @@
 <?php
 
-include_once "../Config/config_sistema.php";
+include_once "../../Config/config_sistema.php";
 
 $count = 0;
 

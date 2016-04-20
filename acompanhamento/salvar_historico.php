@@ -36,11 +36,11 @@ if (isset ($_POST['dia_hoje']))
      
 //enviar EMAIL
 
-		$sql_acompa_orc = mysql_query("SELECT * FROM acompanhamento WHERE id='$id_orc'") or die (mysql_error()); 
+		$sql_acompa_orc = mysql_query("SELECT * FROM orcamentos WHERE id='$id_orc'") or die (mysql_error()); 
 		$linha = mysql_fetch_object($sql_acompa_orc);
                 
-                $cliente = $linha->cliente;
-				$inf_servicos = $linha->inf_servicos;
+                $cliente = $linha->razao_social_contr;
+				$inf_servicos = $linha->descricao_servico_orc;
 				$n_orc = $linha->n_orc;
 
 //ENVIAR EMAIL PRA ATIVAÇÃO DA CONTA COM IMAGEM E EM HTML
