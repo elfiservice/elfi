@@ -183,7 +183,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 
 
                                                                                 <td>
-                                           <?php echo date('d/m/Y H:m', strtotime($row['data_adicionado_orc'])) ;?>
+                                           <?php echo date('d/m/Y H:i', strtotime($row['data_adicionado_orc'])) ;?>
                                         </td> 
                                                                                 <td>
                                            <?php 
