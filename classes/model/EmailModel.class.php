@@ -6,7 +6,9 @@ abstract class EmailModel{
 	private $image_name = "http://elfiservice.eco.br/colaboradores/includes/email/logo_elfi_email.jpg";
 	private $assunto_email;
 
-	public function enviarEmail();
+	public function enviarEmail(){
+		
+	}
 	
 
 	public function getEmail() {

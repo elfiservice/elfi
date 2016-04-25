@@ -3,7 +3,7 @@ include "../checkuserlog.php";
 include_once "../Config/config_sistema.php"; 
 include_once "../classes/controller/ClienteCtrl.class.php";
 include_once "../classes/controller/UsuarioCtrl.class.php";
-//include_once ("salvar_alteracao_orcamento.php");
+
 
 if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	if (!isset($_COOKIE['idCookie'])) {
@@ -197,7 +197,6 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
                                            $diferenca = $time_final - $time_inicial; // 19522800 segundos
                                            // Calcula a diferença de dias
                                            $dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
-                                           
                                            
                                            echo " à ". $dias ." dias";
                                            

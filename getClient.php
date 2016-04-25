@@ -2,7 +2,7 @@
 
 <?php
  include_once "Config/config_sistema.php"; 
- include_once "/includes/funcoes.php";
+ include_once "includes/funcoes.php";
 
 if(isset($_GET['getClientId'])){  
   $res = mysql_query("select * from clientes where razao_social='".$_GET['getClientId']."'") or die(mysql_error());
