@@ -1,7 +1,10 @@
 <?php
 
-include_once "Config/config_sistema.php"; 
+//include_once "../../Config/config_sistema.php"; 
+include_once "includes/funcoes.php";
 
+if(isset($_GET['id_cliente'])){
+$id_cliente = $_GET['id_cliente'];
 
 //Este código será executado somente se o nome de usuário é Postado
 if (isset ($_POST['razao_social']))
@@ -9,7 +12,7 @@ if (isset ($_POST['razao_social']))
 
         $id_usuario = $_POST['usuario'];
         
-    $id_cliente = $_GET['id_cliente'];
+
     
      $razao_social = $_POST['razao_social'];
      $nome_fantasia = $_POST['nome_fantasia'];
@@ -32,13 +35,13 @@ if (isset ($_POST['razao_social']))
              //echo "Pessoa Fisica !!";
              //echo $_POST['cpf'];
              $cnpj_cpf = $_POST['cpf'];
-             $tipo = "Pessoa Fisica";
+             $tipo = "PF";
              //$tipo = utf8_encode($tipo);
          }  else  {
              //echo "Pessoa Juridica!!";
              //echo $_POST['cnpj'];
              $cnpj_cpf = $_POST['cnpj'];
-             $tipo = "Pessoa Juridica";
+             $tipo = "PJ";
              //$tipo = utf8_encode($tipo);
          }
          
@@ -144,42 +147,44 @@ if (isset ($_POST['razao_social']))
                 
                 $nome_usuario = $linha_usuario->Login; 
 
-                        
-                        mysql_query("UPDATE clientes SET razao_social = '$razao_social' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET nome_fantasia = '$nome_fantasia' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET classificacao = '$classificacao' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET ie = '$ie' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET endereco = '$endereco' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET bairro = '$bairro' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET cep = '$cep' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET cnpj_cpf = '$cnpj_cpf' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET tipo = '$tipo' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET tel = '$telefone' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET cel = '$celular' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET fax = '$fax' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET email_tec = '$email_tec' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET email_adm_fin = '$email_admin' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET estado = '$estado' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-                        mysql_query("UPDATE clientes SET cidade = '$cidade' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
-			mysql_query("UPDATE clientes SET usuario = '$nome_usuario' WHERE id ='$id_cliente'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));                        
-                        
-                        
-                        
-    /*/ Add user info into the database table for the main site table
-     $sql = mysql_query("INSERT INTO clientes (razao_social, nome_fantasia, classificacao, data_inclusao, ie, endereco, bairro, estado, cidade, cep, tel, cel, fax, email_tec, email_adm_fin, cnpj_cpf, tipo) 
-     VALUES('$razao_social','$nome_fantasia','$classificacao', now(),'$ie', '$endereco', '$bairro', '$estado', '$cidade', '$cep', '$telefone', '$celular', '$fax', '$email_tec', '$email_admin', '$cnpj_cpf', '$tipo')")  
-     or die (mysql_error());         
-        */ 
-     
-     //echo "Novo cliente adicionado.";
+                $cnpj_cpf =  limpaCPF_CNPJ($cnpj_cpf); //limpar CNPJ ou CPF
+                
+			if(mysql_query("UPDATE clientes SET 
+						usuario = '$nome_usuario',
+						razao_social = '$razao_social',
+						nome_fantasia = '$nome_fantasia',
+						classificacao = '$classificacao',
+						ie = '$ie',
+						endereco = '$endereco',
+						bairro = '$bairro',
+						cep = '$cep',
+						cnpj_cpf = '$cnpj_cpf',
+						tipo = '$tipo',
+						tel = '$telefone',
+						cel = '$celular',
+						fax = '$fax',
+						email_tec = '$email_tec',
+						email_adm_fin = '$email_admin',
+						estado = '$estado',
+						cidade = '$cidade'					
+					WHERE id ='$id_cliente'")
+                     ){
+                     	
      
          
 ?>
 <script>
 	alert ("Cliente atualizado com sucesso!");
 </script>
-
+<a href="tecnico.php?id_menu=cliente" target="_self">Voltar</a>
 <?php
+    }else{
+    	echo"<b> Ocorreu um erro ao tentar salvar as alteracoes!</b>";
     }
     }
+    }
+}else{
+	echo"<b> Cliente n�o identificado </b>";
+}
+
 ?>

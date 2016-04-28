@@ -45,7 +45,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 		<meta name="viewport" content="width=device-width,initial-scale=1">
     	<link rel="stylesheet" href="../estilos.css">
     	
-    	<?php include_once '../includes/tabela_no_head.php';?>
+    	<?php include_once '../includes/javascripts/tabela_no_head.php';?>
     	
 </head>
 <body>

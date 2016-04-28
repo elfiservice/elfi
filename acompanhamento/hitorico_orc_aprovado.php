@@ -85,7 +85,7 @@ display: inline-block;
 	
 	</style>
 
-	<?php include_once '../includes/tabela_no_head.php';?>
+	<?php include_once '../includes/javascripts/tabela_no_head.php';?>
 	
 	
 	</head>

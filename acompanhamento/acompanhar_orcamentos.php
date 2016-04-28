@@ -4,7 +4,7 @@
 
         include_once "../Config/config_sistema.php"; 
 
-
+		require '../Config/SistemConfig.php';
 
 
 if (!isset($_SESSION['idx'])) { 
@@ -75,7 +75,7 @@ display: inline-block;
 	</style>
 
 <!-- Tabela  -->
-<?php include_once '../includes/tabela_no_head.php';?>
+<?php include_once '../includes/javascripts/tabela_no_head.php';?>
 	
 	
 	</head>

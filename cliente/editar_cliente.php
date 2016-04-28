@@ -1,64 +1,14 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-        include "checkuserlog.php";
-
-        include_once "Config/config_sistema.php"; 
-
-
-
-        
-        
-
 
 ?>
 
 
 
 
-<!doctype html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="pt"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="pt"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="pt"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="pt"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Sistema ELFI | Financeiro</title>
-        
-	<meta name="description" content="">
-	<meta name="author" content="Elfi Service">
-
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="estilos1.css">    
-
-
-<style type="text/css">
-
-body {
-    color: #012B8B;
-    direction: ltr;
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
-	
-    font-size: 12px;
-    margin: 0;
-    
-    padding: 0;
-    text-align: left;
-    unicode-bidi: embed;
-	    margin: 0 auto;
-	width:1000px;
-}
-</style>
     
 
-<!--
-MAscaras em campos
--->
-
+<!-- MAscaras em campos -->
 <script src="js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/mascara/jquery.meio.mask.js" charset="utf-8"></script>
 <script type="text/javascript" >
@@ -70,7 +20,7 @@ MAscaras em campos
     );
   })(jQuery);
 </script>        
-                
+              
                 
 <!--
 DESABILITAR CAMPOS COM CHECKBOX
@@ -92,11 +42,9 @@ function toggleStatus() {
 }
 </script>
 
-    </head>
-    <body>
 
          <script language="JavaScript">
-<!--
+
 
 /***********************************************
 * Required field(s) validation v1.10- By NavSurf
@@ -157,7 +105,7 @@ function formCheck(formobj){
 		return false;
 	}
 }
-// -->
+
 </script>
 
 <?php
@@ -168,10 +116,15 @@ $mens_erro = $_GET['msg_erro'];
 
            		$consulta_cliente = mysql_query("select * from clientes where id = '$id_cliente'");
 			$linha_cliente = mysql_fetch_object($consulta_cliente);
-
+if(mysql_num_rows($consulta_cliente)> 0){
                         //$estado = $linha_cliente->nome;
 
 ?>
+
+<div>
+	<h2>Clientes -> Editar</h2>
+</div>
+<hr>
 
 
 <div STYLE="font-size: 16px; text-align: center; margin-top: 10px; color: red;">
@@ -180,7 +133,7 @@ $mens_erro = $_GET['msg_erro'];
 </div>
                 
                 <div id="demo">
-                <form method="post" action="visualizar_clientes.php?id_cliente=<?php echo $id_cliente; ?>" onsubmit="return formCheck(this);">       
+                <form method="post" action="tecnico.php?id_menu=salvar_editar_cliente&id_cliente=<?=$id_cliente?>" onsubmit="return formCheck(this);">       
 
 
                 <table border="0">
@@ -188,7 +141,7 @@ $mens_erro = $_GET['msg_erro'];
                                     <tr>
                                         <th>
                                             <?php 
-                                                if ($linha_cliente->tipo == "Pessoa Fisica")
+                                                if ($linha_cliente->tipo == "PF")
                                                 {
                                                     ?>
                                             <p>Pessoa física <input id="toggleElement" type="checkbox" name="tipo"  onchange="toggleStatus()" checked/></p>
@@ -216,13 +169,18 @@ $mens_erro = $_GET['msg_erro'];
                                                             <option value="contrato">Contrato</option>                                            
                                             <?php
                                                     
-                                                } else {
+                                                } else if($linha_cliente->classificacao == "contrato") {
                                             ?>
                                                  
                                                             <option value="padrao">Padrão</option>
                                                             <option selected value="contrato">Contrato</option>                                                
                                             
                                             <?php        
+                                                }else{
+                                                    ?>
+                                                            <option selected value="padrao">Padrão</option>
+                                                            <option value="contrato">Contrato</option>                                            
+                                            <?php
                                                 }
                                             
                                             ?>    
@@ -323,9 +281,9 @@ $mens_erro = $_GET['msg_erro'];
                                             $estado_cliente = $linha_cliente->estado;
                                             
                         $consulta_estado = mysql_query("select * from estados where nome = '$estado_cliente'");
-			$linha_estado = mysql_fetch_object($consulta_estado);
+						$linha_estado = mysql_fetch_object($consulta_estado);
 
-                        $cod_estado_clientes = $linha_estado->cod_estados;
+                        $cod_estado_clientes = @$linha_estado->cod_estados;
                                             
                                             
                                             ?>
@@ -363,7 +321,7 @@ $mens_erro = $_GET['msg_erro'];
                         $consulta_estado = mysql_query("select * from cidades where nome = '$cidade_cliente'");
 			$linha_cidade = mysql_fetch_object($consulta_estado);
 
-                        $cod_cidade_clientes = $linha_cidade->cod_cidades;
+                        @$cod_cidade_clientes = $linha_cidade->cod_cidades;
                                            // echo $cod_cidade_clientes;
                                             
                                             ?>
@@ -449,38 +407,27 @@ $mens_erro = $_GET['msg_erro'];
                                             
                                         </td>                                        
                                     </tr>
+                                    
                                     <tr>
-                                        <td colspan="2">
-                                            <input type="submit" value="Salvar" name="salvar_novo_cliente" />
-                                            <input type="hidden" name="usuario" value="<?php echo $logOptions_id; ?>" readonly="readonly" />
-                                        </td>
-                                        
-                                        <td colspan="2">
-                                            
-                                            
-                                            
+                                    
+                                        <td colspan="4">
 
                                         </td>
+                                        
+         
                                       
                                     </tr>                                    
                                 </tbody>
                             </table>
-
+                              <hr>
+                                  <input class="bt_verde" type="submit" value="Salvar" name="salvar_novo_cliente" />
+                                  <input type="hidden" name="usuario" value="<?php echo $logOptions_id; ?>" readonly="readonly" />
 		
                 </form>
-                                                                <form method="post" action="visualizar_clientes.php" >       
-                                                <input type="submit" value="Cancelar" name="cancelar_salvar_novo_cliente" />
-                                            </form>
+
                     
                     
                 </div>
-
-
-
-                
-                
-         
-        
-        
-    </body>
-</html>
+<?php }else {
+	echo '<br> Cliente não encontrado </b> <a href="tecnico.php?id_menu=cliente" target="_self">Voltar</a>';
+}?>

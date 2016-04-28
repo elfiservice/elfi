@@ -161,3 +161,34 @@ display: inline-block;
 color:#666;
 display:none;
 }
+
+.bt_vermelho{
+	color: red;
+}
+
+.bt_verde{
+	color: green;
+}
+
+.bt_azul{
+	color: blue;
+}
+
+.inputProcurar {
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid #012B8B;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('imagens/searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 10px 20px 10px 40px;
+}
+
+.textProcurar {
+    
+    font-size: 14px;
+
+}

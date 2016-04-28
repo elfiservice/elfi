@@ -1,6 +1,7 @@
 <?php
 include "../checkuserlog.php";
 include_once "../Config/config_sistema.php";
+require '../Config/SistemConfig.php';
 
 if (!isset($_SESSION['idx'])) { //testa se a sessão existe
 	if (!isset($_COOKIE['idCookie'])) {
@@ -38,7 +39,7 @@ if (!isset($_SESSION['idx'])) { //testa se a sessão existe
 		<meta name="viewport" content="width=device-width,initial-scale=1">
     	<link rel="stylesheet" href="">
     	
-    	<?php include_once '../includes/tabela_no_head.php';?>
+    	<?php include_once '../includes/javascripts/tabela_no_head.php';?>
     	
 </head>
 <body>

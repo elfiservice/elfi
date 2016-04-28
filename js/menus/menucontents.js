@@ -80,6 +80,13 @@ tecnico_cadastro.items=[
 	
 ]
 
+var tecnico_cliente={divclass:'anylinkmenucols', inlinestyle:'', linktarget:''} //Third menu variable. Same precaution.
+tecnico_cliente.cols={divclass:'column', inlinestyle:''} //menu.cols if defined creates columns of menu links segmented by keyword "efc"
+tecnico_cliente.items=[
+	["Novo", "tecnico.php?id_menu=novo_cliente"],
+	["Editar", "tecnico.php?id_menu=editar_cliente"]
+	
+]
 
 var tecnico_orcamento={divclass:'anylinkmenucols', inlinestyle:'', linktarget:''} //Third menu variable. Same precaution.
 tecnico_orcamento.cols={divclass:'column', inlinestyle:''} //menu.cols if defined creates columns of menu links segmented by keyword "efc"

@@ -965,23 +965,23 @@
 			 *   by javascript
 			 */
 			this.oLanguage = {
-				"sProcessing": "Processing...",
-				"sLengthMenu": "Show _MENU_ entries",
-				"sZeroRecords": "No matching records found",
-				"sEmptyTable": "No data available in table",
-				"sLoadingRecords": "Loading...",
-				"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
-				"sInfoEmpty": "Showing 0 to 0 of 0 entries",
-				"sInfoFiltered": "(filtered from _MAX_ total entries)",
+				"sProcessing": "Processando...",
+				"sLengthMenu": "<b>Mostrar _MENU_ entradas</b>",
+				"sZeroRecords": "Não foram encontrados resultados...",
+				"sEmptyTable": "Sem dados na tabela",
+				"sLoadingRecords": "Carregando...",
+				"sInfo": "Mostrando _START_ de _END_ de _TOTAL_ entradas",
+				"sInfoEmpty": "Mostrando 0 de 0 de 0 entradas",
+				"sInfoFiltered": "(filtrado de _MAX_ entradas totais)",
 				"sInfoPostFix": "",
 				"sInfoThousands": ",",
 				"sSearch": "Procurar:",
 				"sUrl": "",
 				"oPaginate": {
-					"sFirst":    "First",
-					"sPrevious": "Previous",
-					"sNext":     "Next",
-					"sLast":     "Last"
+					"sFirst":    "Primeiro",
+					"sPrevious": "Anterior",
+					"sNext":     "Proximo",
+					"sLast":     "Ultimo"
 				},
 				"fnInfoCallback": null
 			};
@@ -4275,12 +4275,12 @@
 		{
 			var sSearchStr = oSettings.oLanguage.sSearch;
 			sSearchStr = (sSearchStr.indexOf('_INPUT_') !== -1) ?
-			  sSearchStr.replace('_INPUT_', '<input type="text" />') :
-			  sSearchStr==="" ? '<input type="text" />' : sSearchStr+' <input type="text" />';
+			  sSearchStr.replace('_INPUT_', '<input class="inputProcurar" type="text" />') :
+			  sSearchStr==="" ? '<input class="inputProcurar" type="text" />' : sSearchStr+' <input class="inputProcurar" type="text" />';
 			
 			var nFilter = document.createElement( 'div' );
 			nFilter.className = oSettings.oClasses.sFilter;
-			nFilter.innerHTML = '<label>'+sSearchStr+'</label>';
+			nFilter.innerHTML = '<label class="textProcurar"><b>'+sSearchStr+'</b></label>';
 			if ( oSettings.sTableId !== '' && typeof oSettings.aanFeatures.f == "undefined" )
 			{
 				nFilter.setAttribute( 'id', oSettings.sTableId+'_filter' );

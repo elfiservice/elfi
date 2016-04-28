@@ -3,7 +3,7 @@ include "../checkuserlog.php";
 include_once "../Config/config_sistema.php"; 
 include_once "../classes/controller/ClienteCtrl.class.php";
 include_once "../classes/controller/UsuarioCtrl.class.php";
-
+require '../Config/SistemConfig.php';
 
 if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	if (!isset($_COOKIE['idCookie'])) {
@@ -53,7 +53,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
     
     
 <!-- Tabela  -->
-<?php include_once '../includes/tabela_no_head.php';?>
+<?php include_once '../includes/javascripts/tabela_no_head.php';?>
     </head>
     <body>
 

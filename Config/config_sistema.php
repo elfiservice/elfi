@@ -18,4 +18,4 @@ $senha_admin = "";						// senha administrador
 $email_admin = "";  // email do administrador
 
 
-?>
+

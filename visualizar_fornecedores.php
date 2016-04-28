@@ -9,7 +9,7 @@
         include_once "Config/config_sistema.php"; 
         
         
-         include_once ("salvar_alteracao_cliente.php");
+         include_once ("cliente/alterar/salvar_alteracao_cliente.php");
 
 
         
