@@ -3,7 +3,7 @@
 <?php
 include_once "../Config/config_sistema.php";
 include_once "../classes/model/EmailOrcamentoNaoAprovado.class.php";
-
+//$row ['email_contr']
 $ano_orc = date ( 'Y' );
 
 $consulta_usuarios = mysql_query ( "select * from orcamentos WHERE ano_orc = '$ano_orc' AND situacao_orc = 'Aguardando aprovação' ORDER BY id  DESC" );
@@ -25,7 +25,7 @@ while ( $row = mysql_fetch_array ( $consulta_usuarios ) )
 	                                                     
 	if (! $row ['email_contr'] == null) {
 		if ($dias == 5 || $dias == 10 || $dias == 15 || $dias == 25 || $dias == 30 || $dias == 45 || $dias == 60) {
-			$email = new EmailOrcNaoAprovado ( $row ['email_contr'], $row ['razao_social_contr'], $dias, $row ['n_orc'], $row ['ano_orc'] );
+			$email = new EmailOrcNaoAprovado ( "elfiservice@gmail.com", $row ['razao_social_contr'], $dias, $row ['n_orc'], $row ['ano_orc'] );
 			$email->enviarEmail ();
 			
 			$f = fopen ( "registro_email_cliente_nao_aprovado.txt", "a+", 0 );

@@ -61,6 +61,77 @@ class Orcamento {
 	private $colab_ultimo_contato_client;
 	
 
+	public function __construct(){
+		
+	}
+	
+// 	public function __construct(
+// 			$id,
+// 			$nOrc,
+// 			$anoOrc,
+// 			$colabOrc,
+// 			$situacaoOrc,
+// 			$razaoSociContr,
+// 			$cnpjContr,
+// 			$enderContr,
+// 			$bairroContr,
+// 			$cidadeContr,
+// 			$estadoContr,
+// 			$cepContr,
+// 			$telefone_contr,
+// 			$celular_contr,
+// 			$email_contr,
+// 			$contato_clint,
+// 			$razao_social_obra,
+// 			$cnpj_obra,
+// 			$endereco_obra,
+// 			$bairro_obra,
+// 			$cidade_obra,
+// 			$estado_obra,
+// 			$cep_obra,
+// 			$telefone_obra,
+// 			$celular_obra,
+// 			$email_obra,
+// 			$atividade,
+// 			$classificacao,
+// 			$quantidade,
+// 			$unidade,
+// 			$descricao_servico_orc,
+// 			$prazo_exec_orc,
+// 			$validade_orc,
+// 			$pagamento_orc,
+// 			$obs_orc,
+// 			$duvida_orc,
+// 			$vr_servco_orc,
+// 			$vr_material_orc,
+// 			$desconto_orc,
+// 			$vr_total_orc,
+// 			$obra_igual_contrat,
+// 			$data_adicionado_orc,
+// 			$data_ultima_alteracao,
+// 			$colaborador_ultim_alteracao,
+// 			$data_aprovada,
+// 			$data_inicio,
+// 			$data_conclusao,
+// 			$dias_d_aprovado,
+// 			$dias_d_exec,
+// 			$dias_ultrapassad,
+// 			$serv_concluido,
+// 			$feito_pos_entreg,
+// 			$nao_conformidade,
+// 			$obs_n_conformidad,
+// 			$client_insatisfeito,
+// 			$data_ultimo_cont_cliente,
+// 			$colab_ultimo_contato_client			
+// 			){
+// 		$this->id = $id;
+// 		$this->n_orc = $nOrc;
+// 		$this->ano_orc = $anoOrc;
+// 		$this->colaborador_orc = $colabOrc;
+// 		$this->situacao_orc = $situacaoOrc;
+// 	}
+
+
 	public function getId() {
 	         return $this->id;
 	}

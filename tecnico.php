@@ -20,8 +20,6 @@ if (! isset ( $_SESSION ['idx'] )) {
 		$menu = $_GET ['id_menu'];
 	}
 	
-	
-	
 	?>
 
 
@@ -43,24 +41,17 @@ if (! isset ( $_SESSION ['idx'] )) {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="estilos.css">
 
-<script src="js/jquery.min.js" type="text/javascript"></script>
-
 <!-- Mostra colaborador Logado -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 // Chama aba Seu Estado
 $(document).ready(function() {
-
-$("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo $logOptions_id;?>');
-
-
-
+	$("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo $logOptions_id;?>');
 });
-
 </script>
 
 <!-- Menus dorp down  -->
 <?php include_once 'includes/javascripts/menu_dropdown.php';?>
-
 
 <!-- Tabela  -->
 <?php include_once 'includes/javascripts/tabela_no_head.php';?> 
@@ -79,10 +70,8 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
 		<div id="colaborador_logado"></div>
 
 		<div style="float: right">
-                <?php
-	echo $logOptions;
-	?>
-            </div>
+                <?php echo $logOptions;	?>
+        </div>
 	</div>
         
 <?php
@@ -103,12 +92,12 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
 
 		<div id="menu_paginas">
 			<ul>
+				<!-- 				<li><a href="#" class="menuanchorclass myownclass" -->
+				<!-- 					rel="tecnico_cliente">Cliente</a></li> -->
+				<li><a href="tecnico.php?id_menu=cliente" class="" rel="">Cliente</a></li>
+				<li><a href="tecnico.php?id_menu=orcamento" class="" rel="">Orcamentos</a></li>
 <!-- 				<li><a href="#" class="menuanchorclass myownclass" -->
-<!-- 					rel="tecnico_cliente">Cliente</a></li> -->
-				<li><a href="tecnico.php?id_menu=cliente" class=""
-					rel="">Cliente</a></li>
-				<li><a href="#" class="menuanchorclass myownclass"
-					rel="tecnico_orcamento">Orçamento</a></li>
+<!-- 					rel="tecnico_orcamento">Orçamento</a></li> -->
 			</ul>
 		</div>
 
@@ -125,49 +114,50 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
 	<div style="margin: 20px 0px 20px 0px;">
             
 <?php
-
-/* Manter Cliente  */
-
-if($menu == "cliente"){
-
-	require_once 'cliente/manterCliente.php';
-}
-
-if($menu == "novo_cliente"){
-	include 'cliente/novo_cliente.php';
-}
-
-if($menu == "salvar_novo_cliente"){
-	require 'cliente/incluir/salvar_novo_cliente.php';
-}
-
-if($menu == "editar_cliente"){
-	
-	include 'cliente/editar_cliente.php';
-}
-
-if($menu == "salvar_editar_cliente"){
-	require 'cliente/alterar/salvar_alteracao_cliente.php';
-}
-
-if($menu == "excluir_cliente"){
-
-	include 'cliente/excluir_cliente.php';
-}
-
-if($menu == "salvar_excluir_cliente"){
-
-	include 'cliente/excluir/salvar_excluir_cliente.php';
-}
-/* FIM Manter Cliente  */
-
-
-/* Manter Orçamentos  */
+		
+		/* ------------ Manter Cliente --------------- */
+		
+		if ($menu == "cliente") {
+			
+			require_once 'cliente/manterCliente.php';
+		}
+		
+		if ($menu == "novo_cliente") {
+			include 'cliente/novo_cliente.php';
+		}
+		
+		if ($menu == "salvar_novo_cliente") {
+			require 'cliente/incluir/salvar_novo_cliente.php';
+		}
+		
+		if ($menu == "editar_cliente") {
+			
+			include 'cliente/editar_cliente.php';
+		}
+		
+		if ($menu == "salvar_editar_cliente") {
+			require 'cliente/alterar/salvar_alteracao_cliente.php';
+		}
+		
+		if ($menu == "excluir_cliente") {
+			
+			include 'cliente/excluir_cliente.php';
+		}
+		
+		if ($menu == "salvar_excluir_cliente") {
+			
+			include 'cliente/excluir/salvar_excluir_cliente.php';
+		}
+		/* ------------ FIM Manter Cliente --------------- */
+		
+		/* ------------- Manter Orçamentos ----------------- */
 		if ($menu == "orcamento") {
 			
-			include_once 'orcamento/novo_orcamento.php';
-			
-
+			//require 'orcamento/manterOrcamentos.php';
+?>
+			<iframe class="iframeStyle" 
+					src="orcamento/manterOrcamentos.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
+<?php 
 		}
 		
 		// Menu novo orçamento
@@ -177,7 +167,7 @@ if($menu == "salvar_excluir_cliente"){
 
                 
                
-                            <iframe class="iframeStyle" 
+          <iframe class="iframeStyle"
 			src="iframes/visualizar_orcamentos.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
             
                 
@@ -189,16 +179,12 @@ if($menu == "salvar_excluir_cliente"){
 			
 			?>
 			<h3>Acompanhamento Orçamento Aguaradando Aprovação</h3>
-		<iframe class="iframeStyle" 
+		<iframe class="iframeStyle"
 			src="acompanhamento_nao_aprovado/acompanhar_orc_n_aprovados.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
       
            <?php
 		}
 		
-		
-
-		
-
 		?>		   
                 
         </div>	

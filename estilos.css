@@ -180,8 +180,21 @@ display:none;
     border: 2px solid #012B8B;
     border-radius: 4px;
     font-size: 16px;
-    background-color: white;
+    background-color: #fff;
     background-image: url('imagens/searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 10px 20px 10px 40px;
+}
+
+.inputProcurar:focus {
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid #012B8B;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #D3D6FF;
+    background-image: none;
     background-position: 10px 10px; 
     background-repeat: no-repeat;
     padding: 10px 20px 10px 40px;

@@ -1,4 +1,7 @@
 <?php
+
+require '../classes/model/Read.class.php';
+
 class OrcamentoDAO {
 	
 	public function buscarOrcamentosPorUsuario($usuarioLogado){
@@ -25,5 +28,17 @@ class OrcamentoDAO {
 		return $n_linhas;
 	}
 	
+	public function atualizarOrcamentoDao($idOrc,$campoOrc,$campoDB){
+		if(mysql_query("UPDATE orcamentos SET $campoDB = '$campoOrc' WHERE id ='$idOrc'")){
+			return true;
+		}else {return false;}
+			
+	}
+	
+	public function buscarOrcamentosDAO($campos,$termos) {
+		$read = new Read();
+		$read->ExecRead($campos, "orcamentos", $termos);
+		return $read->getResultado();
+	}
 }
 ?>

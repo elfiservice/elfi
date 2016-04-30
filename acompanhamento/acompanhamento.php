@@ -3,7 +3,8 @@
         include "../checkuserlog.php";
 
         include_once "../Config/config_sistema.php"; 
-		
+        require '../Config/SistemConfig.php';
+        
 		$days_em_exec = "";
 		$days_de_atraso="";
 		
