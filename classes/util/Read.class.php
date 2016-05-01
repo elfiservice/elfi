@@ -1,5 +1,5 @@
 <?php
-include '../classes/model/Conexao.class.php';
+
 
 class Read extends Conexao{
 	

@@ -149,7 +149,11 @@ if (! isset ( $_SESSION ['idx'] )) {
 		if ($menu == "orcamento") {
 			
 			//require 'orcamento/manterOrcamentos.php';
-?>
+?>			
+			<div>
+	<h2>Orcamentos</h2>
+</div>
+<hr>
 			<iframe class="iframeStyle" 
 					src="orcamento/manterOrcamentos.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
 <?php 

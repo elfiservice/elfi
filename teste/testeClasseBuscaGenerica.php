@@ -1,5 +1,5 @@
 <?php
-require '../classes/model/Read.class.php';
+require '../classes/util/Read.class.php';
 //include '../classes/model/Conexao.class.php';
 
 $read = new Read();

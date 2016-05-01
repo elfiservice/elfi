@@ -1,6 +1,8 @@
 <?php
+include '../classes/util/Conexao.class.php';
+require '../classes/util/Read.class.php';
+require '../classes/util/Update.class.php';
 
-require '../classes/model/Read.class.php';
 
 class OrcamentoDAO {
 	
@@ -28,11 +30,17 @@ class OrcamentoDAO {
 		return $n_linhas;
 	}
 	
-	public function atualizarOrcamentoDao($idOrc,$campoOrc,$campoDB){
-		if(mysql_query("UPDATE orcamentos SET $campoDB = '$campoOrc' WHERE id ='$idOrc'")){
-			return true;
-		}else {return false;}
+// 	public function atualizarOrcamentoDao($idOrc,$campoOrc,$campoDB){
+// 		if(mysql_query("UPDATE orcamentos SET $campoDB = '$campoOrc' WHERE id ='$idOrc'")){
+// 			return true;
+// 		}else {return false;}
 			
+// 	}
+	
+	public function atualizarOrcamentoDao($idOrc, $camposDados){
+		$update = new Update();
+		$update->ExecUpdate("orcamentos", $camposDados, "WHERE id ='$idOrc'");
+		return $update->getResultado();	
 	}
 	
 	public function buscarOrcamentosDAO($campos,$termos) {

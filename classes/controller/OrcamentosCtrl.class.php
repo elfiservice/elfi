@@ -42,20 +42,33 @@ class OrcamentoCtrl{
 							
 			];
 			
-						
+			$contador=1;			
 			foreach ($arrayItensOrc as $campoDb=>$itemOrc){
 				if(!$itemOrc == "" || !$itemOrc == null){
-					//extract($itemArray);
-					if($this->OrcDao->atualizarOrcamentoDao($ocamentoObj->getId(), $itemOrc, $campoDb)){
-						$arrayResultAtualizacao[]=[$campoDb=>"OK, atualizado!"];
-					}else{
-						$arrayResultAtualizacao[]=[$campoDb=>"Erro ao tentar atualizar!!"];
+					if($contador == 1){
+						$campoDados = "{$campoDb}='{$itemOrc}'";
+						$arrayResultAtualizacao[]=[$campoDb=>"OK, atualizado para {$itemOrc}"];
+						$contador++;
+					} else {
+						$campoDados .= ",{$campoDb}='{$itemOrc}'";
+						$arrayResultAtualizacao[]=[$campoDb=>"OK, atualizado para {$itemOrc}"];
+						$contador++;
 					}
+					//extract($itemArray);
+					
 					
 				}else{
 					$arrayResultAtualizacao[]=[$campoDb=>"Campo vazio, nao atualizado."];
 				}
 			}
+			
+			
+			if($this->OrcDao->atualizarOrcamentoDao($ocamentoObj->getId(), $campoDados)){
+				$arrayResultAtualizacao[]=["resultado"=>"OK, atualizado!"];
+			}else{
+				$arrayResultAtualizacao[]=["resultado"=>"Erro ao tentar atualizar!!"];
+			}
+			
 			
 			
 		}else{

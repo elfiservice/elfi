@@ -1,7 +1,7 @@
 <?php
 
 include "../checkuserlog.php";
-include_once "../Config/config_sistema.php";
+//include_once "../Config/config_sistema.php";
 include_once "../classes/controller/UsuarioCtrl.class.php";
 require "../classes/controller/OrcamentosCtrl.class.php";
 //require "../classes/model/Orcamento.class.php";
@@ -40,6 +40,7 @@ if(isSet ($_GET['id_orc'])) {
 	//var_dump($orcObj);
 	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
 
+	//var_dump($resultAtualizOrcamento);
 	?>
 			 
 <script type="text/javascript" >
@@ -51,6 +52,7 @@ if(isSet ($_GET['id_orc'])) {
         } 
        
         $usuario = new UsuarioCtrl();
+        $orcCrtl = new OrcamentoCtrl();
 ?>
 
 <!doctype html>
@@ -82,8 +84,12 @@ if(isSet ($_GET['id_orc'])) {
 			<select name="ano" id="ano" class="formFieldsAno">
 				<option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>
 				<?php
-				$consulta_menor_ano_orc = mysql_query("select DISTINCT ano_orc from orcamentos ORDER BY ano_orc DESC");
-				while($l = mysql_fetch_array($consulta_menor_ano_orc)) {
+				$anosOrcamentosArr = $orcCrtl->buscarOrcamentos("DISTINCT ano_orc", "ORDER BY ano_orc DESC");
+				
+				//$consulta_menor_ano_orc = mysql_query("select DISTINCT ano_orc from orcamentos ORDER BY ano_orc DESC");
+				//while($l = mysql_fetch_array($consulta_menor_ano_orc)) 
+				foreach ($anosOrcamentosArr as $orc => $l)
+				{
 				?>
 					<option value="<?php echo $l['ano_orc']; ?>"><?php echo $l['ano_orc']; ?></option>
 				<?php
@@ -124,7 +130,7 @@ if(isSet ($_GET['id_orc'])) {
             
 <?php
      //fazer busca por OO
-	     $orcCrtl = new OrcamentoCtrl();
+	     
 	     $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = $ano_orc ORDER BY id  DESC");
 	     
 
