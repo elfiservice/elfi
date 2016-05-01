@@ -88,7 +88,9 @@
 <!--                                         </td> -->
                                                                                 <td>
                                            <?php
-                                         echo  date('d/m/Y, H:i', strtotime($row['data_inclusao']));?>
+                                           	echo Formatar::formatarDataComHora($row['data_inclusao']);
+                                           
+                                         //echo  date('d/m/Y, H:i', strtotime($row['data_inclusao']));?>
                                         </td> 
                                                                                 <td>
                                            <?php echo $row['cnpj_cpf'];?>

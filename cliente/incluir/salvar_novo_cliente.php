@@ -1,9 +1,10 @@
+
+<div>
+	<h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> <a href="tecnico.php?id_menu=novo_cliente">Novo</a> -> Salvando</h2>
+</div>
+<hr>
+
 <?php
-
-include_once "includes/funcoes.php";
-
-//include_once "../../Config/config_sistema.php"; 
-
 
 //Este código será executado somente se o nome de usuário é Postado
 if (isset ($_POST['razao_social']))
@@ -129,8 +130,8 @@ if (isset ($_POST['razao_social']))
                 $nome_usuario = $linha_usuario->Login;
     
    	//limpa CPF e CNPJ
-          $cnpj_cpf =  limpaCPF_CNPJ($cnpj_cpf);
-
+         // $cnpj_cpf =  limpaCPF_CNPJ($cnpj_cpf);
+                $cnpj_cpf = Formatar::limpaCPF_CNPJ($cnpj_cpf);
                 
               
 

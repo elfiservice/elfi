@@ -4,46 +4,19 @@
 ?>
 
 
-
-
-    
-
 <!-- MAscaras em campos -->
-<script src="js/jquery.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/mascara/jquery.meio.mask.js" charset="utf-8"></script>
-<script type="text/javascript" >
-  (function($){
-    // call setMask function on the document.ready event
-      $(function(){
-        $('input:text').setMask();
-      }
-    );
-  })(jQuery);
-</script>        
+<?php require 'includes/javascripts/mascaras_campos_valores_monetario.php';?>     
               
                 
 <!--
 DESABILITAR CAMPOS COM CHECKBOX
 -->
-<script type="text/javascript" src="js/desabilitar/jquery-latest.js"></script>
-<script type="text/javascript">
-function toggleStatus() {
+<?php require 'includes/javascripts/desabilCampoCheckBox.php';?>
 
-
-    if ($('#toggleElement').is(':checked')) {
-        $('#elementsToOperateOn :input').attr('disabled', true);
-		$('#elementsToOperateOn2 :input').removeAttr('disabled');
-		
-		
-    } else {
-        $('#elementsToOperateOn :input').removeAttr('disabled');
-		$('#elementsToOperateOn2 :input').attr('disabled', true);
-    }   
-}
-</script>
-
-
-         <script language="JavaScript">
+<?php require 'includes/javascripts/testeCnpjeCpf.php';?>
+<?php require 'includes/javascripts/testeTelefone.php';?>
+<!-- Campos Obrigatorios -->
+<script language="JavaScript">
 
 
 /***********************************************
@@ -122,7 +95,7 @@ if(mysql_num_rows($consulta_cliente)> 0){
 ?>
 
 <div>
-	<h2>Clientes -> Editar</h2>
+	<h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Editar</h2>
 </div>
 <hr>
 
@@ -214,7 +187,7 @@ if(mysql_num_rows($consulta_cliente)> 0){
                                         </td>
                                         <td class="label2">CPF</td>
                                         <td class="input2">
-                                            <div id="elementsToOperateOn2"><input type="text" value="<?php echo $linha_cliente->cnpj_cpf; ?>" id="cpf" name="cpf" alt="cpf" /><br /></div>
+                                            <div id="elementsToOperateOn2"><input type="text" value="<?php echo $linha_cliente->cnpj_cpf; ?>" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" /><br /></div>
                                         </td>
                                         
                                         
@@ -225,7 +198,7 @@ if(mysql_num_rows($consulta_cliente)> 0){
                                                  
                                         <td class="label">CNPJ</td>
                                         <td class="input">             
-                                            <div id="elementsToOperateOn"><input type="text" value="<?php echo $linha_cliente->cnpj_cpf; ?>" id="cnpj" name="cnpj" alt="cnpj" /><br /></div>
+                                            <div id="elementsToOperateOn"><input type="text" onBlur="TESTA();" value="<?php echo $linha_cliente->cnpj_cpf; ?>" id="cnpj" name="cnpj" alt="cnpj" /><br /></div>
                                         </td>
                                         <td class="label2">CPF</td>
                                         <td class="input2">
@@ -362,17 +335,17 @@ if(mysql_num_rows($consulta_cliente)> 0){
                                     <tr>
                                         <td class="label">TEL</td>
                                         <td class="input">
-                                            <input type="text" id="phone" name="phone" alt="phone" value="<?php echo $linha_cliente->tel; ?>"/>
+                                            <input type="text" onchange="Contar(this)" id="phone" name="phone" alt="phone" value="<?php echo $linha_cliente->tel; ?>"/>
                                         </td>
                                         <td class="label2">CEL</td>
                                         <td class="input2">
-                                            <input type="text" id="cel" name="cel" alt="cel" value="<?php echo $linha_cliente->cel; ?>" />
+                                            <input type="text" onchange="Contar(this)" id="cel" name="cel" alt="cel" value="<?php echo $linha_cliente->cel; ?>" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label">FAX</td>
                                         <td class="input">
-                                             <input type="text" id="fax" name="fax" alt="fax" value="<?php echo $linha_cliente->fax; ?>" />
+                                             <input type="text" onchange="Contar(this)" id="fax" name="fax" alt="fax" value="<?php echo $linha_cliente->fax; ?>" />
                                         </td>
                                         <td>
                                             

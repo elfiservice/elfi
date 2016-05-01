@@ -1,11 +1,20 @@
+
 <?php
 
 //include_once "../../Config/config_sistema.php"; 
 include_once "includes/funcoes.php";
 
+
+
 if(isset($_GET['id_cliente'])){
 $id_cliente = $_GET['id_cliente'];
+?>
+<div>
+	<h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> <a href="tecnico.php?id_menu=editar_cliente&id_cliente=<?= $_GET['id_cliente'] ?>&msg_erro=">Editar</a> -> Salvando</h2>
+</div>
+<hr>
 
+<?php
 //Este código será executado somente se o nome de usuário é Postado
 if (isset ($_POST['razao_social']))
     {

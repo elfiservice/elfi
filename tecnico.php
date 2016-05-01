@@ -1,8 +1,11 @@
 <?php
 include "checkuserlog.php";
 require 'Config/SistemConfig.php';
-
+include 'classes/util/Formatar.class.php';
 include_once "Config/config_sistema.php";
+
+
+
 
 if (! isset ( $_SESSION ['idx'] )) {
 	if (! isset ( $_COOKIE ['idCookie'] )) {
@@ -42,19 +45,11 @@ if (! isset ( $_SESSION ['idx'] )) {
 <link rel="stylesheet" href="estilos.css">
 
 <!-- Mostra colaborador Logado -->
-<script src="js/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-// Chama aba Seu Estado
-$(document).ready(function() {
-	$("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo $logOptions_id;?>');
-});
-</script>
-
-<!-- Menus dorp down  -->
-<?php include_once 'includes/javascripts/menu_dropdown.php';?>
+<?php include 'includes/javascripts/mostra_colab_logado.php';?>
 
 <!-- Tabela  -->
 <?php include_once 'includes/javascripts/tabela_no_head.php';?> 
+
 
 </head>
 <body>

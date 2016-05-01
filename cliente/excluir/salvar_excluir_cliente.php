@@ -1,7 +1,13 @@
 <?php
 if (isset ( $_GET ['id_cliente'] )) {
 	$id_cliente = $_GET ['id_cliente'];
+	?>
+	<div>
+		<h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Excluir -> Excluindo</h2>
+	</div>
+	<hr>
 	
+	<?php	
 	
 	if (isset ( $_POST ['razao_social'] )) {
 		$razaoSocial = $_POST ['razao_social'];

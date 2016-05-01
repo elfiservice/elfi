@@ -11,7 +11,7 @@ $linha_cliente = mysql_fetch_object ( $consulta_cliente );
 ?>
 
 <div>
-	<h2>Clientes -> Excluir</h2>
+	<h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Excluir</h2>
 </div>
 <hr>
 
