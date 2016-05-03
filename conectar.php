@@ -50,6 +50,7 @@
 							// Create session var for their username
 							$username = $row["Login"];
 							$_SESSION['Login'] = $username;
+							$_SESSION['tipo_user'] =  $row["tipo"];
 
 							mysql_query("UPDATE colaboradores SET last_log_date=now() WHERE id_colaborador = '$id' LIMIT 1");
 				
@@ -65,6 +66,7 @@
 						
 							$_SESSION['email'] = $email;
 							$_SESSION['pass'] = $pass;
+							
 						
 						$header = header("location: index.php"); 
 						

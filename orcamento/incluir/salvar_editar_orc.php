@@ -1,6 +1,6 @@
 ﻿<?php
 
-include_once "Config/config_sistema.php"; 
+//include_once "../../Config/config_sistema.php"; 
 
 
 //Este código será executado somente se o nome de usuário é Postado

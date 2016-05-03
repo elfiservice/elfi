@@ -9,6 +9,7 @@ class OrcamentoCtrl{
 	 
 	public function OrcamentoCtrl(){
 	 	$this->OrcDao = new OrcamentoDAO();
+	
 	 }
 	 
 	public function nDeOrcPorUsuario($nomeUsuarioLogado){
@@ -63,7 +64,7 @@ class OrcamentoCtrl{
 			}
 			
 			
-			if($this->OrcDao->atualizarOrcamentoDao($ocamentoObj->getId(), $campoDados)){
+			if($this->OrcDao->update($ocamentoObj->getId(), $campoDados)){
 				$arrayResultAtualizacao[]=["resultado"=>"OK, atualizado!"];
 			}else{
 				$arrayResultAtualizacao[]=["resultado"=>"Erro ao tentar atualizar!!"];
@@ -79,10 +80,22 @@ class OrcamentoCtrl{
 	}
 	
 	public function buscarOrcamentos($campos,$termos) {
-		$orcamentosDao = $this->OrcDao->buscarOrcamentosDAO($campos, $termos);
+		$orcamentosDao = $this->OrcDao->select($campos, $termos);
 		
 		return $orcamentosDao;
 		
+	}
+	
+	public function listaAtividades() {
+		return $this->OrcDao->selectAtividades();
+	}
+	
+	public function listarClassificacao(){
+		return $this->OrcDao->selectClassificacao();
+	}
+	
+	public function listarUnidades(){
+		return $this->OrcDao->selectUnidade();
 	}
 }
 

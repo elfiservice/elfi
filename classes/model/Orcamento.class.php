@@ -61,75 +61,66 @@ class Orcamento {
 	private $colab_ultimo_contato_client;
 	
 
-	public function __construct(){
-		
-	}
-	
-// 	public function __construct(
-// 			$id,
-// 			$nOrc,
-// 			$anoOrc,
-// 			$colabOrc,
-// 			$situacaoOrc,
-// 			$razaoSociContr,
-// 			$cnpjContr,
-// 			$enderContr,
-// 			$bairroContr,
-// 			$cidadeContr,
-// 			$estadoContr,
-// 			$cepContr,
-// 			$telefone_contr,
-// 			$celular_contr,
-// 			$email_contr,
-// 			$contato_clint,
-// 			$razao_social_obra,
-// 			$cnpj_obra,
-// 			$endereco_obra,
-// 			$bairro_obra,
-// 			$cidade_obra,
-// 			$estado_obra,
-// 			$cep_obra,
-// 			$telefone_obra,
-// 			$celular_obra,
-// 			$email_obra,
-// 			$atividade,
-// 			$classificacao,
-// 			$quantidade,
-// 			$unidade,
-// 			$descricao_servico_orc,
-// 			$prazo_exec_orc,
-// 			$validade_orc,
-// 			$pagamento_orc,
-// 			$obs_orc,
-// 			$duvida_orc,
-// 			$vr_servco_orc,
-// 			$vr_material_orc,
-// 			$desconto_orc,
-// 			$vr_total_orc,
-// 			$obra_igual_contrat,
-// 			$data_adicionado_orc,
-// 			$data_ultima_alteracao,
-// 			$colaborador_ultim_alteracao,
-// 			$data_aprovada,
-// 			$data_inicio,
-// 			$data_conclusao,
-// 			$dias_d_aprovado,
-// 			$dias_d_exec,
-// 			$dias_ultrapassad,
-// 			$serv_concluido,
-// 			$feito_pos_entreg,
-// 			$nao_conformidade,
-// 			$obs_n_conformidad,
-// 			$client_insatisfeito,
-// 			$data_ultimo_cont_cliente,
-// 			$colab_ultimo_contato_client			
-// 			){
-// 		$this->id = $id;
-// 		$this->n_orc = $nOrc;
-// 		$this->ano_orc = $anoOrc;
-// 		$this->colaborador_orc = $colabOrc;
-// 		$this->situacao_orc = $situacaoOrc;
-// 	}
+	public function __construct($id, $n_orc, $ano_orc, $colaborador_orc, $situacao_orc, $razao_social_contr, $cnpj_contr, $endereco_contr, $bairro_contr, $cidade_contr, $estado_contr, $cep_contr, $telefone_contr, $celular_contr, $email_contr, $contato_clint, $razao_social_obra, $cnpj_obra, $endereco_obra, $bairro_obra, $cidade_obra, $estado_obra, $cep_obra, $telefone_obra, $celular_obra, $email_obra, $atividade, $classificacao, $quantidade, $unidade, $descricao_servico_orc, $prazo_exec_orc, $validade_orc, $pagamento_orc, $obs_orc, $duvida_orc, $vr_servco_orc, $vr_material_orc, $desconto_orc, $vr_total_orc, $obra_igual_contrat, $data_adicionado_orc, $data_ultima_alteracao, $colaborador_ultim_alteracao, $data_aprovada, $data_inicio, $data_conclusao, $dias_d_aprovado, $dias_d_exec, $dias_ultrapassad, $serv_concluido, $feito_pos_entreg, $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, $data_ultimo_cont_cliente, $colab_ultimo_contato_client) {
+            $this->id = $id;
+            $this->n_orc = $n_orc;
+            $this->ano_orc = $ano_orc;
+            $this->colaborador_orc = $colaborador_orc;
+            $this->situacao_orc = $situacao_orc;
+            $this->razao_social_contr = $razao_social_contr;
+            $this->cnpj_contr = $cnpj_contr;
+            $this->endereco_contr = $endereco_contr;
+            $this->bairro_contr = $bairro_contr;
+            $this->cidade_contr = $cidade_contr;
+            $this->estado_contr = $estado_contr;
+            $this->cep_contr = $cep_contr;
+            $this->telefone_contr = $telefone_contr;
+            $this->celular_contr = $celular_contr;
+            $this->email_contr = $email_contr;
+            $this->contato_clint = $contato_clint;
+            $this->razao_social_obra = $razao_social_obra;
+            $this->cnpj_obra = $cnpj_obra;
+            $this->endereco_obra = $endereco_obra;
+            $this->bairro_obra = $bairro_obra;
+            $this->cidade_obra = $cidade_obra;
+            $this->estado_obra = $estado_obra;
+            $this->cep_obra = $cep_obra;
+            $this->telefone_obra = $telefone_obra;
+            $this->celular_obra = $celular_obra;
+            $this->email_obra = $email_obra;
+            $this->atividade = $atividade;
+            $this->classificacao = $classificacao;
+            $this->quantidade = $quantidade;
+            $this->unidade = $unidade;
+            $this->descricao_servico_orc = $descricao_servico_orc;
+            $this->prazo_exec_orc = $prazo_exec_orc;
+            $this->validade_orc = $validade_orc;
+            $this->pagamento_orc = $pagamento_orc;
+            $this->obs_orc = $obs_orc;
+            $this->duvida_orc = $duvida_orc;
+            $this->vr_servco_orc = $vr_servco_orc;
+            $this->vr_material_orc = $vr_material_orc;
+            $this->desconto_orc = $desconto_orc;
+            $this->vr_total_orc = $vr_total_orc;
+            $this->obra_igual_contrat = $obra_igual_contrat;
+            $this->data_adicionado_orc = $data_adicionado_orc;
+            $this->data_ultima_alteracao = $data_ultima_alteracao;
+            $this->colaborador_ultim_alteracao = $colaborador_ultim_alteracao;
+            $this->data_aprovada = $data_aprovada;
+            $this->data_inicio = $data_inicio;
+            $this->data_conclusao = $data_conclusao;
+            $this->dias_d_aprovado = $dias_d_aprovado;
+            $this->dias_d_exec = $dias_d_exec;
+            $this->dias_ultrapassad = $dias_ultrapassad;
+            $this->serv_concluido = $serv_concluido;
+            $this->feito_pos_entreg = $feito_pos_entreg;
+            $this->nao_conformidade = $nao_conformidade;
+            $this->obs_n_conformidad = $obs_n_conformidad;
+            $this->client_insatisfeito = $client_insatisfeito;
+            $this->data_ultimo_cont_cliente = $data_ultimo_cont_cliente;
+            $this->colab_ultimo_contato_client = $colab_ultimo_contato_client;
+        }
+
 
 
 	public function getId() {

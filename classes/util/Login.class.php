@@ -41,7 +41,7 @@ class Login extends Conexao{
 				//$id = $row["id"];
 				//$_SESSION['id'] = $id;
 				//$_SESSION['idx'] = base64_encode("g4p3h9xfn8sq03hs2234$id");
-				//$username = $row["Nome"];
+				//$username = $row["Login"];
 				//$_SESSION['Login'] = $username;
 		
 				//mysql_query("UPDATE colaboradores SET last_log_date=now() WHERE id_colaborador = '$id' LIMIT 1");

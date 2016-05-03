@@ -7,7 +7,6 @@ class Usuario{
 	private $id;
 	private $login;
 	private $senha;
-	private $cpf;
 	private $tipo;
 	private $ultima_data_logado;
 	private $email_ativado;
@@ -15,12 +14,11 @@ class Usuario{
 	
 
 
-	public function Usuario($id, $login, $senha, $cpf, $tipo, $ultimaDataLog, $emailAtivado, $email){
+	public function Usuario($id, $login, $senha, $tipo, $ultimaDataLog, $emailAtivado, $email){
 	
 		$this->id = $id;
 		$this->login = 	$login;
 		$this->senha = $senha;
-		$this->cpf = $cpf;
 		$this->tipo = $tipo;
 		$this->ultima_data_logado =  $ultimaDataLog;
 		$this->email = $email;
@@ -51,14 +49,6 @@ class Usuario{
 	
 	public function setSenha($pSenha){
 		return $this->senha = $pSenha;
-	}
-	
-	public function getCpf(){
-		return $this->cpf;
-	}
-	
-	public function setCpf($pCpf){
-		return $this->cpf = $pCpf;
 	}
 	
 	public function getTipo(){

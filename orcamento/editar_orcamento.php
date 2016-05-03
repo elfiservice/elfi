@@ -7,7 +7,8 @@
         } 
 		
 		//echo $orc;
-		
+		$a = filter_input_array(INPUT_POST,FILTER_DEFAULT);
+		var_dump($a);
 ?>
 
 
@@ -42,12 +43,12 @@ MAscaras em campos
 
         
    <?php
-  			$consulta_colab = mysql_query("select * from colaboradores where id_colaborador = '$logOptions_id'");
-			$linha_colab = mysql_fetch_object($consulta_colab);
-
-                        $tipo_conta = $linha_colab->tipo;
-
-
+   $ColabCtrl = new ColaboradorCtrl();
+   $ColabBd = $ColabCtrl->buscarColaborador("*", "where id_colaborador = $logOptions_id");
+  // extract($ColabBd[0]);
+   $tipo_conta = $ColabBd[0]["tipo"];
+   //var_dump($ColabBd);
+           
     if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh")
         
     {
@@ -135,17 +136,13 @@ function formCheck(formobj){
  			$OrcBd = $OrcBd[0];
  			extract($OrcBd);
 ?>
-
- 
-            
-            <div class="" style="">
-                
-                 
+  
+            <div  class="" style="">
                 
                 <form name="clientForm" method="post" action="salvar_editar_orc.php" onsubmit="return formCheck(this);">       
 
-            <fieldset>
-            <legend><h3>Contratante</h3></legend>
+            <fieldset class="fieldsetGeral">
+            <legend ><h3>Contratante</h3></legend>
                 <table border="0">
                                 <tbody>
 
@@ -154,13 +151,11 @@ function formCheck(formobj){
                                             <select id="clientID" name="clientID">
                                                 <option value="<?php echo $razao_social_contr; ?>"><?php echo $razao_social_contr; ?></option>
                                                     <?php
-                                                            $sql = "SELECT razao_social
-                                                                            FROM clientes
-                                                                            ORDER BY razao_social";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
-                                                                    echo '<option id="clientID" value="'.$row['razao_social'].'">'.$row['razao_social'].'</option>';
-                                                            }
+                                                    $clienteCtrl = new ClienteCtrl();
+                                                    $clienteBd = $clienteCtrl->buscarCliente("razao_social", "ORDER BY razao_social");
+                                                     foreach ($clienteBd as $cliente => $row){
+                                                         echo '<option id="clientID" value="'.$row['razao_social'].'">'.$row['razao_social'].'</option>';
+                                                     }
                                                     ?>
                                                             
                                            </select>
@@ -168,6 +163,7 @@ function formCheck(formobj){
                                         </td>
                                     </tr>
                                   <tr align="left">
+                              
                                       <td><label for="razao_social">Razão Social:</label></br>
                                         <input name="razao_social" id="razao_social" size="60" maxlength="255" readonly>
                                       </td>
@@ -227,7 +223,7 @@ function formCheck(formobj){
                 </table>
            </fieldset>
 
-          <fieldset>
+          <fieldset class="fieldsetGeral">
               <legend><h3>Contato</h3></legend>
             
             
@@ -238,7 +234,7 @@ function formCheck(formobj){
                     
                     
                     
-            <fieldset>
+            <fieldset class="fieldsetGeral">
             <legend><h3>Local da obra</h3></legend>
             
             <div id="form_local_obra">
@@ -310,7 +306,7 @@ function formCheck(formobj){
             </div>
            </fieldset>                    
                  
-           <fieldset>
+           <fieldset class="fieldsetGeral">
             <legend><h3>Classificação da Atividade</h3></legend>
             
              <table border="0">
@@ -343,11 +339,8 @@ function formCheck(formobj){
                                         <select id="" name="atividade1">
                                                 <option name="" value="<?php echo $atividade; ?>" ><?php echo $atividade; ?> </option>
                                                     <?php
-                                                            $sql = "SELECT *
-                                                                            FROM orc_atividades
-                                                                            ORDER BY atividade";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
+                                                   		$listaAtivBd = $OrcCtrl->listaAtividades();
+                                                        foreach ($listaAtivBd as $lista => $row){
                                                                     echo '<option id="" value="'.utf8_encode($row['atividade']).'" >'. utf8_encode($row['atividade']).'</option>';
                                                              }
                                                     ?>
@@ -355,15 +348,13 @@ function formCheck(formobj){
                                          </select>
                                     
                                     </td>
+                                        <?php //echo  var_dump($clienteBd);?>
                                      <td>
                                         <select id="" name="classificacao1">
                                                 <option value="<?php echo $classificacao; ?>" ><?php echo $classificacao; ?></option>
                                                     <?php
-                                                            $sql = "SELECT *
-                                                                            FROM orc_classificacao_ativid
-                                                                            ORDER BY classificacao";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
+															$listaClassfBd = $OrcCtrl->listarClassificacao();
+     														foreach ($listaClassfBd as $lista => $row){
                                                                     echo '<option id="" value="'.utf8_encode($row['classificacao']).'" >'.utf8_encode($row['classificacao']).'</option>';
                                                              }
                                                     ?>
@@ -379,11 +370,8 @@ function formCheck(formobj){
                                         <select id="" name="unidade1">
                                                 <option value="<?php echo $unidade; ?>" ><?php echo $unidade; ?></option>
                                                     <?php
-                                                            $sql = "SELECT *
-                                                                            FROM orc_unidades
-                                                                            ORDER BY unidade";
-                                                            $res = mysql_query( $sql );
-                                                            while ( $row = mysql_fetch_assoc( $res ) ) {
+															$listaUnidBd = $OrcCtrl->listarUnidades();
+															foreach ($listaUnidBd as $lista => $row){
                                                                     echo '<option id="" value="'.utf8_encode($row['unidade']).'" >'.utf8_encode($row['unidade']).'</option>';
                                                              }
                                                     ?>
@@ -401,7 +389,7 @@ function formCheck(formobj){
            </fieldset>
                     
                     
-          <fieldset>
+          <fieldset class="fieldsetGeral">
               <legend><h3>Descrição dos Serviços</h3></legend>
             
             
@@ -410,7 +398,7 @@ function formCheck(formobj){
                          
           </fieldset>
                     
-          <fieldset>
+          <fieldset class="fieldsetGeral">
               <legend><h3>Condições</h3></legend>
             
                          <table border="0">
@@ -448,23 +436,23 @@ function formCheck(formobj){
           </fieldset>
   
                     
-          <fieldset>
+          <fieldset class="fieldsetGeral">
               <legend><h3>Observações</h3></legend>
             
             
-                         <textarea onfocus="init2();" rows="1" cols="100" style="height:1em;" id="text2" name="observacoes_servico"><?php echo $obs_orc; ?></textarea>
+                         <textarea onfocus="" style="height: 5em; width: 100%;" id="text2" name="observacoes_servico"><?php echo $obs_orc; ?></textarea>
                          
                          
           </fieldset>                    
 
-          <fieldset>
+          <fieldset class="fieldsetGeral">
               <legend><h3>Em caso dúvida / Negociações</h3></legend>
             
                          <input name="duvida_orc" id="duvida_orc" size="50" maxlength="50" value="<?php echo $duvida_orc; ?>">
                          
           </fieldset>                    
 
-          <fieldset>
+          <fieldset class="fieldsetGeral">
               <legend><h3>Valor</h3></legend>
             
                          <table border="0">
@@ -512,18 +500,17 @@ function formCheck(formobj){
                                     <td>
                                         
 
-                                        <input type="submit" value="Salvar Orçamento" name="salvar_orc" />
+                                        <input type="submit" value="Salvar" name="salvar_orc" />
 <script type="text/javascript">  
 //a carregar o código  
 function fecha() {
-
 //opener.location.href=opener.location.href;   
 // fechando a janela atual ( popup )  
-window.close();  
-
+//window.close();  
+history.back();  
 }  
 </script>  
-   <input type="button" value="Cancelar"  onclick="fecha()" name="" />
+   										<input type="button" value="Cancelar"  onclick="fecha()" name="" />
 
 										
                                         <input type="hidden" value="<?php echo $orc; ?>" name="id_orc_editado" hidden="hidden" />

@@ -16,6 +16,12 @@ class ClienteDAO {
 		$linha = mysql_fetch_object($sql);
 		return $linha;
 	}
+	
+	public function select($campo, $termos){
+		$read = new Read();
+		$read->ExecRead($campo, "clientes", $termos);
+		return $read->getResultado();
+	}
 }
 
 ?>

@@ -105,5 +105,11 @@ class ClienteCtrl{
 		}
 		return null;
 	}
+	
+	public function buscarCliente($campo, $termos) {
+		return $this->clienteDao->select($campo, $termos);
+		
+	}
+	
 }
 ?>

@@ -37,15 +37,33 @@ class OrcamentoDAO {
 			
 // 	}
 	
-	public function atualizarOrcamentoDao($idOrc, $camposDados){
+	public function update($idOrc, $camposDados){
 		$update = new Update();
 		$update->ExecUpdate("orcamentos", $camposDados, "WHERE id ='$idOrc'");
 		return $update->getResultado();	
 	}
 	
-	public function buscarOrcamentosDAO($campos,$termos) {
+	public function select($campos,$termos) {
 		$read = new Read();
 		$read->ExecRead($campos, "orcamentos", $termos);
+		return $read->getResultado();
+	}
+	
+	public function selectAtividades(){
+		$read = new Read();
+		$read->ExecRead("*", "orc_atividades", "ORDER BY atividade");
+		return $read->getResultado();
+	}
+	
+	public function selectClassificacao(){
+		$read = new Read();
+		$read->ExecRead("*", "orc_classificacao_ativid", "ORDER BY classificacao");
+		return $read->getResultado();
+	}
+	
+	public function selectUnidade(){
+		$read = new Read();
+		$read->ExecRead("*", "orc_unidades", "ORDER BY unidade");
 		return $read->getResultado();
 	}
 }
