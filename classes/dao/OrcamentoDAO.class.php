@@ -1,7 +1,7 @@
 <?php
-include '../classes/util/Conexao.class.php';
-require '../classes/util/Read.class.php';
-require '../classes/util/Update.class.php';
+// include '../classes/util/Conexao.class.php';
+// require '../classes/util/Read.class.php';
+// require '../classes/util/Update.class.php';
 
 
 class OrcamentoDAO {

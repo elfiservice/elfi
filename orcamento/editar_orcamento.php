@@ -1,20 +1,5 @@
 ﻿<?php
 
-
-    
-//echo date('Y')+2 .'<br>';
-
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-        include "checkuserlog.php";
-
-        include_once "Config/config_sistema.php"; 
-
-        $dyn_www = $_SERVER['HTTP_HOST'];  
-
         $orc = "";
         if(isSet ($_GET['id_orc'])) {
         
@@ -26,535 +11,34 @@
 ?>
 
 
-
-
-<!doctype html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="pt"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="pt"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="pt"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="pt"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Sistema ELFI | Técnico</title>
-        
-	<meta name="description" content="">
-	<meta name="author" content="Elfi Service">
-
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="estilos.css">    
-
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-
-
-       
-    
-<script type="text/javascript">
-// Chama aba Seu Estado
-$(document).ready(function() {
-
-$("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo $logOptions_id;?>');
-
-
-});
-
-</script>
-
-
-<!-- Menus dorp down  -->
-
-<link rel="stylesheet" type="text/css" href="js/menus/anylinkmenu.css" />
-
-<script type="text/javascript" src="js/menus/menucontents.js"></script>
-
-<script type="text/javascript" src="js/menus/anylinkmenu.js">
-
-/***********************************************
-* AnyLink JS Drop Down Menu v2.0- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
-* This notice MUST stay intact for legal use
-* Visit Project Page at http://www.dynamicdrive.com/dynamicindex1/dropmenuindex.htm for full source code
-***********************************************/
-
-</script>
-
-<script type="text/javascript">
-
-//anylinkmenu.init("menu_anchors_class") //Pass in the CSS class of anchor links (that contain a sub menu)
-anylinkmenu.init("menuanchorclass")
-
-</script>
-<!-- FIM Menus dorp down  -->
-
 <!--
 Inicio menu colaps (esconder ou mostrar) Vertical
 -->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
-<script type="text/javascript" src="js/esconder_mostrar/ddaccordion.js">
-
-/***********************************************
-* Accordion Content script- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
-* Visit http://www.dynamicDrive.com for hundreds of DHTML scripts
-* This notice must stay intact for legal use
-***********************************************/
-
-</script>
-
-
-<style type="text/css">
-	.mypets{ /*header of 1st demo*/
-	cursor: hand;
-	cursor: pointer;
-	padding: 2px 5px;
-
-	}
-
-	.openpet{ /*class added to contents of 1st demo when they are open*/
-	border-bottom: 2px solid #012B8B;
-	}
-</style>
-
-<script type="text/javascript">
-
-//Initialize first demo:
-ddaccordion.init({
-	headerclass: "mypets", //Shared CSS class name of headers group
-	contentclass: "thepet", //Shared CSS class name of contents group
-	revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
-	mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
-	collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
-	defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content.
-	onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
-	animatedefault: false, //Should contents open by default be animated into view?
-	persiststate: true, //persist state of opened contents within browser session?
-	toggleclass: ["", "openpet"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
-	togglehtml: ["none", "", ""], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
-	animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
-	oninit:function(expandedindices){ //custom code to run when headers have initalized
-		//do nothing
-	},
-	onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
-		//do nothing
-	}
-})
-
-</script>
 <!--
 FINAL Inicio menu colaps (esconder ou mostrar) Vertical
 -->
 
 
-<!-- Tabela  -->
-<link rel="stylesheet" href="tabela/demo_page.css">  
-<link rel="stylesheet" href="tabela/demo_table.css">  
-
-		<script type="text/javascript" language="javascript" src="tabela/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="tabela/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#example').dataTable();
-			} );
-		</script>
-<!-- FIM Tabela  -->
-
 <!--  Busca cliente para Auto Preenchimento  -->
-<script type="text/javascript" src="js/buscacliente/ajax.js"></script>
-	<script type="text/javascript">
-
-	var ajax = new sack();
-	var currentClientID=false;
-	function getClientData()
-	{
-		var clientId = document.getElementById('clientID').value;
-		if(clientId!=currentClientID){
-			currentClientID = clientId
-			ajax.requestFile = 'getClient.php?getClientId='+clientId;	// Specifying which file to get
-			ajax.onCompletion = showClientData;	// Specify function that will be executed after file has been found
-			ajax.runAJAX();		// Execute AJAX function			
-		}
-		
-	}
-	
-	function showClientData()
-	{
-		var formObj = document.forms['clientForm'];	
-		eval(ajax.response);
-	}
-	
-	
-	function initFormEvents()
-	{
-		document.getElementById('clientID').onblur = getClientData;
-		document.getElementById('clientID').focus();
-	}
-	
-	
-	window.onload = initFormEvents;
-	</script>
-<!-- FIM Busca cliente para Auto Preenchimento  -->
+<?php require 'includes/javascripts/busca_cliente_auto_preenchimento.php';?>
 
 <!-- Troca Local da Obra no ORçamento  -->
-<script type="text/javascript">
-
-function retira_form_obra() {
-var planet = document.getElementById("form_local_obra");
-planet.innerHTML = "<input onClick=\"return mostra_form_obra()\" name=\"submit\" type=\"submit\" value=\"O contratante é diferente do Local da Obra.\"  />";
-}
-
-//window.onload = cara;
-
-</script>
-
-<script type="text/javascript">
-
-function mostra_form_obra() {
-var planet = document.getElementById("form_local_obra");
-planet.innerHTML = "            <input onClick=\"return retira_form_obra()\" name=\"submit\" type=\"submit\" value=\"Os dados da contratante é o mesmo da Obra.\"  /> \n\
-                <table border=\"0\"> \n\
-                                <tbody> \n\
-                                    <tr align=\"left\"> \n\
-                                      <td><label for=\"razao_social2\">Razão Social:</label></br> \n\
-                                        <input name=\"razao_social2\" id=\"razao_social2\" size=\"60\" maxlength=\"255\"> \n\
-                                      </td> \n\
-                                      <td><label for=\"cnpj2\">CNPJ:</label></br> \n\
-                                        <input name=\"cnpj2\" id=\"cnpj2\" alt=\"cnpj\" size=\"20\" maxlength=\"20\"> \n\
-                                    </td> \n\
-                                </tr> \n\
-                                  <tr align=\"left\"> \n\
-                                    <td><label for=\"endereco2\">Endereço:</label></br> \n\
-                                    <input name=\"endereco2\" id=\"endereco2\" size=\"60\" maxlength=\"255\"></td> \n\
-                                </tr> \n\
-                                <tr align=\"left\"> \n\
-                                    <td><label for=\"bairro2\">Bairro:</label></br> \n\
-                                    <input name=\"bairro2\" id=\"bairro2\" size=\"20\" maxlength=\"255\"> \n\
-                                    </td> \n\
-                                    <td><label for=\"city2\">Cidade:</label></br> \n\
-                                    <input name=\"city2\" id=\"city2\" size=\"20\" maxlength=\"255\"> \n\
-                                    </td> \n\
-                                    <td><label for=\"estado2\">Estado:</label></br>\n\
-                                        <input name=\"estado2\" id=\"estado2\" size=\"20\" maxlength=\"255\" > \n\
-                                                    </td>\n\
-                                    </tr> \n\
-                                <tr align=\"left\"> \n\
-                                    <td><label for=\"cep2\">CEP:</label></br> \n\
-                                    <input name=\"cep2\" id=\"cep2\" alt=\"cep\" size=\"20\" maxlength=\"15\"> \n\
-                                  </td> \n\
-                                     <td><label for=\"tel2\">Telefone:</label></br> \n\
-                                    <input name=\"tel2\" id=\"tel2\" size=\"20\" alt=\"phone\" maxlength=\"15\"> \n\
-                                    </td> \n\
-                                     <td><label for=\"cel2\">Celular:</label></br> \n\
-                                    <input name=\"cel2\" id=\"cel2\" size=\"20\" alt=\"cel\" maxlength=\"15\"> \n\
-                                    </td> \n\
-                                    </tr> \n\
-                                <tr align=\"left\"> \n\
-                                    <td><label for=\"email_orc2\">Email:</label></br> \n\
-                                    <input name=\"email_orc2\" id=\"email_orc2\" size=\"20\" maxlength=\"255\"> \n\
-                                    </td> \n\
-                                </tr> \n\
-                                </tbody> \n\
-                </table> \n\
-                ";
-}
-
-//window.onload = cara;
-
-</script>
-<!-- FIM  Troca Local da Obra no ORçamento  -->
-
-<!--  Auto Rize no Text Area do Descrição servicos e Observação Orçamento  -->
-<script type="text/javascript">
-var observe;
-if (window.attachEvent) {
-    observe = function (element, event, handler) {
-        element.attachEvent('on'+event, handler);
-    };
-}
-else {
-    observe = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-    };
-}
-function init () {
-    var text = document.getElementById('text');
-    function resize () {
-        text.style.height = 'auto';
-        text.style.height = text.scrollHeight+'px';
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize () {
-        window.setTimeout(resize, 0);
-    }
-    observe(text, 'change',  resize);
-    observe(text, 'cut',     delayedResize);
-    observe(text, 'paste',   delayedResize);
-    observe(text, 'drop',    delayedResize);
-    observe(text, 'keydown', delayedResize);
-
-    text.focus();
-    text.select();
-    resize();
-}
-
-
-
-</script>        
-<script type="text/javascript">
-var observe2;
-if (window.attachEvent) {
-    observe2 = function (element, event, handler) {
-        element.attachEvent('on'+event, handler);
-    };
-}
-else {
-    observe2 = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-    };
-}
-function init2 () {
-    var text = document.getElementById('text2');
-    function resize () {
-        text.style.height = 'auto';
-        text.style.height = text.scrollHeight+'px';
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize () {
-        window.setTimeout(resize, 0);
-    }
-    observe(text, 'change',  resize);
-    observe(text, 'cut',     delayedResize);
-    observe(text, 'paste',   delayedResize);
-    observe(text, 'drop',    delayedResize);
-    observe(text, 'keydown', delayedResize);
-
-    text.focus();
-    text.select();
-    resize();
-}
-
-
-
-</script>            
-
-<!-- soma valores do serviço e materiais no ORçamento  -->
-<!--script language="javascript">
-function soma(){
-    var a =parseFloat(document.getElementById("vr_servico_orc").value.replace(/\s/g,'').replace(',','.'));
-    var b =parseFloat(document.getElementById("vr_material_orc").value.replace(/\s/g,'').replace(',','.'));
-    var c =parseFloat(document.getElementById("desconto_orc").value.replace(/\s/g,'').replace(',','.'));
-    
-    
-    resultado=(a+b)-c;
-    var total_geral= document.getElementById("total_orc");
-
-    total_geral.innerHTML=resultado;
-}
-</script>
-<script language="Javascript">
-function soma(){
-
-document.getElementById("total_orc") = '0'
-var preco = parseFloat(document.getElementById("vr_servico_orc").value);
-var material = parseFloat(document.getElementById("vr_material_orc").value);
-var desconto = parseFloat(document.getElementById("desconto_orc").value);
-document.getElementById("total_orc") = preco + material - desconto;
-}
-</SCRIPT-->
-
- <script>
-        $(document).ready ( function () {
-            $("#btn1").click ( function () {
-              var resultVal = 0.0;
-               $(".test").each ( function() {
-                   resultVal += parseFloat ( $(this).val().replace(/\s/g,'').replace(',','.'));
-                });
-                alert ( resultVal );  
-            });
-        });
-    </script>
-
-<!-- FIM  soma valores do serviço e materiais no ORçamento  -->    
-
+<?php require 'includes/javascripts/trocar_local_obra_orc.php';?>
+     
 
 <!--
 MAscaras em campos
 -->
+<?php require 'includes/javascripts/mascaras_campos_valores_monetario.php';?>
 
-<script src="js/jquery.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/mascara/jquery.meio.mask.js" charset="utf-8"></script>
-<script type="text/javascript" >
-  (function($){
-    // call setMask function on the document.ready event
-      $(function(){
-        $('input:text').setMask();
-      }
-    );
-  })(jQuery);
-</script>
-<!--
-FIM  MAscaras em campos
--->
   
 <!--
  SOMA campos
 -->
+<?php require 'includes/javascripts/somar_valores_monetarios.php';?>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
-
-	<!--// load jQuery Plug-ins //-->
-
-	<script type="text/javascript" src=""></script>
-
-	<script type="text/javascript" src="js/calcular/jquery.calculation.js"></script>
-
-
-
-	<script type="text/javascript">
-
-	var bIsFirebugReady = (!!window.console && !!window.console.log);
-
-
-
-	$(document).ready(
-
-		function (){
-
-
-/*			
-			$.Calculation.setDefaults({
-				onParseError: function(){
-					this.css("backgroundColor", "#cc0000")
-				}
-				, onParseClear: function (){
-					this.css("backgroundColor", "");
-				}
-			});
-*/
-			
-
-
-
-			// automatically update the "#totalSum" field every time
-			// the values are changes via the keyup event
-
-			$("input[name^=sum]").sum("keyup", "#totalSum");
-			
-			// automatically update the "#totalAvg" field every time
-			// the values are changes via the keyup event
-			$("input[name^=avg]").avg({
-				bind:"keyup"
-				, selector: "#totalAvg"
-				// if an invalid character is found, change the background color
-				, onParseError: function(){
-					this.css("backgroundColor", "#cc0000")
-				}
-				// if the error has been cleared, reset the bgcolor
-				, onParseClear: function (){
-					this.css("backgroundColor", "");
-				}
-			});
-
-
-			// automatically update the "#minNumber" field every time
-			// the values are changes via the keyup event
-			$("input[name^=min]").min("keyup", "#numberMin");
-
-			// automatically update the "#minNumber" field every time
-			// the values are changes via the keyup event
-			$("input[name^=max]").max("keyup", {
-				selector: "#numberMax"
-				, oncalc: function (value, options){
-					// you can use this to format the value
-					$(options.selector).val(value);
-				}
-			});
-
-			// this calculates the sum for some text nodes
-
-			$("#idTotalTextSum").click(
-
-				function (){
-					// get the sum of the elements
-
-					var sum = $(".textSum").sum();
-
-
-
-					// update the total
-					$("#totalTextSum").text("$" + sum.toString());
-
-				}
-
-			);
-
-
-
-			// this calculates the average for some text nodes
-
-			$("#idTotalTextAvg").click(
-
-				function (){
-
-					// get the average of the elements
-					var avg = $(".textAvg").avg();
-
-
-
-					// update the total
-					$("#totalTextAvg").text(avg.toString());
-
-				}
-
-			);
-
-		}
-
-	);
-	
-	function recalc(){
-		$("[id^=total_item]").calc(
-			// the equation to use for the calculation
-			"qty * price",
-			// define the variables used in the equation, these can be a jQuery object
-			{
-				qty: $("input[name^=qty_item_]"),
-				price: $("[id^=price_item_]")
-			},
-			// define the formatting callback, the results of the calculation are passed to this function
-			function (s){
-				// return the number as a dollar amount
-				return "$" + s.toFixed(2);
-			},
-			// define the finish callback, this runs after the calculation has been complete
-			function ($this){
-				// sum the total of the $("[id^=total_item]") selector
-				var sum = $this.sum();
-				
-				$("#grandTotal").text(
-					// round the results to 2 digits
-					"$" + sum.toFixed(2)
-				);
-			}
-		);
-	}
-
-	</script>
-
-
-
-<!--
-fim SOMA CAMPOS em campos
--->
-
-    
-    </head>
-    <body>
-	
-        
-
-    
-
-        
+       
 
         
    <?php
@@ -569,15 +53,17 @@ fim SOMA CAMPOS em campos
     {
        ?>
 	   
-	           
-        <div style="margin:20px 0px 20px 0px;">
-            
+ <div>
+	<h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Editar</h2>
+</div>
+<hr>	           
+<div style="margin:0px 0px 0px 0px;">
 
             
-<!-- Editar  orçaentos -->  
+<!-- Campos obrigatorios -->  
  
  <script language="JavaScript">
-<!--
+
 
 /***********************************************
 * Required field(s) validation v1.10- By NavSurf
@@ -638,25 +124,21 @@ function formCheck(formobj){
 		return false;
 	}
 }
-// -->
+
 </script>
  
 
  <?php
  //burca Orçamento
- 
-   			$consulta_orc = mysql_query("select * from orcamentos where id = '$orc'");
-			$linha_orc = mysql_fetch_object($consulta_orc);
+ 			$OrcCtrl = new OrcamentoCtrl();
+ 			$OrcBd = $OrcCtrl->buscarOrcamentos("*", "where id = $orc");
+ 			$OrcBd = $OrcBd[0];
+ 			extract($OrcBd);
+?>
 
-                       $orc_cliente = $linha_orc->razao_social_contr;
  
- 
- ?>
- 
- 
-            <h3 class="mypets">Editar Orçamento (clique aqui)</h3>
-           
-            <div class="thepet" style="text-align: center;">
+            
+            <div class="" style="">
                 
                  
                 
@@ -670,7 +152,7 @@ function formCheck(formobj){
                                     <tr align="left">
                                         <td><label for="clientID">Cliente:</label></br>
                                             <select id="clientID" name="clientID">
-                                                <option value="<?php echo $linha_orc->razao_social_contr; ?>"><?php echo $linha_orc->razao_social_contr; ?></option>
+                                                <option value="<?php echo $razao_social_contr; ?>"><?php echo $razao_social_contr; ?></option>
                                                     <?php
                                                             $sql = "SELECT razao_social
                                                                             FROM clientes
@@ -749,7 +231,7 @@ function formCheck(formobj){
               <legend><h3>Contato</h3></legend>
             
             
-                         <input id="contato_clint" name="contato_clint" size="80" maxlength="100" value="<?php echo $linha_orc->contato_clint; ?>" />
+                         <input id="contato_clint" name="contato_clint" size="80" maxlength="100" value="<?php echo $contato_clint; ?>" />
                          
                          
           </fieldset>                     
@@ -768,29 +250,29 @@ function formCheck(formobj){
 
                                   <tr align="left">
                                       <td><label for="razao_social2">Razão Social:</label></br>
-                                        <input name="razao_social2" id="razao_social2" size="60" maxlength="255" value="<?php echo $linha_orc->razao_social_obra; ?>" >
+                                        <input name="razao_social2" id="razao_social2" size="60" maxlength="255" value="<?php echo $razao_social_obra; ?>" >
                                       </td>
 
                                       <td><label for="cnpj2">CNPJ:</label></br>
-                                        <input name="cnpj2" id="cnpj2" size="20" alt="cnpj" maxlength="22" value="<?php echo $linha_orc->cnpj_obra; ?>">
+                                        <input name="cnpj2" id="cnpj2" size="20" alt="cnpj" maxlength="22" value="<?php echo $cnpj_obra; ?>">
                                     </td>
                                 </tr>
                                   <tr align="left">
                                     <td><label for="endereco2">Endereço:</label></br>
-                                    <input name="endereco2" id="endereco2" size="60" maxlength="255" value="<?php echo $linha_orc->endereco_obra; ?>"></td>
+                                    <input name="endereco2" id="endereco2" size="60" maxlength="255" value="<?php echo $endereco_obra; ?>"></td>
                                   </tr>
                                   <tr align="left">
                                     <td><label for="bairro2">Bairro:</label></br>
-                                    <input name="bairro2" id="bairro2" size="20" maxlength="255" value="<?php echo $linha_orc->bairro_obra; ?>">
+                                    <input name="bairro2" id="bairro2" size="20" maxlength="255" value="<?php echo $bairro_obra; ?>">
                                     
                                     </td>
                                     
                                    <td><label for="city2">Cidade:</label></br>
-                                    <input name="city2" id="city2" size="20" maxlength="255" value="<?php echo $linha_orc->cidade_obra; ?>">
+                                    <input name="city2" id="city2" size="20" maxlength="255" value="<?php echo $cidade_obra; ?>">
                                     
                                     </td>
                                     <td><label for="estado2">Estado:</label></br>
-                                    <input name="estado2" id="estado2" size="20" maxlength="255" value="<?php echo $linha_orc->estado_obra; ?>">
+                                    <input name="estado2" id="estado2" size="20" maxlength="255" value="<?php echo $estado_obra; ?>">
                                     
                                     </td>
                                     
@@ -798,15 +280,15 @@ function formCheck(formobj){
                                 <tr align="left">
                                     
                                     <td><label for="cep2">CEP:</label></br>
-                                    <input name="cep2" id="cep2" alt="cep"  size="20" maxlength="12" value="<?php echo $linha_orc->cep_obra; ?>">
+                                    <input name="cep2" id="cep2" alt="cep"  size="20" maxlength="12" value="<?php echo $cep_obra; ?>">
                                     
                                     </td>
                                      <td><label for="tel2">Telefone:</label></br>
-                                    <input name="tel2" id="tel2" size="20" alt="phone" maxlength="15" value="<?php echo $linha_orc->telefone_obra; ?>">
+                                    <input name="tel2" id="tel2" size="20" alt="phone" maxlength="15" value="<?php echo $telefone_obra; ?>">
                                     
                                     </td>
                                      <td><label for="cel2">Celular:</label></br>
-                                    <input name="cel2" id="cel2" size="20" alt="cel" maxlength="15" value="<?php echo $linha_orc->celular_obra; ?>">
+                                    <input name="cel2" id="cel2" size="20" alt="cel" maxlength="15" value="<?php echo $celular_obra; ?>">
                                     
                                     </td>                                   
                                     
@@ -815,7 +297,7 @@ function formCheck(formobj){
                                 <tr align="left">
                                     
                                     <td><label for="email_orc2">Email:</label></br>
-                                    <input name="email_orc2" id="email_orc2" size="20" maxlength="255" value="<?php echo $linha_orc->email_obra; ?>">
+                                    <input name="email_orc2" id="email_orc2" size="20" maxlength="255" value="<?php echo $email_obra; ?>">
                                     
                                     </td>
                                  
@@ -859,7 +341,7 @@ function formCheck(formobj){
                                     
                                     <td>
                                         <select id="" name="atividade1">
-                                                <option name="" value="<?php echo $linha_orc->atividade; ?>" ><?php echo $linha_orc->atividade; ?> </option>
+                                                <option name="" value="<?php echo $atividade; ?>" ><?php echo $atividade; ?> </option>
                                                     <?php
                                                             $sql = "SELECT *
                                                                             FROM orc_atividades
@@ -875,7 +357,7 @@ function formCheck(formobj){
                                     </td>
                                      <td>
                                         <select id="" name="classificacao1">
-                                                <option value="<?php echo $linha_orc->classificacao; ?>" ><?php echo $linha_orc->classificacao; ?></option>
+                                                <option value="<?php echo $classificacao; ?>" ><?php echo $classificacao; ?></option>
                                                     <?php
                                                             $sql = "SELECT *
                                                                             FROM orc_classificacao_ativid
@@ -890,12 +372,12 @@ function formCheck(formobj){
                                     
                                     </td>
                                      <td>
-                                    <input name="quantidade1" id="" size="10" maxlength="10" value="<?php echo $linha_orc->quantidade; ?>">
+                                    <input name="quantidade1" id="" size="10" maxlength="10" value="<?php echo $quantidade; ?>">
                                     
                                     </td>  
                                      <td>
                                         <select id="" name="unidade1">
-                                                <option value="<?php echo $linha_orc->unidade; ?>" ><?php echo $linha_orc->unidade; ?></option>
+                                                <option value="<?php echo $unidade; ?>" ><?php echo $unidade; ?></option>
                                                     <?php
                                                             $sql = "SELECT *
                                                                             FROM orc_unidades
@@ -923,7 +405,7 @@ function formCheck(formobj){
               <legend><h3>Descrição dos Serviços</h3></legend>
             
             
-                         <textarea onfocus="init();" rows="1" cols="100" style="height:1em;" id="text" name="descricao_servicos"><?php echo strip_tags($linha_orc->descricao_servico_orc) ; ?></textarea>
+                         <textarea onfocus="" style="height: 10em; width: 100%;"  id="text" name="descricao_servicos"><?php echo strip_tags($descricao_servico_orc) ; ?></textarea>
                          
                          
           </fieldset>
@@ -949,15 +431,15 @@ function formCheck(formobj){
                                 </tr>
                                  <tr align="left">
                                     <td>
-                                       <input name="execucao_orc" id="execucao_orc" size="5" maxlength="3" value="<?php echo $linha_orc->prazo_exec_orc; ?>"> dias
+                                       <input name="execucao_orc" id="execucao_orc" size="5" maxlength="3" value="<?php echo $prazo_exec_orc; ?>"> dias
                                     </td>
                                        
                                     <td>
-                                      <input name="validade_orc" id="validade_orc" size="5" maxlength="3" value="<?php echo $linha_orc->validade_orc; ?>"> dias
+                                      <input name="validade_orc" id="validade_orc" size="5" maxlength="3" value="<?php echo $validade_orc; ?>"> dias
                                     </td>
                                     
                                    <td>
-                                     <input name="pagamento_orc" id="pagamento_orc" size="80" maxlength="80" value="<?php echo $linha_orc->pagamento_orc; ?>">
+                                     <input name="pagamento_orc" id="pagamento_orc" size="80" maxlength="80" value="<?php echo $pagamento_orc; ?>">
                                     </td>
                                     
                                 </tr>
@@ -970,7 +452,7 @@ function formCheck(formobj){
               <legend><h3>Observações</h3></legend>
             
             
-                         <textarea onfocus="init2();" rows="1" cols="100" style="height:1em;" id="text2" name="observacoes_servico"><?php echo $linha_orc->obs_orc; ?></textarea>
+                         <textarea onfocus="init2();" rows="1" cols="100" style="height:1em;" id="text2" name="observacoes_servico"><?php echo $obs_orc; ?></textarea>
                          
                          
           </fieldset>                    
@@ -978,7 +460,7 @@ function formCheck(formobj){
           <fieldset>
               <legend><h3>Em caso dúvida / Negociações</h3></legend>
             
-                         <input name="duvida_orc" id="duvida_orc" size="50" maxlength="50" value="<?php echo $linha_orc->duvida_orc; ?>">
+                         <input name="duvida_orc" id="duvida_orc" size="50" maxlength="50" value="<?php echo $duvida_orc; ?>">
                          
           </fieldset>                    
 
@@ -1005,11 +487,11 @@ function formCheck(formobj){
                                 </tr>
                                  <tr align="left">
                                     <td>
-                                       <input onchange="soma11()" name="sum_vr_servico_orc" id="vr_servico_orc" alt="decimal" size="15" maxlength="15" value="<?php echo $linha_orc->vr_servco_orc; ?>"> 
+                                       <input onchange="soma11()" name="sum_vr_servico_orc" id="vr_servico_orc" alt="decimal" size="15" maxlength="15" value="<?php echo $vr_servco_orc; ?>"> 
                                     </td>
                                        
                                     <td>
-                                      <input onchange="soma11()" name="sum_vr_material_orc" id="vr_material_orc" alt="decimal" size="15" maxlength="15" value="<?php echo $linha_orc->vr_material_orc; ?>"> 
+                                      <input onchange="soma11()" name="sum_vr_material_orc" id="vr_material_orc" alt="decimal" size="15" maxlength="15" value="<?php echo $vr_material_orc; ?>"> 
                                     </td>
                                     
                                    <td>
@@ -1068,13 +550,3 @@ window.close();
         </div>	
 		
         
-
-			
-			<footer>
-			
-
-				
-			</footer>       
-        
-    </body>
-</html>

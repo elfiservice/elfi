@@ -1,7 +1,7 @@
 <?php 
 
-include '../classes/dao/OrcamentoDAO.class.php';
-include '../classes/model/Orcamento.class.php';
+// include '../classes/dao/OrcamentoDAO.class.php';
+// include '../classes/model/Orcamento.class.php';
 
 class OrcamentoCtrl{
 	 private $OrcDao;

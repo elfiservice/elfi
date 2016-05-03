@@ -1,6 +1,6 @@
 <?php
 ?>
-<script type="text/javascript" src="./js/buscacliente/ajax.js"></script>
+<script type="text/javascript" src="<?= $www ?>/js/buscacliente/ajax.js"></script>
 <script type="text/javascript">
 
 	var ajax = new sack();

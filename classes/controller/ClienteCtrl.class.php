@@ -1,7 +1,7 @@
 <?php
-include '../classes/dao/ClienteDAO.class.php';
-include '../classes/model/Cliente_PF.class.php';
-include '../classes/model/Cliente_PJ.class.php';
+// include '../classes/dao/ClienteDAO.class.php';
+// include '../classes/model/Cliente_PF.class.php';
+// include '../classes/model/Cliente_PJ.class.php';
 class ClienteCtrl{
 	
 	private $clienteDao;

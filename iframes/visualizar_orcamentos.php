@@ -173,7 +173,7 @@ body {
                                                 
                                                 <select name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
 													<option value="<?php echo $row['situacao_orc'];?>"><?php echo $row['situacao_orc'];?></option>
-													<?php include "../lista_situacao_orc.php"; ?>
+													<?php include "../includes/orcamento/lista_situacao_orc.php"; ?>
 												</select>
 												
 												<input type="submit" value="Alterar" name="alterar_situacao" />

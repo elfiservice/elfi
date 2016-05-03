@@ -2,11 +2,11 @@
 
 include "../checkuserlog.php";
 //include_once "../Config/config_sistema.php";
-include_once "../classes/controller/UsuarioCtrl.class.php";
-require "../classes/controller/OrcamentosCtrl.class.php";
+// include_once "../classes/controller/UsuarioCtrl.class.php";
+// require "../classes/controller/OrcamentosCtrl.class.php";
 //require "../classes/model/Orcamento.class.php";
 require '../Config/SistemConfig.php';
-
+require '../classes/Config.inc.php';
 
 $ano_orc = "";
 if(isSet ($_GET['ano_orc'])) {
@@ -161,7 +161,7 @@ if(isSet ($_GET['id_orc'])) {
                                                 
                                                 <select name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
 													<option value="<?php echo $row['situacao_orc'];?>"><?php echo $row['situacao_orc'];?></option>
-													<?php include "../lista_situacao_orc.php"; ?>
+													<?php include "../includes/orcamento/lista_situacao_orc.php"; ?>
 												</select>
 												
 												<input type="submit" value="Alterar" name="alterar_situacao" />

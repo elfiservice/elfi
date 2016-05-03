@@ -1,9 +1,11 @@
 <?php
 include "checkuserlog.php";
 require 'Config/SistemConfig.php';
-include 'classes/util/Formatar.class.php';
+//include 'classes/util/Formatar.class.php';
 include_once "Config/config_sistema.php";
-
+//include_once "classes/controller/UsuarioCtrl.class.php";
+//require "classes/controller/OrcamentosCtrl.class.php";
+require 'classes/Config.inc.php';
 
 
 
@@ -99,12 +101,7 @@ if (! isset ( $_SESSION ['idx'] )) {
 		<div class="barra_menu"
 			style="background: #012B8B; text-align: center; padding: 5px 0px 0px 0px;">
 		</div>
-
-
-
 	</div>
-
-
 
 	<div style="margin: 20px 0px 20px 0px;">
             
@@ -148,29 +145,15 @@ if (! isset ( $_SESSION ['idx'] )) {
 		/* ------------- Manter Orçamentos ----------------- */
 		if ($menu == "orcamento") {
 			
-			//require 'orcamento/manterOrcamentos.php';
-?>			
-			<div>
-	<h2>Orcamentos</h2>
-</div>
-<hr>
-			<iframe class="iframeStyle" 
-					src="orcamento/manterOrcamentos.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
-<?php 
+			require 'orcamento/manterOrcamentos.php';
+
 		}
 		
 		// Menu novo orçamento
 		if ($menu == "editar_orcamento") {
 			
-			?>
-
-                
-               
-          <iframe class="iframeStyle"
-			src="iframes/visualizar_orcamentos.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
-            
-                
-           <?php
+			require 'orcamento/editar_orcamento.php';
+	
 		}
 		
 		// Menu Acompanhamento

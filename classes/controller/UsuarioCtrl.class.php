@@ -1,6 +1,6 @@
 <?php
-include '../classes/dao/UsuarioDAO.class.php';
-include '../classes/model/Usuario.class.php';
+// include '../classes/dao/UsuarioDAO.class.php';
+// include '../classes/model/Usuario.class.php';
 class UsuarioCtrl{
 	
 	private $usuarioDao;
