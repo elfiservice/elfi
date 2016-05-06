@@ -152,6 +152,10 @@ if (!isset($_SESSION ['idx'])) {
             if ($menu == "salvar_editar_orcamento") {
                 require 'orcamento/alterar/salvar_editar_orc.php';
             }
+            
+            if ($menu == "excluir_orcamento") {
+                require './orcamento/excluir/excluir_orcamento.php';
+            }
 
 
             // Menu Acompanhamento

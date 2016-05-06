@@ -25,22 +25,15 @@ if(isSet ($_GET['id_orc'])) {
 	$usuarioObj = new UsuarioCtrl();
 	$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
 	$nome_usuario = $usuario->getLogin();
-	
-       // corrigir a Instancia de Orcamento!!!  E ADICIONAR A DATA DE APROVADO O ORC E DE CONCLUIDO E CANCELADO
+
 	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); 
-//	$orcObj->setId($ident_orc);
-//	$orcObj->setColabOrc($nome_usuario);
-//	$orcObj->setSituacaoOrc($situcao_orc);
-	
 	$orcCrtlObj = new OrcamentoCtrl();
-	//var_dump($orcObj);
 	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
 
-	//var_dump($resultAtualizOrcamento);
 	?>
 			 
 <script type="text/javascript" >
-	alert ("Orcamento de ID <?= $orcObj->getId();?> foi atualizado: \n Situacao: <?= $resultAtualizOrcamento[3]["situacao_orc"];?> \n Colaborador: <?= $resultAtualizOrcamento[2]['colaborador_orc']?>!");
+	alert ("Orcamento de ID <?= $orcObj->getId();?> foi atualizado: \n Situacao: <?= $resultAtualizOrcamento["situacao_orc"];?> \n Colaborador: <?= $resultAtualizOrcamento['colaborador_orc']?>!");
 </script>
 			 
 <?php
@@ -86,7 +79,8 @@ if(isSet ($_GET['id_orc'])) {
                                     <tr>
                                             <th>No. ORC</th>
                                             <th>Colaborador</th>
-                                            <th>Situacao</th>                                            
+                                            <th>Situacao</th>             
+                                     
                                             <th>Editar</th>
                                             <th>Razao Social / Nome</th>
                                             <th>Classificacao</th>
@@ -128,39 +122,33 @@ if(isSet ($_GET['id_orc'])) {
                                         </td>                                        
                                         <td>
                                             
-										    <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y');?>&id_orc=<?php echo $row['id']; ?>&id_menu=orcamento" method="POST" enctype="multipart/form-data">
-                                                
-                                                
+                                            <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y');?>&id_orc=<?php echo $row['id']; ?>&id_menu=orcamento" method="POST" enctype="multipart/form-data">
                                                 <select name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
-													<option value="<?php echo $row['situacao_orc'];?>"><?php echo $row['situacao_orc'];?></option>
-													<?php include "includes/orcamento/lista_situacao_orc.php"; ?>
-												</select>
-												
-												<input type="submit" value="Alterar" name="alterar_situacao" />
+			<option value="<?php echo $row['situacao_orc'];?>"><?php echo $row['situacao_orc'];?></option>
+                                                            <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
+                                                </select>
+                                                				
+                                                   <input type="submit" value="Alterar" name="alterar_situacao" />
                                             </form>
 											
 											
-                                        </td>                                           
+                                        </td>   
                                         <td>
-                                            
-                                            <!--form name="editar_cliente" action="editar_orcamento.php?id_cliente=<?php echo $row['id'];?>&msg_erro=" method="POST" enctype="multipart/form-data">
-                                                
-                                                <input type="submit" value="Editar" name="enviar_lembrete" />
-                                                
-                                            </form-->
-											
-												<!-- a href="#" onclick="window.open('../editar_orcamento.php?id_orc=<?php echo $row['id'];?>&msg_erro=', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-												Editar
-												</a-->
+                                      
+
                                             <form name="editarOrcamento" action="tecnico.php?id_menu=editar_orcamento&id_orc=<?php echo $row['id'];?>&msg_erro=" method="POST" enctype="multipart/form-data">
                                                 
-                                                <input style="color: green; margin-bottom: 5px;" type="submit" value="Editar" name="editarOrcBtn" />
+                                                <input class="bt_verde" type="submit" value="Editar" name="editarOrcBtn" />
                                                 
-                                            </form>												
+                                            </form>
+                                            
+                                             <form name="excluirOrcamento" action="tecnico.php?id_menu=excluir_orcamento&id_orc=<?php echo $row['id'];?>&msg_erro=" method="POST" enctype="multipart/form-data">
+                                                
+                                                 <input class="bt_vermelho" type="submit" value="Exluir" name="excluirOrcBtn" />
+                                                
+                                            </form>
 												
-												<a href="#" onclick="window.open('../imprimir_orc.php?id_orc=<?php echo $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
-												Imprimir
-												</a>
+
 												
                                             
                                         </td>

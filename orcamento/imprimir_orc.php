@@ -1,9 +1,9 @@
 <?php
 
 
-        include "checkuserlog.php";
+        include "../checkuserlog.php";
 
-        include_once "Config/config_sistema.php"; 
+        include_once "../Config/config_sistema.php"; 
 
         $dyn_www = $_SERVER['HTTP_HOST'];  
 
@@ -382,7 +382,7 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
             <table border="0"    CELLPADDING="5" style="border-collapse: collapse"   >
                 <tr bordercolor=""  >
                     <td colspan="" >
-                        <img src="imagens/logo_elfi.jpg" id="" />
+                        <img src="../imagens/logo_elfi.jpg" id="" />
                         
                     </td>
                     <td align="center" colspan="8">

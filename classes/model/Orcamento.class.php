@@ -181,11 +181,11 @@ class Orcamento {
 	}
 	
 	public function getCnpjContrat() {
-	         return $this->razao_social_contr;
+	         return $this->cnpj_contr;
 	}
 	
-	public function setCnpjContrat($razao_social_contr) {
-	         $this->razao_social_contr = $razao_social_contr;
+	public function setCnpjContrat($cnpj_contr) {
+	         $this->cnpj_contr = $cnpj_contr;
 	}
 	
 	public function getEnderecoContrat() {

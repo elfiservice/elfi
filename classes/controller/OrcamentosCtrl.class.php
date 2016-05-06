@@ -33,8 +33,6 @@ class OrcamentoCtrl{
 		$arrayResultAtualizacao=[];
 		if($ocamentoObj instanceof Orcamento){
 			
-			//$arrayCampoDB = ["n_orc","ano_orc","colaborador_orc","situacao_orc"];
-			
 			$arrayItensOrc = [
 					"n_orc" => $ocamentoObj->getNOrc(),
 					"ano_orc" => $ocamentoObj->getAnoOrc(),
@@ -96,6 +94,7 @@ class OrcamentoCtrl{
 			
 			];
 			
+                     
 			$contador=1;			
 			foreach ($arrayItensOrc as $campoDb=>$itemOrc){
 				if(!$itemOrc == "" || !$itemOrc == null){
@@ -134,12 +133,31 @@ class OrcamentoCtrl{
 	
 	public function buscarOrcamentos($campos,$termos) {
 		$orcamentosDao = $this->OrcDao->select($campos, $termos);
-		
-		return $orcamentosDao;
-		
-	}
-	
-	public function listaAtividades() {
+                                    return $orcamentosDao;  
+                  }
+                  
+                  public function buscarOrcamentoPorId($campos,$termos){
+                      
+                 
+                      $orcamentoDao2 = $this->OrcDao->select($campos, $termos);
+                      if(!$orcamentoDao2 == "" || !$orcamentoDao2 == null){
+                       $orcamentoDao2 = $orcamentoDao2[0];
+                        extract($orcamentoDao2);
+                        
+                      return  new Orcamento($id, 
+                                $n_orc, 
+                                $ano_orc, 
+                                $colaborador_orc, 
+                                $situacao_orc, 
+                                $razao_social_contr, 
+                                $cnpj_contr, 
+                                $endereco_contr, $bairro_contr, $cidade_contr, $estado_contr, $cep_contr, $telefone_contr, $celular_contr, $email_contr, $contato_clint, $razao_social_obra, $cnpj_obra, $endereco_obra, $bairro_obra, $cidade_obra, $estado_obra, $cep_obra, $telefone_obra, $celular_obra, $email_obra, $atividade, $classificacao, $quantidade, $unidade, $descricao_servico_orc, $prazo_exec_orc, $validade_orc, $pagamento_orc, $obs_orc, $duvida_orc, $vr_servco_orc, $vr_material_orc, $desconto_orc, $vr_total_orc, $obra_igual_contrat, $data_adicionado_orc, $data_ultima_alteracao, $colaborador_ultim_alteracao, $data_aprovada, $data_inicio, $data_conclusao, $dias_d_aprovado, $dias_d_exec, $dias_ultrapassad, $serv_concluido, $feito_pos_entreg, $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, $data_ultimo_cont_cliente, $colab_ultimo_contato_client, $novo_cliente);
+                      }else{
+                          return "";
+                      }
+                  }
+
+                                    public function listaAtividades() {
 		return $this->OrcDao->selectAtividades();
 	}
 	

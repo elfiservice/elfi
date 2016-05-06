@@ -14,6 +14,11 @@
 
 if (filter_has_var(INPUT_POST, "razao_social"))
     {
+    
+    //echo $_POST['cnpj'];
+   // $cnpj_contrato = ;
+    $cnpj_contrato = Formatar::limpaCPF_CNPJ($_POST['cnpj']);
+    
         //dados obra
     if (filter_has_var(INPUT_POST, "razao_social2"))
         {
@@ -60,7 +65,7 @@ if (filter_has_var(INPUT_POST, "razao_social"))
                 $_SESSION['Login'], 
                 "", 
                 $_POST['razao_social'], 
-                $_POST['cnpj'], 
+                $cnpj_contrato, 
                 $_POST['endereco'], 
                 $_POST['bairro'], 
                 $_POST['city'], 
@@ -98,11 +103,12 @@ if (filter_has_var(INPUT_POST, "razao_social"))
                 "", 
                 $data_ultima_alteracao, "", "", "", "", "", "", "", "", "", "", "", "", "", "","");
     
+       // var_dump($orcamentoObj);
            
         $orcSaveCtrl = new OrcamentoCtrl();
         
        $result = $orcSaveCtrl->atualizarOrcamento($orcamentoObj);
-       //var_dump($result);
+    //  var_dump($result);
 
     echo "Resultado desta operação: <b> {$result['resultado']}</b><br>";
 //    foreach ($result as $campo => $dado){

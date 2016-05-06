@@ -1,14 +1,15 @@
 
 
 <?php
- include_once "Config/config_sistema.php"; 
- include_once "includes/funcoes.php";
+ include_once "../Config/config_sistema.php"; 
+ include_once "../classes/util/Formatar.class.php";
+ 
 
 if(isset($_GET['getClientId'])){  
   $res = mysql_query("select * from clientes where razao_social='".$_GET['getClientId']."'") or die(mysql_error());
   if($inf = mysql_fetch_array($res)){
     echo "formObj.razao_social.value = '".$inf["razao_social"]."';\n";    
-    echo "formObj.cnpj.value = '".formatar($inf["cnpj_cpf"])."';\n";    
+    echo "formObj.cnpj.value = '".Formatar::formatTelCnpjCpf($inf["cnpj_cpf"])."';\n";    
     echo "formObj.endereco.value = '".$inf["endereco"]."';\n";
     echo "formObj.bairro.value = '".$inf["bairro"]."';\n";     
   

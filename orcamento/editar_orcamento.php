@@ -17,7 +17,7 @@
 
 <!-- Troca Local da Obra no ORçamento  -->
 <?php require 'includes/javascripts/trocar_local_obra_orc.php';?>
-     
+
 
 <!--
 MAscaras em campos
@@ -49,8 +49,11 @@ MAscaras em campos
 	<h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Editar</h2>
 </div>
 <hr>	           
-<div style="margin:0px 0px 0px 0px;">
+<div>
 
+    <a href="#" class="bt_imprimir" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?php echo $orc; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
+         Imprimir
+</a>
             
 <!-- Campos obrigatorios -->  
  
@@ -431,7 +434,7 @@ function formCheck(formobj){
               <legend><h3>Observações</h3></legend>
             
             
-                         <textarea onfocus="" style="height: 5em; width: 100%;" id="text2" name="observacoes_servico"><?php echo $obs_orc; ?></textarea>
+                         <textarea onfocus="" style="height: 5em; width: 100%;" id="text2" name="observacoes_servico"><?php echo strip_tags($obs_orc); ?></textarea>
                          
                          
           </fieldset>                    
