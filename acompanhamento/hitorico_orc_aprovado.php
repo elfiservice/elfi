@@ -48,7 +48,7 @@
 	
 	<style type="text/css">
 		#menu {
-float: ;
+
  
  }
  

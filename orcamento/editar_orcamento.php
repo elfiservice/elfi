@@ -6,19 +6,10 @@
              $orc = $_GET['id_orc'];
         } 
 		
-		//echo $orc;
-		$a = filter_input_array(INPUT_POST,FILTER_DEFAULT);
-		var_dump($a);
+//		//echo $orc;
+//		$a = filter_input_array(INPUT_POST,FILTER_DEFAULT);
+//		var_dump($a);
 ?>
-
-
-<!--
-Inicio menu colaps (esconder ou mostrar) Vertical
--->
-
-<!--
-FINAL Inicio menu colaps (esconder ou mostrar) Vertical
--->
 
 
 <!--  Busca cliente para Auto Preenchimento  -->
@@ -139,7 +130,7 @@ function formCheck(formobj){
   
             <div  class="" style="">
                 
-                <form name="clientForm" method="post" action="salvar_editar_orc.php" onsubmit="return formCheck(this);">       
+                <form name="clientForm" method="post" action="tecnico.php?id_menu=salvar_editar_orcamento" onsubmit="return formCheck(this);">       
 
             <fieldset class="fieldsetGeral">
             <legend ><h3>Contratante</h3></legend>

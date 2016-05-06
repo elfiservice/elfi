@@ -26,10 +26,11 @@ if(isSet ($_GET['id_orc'])) {
 	$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
 	$nome_usuario = $usuario->getLogin();
 	
-	$orcObj = new Orcamento(); 
-	$orcObj->setId($ident_orc);
-	$orcObj->setColabOrc($nome_usuario);
-	$orcObj->setSituacaoOrc($situcao_orc);
+       // corrigir a Instancia de Orcamento!!!  E ADICIONAR A DATA DE APROVADO O ORC E DE CONCLUIDO E CANCELADO
+	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); 
+//	$orcObj->setId($ident_orc);
+//	$orcObj->setColabOrc($nome_usuario);
+//	$orcObj->setSituacaoOrc($situcao_orc);
 	
 	$orcCrtlObj = new OrcamentoCtrl();
 	//var_dump($orcObj);

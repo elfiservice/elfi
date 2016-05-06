@@ -37,9 +37,7 @@ if (!isset($_SESSION['idx'])) {
 	
 	<style type="text/css">
 		#menu {
-float: ;
- 
- }
+                }
  
 
 #menu ul {

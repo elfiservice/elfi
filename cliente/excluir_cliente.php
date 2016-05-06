@@ -21,7 +21,7 @@ $linha_cliente = mysql_fetch_object ( $consulta_cliente );
     
     <?php echo  $mens_erro; ?>
 </div>
-<div STYLE="font-size: 16px; text-align:; margin-top: 10px; color: red;">
+<div STYLE="font-size: 16px; margin-top: 10px; color: red;">
 
 	<h4>Deseja realmente excluir esse Cliente ?</h4>
 </div>

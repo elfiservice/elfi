@@ -87,7 +87,7 @@ function formCheck(formobj){
 </div>
 <hr>
 
-<div class="" style="text-align: ;">
+<div class="" >
 
 
 
