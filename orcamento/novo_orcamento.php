@@ -1,325 +1,26 @@
 <?php
 ?>
 <!-- Troca Local da Obra no OR�amento  -->
-<script type="text/javascript">
-
-function retira_form_obra() {
-var planet = document.getElementById("form_local_obra");
-planet.innerHTML = "<input onClick=\"return mostra_form_obra()\" name=\"submit\" type=\"submit\" value=\"O contratante é diferente do Local da Obra.\"  />";
-}
-
-//window.onload = cara;
-
-</script>
-<script type="text/javascript">
-
-function mostra_form_obra() {
-var planet = document.getElementById("form_local_obra");
-planet.innerHTML = "            <input onClick=\"return retira_form_obra()\" name=\"submit\" type=\"submit\" value=\"Os dados da contratante são os mesmos da Obra.\"  /> \n\
-                <table border=\"0\"> \n\
-                                <tbody> \n\
-                                    <tr align=\"left\"> \n\
-                                      <td><label for=\"razao_social2\">Razao Social:</label></br> \n\
-                                        <input name=\"razao_social2\" id=\"razao_social2\" size=\"60\" maxlength=\"255\"> \n\
-                                      </td> \n\
-                                      <td><label for=\"cnpj2\">CNPJ:</label></br> \n\
-                                        <input name=\"cnpj2\" id=\"cnpj2\" alt=\"cnpj\" size=\"20\" maxlength=\"20\"> \n\
-                                    </td> \n\
-                                </tr> \n\
-                                  <tr align=\"left\"> \n\
-                                    <td><label for=\"endereco2\">Endereco:</label></br> \n\
-                                    <input name=\"endereco2\" id=\"endereco2\" size=\"60\" maxlength=\"255\"></td> \n\
-                                </tr> \n\
-                                <tr align=\"left\"> \n\
-                                    <td><label for=\"bairro2\">Bairro:</label></br> \n\
-                                    <input name=\"bairro2\" id=\"bairro2\" size=\"20\" maxlength=\"255\"> \n\
-                                    </td> \n\
-                                    <td><label for=\"city2\">Cidade:</label></br> \n\
-                                    <input name=\"city2\" id=\"city2\" size=\"20\" maxlength=\"255\"> \n\
-                                    </td> \n\
-                                    <td><label for=\"estado2\">Estado:</label></br>\n\
-                                        <input name=\"estado2\" id=\"estado2\" size=\"20\" maxlength=\"255\" > \n\
-                                                    </td>\n\
-                                    </tr> \n\
-                                <tr align=\"left\"> \n\
-                                    <td><label for=\"cep2\">CEP:</label></br> \n\
-                                    <input name=\"cep2\" id=\"cep2\" alt=\"cep\" size=\"20\" maxlength=\"15\"> \n\
-                                  </td> \n\
-                                     <td><label for=\"tel2\">Telefone:</label></br> \n\
-                                    <input name=\"tel2\" id=\"tel2\" size=\"20\" alt=\"phone\" maxlength=\"15\"> \n\
-                                    </td> \n\
-                                     <td><label for=\"cel2\">Celular:</label></br> \n\
-                                    <input name=\"cel2\" id=\"cel2\" size=\"20\" alt=\"cel\" maxlength=\"15\"> \n\
-                                    </td> \n\
-                                    </tr> \n\
-                                <tr align=\"left\"> \n\
-                                    <td><label for=\"email_orc2\">Email:</label></br> \n\
-                                    <input name=\"email_orc2\" id=\"email_orc2\" size=\"20\" maxlength=\"255\"> \n\
-                                    </td> \n\
-                                </tr> \n\
-                                </tbody> \n\
-                </table> \n\
-                ";
-}
-
-//window.onload = cara;
-
-</script>
+<?php require 'includes/javascripts/trocar_local_obra_orc.php';?>
 <!-- FIM  Troca Local da Obra no OR�amento  -->
 
 <!-- Busca cliente para Auto Preenchimento  -->
-<script type="text/javascript" src="./js/buscacliente/ajax.js"></script>
-<script type="text/javascript">
-
-	var ajax = new sack();
-	var currentClientID=false;
-	function getClientData()
-	{
-		var clientId = document.getElementById('clientID').value;
-		if(clientId!=currentClientID){
-			currentClientID = clientId
-			ajax.requestFile = 'getClient.php?getClientId='+clientId;	// Specifying which file to get
-			ajax.onCompletion = showClientData;	// Specify function that will be executed after file has been found
-			ajax.runAJAX();		// Execute AJAX function			
-		}
-		
-	}
-	
-	function showClientData()
-	{
-		var formObj = document.forms['clientForm'];	
-		eval(ajax.response);
-	}
-	
-	
-	function initFormEvents()
-	{
-		document.getElementById('clientID').onblur = getClientData;
-		document.getElementById('clientID').focus();
-	}
-	
-	
-	window.onload = initFormEvents;
-	</script>
+<?php require 'includes/javascripts/busca_cliente_auto_preenchimento.php'; ?>
 <!-- FIM Busca cliente para Auto Preenchimento  -->
 
 
 <!--  Auto Rize no Text Area do Descrição servicos e Observação Orçamento  -->
-<script type="text/javascript">
-var observe;
-if (window.attachEvent) {
-    observe = function (element, event, handler) {
-        element.attachEvent('on'+event, handler);
-    };
-}
-else {
-    observe = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-    };
-}
-function init () {
-    var text = document.getElementById('text');
-    function resize () {
-        text.style.height = 'auto';
-        text.style.height = text.scrollHeight+'px';
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize () {
-        window.setTimeout(resize, 0);
-    }
-    observe(text, 'change',  resize);
-    observe(text, 'cut',     delayedResize);
-    observe(text, 'paste',   delayedResize);
-    observe(text, 'drop',    delayedResize);
-    observe(text, 'keydown', delayedResize);
-
-    text.focus();
-    text.select();
-    resize();
-}
-
-
-
-</script>
-<script type="text/javascript">
-var observe2;
-if (window.attachEvent) {
-    observe2 = function (element, event, handler) {
-        element.attachEvent('on'+event, handler);
-    };
-}
-else {
-    observe2 = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-    };
-}
-function init2 () {
-    var text = document.getElementById('text2');
-    function resize () {
-        text.style.height = 'auto';
-        text.style.height = text.scrollHeight+'px';
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize () {
-        window.setTimeout(resize, 0);
-    }
-    observe(text, 'change',  resize);
-    observe(text, 'cut',     delayedResize);
-    observe(text, 'paste',   delayedResize);
-    observe(text, 'drop',    delayedResize);
-    observe(text, 'keydown', delayedResize);
-
-    text.focus();
-    text.select();
-    resize();
-}
-
-
-
-</script>
 <!--  FIMM Auto Rize no Text Area do Descrição servicos e Observação Orçamento  -->
 
 
 <!-- MAscaras em campos valores-->
-<script src="./js/jquery.js" type="text/javascript"></script>
-<script type="text/javascript" src="./js/mascara/jquery.meio.mask.js"
-	charset="utf-8"></script>
-<script type="text/javascript">
-  (function($){
-    // call setMask function on the document.ready event
-      $(function(){
-        $('input:text').setMask();
-      }
-    );
-  })(jQuery);
-</script>
+<?php require 'includes/javascripts/mascaras_campos_valores_monetario.php'; ?>
 <!-- FIM  MAscaras em campos -->
 
 
 <!--  SOMA campos  valores -->
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<!--// load jQuery Plug-ins //-->
-<script type="text/javascript" src="./js/calcular/jquery.calculation.js"></script>
-<script type="text/javascript">
-
-	var bIsFirebugReady = (!!window.console && !!window.console.log);
-	$(document).ready(
-		function (){
-/*			
-			$.Calculation.setDefaults({
-				onParseError: function(){
-					this.css("backgroundColor", "#cc0000")
-				}
-				, onParseClear: function (){
-					this.css("backgroundColor", "");
-				}
-			});
-*/
-
-			// automatically update the "#totalSum" field every time
-			// the values are changes via the keyup event
-
-			$("input[name^=sum]").sum("keyup", "#totalSum");
-			
-			// automatically update the "#totalAvg" field every time
-			// the values are changes via the keyup event
-			$("input[name^=avg]").avg({
-				bind:"keyup"
-				, selector: "#totalAvg"
-				// if an invalid character is found, change the background color
-				, onParseError: function(){
-					this.css("backgroundColor", "#cc0000")
-				}
-				// if the error has been cleared, reset the bgcolor
-				, onParseClear: function (){
-					this.css("backgroundColor", "");
-				}
-			});
-
-
-			// automatically update the "#minNumber" field every time
-			// the values are changes via the keyup event
-			$("input[name^=min]").min("keyup", "#numberMin");
-
-			// automatically update the "#minNumber" field every time
-			// the values are changes via the keyup event
-			$("input[name^=max]").max("keyup", {
-				selector: "#numberMax"
-				, oncalc: function (value, options){
-					// you can use this to format the value
-					$(options.selector).val(value);
-				}
-			});
-
-			// this calculates the sum for some text nodes
-
-			$("#idTotalTextSum").click(
-
-				function (){
-					// get the sum of the elements
-
-					var sum = $(".textSum").sum();
-
-
-
-					// update the total
-					$("#totalTextSum").text("$" + sum.toString());
-
-				}
-
-			);
-
-			// this calculates the average for some text nodes
-
-			$("#idTotalTextAvg").click(
-
-				function (){
-
-					// get the average of the elements
-					var avg = $(".textAvg").avg();
-					// update the total
-					$("#totalTextAvg").text(avg.toString());
-
-				}
-
-			);
-
-		}
-
-	);
-	
-	function recalc(){
-		$("[id^=total_item]").calc(
-			// the equation to use for the calculation
-			"qty * price",
-			// define the variables used in the equation, these can be a jQuery object
-			{
-				qty: $("input[name^=qty_item_]"),
-				price: $("[id^=price_item_]")
-			},
-			// define the formatting callback, the results of the calculation are passed to this function
-			function (s){
-				// return the number as a dollar amount
-				return "$" + s.toFixed(2);
-			},
-			// define the finish callback, this runs after the calculation has been complete
-			function ($this){
-				// sum the total of the $("[id^=total_item]") selector
-				var sum = $this.sum();
-				
-				$("#grandTotal").text(
-					// round the results to 2 digits
-					"$" + sum.toFixed(2)
-				);
-			}
-		);
-	}
-
-	</script>
+<?php require 'includes/javascripts/somar_valores_monetarios.php'; ?>
 <!-- fim SOMA CAMPOS em campos -->
-
-
 
 <!-- Teste Campos obrigatorios -->
 <script language="JavaScript">
@@ -388,16 +89,17 @@ function formCheck(formobj){
 </script>
 <!-- Fim Teste Campos obrigatorios -->
 
-<h3 class="">Novo Orçamento</h3>
 
-<div class="" style="text-align: center;">
+ <div>
+	<h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Novo</h2>
+</div>
+<hr>
+<div class="" style="       ">
 
-
-
-<form name="clientForm" method="post" action="salvar_novo_orc.php"
+<form name="clientForm" method="post" action="tecnico.php?id_menu=salvar_novo_orc"
 		onsubmit="return formCheck(this);">
 
-		<fieldset>
+    <fieldset>
 		<legend>
 		<h3>Contratante</h3>
 		</legend>
@@ -409,9 +111,9 @@ function formCheck(formobj){
 		id="clientID" name="clientID">
 		<option value=""></option>
 		<?php
-		$sql = "SELECT razao_social FROM clientes ORDER BY razao_social";
-		$res = mysql_query ( $sql );
-		while ( $row = mysql_fetch_assoc ( $res ) ) {
+                                    $clienteCtrl = new ClienteCtrl();
+                                    $clienteBd = $clienteCtrl->buscarCliente("razao_social", "ORDER BY razao_social");
+                                  foreach ($clienteBd as $cliente => $row){
 			echo '<option id="clientID" value="' . $row ['razao_social'] . '">' . $row ['razao_social'] . '</option>';
 		}
 		?>
@@ -420,41 +122,41 @@ function formCheck(formobj){
 							</tr>
 							<tr align="left">
 								<td><label for="razao_social">Razão Social:</label></br> <input
-									name="razao_social" id="razao_social" size="60" maxlength="255">
+                                                                        name="razao_social" id="razao_social" size="60" maxlength="255" readonly="readonly">
 								</td>
 
 								<td><label for="cnpj">CNPJ:</label></br> <input name="cnpj"
-									id="cnpj" alt="" size="20" maxlength="255"></td>
+									id="cnpj" alt="" size="20" maxlength="255" readonly="readonly"></td>
 							</tr>
 							<tr align="left">
 								<td><label for="endereco">Endereço:</label></br> <input
-									name="endereco" id="endereco" size="60" maxlength="255"></td>
+									name="endereco" id="endereco" size="60" maxlength="255" readonly="readonly"></td>
 							</tr>
 							<tr align="left">
 								<td><label for="bairro">Bairro:</label></br> <input
-									name="bairro" id="bairro" size="20" maxlength="255"></td>
+									name="bairro" id="bairro" size="20" maxlength="255" readonly="readonly"></td>
 
 								<td><label for="city">Cidade:</label></br> <input name="city"
-									id="city" size="20" maxlength="255"></td>
+									id="city" size="20" maxlength="255" readonly="readonly"></td>
 								<td><label for="estado">Estado:</label></br> <input
-									name="estado" id="estado" size="20" maxlength="255"></td>
+									name="estado" id="estado" size="20" maxlength="255" readonly="readonly"></td>
 
 							</tr>
 							<tr align="left">
 
 								<td><label for="cep">CEP:</label></br> <input name="cep"
-									id="cep" size="20" maxlength="15"></td>
+									id="cep" size="20" maxlength="15" readonly="readonly"></td>
 								<td><label for="tel">Telefone:</label></br> <input name="tel"
-									id="tel" size="20" maxlength="15"></td>
+									id="tel" size="20" maxlength="15" readonly="readonly"></td>
 								<td><label for="cel">Celular:</label></br> <input name="cel"
-									id="cel" size="20" maxlength="15"></td>
+									id="cel" size="20" maxlength="15" readonly="readonly"></td>
 
 
 							</tr>
 							<tr align="left">
 
 								<td><label for="email_orc">Email:</label></br> <input
-									name="email_orc" id="email_orc" size="20" maxlength="255"></td>
+									name="email_orc" id="email_orc" size="20" maxlength="255" readonly="readonly"></td>
 
 
 
@@ -561,9 +263,9 @@ function formCheck(formobj){
 								<td><select id="" name="atividade1">
 										<option name="" value=""></option>
                                                     <?php
-			$sql = "SELECT * FROM orc_atividades ORDER BY atividade";
-			$res = mysql_query ( $sql );
-			while ( $row = mysql_fetch_assoc ( $res ) ) {
+                                                       $OrcCtrl = new OrcamentoCtrl();             
+                                                   		$listaAtivBd = $OrcCtrl->listaAtividades();
+                                                        foreach ($listaAtivBd as $lista => $row){
 				echo '<option id="" value="' . utf8_encode ( $row ['atividade'] ) . '" >' . utf8_encode ( $row ['atividade'] ) . '</option>';
 			}
 			?>
@@ -572,9 +274,8 @@ function formCheck(formobj){
 								<td><select id="" name="classificacao1">
 										<option value=""></option>
                                                     <?php
-			$sql = "SELECT * FROM orc_classificacao_ativid ORDER BY classificacao";
-			$res = mysql_query ( $sql );
-			while ( $row = mysql_fetch_assoc ( $res ) ) {
+                                                            $listaClassfBd = $OrcCtrl->listarClassificacao();
+                                                            foreach ($listaClassfBd as $lista => $row){
 				echo '<option id="" value="' . utf8_encode ( $row ['classificacao'] ) . '" >' . utf8_encode ( $row ['classificacao'] ) . '</option>';
 			}
 			?>
@@ -584,9 +285,8 @@ function formCheck(formobj){
 								<td><select id="" name="unidade1">
 										<option value=""></option>
                                                     <?php
-			$sql = "SELECT * FROM orc_unidades ORDER BY unidade";
-			$res = mysql_query ( $sql );
-			while ( $row = mysql_fetch_assoc ( $res ) ) {
+                                                            $listaUnidBd = $OrcCtrl->listarUnidades();
+                                                            foreach ($listaUnidBd as $lista => $row){
 				echo '<option id="" value="' . utf8_encode ( $row ['unidade'] ) . '" >' . utf8_encode ( $row ['unidade'] ) . '</option>';
 			}
 			?>
@@ -650,7 +350,7 @@ function formCheck(formobj){
 
 
 					<textarea onfocus="init2();" rows="1" cols="100"
-						style="height: 1em;" id="text2" name="observacoes_servico"></textarea>
+						style="height: 5em; width: 100%;"  id="text2" name="observacoes_servico"></textarea>
 
 
 				</fieldset>

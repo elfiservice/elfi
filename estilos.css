@@ -220,6 +220,12 @@ display:none;
         margin-bottom: 5px;
 }
 
+.bt_incluir{
+    width: 80px; 
+    height: 35px; 
+    color: blue;
+}
+
 .bt_imprimir:link, .bt_imprimir:visited{
    
 color: #000;
@@ -287,4 +293,20 @@ color: #000;
 	
 }
 
+fieldset{
+	background-color: #fff;
+	
+}
 
+/* ALERTA de Mensagens */
+.sucesso{
+    font-size: 16px;
+    padding: 20px;
+}
+
+.erro{
+        font-size: 16px;
+    padding: 20px;
+    color: #ff3c3c;
+    
+}

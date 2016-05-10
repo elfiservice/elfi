@@ -50,7 +50,12 @@ if(isSet ($_GET['id_orc'])) {
 	<h2>Orcamentos</h2>
 </div>
 <hr>
-
+<div style="padding-bottom: 0px;">
+	<form name="novo_orc" action="tecnico.php?id_menu=novo_orcamento" method="POST" enctype="multipart/form-data">
+                        <input class="bt_incluir"  type="submit" value="Novo" name="novo_orc_btn" />
+	</form>
+</div>
+<hr>
 	<div>
 		<form action="tecnico.php?ano_orc=<?php echo $ano_orc_selec; ?>&id_menu=orcamento" method="post" enctype="multipart/form-data" name="formAgenda">
 			Selecione o ANO:	

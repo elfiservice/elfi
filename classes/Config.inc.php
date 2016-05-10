@@ -29,3 +29,4 @@ require $tree.'classes/util/Formatar.class.php';
 require $tree.'classes/util/Read.class.php';
 require $tree.'classes/util/Update.class.php';
 require $tree.'classes/util/Login.class.php';
+require $tree.'classes/util/Insert.class.php';

@@ -7,7 +7,7 @@
 <hr>
 <div style="padding-bottom: 0px;">
 	<form name="novo_cliente" action="tecnico.php?id_menu=novo_cliente" method="POST" enctype="multipart/form-data">
-		<input style="width: 80px; height: 25px; color: blue;" type="submit" value="Novo" name="novo_cliente_btn" />
+            <input class="bt_incluir" type="submit" value="Novo" name="novo_cliente_btn" />
 	</form>
 </div>
 

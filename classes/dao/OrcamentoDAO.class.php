@@ -43,12 +43,13 @@ class OrcamentoDAO {
 		return $update->getResultado();	
 	}
 	
-	public function select($campos,$termos) {
+	public function select($campos, $termos, $tabela = "orcamentos") {
 		$read = new Read();
-		$read->ExecRead($campos, "orcamentos", $termos);
+		$read->ExecRead($campos, $tabela, $termos);
 		return $read->getResultado();
 	}
-	
+ 
+
 	public function selectAtividades(){
 		$read = new Read();
 		$read->ExecRead("*", "orc_atividades", "ORDER BY atividade");
@@ -66,5 +67,11 @@ class OrcamentoDAO {
 		$read->ExecRead("*", "orc_unidades", "ORDER BY unidade");
 		return $read->getResultado();
 	}
+        
+        public function insert($camposBd, $valores, $tabela = "orcamentos"){
+            $insert = new Insert();
+            $insert->ExecInsert($tabela, $camposBd, $valores);
+            return $insert->getResultado();
+            
+        }
 }
-?>

@@ -136,16 +136,21 @@
 			// and then if the 'attr' options value is 'alt', your input should look like:
 			// <input type="text" name="some_name" id="some_name" alt="msk" />
 			masks : {
-				'phone'				: { mask : '(99) 9999-9999' },
-                                'cel'				: { mask : '(99) 9999-9999' },
+				'phone'				: { mask : '(99) 99999-9999' },
+                                				'tel'				: { mask : '(99) 99999-9999' },
+                                                                                           'tel2'				: { mask : '(99) 99999-9999' },
+                                'cel'				: { mask : '(99) 99999-9999' },
+                                                                'cel2'				: { mask : '(99) 99999-9999' },
                                 'fax'				: { mask : '(99) 9999-9999' },
 				'phone-us'			: { mask : '(999) 999-9999' },
 				'cpf'				: { mask : '999.999.999-99' }, // cadastro nacional de pessoa fisica
 				'cnpj'				: { mask : '99.999.999/9999-99' },
+                                'cnpj2'				: { mask : '99.999.999/9999-99' },
                                 'ie'				: { mask : '99.999.999-9' },
 				'date'				: { mask : '39/19/9999' }, //uk date
 				'date-us'			: { mask : '19/39/9999' },
 				'cep'				: { mask : '99999-999' },
+                                				'cep2'				: { mask : '99999-999' },
 				'time'				: { mask : '29:59' },
 				'cc'				: { mask : '9999 9999 9999 9999' }, //credit card mask
 				'integer'			: { mask : '999.999.999.999', type : 'reverse' },				

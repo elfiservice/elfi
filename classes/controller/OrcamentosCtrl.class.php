@@ -5,8 +5,17 @@
 
 class OrcamentoCtrl{
 	 private $OrcDao;
-
+                   private $result;
 	 
+                   function getResult() {
+                       return $this->result;
+                   }
+
+                   function setResult($result) {
+                       $this->result = $result;
+                   }
+
+                                      
 	public function OrcamentoCtrl(){
 	 	$this->OrcDao = new OrcamentoDAO();
 	
@@ -156,8 +165,108 @@ class OrcamentoCtrl{
                           return "";
                       }
                   }
+                  
+                  public function inserirOrcamento($orcamentoObj){
+                      $camposBd = "n_orc, ano_orc, colaborador_orc, razao_social_contr, cnpj_contr, endereco_contr, bairro_contr, cidade_contr, estado_contr, cep_contr, telefone_contr, celular_contr, email_contr, atividade, classificacao, quantidade, unidade, descricao_servico_orc, prazo_exec_orc, validade_orc, pagamento_orc, obs_orc, duvida_orc, vr_servco_orc, vr_material_orc, vr_total_orc, data_adicionado_orc, razao_social_obra, cnpj_obra, endereco_obra, bairro_obra, estado_obra, cidade_obra, cep_obra, telefone_obra, celular_obra, email_obra, situacao_orc, contato_clint, novo_cliente";
+                      if($orcamentoObj instanceof Orcamento){
+                          $this->numeroDoOrc($orcamentoObj->getAnoOrc());
+                         $orcamentoObj->setNOrc($this->getResult());
+                         
+                         //$this->verificaSeNovoCliente($orcamentoObj->getRazaoSocialContrat());
+                       // $orcamentoObj->setNovo_cliente($this->getResult());
+                        
+                        
+                         $valores = "'{$orcamentoObj->getNOrc()}',"
+                         . "'{$orcamentoObj->getAnoOrc()}',"
+                         . "'{$orcamentoObj->getColabOrc()}',"
+                         . "'{$orcamentoObj->getRazaoSocialContrat()}',"
+                         . "'{$orcamentoObj->getCnpjContrat()}',"
+                         . "'{$orcamentoObj->getEnderecoContrat()}',"
+                         . "'{$orcamentoObj->getBairroContrat()}',"
+                         . "'{$orcamentoObj->getCidadeContrat()}',"
+                         . " '{$orcamentoObj->getEstadoContrat()}',"
+                         . " '{$orcamentoObj->getCepContrat()}',"
+                         . " '{$orcamentoObj->getTelContrat()}',"
+                         . " '{$orcamentoObj->getCelContrat()}',"
+                         . " '{$orcamentoObj->getEmailContrat()}',"
+                         . " '{$orcamentoObj->getAtividade()}', "
+                         . "'{$orcamentoObj->getClassificacao()}',"
+                         . " '{$orcamentoObj->getQuantidade()}',"
+                         . " '{$orcamentoObj->getUnidade()}',"
+                         . " '{$orcamentoObj->getDesciServicoObra()}',"
+                         . " '{$orcamentoObj->getPrazoExec()}',"
+                         . " '{$orcamentoObj->getValidade()}',"
+                         . " '{$orcamentoObj->getPagamento()}',"
+                         . " '{$orcamentoObj->getObs()}',"
+                         . " '{$orcamentoObj->getDuvida()}', "
+                         . "'{$orcamentoObj->getVrServico()}', "
+                         . "'{$orcamentoObj->getVrMaterial()}',"
+                         . "'{$orcamentoObj->getVrTotal()}',"
+                         . "'{$orcamentoObj->getDataDoOrc()}', "
+                                 . "'{$orcamentoObj->getRazaoSocialObra()}',"
+                                 . "'{$orcamentoObj->getCnpjObra()}',"
+                                 . "'{$orcamentoObj->getEnderecoObra()}',"
+                                 . " '{$orcamentoObj->getBairroObra()}',"
+                                 . " '{$orcamentoObj->getEstadoObra()}',"
+                                 . " '{$orcamentoObj->getCidadeObra()}',"
+                                 . " '{$orcamentoObj->getCepObra()}',"
+                                 . " '{$orcamentoObj->getTelObra()}', "
+                                 . "'{$orcamentoObj->getCelObra()}',"
+                                 . " '{$orcamentoObj->getEmailObra()}',"
+                                 . "'Aguardando aprovação',"
+                                         . "'{$orcamentoObj->getContatoCliente()}',"
+                                         . "'{$orcamentoObj->getNovo_cliente()}'";
+                                   
+                                 //var_dump($camposBd);
+                                // var_dump($valores);
+                                 
+                                // var_dump($this->OrcDao->insert($camposBd, $valores, "orcamentos"));
+                                         
+                                 if($this->OrcDao->insert($camposBd, $valores)){
+                                     $this->result = true;
+                                 }else{
+                                     $this->result = false;
+                                 }
+                                 
+                      }else{
+                          $this->result = false;
+                      }
+                      
+                      
+                  }
 
-                                    public function listaAtividades() {
+
+
+
+                  private function verificaSeNovoCliente($razao_social_contr){
+                      echo $razao_social_contr;
+                    $razaobd =  $this->OrcDao->select("*", "WHERE razao_social_contr = $razao_social_contr");
+                    var_dump($razaobd);
+                   // echo $razaobd[0]['razao_social_contr'];
+                      if(!$razaobd[0]['razao_social_contr'] == null){
+                          $this->result = 'n';
+                      }else{
+                          $this->result = 's';
+                      }
+                          
+                  }
+
+                  private function numeroDoOrc($ano_orc){
+
+                        $consulta_ORC          = $this->OrcDao->select("n_orc", "WHERE ano_orc = $ano_orc", "orcamentos");
+                            
+                        if ($consulta_ORC == false) 
+                        {
+                            $numero_ORC = "1";
+                        } else {
+                            $quant_orc = count($consulta_ORC);
+                            $numero_ORC = $quant_orc + 1;
+                         }
+                        
+                        $this->result = $numero_ORC;
+                  }
+
+                  public function listaAtividades() {
 		return $this->OrcDao->selectAtividades();
 	}
 	
