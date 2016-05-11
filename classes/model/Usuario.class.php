@@ -7,26 +7,16 @@ class Usuario{
 	private $id;
 	private $login;
 	private $senha;
-	private $tipo;
+
 	private $ultima_data_logado;
 	private $email_ativado;
-	private $email;
+
 	
 
-
-	public function Usuario($id, $login, $senha, $tipo, $ultimaDataLog, $emailAtivado, $email){
 	
-		$this->id = $id;
-		$this->login = 	$login;
-		$this->senha = $senha;
-		$this->tipo = $tipo;
-		$this->ultima_data_logado =  $ultimaDataLog;
-		$this->email = $email;
-		$this->email_ativado = $emailAtivado;
-		
-		
-	}
-	
+        
+        
+        
 	public function getId(){
 		return $this->id;
 	}
@@ -51,13 +41,7 @@ class Usuario{
 		return $this->senha = $pSenha;
 	}
 	
-	public function getTipo(){
-		return $this->tipo;
-	}
-	
-	public function setTipo($pTipo){
-		return $this->tipo = $pTipo;
-	}
+
 	
 	public function getUltDataLogado(){
 		return $this->ultima_data_logado;
@@ -67,13 +51,9 @@ class Usuario{
 		return $this->ultima_data_logado = $pUltDataLogado;
 	}
 	
-	public function getEmail(){
-		return $this->email;
-	}
+
 	
-	public function setEmail($pEmail){
-		return $this->email = $pEmail;
-	}
+
 	
 	public function getEmailAtivado(){
 		return $this->email_ativado;
@@ -83,8 +63,11 @@ class Usuario{
 		return $this->email_ativado = $pEmailAtivado;
 	}	
 	
-	
+
+
+
+
+            
+        
 	
 }
-
-?>

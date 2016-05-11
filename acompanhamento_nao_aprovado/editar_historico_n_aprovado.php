@@ -39,15 +39,16 @@ if (!isset($_SESSION['idx'])) { //testa se a sess�o existe
 	<meta name="description" content="">
 	<meta name="author" content="Elfi Service">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="../estilos.css">
 </head>
 <body>
 <div  style="background: url(../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"></div>
-<a href="javascript:window.history.go(-1)" target="_self">Voltar</a>
-<div id="">
-	<h3> Editando Histórico Orçamento não Aprovado</h3>
-
+<!--<a href="javascript:window.history.go(-1)" target="_self">Voltar</a>-->
+ <div>
+	<h2><a href="javascript:window.history.go(-1)">Histórico Orçamento não Aprovado</a> -> Editar</h2>
 </div>
+<hr>
+
 
 <fieldset>
 	<legend><h3>Dados</h3></legend>

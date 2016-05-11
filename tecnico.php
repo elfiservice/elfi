@@ -156,8 +156,7 @@ if (!isset($_SESSION ['idx'])) {
             if ($menu == "novo_orcamento") {
                 require './orcamento/novo_orcamento.php';
             }
-            
-            
+                        
            if ($menu == "salvar_novo_orc") {
                 require './orcamento/incluir/salvar_novo_orc.php';
             }
@@ -166,8 +165,6 @@ if (!isset($_SESSION ['idx'])) {
                 require './orcamento/excluir_orcamento.php';
             }
 
-
-            // Menu Acompanhamento
             if ($menu == "acompanhar_orc") {
                 ?>
                             <h3>Acompanhamento Orçamento Aguaradando Aprovação</h3>

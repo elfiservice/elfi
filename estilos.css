@@ -42,6 +42,7 @@ body {
 	  border: 2px solid #012B8B;
 	  border-radius: 4px;
 	  padding: 5px;
+           font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 input:focus,select:focus,textarea:focus{
@@ -86,9 +87,8 @@ h2 {
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
-#corpo {
 
-}
+
 
 
 #menu {
@@ -309,4 +309,93 @@ fieldset{
     padding: 20px;
     color: #ff3c3c;
     
+}
+
+/* ---- PAgina Editar_Orcamento ----- Opçoes Imprimir e ALterar Situação ORC */
+#editarOrcOpcoes ul {
+ padding:0px 0px 0px 0px;
+ margin:-2px 0px 0px 0px;
+ float: left;
+ width: 100%;
+  list-style:none;
+}
+
+#editarOrcOpcoes ul  li{
+display: inline;
+
+}
+
+ #editarOrcOpcoes ul li a{
+
+ float:left;
+ /* visual do link */
+
+display: inline-block;
+ }
+ 
+ #editarOrcOpcoes ul li form{
+ padding: 8px 10px 10px 10px;
+
+ float:left;
+ /* visual do link */
+display: inline-block;
+ }
+
+ 
+ .alinhamentoHorizontal ul {
+ padding:0px 0px 0px 0px;
+ margin:-2px 0px 0px 0px;
+ float: left;
+ width: 100%;
+  list-style:none;
+}
+
+.alinhamentoHorizontal ul  li{
+display: inline;
+
+}
+
+ .alinhamentoHorizontal ul li a{
+
+ float:left;
+ /* visual do link */
+
+display: inline-block;
+ }
+ 
+ .alinhamentoHorizontal ul li form{
+ padding: 8px 10px 10px 10px;
+
+ float:left;
+ /* visual do link */
+display: inline-block;
+ }
+ 
+ 
+ /* -------- formatação BOtão LINK geral --------------*/
+ 
+ .bt_link:link, .bt_link:visited{
+   
+
+    padding: 10px 10px;
+    text-align: center;	
+    text-decoration: none;
+    display: inline-block;
+
+	background-color: #bdbebf;
+		 box-sizing: border-box;
+	  border: 1px solid #646466;
+	  border-radius: 4px;
+	
+}
+
+.bt_link:hover, .bt_link:active{
+    	background-color:  #f1f1f1;
+		 box-sizing: border-box;
+	  border: 1px solid #646466;
+	  border-radius: 4px;
+	  color: red;
+	  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	 -webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+	 cursor:pointer;
 }

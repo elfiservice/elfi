@@ -1,14 +1,12 @@
 ﻿<?php
 
-        $orc = "";
-        if(isSet ($_GET['id_orc'])) {
+        //$orc = "";
+        if(filter_has_var(INPUT_GET, 'id_orc')) {
         
-             $orc = $_GET['id_orc'];
-        } 
-		
-//		//echo $orc;
-//		$a = filter_input_array(INPUT_POST,FILTER_DEFAULT);
-//		var_dump($a);
+            $orc =  filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
+         
+if($orc){		// TESTA SE o id_orc no link é VALIDO
+
 ?>
 
 
@@ -30,31 +28,80 @@ MAscaras em campos
 -->
 <?php require 'includes/javascripts/somar_valores_monetarios.php';?>
 
-       
+ 
 
         
    <?php
+   //Ao Alterar Situação ORC
+   $ident_orc="";
+if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
+
+	$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
+	$situcao_orc = $_POST['itens_situcao_orc'];
+
+	//$usuarioObj = new UsuarioCtrl();
+	//$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
+	//$nome_usuario = $usuario->getLogin();
+        $nome_usuario = $_SESSION['Login'];
+
+	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); 
+	$orcCrtlObj = new OrcamentoCtrl();
+	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
+
+	?>
+			 
+<script type="text/javascript" >
+	alert ("Orcamento de ID <?= $orcObj->getId();?> foi atualizado: \n Situacao: <?= $resultAtualizOrcamento["situacao_orc"];?> \n Colaborador: <?= $resultAtualizOrcamento['colaborador_orc']?>!");
+</script>
+			 
+<?php
+
+        } 
+   
+   
+   
    $ColabCtrl = new ColaboradorCtrl();
    $ColabBd = $ColabCtrl->buscarColaborador("*", "where id_colaborador = $logOptions_id");
   // extract($ColabBd[0]);
-   $tipo_conta = $ColabBd[0]["tipo"];
+   $tipo_conta = $ColabBd->getTipo();
    //var_dump($ColabBd);
            
     if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh")
         
     {
+        
+         //burca Orçamento
+ 			$OrcCtrl = new OrcamentoCtrl();
+ 			$OrcBdCtrl = $OrcCtrl->buscarOrcamentos("*", "where id = $orc");
+ 			$OrcBd = $OrcBdCtrl[0];
+ 			extract($OrcBd);
        ?>
 	   
  <div>
 	<h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Editar</h2>
 </div>
 <hr>	           
-<div>
 
-    <a href="#" class="bt_imprimir" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?php echo $orc; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
-         Imprimir
-</a>
-            
+<div id="editarOrcOpcoes"> 
+    <ul>
+        <li>
+             <a href="#" class="bt_imprimir" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?php echo $orc; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
+                     Imprimir
+            </a>
+        </li>
+        <li>
+            <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y');?>&id_orc=<?php echo $id; ?>&id_menu=editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
+                <select name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
+                    <option value="<?php echo $situacao_orc;?>"><?php echo $situacao_orc;?></option>
+                        <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
+                </select>
+                <input type="submit" value="Alterar" name="alterar_situacao" />
+            </form>
+        </li>     
+    </ul>       
+</div>
+<hr>
+    
 <!-- Campos obrigatorios -->  
  
  <script language="JavaScript">
@@ -124,14 +171,10 @@ function formCheck(formobj){
  
 
  <?php
- //burca Orçamento
- 			$OrcCtrl = new OrcamentoCtrl();
- 			$OrcBd = $OrcCtrl->buscarOrcamentos("*", "where id = $orc");
- 			$OrcBd = $OrcBd[0];
- 			extract($OrcBd);
+
 ?>
   
-            <div  class="" style="">
+            <div  class="" style="margin-top: 20px;">
                 
                 <form name="clientForm" method="post" action="tecnico.php?id_menu=salvar_editar_orcamento" onsubmit="return formCheck(this);">       
 
@@ -147,13 +190,14 @@ function formCheck(formobj){
                                                     <?php
                                                     $clienteCtrl = new ClienteCtrl();
                                                     $clienteBd = $clienteCtrl->buscarCliente("razao_social", "ORDER BY razao_social");
+                                                    
                                                      foreach ($clienteBd as $cliente => $row){
                                                          echo '<option id="clientID" value="'.$row['razao_social'].'">'.$row['razao_social'].'</option>';
                                                      }
                                                     ?>
                                                             
                                            </select>
-                                            
+
                                         </td>
                                     </tr>
                                   <tr align="left">
@@ -525,7 +569,12 @@ history.back();
             <?php   
 
             } 
-            
+} else{
+    echo"ID do Orcamento invalido!";
+}
+}  else{
+    echo"variavel ID do Orcamento não identificada!";
+}
 ?>
                 
         </div>	

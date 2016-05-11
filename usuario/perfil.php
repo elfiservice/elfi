@@ -1,8 +1,10 @@
 <?php
 include "../checkuserlog.php";
 include_once "../Config/config_sistema.php";
-include_once "../classes/controller/UsuarioCtrl.class.php";
-include_once "../classes/controller/OrcamentosCtrl.class.php";
+include_once "../Config/SistemConfig.php";
+//include_once "../classes/controller/UsuarioCtrl.class.php";
+//include_once "../classes/controller/OrcamentosCtrl.class.php";
+require '../classes/Config.inc.php';
 
 if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	if (!isset($_COOKIE['idCookie'])) {
@@ -18,10 +20,13 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 		$id_user = $_GET['id_user'];
 	}
 	
-	$usuario_logado = new UsuarioCtrl();
-	$user = $usuario_logado->buscarUserPorId($id_user);
+//	$usuario_logado = new UsuarioCtrl();
+//	$user = $usuario_logado->buscarUserPorId($id_user);
 	$orc_ctrl = new OrcamentoCtrl();
-
+        
+                    $colabCtrl = new ColaboradorCtrl();
+                    $user = $colabCtrl->buscarColaborador("*", "where id_colaborador = $id_user");
+                   //var_dump($user);   
 
 ?>
 <!doctype html>
@@ -42,6 +47,16 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 </head>
 <body>
 <div  style="background: url(../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"></div>
+
+
+<div>
+	<h2>Colaborador</h2>
+</div>
+<hr>
+<?php
+    if($user != null){
+?>
+
 <fieldset>
 	<legend><b>Dados do Usuario: <?php echo $user->getLogin();?></b></legend>
 		<table>
@@ -86,7 +101,9 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 
 
 <?php 
-
+    }else{
+        echo "Usuario não encontrado.";
+    }
 }//fecha o else do $_SESSION
 
 ?>

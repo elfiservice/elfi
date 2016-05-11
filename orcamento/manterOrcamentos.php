@@ -16,29 +16,23 @@ if(isSet ($_POST['ano'])) {
 	$ano_orc_selec = $_POST['ano'];
 }
 
-$ident_orc="";
-if(isSet ($_GET['id_orc'])) {
+//$ident_orc="";
+//if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
+//
+//	$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
+//	$situcao_orc = $_POST['itens_situcao_orc'];
+//
+//	$usuarioObj = new UsuarioCtrl();
+//	$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
+//	$nome_usuario = $usuario->getLogin();
+//
+//	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); 
+//	$orcCrtlObj = new OrcamentoCtrl();
+//	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
+//
 
-	$ident_orc = $_GET['id_orc'];
-	$situcao_orc = $_POST['itens_situcao_orc'];
-
-	$usuarioObj = new UsuarioCtrl();
-	$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
-	$nome_usuario = $usuario->getLogin();
-
-	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); 
-	$orcCrtlObj = new OrcamentoCtrl();
-	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
-
-	?>
-			 
-<script type="text/javascript" >
-	alert ("Orcamento de ID <?= $orcObj->getId();?> foi atualizado: \n Situacao: <?= $resultAtualizOrcamento["situacao_orc"];?> \n Colaborador: <?= $resultAtualizOrcamento['colaborador_orc']?>!");
-</script>
-			 
-<?php
-
-        } 
+//
+//        } 
        
         $usuario = new UsuarioCtrl();
         $orcCrtl = new OrcamentoCtrl();
@@ -50,10 +44,19 @@ if(isSet ($_GET['id_orc'])) {
 	<h2>Orcamentos</h2>
 </div>
 <hr>
-<div style="padding-bottom: 0px;">
+<div class="alinhamentoHorizontal">
+    <ul>
+        <li>
 	<form name="novo_orc" action="tecnico.php?id_menu=novo_orcamento" method="POST" enctype="multipart/form-data">
                         <input class="bt_incluir"  type="submit" value="Novo" name="novo_orc_btn" />
 	</form>
+        </li>
+        <li>
+	<form name="acomp_aprovados" action="acompanhamento/acompanhar_orcamentos.php" method="POST" enctype="multipart/form-data">
+                        <input class="bt_incluir"  type="submit" value="Aprovados" name="acomp_aprovados_btn" />
+	</form>
+        </li>     
+    </ul>        
 </div>
 <hr>
 	<div>
@@ -63,9 +66,6 @@ if(isSet ($_GET['id_orc'])) {
 				<option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>
 				<?php
 				$anosOrcamentosArr = $orcCrtl->buscarOrcamentos("DISTINCT ano_orc", "ORDER BY ano_orc DESC");
-				
-				//$consulta_menor_ano_orc = mysql_query("select DISTINCT ano_orc from orcamentos ORDER BY ano_orc DESC");
-				//while($l = mysql_fetch_array($consulta_menor_ano_orc)) 
 				foreach ($anosOrcamentosArr as $orc => $l)
 				{
 				?>
@@ -109,33 +109,65 @@ if(isSet ($_GET['id_orc'])) {
             
 <?php
 	     $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = $ano_orc ORDER BY id  DESC");
+
+             
+             
+             
 		foreach ($orcamentosArray as $orc => $row)
                 {
+                    
+                    //Buscar ID do CLIENTE
+             $clienteCtrl = new ClienteCtrl();
+             $clienteDao = $clienteCtrl->buscarClientePorRazaoSocial($row['razao_social_contr']);
 ?>
                                     <tr>
                                         <td>
-                                            <?php echo $row['n_orc'].'.'.$row['ano_orc'];?>
+                                                         <a href="#" class="" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?php echo $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
+<?php 
+                                                        echo $row['n_orc'].'.'.$row['ano_orc'];
+?>
+                                                         </a>
                                         </td>
                                         <td>
-                                            <?php //echo $row['colaborador_orc'];
-            									$user = $usuario->buscarUserPorLogin($row['colaborador_orc']);
-            									
-            								?>
-                                            <a href="#" onclick="window.open('../usuario/perfil.php?id_user=<?php echo $user->getId();  ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+<?php //echo $row['colaborador_orc'];
+            			$user = $usuario->buscarUserPorLogin($row['colaborador_orc']);
+?>
+                                            <a  href="#" onclick="window.open('usuario/perfil.php?id_user=<?php echo $user->getId();  ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                                             	<?php echo $row['colaborador_orc'];?>
                                             </a>                                            
                                         </td>                                        
                                         <td>
                                             
-                                            <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y');?>&id_orc=<?php echo $row['id']; ?>&id_menu=orcamento" method="POST" enctype="multipart/form-data">
+<!--                                            <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php //echo date('Y');?>&id_orc=<?php //echo $row['id']; ?>&id_menu=orcamento" method="POST" enctype="multipart/form-data">
                                                 <select name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
-			<option value="<?php echo $row['situacao_orc'];?>"><?php echo $row['situacao_orc'];?></option>
-                                                            <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
+			<option value="<?php //echo $row['situacao_orc'];?>"><?php //echo $row['situacao_orc'];?></option>
+                                                            <?php //include "includes/orcamento/lista_situacao_orc.php"; ?>
                                                 </select>
                                                 				
                                                    <input type="submit" value="Alterar" name="alterar_situacao" />
-                                            </form>
-											
+                                            </form>-->
+                                            
+                                            <?php
+                                                if($row['situacao_orc'] == "Aguardando aprovação"){
+                                                    ?>
+                                            <a class="bt_link bt_azul" href="#" onclick="window.open('acompanhamento_nao_aprovado/historico_acompanhamento.php?id_orc=<?php echo $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
+			<?=$row['situacao_orc']?>
+			</a>
+                                            <?php
+                                                }else if($row['situacao_orc'] == "Aprovado"){
+                                                    ?>
+                                                
+                                            <a class="bt_link bt_azul" href="acompanhamento/acompanhar_orcamentos.php" >
+			<?=$row['situacao_orc']?>
+			</a>
+                                                <?php
+                                                            
+                                                }else{
+                                                    echo    $row['situacao_orc'];
+                                                }
+                                            ?>
+
+                                         
 											
                                         </td>   
                                         <td>
@@ -160,7 +192,13 @@ if(isSet ($_GET['id_orc'])) {
                                         
                                         
                                         <td>
-                                            <?php echo $row['razao_social_contr'];?>
+                                            
+                                            <a href="#" class="" onclick="window.open('cliente/perfil.php?id_cliente=<?php echo $clienteDao->getId(); ?>&tipo_cliente=<?php echo $clienteDao->getTipo() ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
+<?php 
+                                                        echo $row['razao_social_contr'];
+?>
+                                                         </a>                                            
+                                            
                                         </td>
 
                                         <td>
