@@ -1,9 +1,10 @@
 <?php
 include "../checkuserlog.php";
 include_once "../Config/config_sistema.php";
-include_once "../classes/model/Usuario.class.php";
-include_once "../classes/controller/OrcamentosCtrl.class.php";
-include_once "../classes/controller/ClienteCtrl.class.php";
+include_once "../Config/SistemConfig.php";
+//include_once "../classes/controller/UsuarioCtrl.class.php";
+//include_once "../classes/controller/OrcamentosCtrl.class.php";
+require '../classes/Config.inc.php';
 
 if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	if (!isset($_COOKIE['idCookie'])) {
@@ -29,7 +30,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	$orc_ctrl = new OrcamentoCtrl();
 	$cliente = new ClienteCtrl();
 	$clienteFinal = $cliente->selecionarCliente($id_cliente, $tipo_cliente);
-
+                    
 
 ?>
 <!doctype html>
@@ -45,7 +46,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 		<meta name="viewport" content="width=device-width,initial-scale=1">
     	<link rel="stylesheet" href="../estilos.css">
     	
-    	<?php include_once '../includes/tabela_no_head.php';?>
+    	<?php include_once '../includes/javascripts/tabela_no_head.php';?>
     	
 </head>
 <body>

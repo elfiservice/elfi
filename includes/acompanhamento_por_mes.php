@@ -308,9 +308,9 @@ if($serv_concluido == "s" && $feito_pos_entreg == "n" ) {
 		<TD><?php echo $row['novo_cliente']; ?></TD>
 		<TD><?php echo $row['n_orc']; ?></TD>
 		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
-		<TD><?php echo $data_aprovada; ?></TD>
-		<TD><?php echo $row['data_inicio']; ?></TD>
-		<TD><?php echo $row['data_conclusao']; ?></TD>
+		<TD><?php echo date('d/m/Y', strtotime($data_aprovada)); ?></TD>
+		<TD><?php if ($row['data_inicio'] == "0000-00-00"){echo "--";}else{echo date('d/m/Y', strtotime($row['data_inicio'])); }; ?></TD>
+		<TD><?php if ($row['data_conclusao'] == "0000-00-00"){echo "--";}else{echo date('d/m/Y', strtotime($row['data_conclusao'])); }; ?></TD>
 		<TD><?php echo $days.' dia(s)'; ?></TD>
 		<TD><?php echo $days_em_exec; ?> </TD>
 		<TD><?php echo $days_de_atraso; ?></TD>

@@ -3,7 +3,7 @@ include "../checkuserlog.php";
 include_once "../Config/config_sistema.php"; 
 include_once "../classes/controller/ClienteCtrl.class.php";
 include_once "../classes/controller/UsuarioCtrl.class.php";
-//include_once ("salvar_alteracao_orcamento.php");
+require '../Config/SistemConfig.php';
 
 if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	if (!isset($_COOKIE['idCookie'])) {
@@ -53,16 +53,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
     
     
 <!-- Tabela  -->
-<link rel="stylesheet" href="../tabela/demo_page.css">  
-<link rel="stylesheet" href="../tabela/demo_table.css">  
-
-		<script type="text/javascript" language="javascript" src="../tabela/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="../tabela/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#example').dataTable();
-			} );
-		</script>
+<?php include_once '../includes/javascripts/tabela_no_head.php';?>
     </head>
     <body>
 
@@ -192,7 +183,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 
 
                                                                                 <td>
-                                           <?php echo date('d/m/Y H:m', strtotime($row['data_adicionado_orc'])) ;?>
+                                           <?php echo date('d/m/Y H:i', strtotime($row['data_adicionado_orc'])) ;?>
                                         </td> 
                                                                                 <td>
                                            <?php 
@@ -206,7 +197,6 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
                                            $diferenca = $time_final - $time_inicial; // 19522800 segundos
                                            // Calcula a diferença de dias
                                            $dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
-                                           
                                            
                                            echo " à ". $dias ." dias";
                                            

@@ -33,6 +33,49 @@ body {
 	width:auto;
 }
 
+
+
+
+ select, input, textarea, checkbox{
+	background-color: #DAE2F5;
+	 box-sizing: border-box;
+	  border: 2px solid #012B8B;
+	  border-radius: 4px;
+	  padding: 5px;
+           font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+input:focus,select:focus,textarea:focus{
+	background-color: #DAE2F5;
+	 box-sizing: border-box;
+	  border: 2px solid #ff3c3c;
+	  border-radius: 4px;
+	  padding: 5px;
+}
+
+input[type=submit],input[type=button]{
+	background-color: #bdbebf;
+		 box-sizing: border-box;
+	  border: 1px solid #646466;
+	  border-radius: 4px;
+	  padding: 5px;
+	
+}
+
+input[type=submit]:hover,input[type=button]:hover{
+	background-color:  #f1f1f1;
+		 box-sizing: border-box;
+	  border: 1px solid #646466;
+	  border-radius: 4px;
+	  padding: 5px;
+	  color: red;
+	  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	 -webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+	 cursor:pointer;
+	  
+	
+} 
+
 .iframeStyle{
 	
 	width: 100%;
@@ -44,9 +87,8 @@ h2 {
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
-#corpo {
 
-}
+
 
 
 #menu {
@@ -160,4 +202,200 @@ display: inline-block;
 .carregando{
 color:#666;
 display:none;
+}
+
+/*//Botoes GErais*/
+.bt_vermelho{
+	color: red;
+        margin-bottom: 5px;
+}
+
+.bt_verde{
+	color: green;
+        margin-bottom: 5px;
+}
+
+.bt_azul{
+	color: blue;
+        margin-bottom: 5px;
+}
+
+.bt_incluir{
+    width: 80px; 
+    height: 35px; 
+    color: blue;
+}
+
+.bt_imprimir:link, .bt_imprimir:visited{
+   
+color: #000;
+    padding: 14px 40px;
+    text-align: center;	
+    text-decoration: none;
+    display: inline-block;
+
+	background-color: #bdbebf;
+		 box-sizing: border-box;
+	  border: 1px solid #646466;
+	  border-radius: 4px;
+	
+}
+
+.bt_imprimir:hover, .bt_imprimir:active{
+    	background-color:  #f1f1f1;
+		 box-sizing: border-box;
+	  border: 1px solid #646466;
+	  border-radius: 4px;
+	  padding: 14px 40px;
+	  color: red;
+	  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	 -webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+	 cursor:pointer;
+}
+
+
+
+
+/*Campo de Procurar na Tabela de dados */
+.inputProcurar {
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid #012B8B;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    background-image: url('imagens/searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 10px 20px 10px 40px;
+}
+
+.inputProcurar:focus {
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid #012B8B;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #D3D6FF;
+    background-image: none;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 10px 20px 10px 40px;
+}
+
+.textProcurar {
+    font-size: 14px;
+}
+
+/* ----- Estilo dos Fieldsets ---------- */
+.fieldsetGeral{
+	background-color: #fff;
+	
+}
+
+fieldset{
+	background-color: #fff;
+	
+}
+
+/* ALERTA de Mensagens */
+.sucesso{
+    font-size: 16px;
+    padding: 20px;
+}
+
+.erro{
+        font-size: 16px;
+    padding: 20px;
+    color: #ff3c3c;
+    
+}
+
+/* ---- PAgina Editar_Orcamento ----- Opçoes Imprimir e ALterar Situação ORC */
+#editarOrcOpcoes ul {
+ padding:0px 0px 0px 0px;
+ margin:-2px 0px 0px 0px;
+ float: left;
+ width: 100%;
+  list-style:none;
+}
+
+#editarOrcOpcoes ul  li{
+display: inline;
+
+}
+
+ #editarOrcOpcoes ul li a{
+
+ float:left;
+ /* visual do link */
+
+display: inline-block;
+ }
+ 
+ #editarOrcOpcoes ul li form{
+ padding: 8px 10px 10px 10px;
+
+ float:left;
+ /* visual do link */
+display: inline-block;
+ }
+
+ 
+ .alinhamentoHorizontal ul {
+ padding:0px 0px 0px 0px;
+ margin:-2px 0px 0px 0px;
+ float: left;
+ width: 100%;
+  list-style:none;
+}
+
+.alinhamentoHorizontal ul  li{
+display: inline;
+
+}
+
+ .alinhamentoHorizontal ul li a{
+
+ float:left;
+ /* visual do link */
+
+display: inline-block;
+ }
+ 
+ .alinhamentoHorizontal ul li form{
+ padding: 8px 10px 10px 10px;
+
+ float:left;
+ /* visual do link */
+display: inline-block;
+ }
+ 
+ 
+ /* -------- formatação BOtão LINK geral --------------*/
+ 
+ .bt_link:link, .bt_link:visited{
+   
+
+    padding: 10px 10px;
+    text-align: center;	
+    text-decoration: none;
+    display: inline-block;
+
+	background-color: #bdbebf;
+		 box-sizing: border-box;
+	  border: 1px solid #646466;
+	  border-radius: 4px;
+	
+}
+
+.bt_link:hover, .bt_link:active{
+    	background-color:  #f1f1f1;
+		 box-sizing: border-box;
+	  border: 1px solid #646466;
+	  border-radius: 4px;
+	  color: red;
+	  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	 -webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+	 cursor:pointer;
 }

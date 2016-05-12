@@ -3,7 +3,8 @@
         include "../checkuserlog.php";
 
         include_once "../Config/config_sistema.php"; 
-		
+        require '../Config/SistemConfig.php';
+        
 		$days_em_exec = "";
 		$days_de_atraso="";
 		
@@ -32,22 +33,22 @@
 		  if (!isset($_COOKIE['idCookie'])) {
 
 		  	
-		  		echo "Você não esta logado!";
+		  		echo "Vocï¿½ nï¿½o esta logado!";
 		  
 		  	
 		  	?>
 		  		 <script type="text/javascript">
-				//função usada para carregar o código
+				//funï¿½ï¿½o usada para carregar o cï¿½digo
 				function fecha() {
 				//fechando a janela atual ( popup )
 				window.close();
-				//dando um refresh na página principal
+				//dando um refresh na pï¿½gina principal
 				//opener.location.href=opener.location.href;
 				/* ou assim:*/ 
 				window.opener.location.reload();
 				
 				//document.location="Cores.htm"
-				//fim da função
+				//fim da funï¿½ï¿½o
 				}
 				</script>
 				<a href="javascript:void(0)" onclick="fecha()">fechar</a>
@@ -78,10 +79,7 @@
     <link rel="stylesheet" href="../estilos.css">
 	
 	<style type="text/css">
-				#menu {
-		float: ;
-		 
-		 }
+
 		 
 
 		#menu ul {
@@ -117,7 +115,7 @@
 	</style>
 
 <!-- Tabela  -->
-<?php include_once '../includes/tabela_no_head.php';?>
+<?php include_once '../includes/javascripts/tabela_no_head.php';?>
 	
 	
 </head>

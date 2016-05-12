@@ -9,7 +9,7 @@
 
         include_once "../Config/config_sistema.php"; 
 
-
+        require '../Config/SistemConfig.php';
 	
 		$ID_cliente = "";
         if(isSet ($_GET['id'])) {
@@ -45,66 +45,11 @@
 	<meta name="author" content="Elfi Service">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../estilos.css">
 	
-	<style type="text/css">
-		#menu {
-float: ;
- 
- }
- 
-
-#menu ul {
- padding:0px 0px 0px 0px;
- margin:-2px 0px 0px 0px;
- float: left;
- width: 100%;
- list-style:none;
- font: 11px verdana, arial, helvetica, sans-serif;
-
- 
- }
-
- #menu ul li {display: inline;}
-
- #menu ul li a{
- padding: 5px 10px;
- margin: 0px 0px;
- float:left;
- /* visual do link */
-
- 
-text-decoration: none; 
-display: inline-block;
- }
-
- 
-  #menu ul li a:hover  {
-
-
- }
-	
-	</style>
 
 <!-- Tabela  -->
-<link rel="stylesheet" href="../tabela/demo_page.css">  
-<link rel="stylesheet" href="../tabela/demo_table.css">  
-
-		<script type="text/javascript" language="javascript" src="../tabela/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="../tabela/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#example').dataTable();
-			} );
-			
-						$(document).ready(function() {
-				$('#example2').dataTable();
-			} );
-
-						$(document).ready(function() {
-				$('#example3').dataTable();
-			} );			
-		</script>
+	<?php include_once '../includes/javascripts/tabela_no_head.php';?>
 	
 	
 	</head>

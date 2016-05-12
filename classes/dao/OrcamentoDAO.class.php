@@ -1,4 +1,9 @@
 <?php
+// include '../classes/util/Conexao.class.php';
+// require '../classes/util/Read.class.php';
+// require '../classes/util/Update.class.php';
+
+
 class OrcamentoDAO {
 	
 	public function buscarOrcamentosPorUsuario($usuarioLogado){
@@ -25,5 +30,48 @@ class OrcamentoDAO {
 		return $n_linhas;
 	}
 	
+// 	public function atualizarOrcamentoDao($idOrc,$campoOrc,$campoDB){
+// 		if(mysql_query("UPDATE orcamentos SET $campoDB = '$campoOrc' WHERE id ='$idOrc'")){
+// 			return true;
+// 		}else {return false;}
+			
+// 	}
+	
+	public function update($idOrc, $camposDados){
+		$update = new Update();
+		$update->ExecUpdate("orcamentos", $camposDados, "WHERE id ='$idOrc'");
+		return $update->getResultado();	
+	}
+	
+	public function select($campos, $termos, $tabela = "orcamentos") {
+		$read = new Read();
+		$read->ExecRead($campos, $tabela, $termos);
+		return $read->getResultado();
+	}
+ 
+
+	public function selectAtividades(){
+		$read = new Read();
+		$read->ExecRead("*", "orc_atividades", "ORDER BY atividade");
+		return $read->getResultado();
+	}
+	
+	public function selectClassificacao(){
+		$read = new Read();
+		$read->ExecRead("*", "orc_classificacao_ativid", "ORDER BY classificacao");
+		return $read->getResultado();
+	}
+	
+	public function selectUnidade(){
+		$read = new Read();
+		$read->ExecRead("*", "orc_unidades", "ORDER BY unidade");
+		return $read->getResultado();
+	}
+        
+        public function insert($camposBd, $valores, $tabela = "orcamentos"){
+            $insert = new Insert();
+            $insert->ExecInsert($tabela, $camposBd, $valores);
+            return $insert->getResultado();
+            
+        }
 }
-?>

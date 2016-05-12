@@ -1,5 +1,5 @@
 <?php
-include 'Cliente.class.php';
+//include 'Cliente.class.php';
 class ClientePF extends Cliente {
 	private	$cpf;
 	

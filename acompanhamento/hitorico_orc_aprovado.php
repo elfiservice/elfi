@@ -8,7 +8,7 @@
         include "../checkuserlog.php";
 
         include_once "../Config/config_sistema.php"; 
-
+        require '../Config/SistemConfig.php';
 	$ano_atual = date('Y');   
 
 	
@@ -44,11 +44,11 @@
 	<meta name="author" content="Elfi Service">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../estilos.css">
 	
 	<style type="text/css">
 		#menu {
-float: ;
+
  
  }
  
@@ -85,7 +85,7 @@ display: inline-block;
 	
 	</style>
 
-	<?php include_once '../includes/tabela_no_head.php';?>
+	<?php include_once '../includes/javascripts/tabela_no_head.php';?>
 	
 	
 	</head>

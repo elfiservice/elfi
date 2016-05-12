@@ -1,6 +1,7 @@
 <?php
 include "../checkuserlog.php";
 include_once "../Config/config_sistema.php";
+require '../Config/SistemConfig.php';
 
 if (!isset($_SESSION['idx'])) { //testa se a sessão existe
 	if (!isset($_COOKIE['idCookie'])) {
@@ -36,13 +37,17 @@ if (!isset($_SESSION['idx'])) { //testa se a sessão existe
 		<meta name="author" content="Elfi Service">
 
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-    	<link rel="stylesheet" href="">
+                <link rel="stylesheet" href="../estilos.css">
     	
-    	<?php include_once '../includes/tabela_no_head.php';?>
+    	<?php include_once '../includes/javascripts/tabela_no_head.php';?>
     	
 </head>
 <body>
 <div  style="background: url(../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"></div>
+ <div>
+	<h2><a href="javascript:window.close()">Orçamento</a> -> Histórico Orçamento não Aprovado</h2>
+</div>
+<hr>
 <fieldset>
 	<legend><b>Dados do Orçamento</b></legend>
 	<div id="">
@@ -66,16 +71,16 @@ if (!isset($_SESSION['idx'])) { //testa se a sessão existe
 				<td><input type="text" value="<?php echo $linha_user->Login; ?>" name="colab_elfi" readonly="readonly" /></td>
 			</tr>
 			<tr>
-				<td>Contato no Cliente:</td>
+				<td>Nome do contato:</td>
 				<td><input type="text" value="" name="contato_cliente"  /></td>
 			</tr>
 			<tr>
-				<td>Telefone do Cliente:</td>
+				<td>Telefone do contato:</td>
 				<td><input type="text" value="" name="tel_cliente"  /></td>
 			</tr>
 			<tr>
 				<td>Conversado:</td>
-				<td><textarea  rows="3" cols="100" id="text" name="conversado"></textarea></td>
+				<td><textarea  style="height: 5em; width: 100%;" id="text" name="conversado"></textarea></td>
 			</tr>
 			<tr>
 				<td><input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="salvar" value="Salvar" id="salvar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  />
@@ -108,9 +113,9 @@ if (!isset($_SESSION['idx'])) { //testa se a sessão existe
          while ( $row = mysql_fetch_assoc( $res ) ) {
 		?>
 	  		<TR>
-				<td><a href="#" onclick="window.open('editar_historico_n_aprovado.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a>
+                                                                                <td><a class="bt_link bt_verde" href="#" onclick="window.open('editar_historico_n_aprovado.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">editar</a>
 					<br>
-					<a href="#" onclick="window.open('excluir_historico_n_aprovado.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">excluir</a>
+                                                                                <a class="bt_link bt_vermelho" href="#" onclick="window.open('excluir_historico_n_aprovado.php?id_historico=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">excluir</a>
 				</td>
 	    		<Td><?php echo date('d/m/Y à\s H:m', strtotime($row['dia_do_contato'])); ?></Td>
 				<TD><?php echo $row['colab_elfi']; ?></TD>
