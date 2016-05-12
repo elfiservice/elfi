@@ -5,7 +5,7 @@
         include_once "../Config/config_sistema.php"; 
 
 		require '../Config/SistemConfig.php';
-
+//echo phpinfo();
 
 if (!isset($_SESSION['idx'])) { 
   if (!isset($_COOKIE['idCookie'])) {

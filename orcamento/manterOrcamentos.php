@@ -35,7 +35,7 @@ if(isSet ($_POST['ano'])) {
 //        } 
        
         $usuario = new UsuarioCtrl();
-        $orcCrtl = new OrcamentoCtrl();
+               $orcCrtl = new OrcamentoCtrl();
 ?>
 
 
@@ -131,7 +131,7 @@ if(isSet ($_POST['ano'])) {
                                         <td>
 <?php //echo $row['colaborador_orc'];
             			$user = $usuario->buscarUserPorLogin($row['colaborador_orc']);
-?>
+                                    ?>                                                  
                                             <a  href="#" onclick="window.open('usuario/perfil.php?id_user=<?php echo $user->getId();  ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                                             	<?php echo $row['colaborador_orc'];?>
                                             </a>                                            

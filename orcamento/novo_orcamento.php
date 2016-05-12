@@ -113,6 +113,7 @@ function formCheck(formobj){
 		<?php
                                     $clienteCtrl = new ClienteCtrl();
                                     $clienteBd = $clienteCtrl->buscarCliente("razao_social", "ORDER BY razao_social");
+                             
                                   foreach ($clienteBd as $cliente => $row){
 			echo '<option id="clientID" value="' . $row ['razao_social'] . '">' . $row ['razao_social'] . '</option>';
 		}

@@ -31,7 +31,7 @@ class UsuarioCtrl{
 	public function buscarUserPorLogin ($login){
 		$linha_user = $this->usuarioDao->buscarUsuarioLogin($login);
 		if ($linha_user <> "" || $linha_user <> null ){
-			$usuario = new Usuario($linha_user->id_colaborador,
+			$usuario = new Colaborador($linha_user->id_colaborador,
 					$linha_user->Login,
 					$linha_user->Senha,
 					$linha_user->cpf,
