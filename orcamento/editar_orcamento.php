@@ -39,8 +39,11 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 	$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
 	$situcao_orc = $_POST['itens_situcao_orc'];
                     $data_aprovada="";
+                   
         if($situcao_orc == "Aprovado"){
             $data_aprovada = date('Y-m-d');
+        }else{
+            $data_aprovada = date('0000-00-00');
         }
 	//$usuarioObj = new UsuarioCtrl();
 	//$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
@@ -94,15 +97,35 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
         </li>
         <li>
             <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y');?>&id_orc=<?php echo $id; ?>&id_menu=editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
-                <select name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
-                    <option value="<?php echo $situacao_orc;?>"><?php echo $situacao_orc;?></option>
+                <select onchange="habilitaBtn()" name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
+                    <option id="opcao" value="<?php echo $situacao_orc;?>"><?php echo $situacao_orc;?></option>
                         <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
                 </select>
-                <input type="submit" value="Alterar" name="alterar_situacao" />
+                <input type="submit" value="Alterar" name="alterar_situacao" id="salvar_situacao" disabled="disabled" />
             </form>
         </li>     
     </ul>       
 </div>
+
+    <script type="text/javascript">
+        var opInicial = document.getElementById("opcao").value;
+        function habilitaBtn () {
+            var opAposMudar = document.getElementById("itens_situcao_orc").value;
+     
+
+            if(opInicial !== opAposMudar)
+            {
+                   if(document.getElementById('salvar_situacao').disabled) {
+                    document.getElementById('salvar_situacao').disabled=false;
+                }
+           }
+            if(opInicial === opAposMudar){
+                                 if(!document.getElementById('salvar_situacao').disabled) {
+                    document.getElementById('salvar_situacao').disabled=true;
+                }
+            }
+        }
+    </script>
 <hr>
     
 <!-- Campos obrigatorios -->  
