@@ -38,13 +38,16 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 
 	$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
 	$situcao_orc = $_POST['itens_situcao_orc'];
-
+                    $data_aprovada="";
+        if($situcao_orc == "Aprovado"){
+            $data_aprovada = date('Y-m-d');
+        }
 	//$usuarioObj = new UsuarioCtrl();
 	//$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
 	//$nome_usuario = $usuario->getLogin();
-        $nome_usuario = $_SESSION['Login'];
+                  $nome_usuario = $_SESSION['Login'];
 
-	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); 
+	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", ""); 
 	$orcCrtlObj = new OrcamentoCtrl();
 	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
 
