@@ -5,6 +5,7 @@
         include_once "../Config/config_sistema.php"; 
 
 		require '../Config/SistemConfig.php';
+                require '../classes/Config.inc.php';
 //echo phpinfo();
 
 if (!isset($_SESSION['idx'])) { 
@@ -204,7 +205,7 @@ display: inline-block;
 	    <Td><?php echo $row['razao_social_contr']; ?></Td>
 		<TD><?php echo $row['atividade']; ?></TD>
 		<TD><?php echo $row['classificacao']; ?></TD>
-		<TD><?php echo $row['descricao_servico_orc']; ?></TD>
+    <TD><?php echo Formatar::limita_texto(strip_tags($row['descricao_servico_orc']), 200); ?></TD>
 		<TD><?php //echo $row['novo_cliente']; ?></TD>
 		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
 		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
@@ -265,7 +266,7 @@ display: inline-block;
 	    <Td><?php echo $row['razao_social_contr']; ?></Td>
 		<TD><?php echo $row['atividade']; ?></TD>
 		<TD><?php echo $row['classificacao']; ?></TD>
-		<TD><?php echo $row['descricao_servico_orc']; ?></TD>
+   <TD><?php echo Formatar::limita_texto(strip_tags($row['descricao_servico_orc']), 200); ?></TD>
 		<TD><?php //echo $row['novo_cliente']; ?></TD>
 		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
 		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
@@ -325,7 +326,7 @@ display: inline-block;
 	    <Td><?php echo $row['razao_social_contr']; ?></Td>
 		<TD><?php echo $row['atividade']; ?></TD>
 		<TD><?php echo $row['classificacao']; ?></TD>
-		<TD><?php echo $row['descricao_servico_orc']; ?></TD>
+ <TD><?php echo Formatar::limita_texto(strip_tags($row['descricao_servico_orc']), 200); ?></TD>
 		<TD><?php //echo $row['novo_cliente']; ?></TD>
 		<TD><?php echo $row['n_orc'].".".$row['ano_orc']; ?></TD>
 		<TD><?php echo $row['prazo_exec_orc']; ?></TD>
