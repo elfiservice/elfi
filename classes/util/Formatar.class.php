@@ -16,7 +16,7 @@ class Formatar {
     }
 
     public static function formatTelCnpjCpf($string, $tipo = "") {
-        $string = ereg_replace("[^0-9]", "", $string);
+        $string = preg_replace("[^0-9]", "", $string);
         if (!$tipo) {
             switch (strlen($string)) {
                 case 10: $tipo = 'fone';

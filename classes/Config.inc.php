@@ -9,11 +9,13 @@ require $tree.'classes/controller/ClienteCtrl.class.php';
 require $tree.'classes/controller/OrcamentosCtrl.class.php';
 require $tree.'classes/controller/UsuarioCtrl.class.php';
 require $tree.'classes/controller/ColaboradorCtrl.class.php';
+require $tree.'classes/controller/EmpresaCtrl.class.php';
 
 require $tree.'classes/dao/ClienteDAO.class.php';
 require $tree.'classes/dao/OrcamentoDAO.class.php';
 require $tree.'classes/dao/UsuarioDAO.class.php';
 require $tree.'classes/dao/ColaboradorDAO.class.php';
+require $tree.'classes/dao/EmpresaDAO.class.php';
 
 require $tree.'classes/model/Cliente.class.php';
 require $tree.'classes/model/Cliente_PF.class.php';
@@ -23,6 +25,7 @@ require $tree.'classes/model/EmailOrcamentoNaoAprovado.class.php';
 require $tree.'classes/model/Orcamento.class.php';
 require $tree.'classes/model/Usuario.class.php';
 require $tree.'classes/model/Colaborador.class.php';
+require $tree.'classes/model/Empresa.class.php';
 
 require $tree.'classes/util/Conexao.class.php';
 require $tree.'classes/util/Formatar.class.php';

@@ -2,9 +2,10 @@
 
 
         include "../checkuserlog.php";
-
+require '../Config/SistemConfig.php';
         include_once "../Config/config_sistema.php"; 
-
+        require '../classes/Config.inc.php';
+//header('Content-Type: text/html; charset=utf-8');
         $dyn_www = $_SERVER['HTTP_HOST'];  
 
         $menu = "";
@@ -18,6 +19,11 @@
         
              $id_orcamento = $_GET['id_orc'];
         } 
+        
+      //  $mostrar = '1';
+        $empresaCtrl = new EmpresaCtrl();
+        $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 1");
+        //var_dump($empresaDao);
         
         
         //$id_orcamento = "17";
@@ -383,7 +389,7 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                 <tr bordercolor=""  >
                     <td colspan="" >
                         <img src="../imagens/logo_elfi.jpg" id="" />
-                        
+                        <p style="font-size: 10px;"><?= $empresaDao->getRazao_social() ?></p>
                     </td>
                     <td align="center" colspan="8">
                         <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px; color: #3E4B95;">
@@ -776,8 +782,8 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                  <tr>
 
                     <Td colspan="10" width="" align="center">  <div style="color: #3E4B95; font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                          CNPJ 73.624.165/0001-08 - Rua Cap. Vasconcelos, 645 – Aerolândia – Fortaleza-CE – Fone: (85) 3227.6307 – Fax: (85) 3227.6068
-CEP: 60.851-010 – elfi@elfiservice.com.br – www.elfiservice.com.br
+                            CNPJ <?= Formatar::formatTelCnpjCpf($empresaDao->getCnpj()) ?> - <?= $empresaDao->getEndereco()?> – <?= $empresaDao->getBairro()?>  – <?= $empresaDao->getCidade()?> -<?= $empresaDao->getEstado()?>  – Fone: <?= Formatar::formatTelCnpjCpf($empresaDao->getTel()) ?> – Fax: (85) 3227.6068
+                            CEP: <?= Formatar::formatTelCnpjCpf($empresaDao->getCep()) ?> – <?= $empresaDao->getEmail_tec()?> – www.elfiservice.com.br
 
                         </div>
                     </td>
