@@ -39,10 +39,10 @@ class OrcamentoCtrl{
 	}
 	
 	public function atualizarOrcamento($ocamentoObj){
-		$arrayResultAtualizacao=[];
+		$arrayResultAtualizacao=array();
 		if($ocamentoObj instanceof Orcamento){
 			
-			$arrayItensOrc = [
+			$arrayItensOrc = array(
 					"n_orc" => $ocamentoObj->getNOrc(),
 					"ano_orc" => $ocamentoObj->getAnoOrc(),
 					"colaborador_orc" => $ocamentoObj->getColabOrc(),
@@ -101,7 +101,7 @@ class OrcamentoCtrl{
                                                                                             "colab_ultimo_contato_client"=>$ocamentoObj->getColabUltimContatoCliente(),
                                                                                             "novo_cliente"=>$ocamentoObj->getNovo_cliente()
 			
-			];
+			);
 			
                      
 			$contador=1;			

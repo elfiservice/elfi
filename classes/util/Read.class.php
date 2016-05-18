@@ -1,11 +1,12 @@
 <?php
-
+//phpinfo();
+//echo phpversion();
 
 class Read extends Conexao{
 	
 	private $select;
 	private $sql;
-	private $resultado=[];
+	private $resultado;
 	private $conexao;
 	private $query;
 	
