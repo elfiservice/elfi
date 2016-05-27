@@ -25,8 +25,36 @@ if (isset ($_POST['clientID']))
 	// $dia = $data_aprovada[0];
 	// $data_aprovada = "$ano-$mes-$dia";
 	// $ano_da_aprovacao_orc = $ano;
-     $data_inicio =		 $_POST['data_inicio'];   
-	 $data_conclusao =		 $_POST['data_conclusao'];
+        //var_dump($_POST['data_inicio'], $_POST['data_conclusao']);
+        
+    //    str_replace('/', '-', $_POST['data_inicio']);
+       // var_dump(str_replace('/', '-', $_POST['data_inicio']));
+                    
+                    $varTesteDataVazia = "00-00-0000";
+                    $dataInicio = str_replace('/', '-', $_POST['data_inicio']);
+                    $dataConclusao = str_replace('/', '-', $_POST['data_conclusao']);
+                    
+                    if($dataInicio == $varTesteDataVazia && $dataConclusao == $varTesteDataVazia){
+                        $data_inicio = null;
+                        $data_conclusao = null;
+                    }else if($dataInicio == $varTesteDataVazia){
+                        $data_inicio = null;
+                                $data_conclusao =	date('Y-m-d', strtotime( $dataConclusao));
+                    }else if ($dataConclusao == $varTesteDataVazia){
+                        $data_inicio =		 date('Y-m-d', strtotime($dataInicio));  
+                        $data_conclusao = null;
+                    }else{
+                        $data_conclusao =	date('Y-m-d', strtotime( $dataConclusao));
+                        $data_inicio =		 date('Y-m-d', strtotime($dataInicio));  
+                    }
+                    
+                    
+
+                    
+                    
+         
+        // var_dump($data_inicio, $data_conclusao);
+         //exit;
 	 //$feito_pos_entreg =		 $_POST['feito_pos_entreg'];
 	 $nao_conformidade =		 $_POST['nao_conformidade'];
 	 $obs_n_conformidad =		 $_POST['obs_n_conformidad'];

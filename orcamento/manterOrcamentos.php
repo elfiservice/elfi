@@ -205,7 +205,7 @@ if(isSet ($_POST['ano'])) {
                                             <?php echo $row['atividade'].'-'.$row['classificacao'];?>
                                         </td>
                                                                                 <td>
-                                           <?php echo $row['data_adicionado_orc'];?>
+                                           <?php echo date('d/m/Y \a\s H:i', strtotime($row['data_adicionado_orc']));?>
                                         </td> 
                                                                                 <td>
                                            <?php echo $row['cnpj_contr'];?>
