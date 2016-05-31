@@ -172,8 +172,8 @@ class OrcamentoCtrl{
                           $this->numeroDoOrc($orcamentoObj->getAnoOrc());
                          $orcamentoObj->setNOrc($this->getResult());
                          
-                         //$this->verificaSeNovoCliente($orcamentoObj->getRazaoSocialContrat());
-                       // $orcamentoObj->setNovo_cliente($this->getResult());
+                         $this->verificaSeNovoCliente($orcamentoObj->getRazaoSocialContrat());
+                        $orcamentoObj->setNovo_cliente($this->getResult());
                         
                         
                          $valores = "'{$orcamentoObj->getNOrc()}',"
@@ -239,9 +239,9 @@ class OrcamentoCtrl{
 
 
                   private function verificaSeNovoCliente($razao_social_contr){
-                      echo $razao_social_contr;
-                    $razaobd =  $this->OrcDao->select("*", "WHERE razao_social_contr = $razao_social_contr");
-                    var_dump($razaobd);
+                      //echo $razao_social_contr;
+                    $razaobd =  $this->OrcDao->select("razao_social_contr", "WHERE razao_social_contr = '$razao_social_contr'", "orcamentos");
+                    //var_dump($razaobd);
                    // echo $razaobd[0]['razao_social_contr'];
                       if(!$razaobd[0]['razao_social_contr'] == null){
                           $this->result = 'n';
@@ -254,7 +254,7 @@ class OrcamentoCtrl{
                   private function numeroDoOrc($ano_orc){
 
                         $consulta_ORC          = $this->OrcDao->select("n_orc", "WHERE ano_orc = $ano_orc", "orcamentos");
-                            
+                            //var_dump($consulta_ORC);
                         if ($consulta_ORC == false) 
                         {
                             $numero_ORC = "1";

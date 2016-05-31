@@ -38,7 +38,7 @@ class Read extends Conexao{
 			}
 		} 
                                 }else{
-                                    $this->resultado['erro']=false;
+                                    $this->resultado[]=false;
                                 }
 		
 	}
