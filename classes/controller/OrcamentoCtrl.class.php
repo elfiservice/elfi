@@ -56,7 +56,7 @@ class OrcamentoCtrl{
                                                                                             "cep_contr"=>$ocamentoObj->getCepContrat(),
                                                                                             "telefone_contr"=>$ocamentoObj->getTelContrat(),
                                                                                             "celular_contr"=>$ocamentoObj->getCelContrat(),
-                                                                                            "email_contr"=>$ocamentoObj->getCelContrat(),
+                                                                                            "email_contr"=>$ocamentoObj->getEmailContrat(),
                                                                                             "contato_clint"=>$ocamentoObj->getContatoCliente(),
                                                                                             "razao_social_obra"=>$ocamentoObj->getRazaoSocialObra(),
                                                                                             "cnpj_obra"=>$ocamentoObj->getCnpjObra(),

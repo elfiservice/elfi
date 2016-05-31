@@ -79,60 +79,34 @@ if (isset ($_POST['razao_social']))
                 if ($razao_check > 1)
                 {
 
+                        echo "<b> <span style=\"color:red;\"> Razao Social ja cadastrada no sistema! <br> Cliente NAO atualizado. </span></b>";
                 ?>
-                    <script type="text/javascript" >
-                        alert ("Razao Social ja cadastrada no sistema! \n  Cliente NAO cadastrado.");
-                                              
-                    </script>
-                    
-                        
-                                       
-                    <!--a href="javascript:history.back();" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a-->
+                    <a href="javascript:history.back(-1);" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a>
                  <?php
-                    
-                     header("location: editar_cliente.php?id_cliente=$id_cliente&msg_erro=Razao Social ja cadastrada no sistema! Cliente NAO cadastrado."); // Shoot viewer back to the homepage of the site if they try to look here
-                     
-                    exit();
-                    
-                    
+                     exit();
                 } else if ($fantasia_check > 1){
+                     echo "<b> <span style=\"color:red;\">Nome Fantasia ja cadastrada no sistema! <br> Cliente NAO atualizado. </span></b>";
                   ?>
-                    <script type="text/javascript" >
-                        alert ("Nome Fantasia ja cadastrada no sistema! \n  Cliente NAO cadastrado.");
-                                                exit();
-                    </script>
-                    
-                    <?php                
-                     header("location: editar_cliente.php?id_cliente=$id_cliente&msg_erro=Nome Fantasia ja cadastrada no sistema! Cliente NAO cadastrado."); // Shoot viewer back to the homepage of the site if they try to look here
-                     
-                    exit();
-                    
-                    
+                    <a href="javascript:history.back(-1);" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a>
+                    <?php     
+                      exit();
+                   
                 } else if($email_tec_check > 1)  {
+                     echo "<b> <span style=\"color:red;\">O Email Tecnico ja cadastrada no sistema!  <br> Cliente NAO atualizado. </span></b>";
                   ?>
-                    <script type="text/javascript" >
-                        alert ("O Email Tecnico ja cadastrada no sistema! \n  Cliente NAO cadastrado.");
-                                                exit();
-                    </script>
-                    
+                    <a href="javascript:history.back(-1);" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a>
                     <?php                      
-                   header("location: editar_cliente.php?id_cliente=$id_cliente&msg_erro=O Email Tecnico ja cadastrada no sistema! Cliente NAO cadastrado."); // Shoot viewer back to the homepage of the site if they try to look here
-                     
                     exit();
                     
                     
                 } else if ($cnpj_cpf_check > 1){
+                    echo "<b> <span style=\"color:red;\">O CPF ja cadastrada no sistema!  <br> Cliente NAO atualizado. </span></b>";
                    ?>
-                    <script type="text/javascript" >
-                        alert ("O CNPJ ou CPF ja cadastrado no sistema! \n  Cliente NAO cadastrado.");
-                                            
-                    </script>
+               <a href="javascript:history.back(-1);" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a>
                     <?php                     
-                    header("location: editar_cliente.php?id_cliente=$id_cliente&msg_erro=O CNPJ ou CPF ja cadastrado no sistema! \n  Cliente NAO cadastrado."); // Shoot viewer back to the homepage of the site if they try to look here
+              
                     exit(); 
-                    
-                    
-                    
+
                 }
                 else{
          
@@ -193,7 +167,7 @@ if (isset ($_POST['razao_social']))
     }
     }
 }else{
-	echo"<b> Cliente não identificado </b>";
+	echo"<b> Cliente nï¿½o identificado </b>";
 }
 
 ?>

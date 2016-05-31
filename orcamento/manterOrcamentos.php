@@ -192,13 +192,20 @@ if(isSet ($_POST['ano'])) {
                                         
                                         
                                         <td>
-                                            
+                                            <?php
+                                            if($clienteDao && !empty($clienteDao)){
+                                            ?>
                                             <a href="#" class="" onclick="window.open('cliente/perfil.php?id_cliente=<?php echo $clienteDao->getId(); ?>&tipo_cliente=<?php echo $clienteDao->getTipo() ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
 <?php 
                                                         echo $row['razao_social_contr'];
 ?>
                                                          </a>                                            
-                                            
+                                            <?php
+                                            }else{
+                                                echo $row['razao_social_contr']."<br>";
+                                                echo"<small>cliente não encontrado no sistema</small>";
+                                            }
+                                            ?>
                                         </td>
 
                                         <td>

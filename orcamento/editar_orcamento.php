@@ -32,46 +32,18 @@ MAscaras em campos
 
         
    <?php
-   //Ao Alterar Situação ORC
-   $ident_orc="";
-if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 
-	$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
-	$situcao_orc = $_POST['itens_situcao_orc'];
-                    $data_aprovada="";
-                   
-        if($situcao_orc == "Aprovado"){
-            $data_aprovada = date('Y-m-d');
-        }else{
-            $data_aprovada = date('0000-00-00');
-        }
-	//$usuarioObj = new UsuarioCtrl();
-	//$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
-	//$nome_usuario = $usuario->getLogin();
-                  $nome_usuario = $_SESSION['Login'];
-
-	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", ""); 
-	$orcCrtlObj = new OrcamentoCtrl();
-	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
-
-	?>
-			 
-<script type="text/javascript" >
-	alert ("Orcamento de ID <?= $orcObj->getId();?> foi atualizado: \n Situacao: <?= $resultAtualizOrcamento["situacao_orc"];?> \n Colaborador: <?= $resultAtualizOrcamento['colaborador_orc']?>!");
-</script>
-			 
-<?php
-
-        } 
    
    
    
-   $ColabCtrl = new ColaboradorCtrl();
-   $ColabBd = $ColabCtrl->buscarColaborador("*", "where id_colaborador = $logOptions_id");
+   //$ColabCtrl = new ColaboradorCtrl();
+   //$ColabBd = $ColabCtrl->buscarColaborador("*", "where id_colaborador = $logOptions_id");
   // extract($ColabBd[0]);
-   $tipo_conta = $ColabBd->getTipo();
+  // $tipo_conta = $ColabBd->getTipo();
    //var_dump($ColabBd);
-           
+   //$tipo_conta = $_SESSION['tipo_user'];
+   //var_dump($_SESSION['tipo_user']);
+   
     if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh")
         
     {
@@ -80,8 +52,55 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
  			$OrcCtrl = new OrcamentoCtrl();
  			$OrcBdCtrl = $OrcCtrl->buscarOrcamentos("*", "where id = $orc");
  			$OrcBd = $OrcBdCtrl[0];
- 			extract($OrcBd);
-       ?>
+                         
+                        extract($OrcBd);
+                      //  var_dump($OrcBd);
+                        
+   //Ao Alterar Situação ORC
+   //$ident_orc="";
+if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
+
+	//$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
+	$situcao_orc = $_POST['itens_situcao_orc'];
+
+                    $data_aprovada="";
+                   
+        if($situcao_orc == "Aprovado"){
+            $data_aprovada = date('Y-m-d');
+            
+            
+        }else{
+            $data_aprovada = date('0000-00-00');
+        }
+                //$usuarioObj = new UsuarioCtrl();
+                //$usuario = $usuarioObj->buscarUserPorId($logOptions_id); $OrcBd['email_contr']
+                //$nome_usuario = $usuario->getLogin();
+                  $nome_usuario = $_SESSION['Login'];
+
+	$orcObj = new Orcamento($orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", ""); 
+	$orcCrtlObj = new OrcamentoCtrl();
+	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
+                    
+                    //$dataHj = date('d/m/Y', strtotime(date('Y-m-d')));
+                    $dataHj = date('d/m/Y');
+                    $assuntoEmail = "Alteração Situação do Orçamento";
+                    $textoCorpo = "Olá, a situação do orçamento Nº <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b> foi alterado para <b>\"{$OrcBd['situacao_orc']}\"</b> em <b>{$dataHj }</b>. Pelo colaborador <b>{$OrcBd['colaborador_orc']}</b>";
+                    $email = new EmailGenerico("junior@elfiservice.com.br", $assuntoEmail, $textoCorpo,  "elfiservice@hotmail.com","elfi@elfiservice.com.br");
+                    if($email->enviarEmailSMTP()){
+                        echo "enviado Email";
+                    }else{
+                        echo"Não foi possível enviar Email!";
+                    }
+                    
+?>
+			 
+<script type="text/javascript" >
+	alert ("Orcamento de ID <?= $orcObj->getId();?> foi atualizado: \n Situacao: <?= $resultAtualizOrcamento["situacao_orc"];?> \n Colaborador: <?= $resultAtualizOrcamento['colaborador_orc']?>!");
+</script>
+			 
+<?php
+}                         
+?>
 	   
  <div>
 	<h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Editar</h2>
@@ -102,6 +121,7 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
                         <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
                 </select>
                 <input type="submit" value="Alterar" name="alterar_situacao" id="salvar_situacao" disabled="disabled" />
+
             </form>
         </li>     
     </ul>       
