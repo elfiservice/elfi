@@ -107,7 +107,7 @@ function PHPErro($errNo, $errMsg, $errFile, $errLine) {
 
 set_error_handler('PHPErro');   //informar para p PHP q essa sera a Mensagem responsavel pelos ERROS
 
-
+echo"";
 
 
 
