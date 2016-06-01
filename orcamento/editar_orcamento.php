@@ -63,45 +63,34 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 	//$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
 	$situacao_orc = $_POST['itens_situcao_orc'];
 
-                    $data_aprovada="";
-                   
+        $data_aprovada="";
         if($situacao_orc == "Aprovado"){
             $data_aprovada = date('Y-m-d');
-            
             
         }else{
             $data_aprovada = date('0000-00-00');
         }
-                //$usuarioObj = new UsuarioCtrl();
-                //$usuario = $usuarioObj->buscarUserPorId($logOptions_id); $OrcBd['email_contr']
-                //$nome_usuario = $usuario->getLogin();
-                  $nome_usuario = $_SESSION['Login'];
 
+                  $nome_usuario = $_SESSION['Login'];
 	$orcObj = new Orcamento($orc, "", "", $nome_usuario, $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", ""); 
 	$orcCrtlObj = new OrcamentoCtrl();
 	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
-                    
-                    //$dataHj = date('d/m/Y', strtotime(date('Y-m-d')));
+
+        if($resultAtualizOrcamento[0]){
                     $dataHj = date('d/m/Y');
                     $assuntoEmail = "Alteração Situação do Orçamento";
-                    $textoCorpo = "Olá, a situação do orçamento Nº <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b> foi alterado para <b>\"{$situacao_orc}\"</b> em <b>{$dataHj }</b>. Pelo colaborador <b>{$OrcBd['colaborador_orc']}</b>";
+                    $textoCorpo = "Olá, a situação do orçamento Nº <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b>, cliente <b>{$OrcBd['razao_social_contr']}</b> foi alterado para <b>\"{$situacao_orc}\"</b> em <b>{$dataHj }</b>. Pelo colaborador <b>{$OrcBd['colaborador_orc']}</b>";
                     $email = new EmailGenerico("junior@elfiservice.com.br", $assuntoEmail, $textoCorpo,  "","");
+                    
                     if($email->enviarEmailSMTP()){
-                        echo "enviado Email";
+                        WSErro("Orçamento <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b> foi Alterado para <b>\"{$situacao_orc}\"</b>! e Email enviado para o cliente <b>{$OrcBd['email_contr']}</b>!", WS_ACCEPT);
                     }else{
-                        echo"Não foi possível enviar Email!";
+                        WSErro("Alterado! mas Email não foi Enviado.", WS_ALERT);
                     }
-                    
-                    
-                    
-?>
-			 
-<script type="text/javascript" >
-	alert ("Orcamento de ID <?= $orcObj->getId();?> foi atualizado: \n Situacao: <?= $resultAtualizOrcamento["situacao_orc"];?> \n Colaborador: <?= $resultAtualizOrcamento['colaborador_orc']?>!");
-</script>
-			 
-<?php
-}                         
+        }else{
+            PHPErro(WS_ERROR, "Não Alterado! e Email não foi Enviado.", __FILE__, __LINE__);
+        }
+  }                         
 ?>
 	   
  <div>

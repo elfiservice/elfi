@@ -2,7 +2,7 @@
 include "checkuserlog.php";
 require 'Config/SistemConfig.php';
 //include 'classes/util/Formatar.class.php';
-include_once "Config/config_sistema.php";
+//include_once "Config/config_sistema.php";
 //include_once "classes/controller/UsuarioCtrl.class.php";
 //require "classes/controller/OrcamentosCtrl.class.php";
 require 'classes/Config.inc.php';

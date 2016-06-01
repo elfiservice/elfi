@@ -110,6 +110,70 @@ class ClienteCtrl{
 		return $this->clienteDao->select($campo, $termos);
 		
 	}
+        
+        
+                public function buscar($campo, $termos) {
+                    $clienteBD =  $this->clienteDao->select($campo, $termos);
+                    $clienteBD =$clienteBD[0];
+                    $clienteMontado = $this->montarCliente($clienteBD);
+                    if($clienteMontado){
+                        
+                        return $clienteMontado;
+                        
+                    }else{
+                        return null;
+                    }
+                }
+                
+                
+                private function montarCliente($clienteBD){
+                    
+                    		if ($clienteBD <> "" || $clienteBD <> null ){
+                                      
+			if ($clienteBD['tipo'] == "PJ"){
+                           // var_dump($clienteBD);
+				$clientePJ = new ClientePJ($clienteBD['id'],
+						$clienteBD['usuario'],
+						$clienteBD['razao_social'],
+						$clienteBD['nome_fantasia'],
+						$clienteBD['classificacao'],
+						$clienteBD['tipo'],
+						$clienteBD['data_inclusao'],
+						$clienteBD['cnpj_cpf'],
+						$clienteBD['ie'],
+						$clienteBD['endereco'],
+						$clienteBD['bairro'],
+						$clienteBD['estado'],
+						$clienteBD['cidade'],
+						$clienteBD['cep'],
+						$clienteBD['tel'],
+						$clienteBD['cel'],
+						$clienteBD['fax'],
+						$clienteBD['email_tec'],
+						$clienteBD['email_adm_fin']);
+				return $clientePJ;
+			}else if ($clienteBD['tipo'] == "PF"){
+				$clientePF = new ClientePF($clienteBD['id'],
+						$clienteBD['usuario'],
+						$clienteBD['razao_social'],
+						$clienteBD['nome_fantasia'],
+						$clienteBD['classificacao'],
+						$clienteBD['tipo'],
+						$clienteBD['data_inclusao'],
+						$clienteBD['cpf'],
+						$clienteBD['endereco'],
+						$clienteBD['bairro'],
+						$clienteBD['estado'],
+						$clienteBD['cidade'],
+						$clienteBD['cep'],
+						$clienteBD['tel'],
+						$clienteBD['cel'],
+						$clienteBD['email_tec']);
+				return $clientePF;
+			}
+		}
+		return null;
+                    
+                }
 	
 }
-?>

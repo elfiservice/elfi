@@ -126,14 +126,17 @@ class OrcamentoCtrl{
 			
 			
 			if($this->OrcDao->update($ocamentoObj->getId(), $campoDados)){
-                                                                        $arrayResultAtualizacao["resultado"]='OK, atualizado!';
+                             $arrayResultAtualizacao[0]=true;                                            
+                            $arrayResultAtualizacao["resultado"]='OK, atualizado!';
 			}else{
+                                                                             $arrayResultAtualizacao[0]=false;
 				$arrayResultAtualizacao["resultado"]='Erro ao tentar atualizar!!';
 			}
 			
 			
 			
 		}else{
+                                                        $arrayResultAtualizacao[0]=false;
 			$arrayResultAtualizacao["resultado"]='Erro, Objeto nao e valido!';
 		}
 		
