@@ -31,7 +31,7 @@ abstract class EmailModel {
         $this->getPhpMailer()->Host = 'smtp.elfiservice.com.br';
         $this->getPhpMailer()->SMTPAuth = true;
         $this->getPhpMailer()->Username = 'elfi@elfiservice.com.br';
-        $this->getPhpMailer()->Password = '';
+        $this->getPhpMailer()->Password = 'Sapato44';
         $this->getPhpMailer()->Port = 587;
         $this->getPhpMailer()->AddAttachment($this->getImage_name());
         $this->getPhpMailer()->IsHTML(true);

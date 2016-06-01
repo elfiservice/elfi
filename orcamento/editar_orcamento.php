@@ -61,11 +61,11 @@ MAscaras em campos
 if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 
 	//$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
-	$situcao_orc = $_POST['itens_situcao_orc'];
+	$situacao_orc = $_POST['itens_situcao_orc'];
 
                     $data_aprovada="";
                    
-        if($situcao_orc == "Aprovado"){
+        if($situacao_orc == "Aprovado"){
             $data_aprovada = date('Y-m-d');
             
             
@@ -77,20 +77,22 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
                 //$nome_usuario = $usuario->getLogin();
                   $nome_usuario = $_SESSION['Login'];
 
-	$orcObj = new Orcamento($orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", ""); 
+	$orcObj = new Orcamento($orc, "", "", $nome_usuario, $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", ""); 
 	$orcCrtlObj = new OrcamentoCtrl();
 	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
                     
                     //$dataHj = date('d/m/Y', strtotime(date('Y-m-d')));
                     $dataHj = date('d/m/Y');
                     $assuntoEmail = "Alteração Situação do Orçamento";
-                    $textoCorpo = "Olá, a situação do orçamento Nº <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b> foi alterado para <b>\"{$OrcBd['situacao_orc']}\"</b> em <b>{$dataHj }</b>. Pelo colaborador <b>{$OrcBd['colaborador_orc']}</b>";
-                    $email = new EmailGenerico("junior@elfiservice.com.br", $assuntoEmail, $textoCorpo,  "elfiservice@hotmail.com","elfi@elfiservice.com.br");
+                    $textoCorpo = "Olá, a situação do orçamento Nº <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b> foi alterado para <b>\"{$situacao_orc}\"</b> em <b>{$dataHj }</b>. Pelo colaborador <b>{$OrcBd['colaborador_orc']}</b>";
+                    $email = new EmailGenerico("junior@elfiservice.com.br", $assuntoEmail, $textoCorpo,  "","");
                     if($email->enviarEmailSMTP()){
                         echo "enviado Email";
                     }else{
                         echo"Não foi possível enviar Email!";
                     }
+                    
+                    
                     
 ?>
 			 
@@ -117,7 +119,7 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
         <li>
             <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y');?>&id_orc=<?php echo $id; ?>&id_menu=editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
                 <select onchange="habilitaBtn()" name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
-                    <option id="opcao" value="<?php echo $situacao_orc;?>"><?php echo $situacao_orc;?></option>
+                    <option id="opcao" value=""><?php echo $situacao_orc;?></option>
                         <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
                 </select>
                 <input type="submit" value="Alterar" name="alterar_situacao" id="salvar_situacao" disabled="disabled" />
