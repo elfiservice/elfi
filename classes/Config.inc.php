@@ -1,14 +1,12 @@
 <?php
 $www = "http://localhost/site%20ELFI/colaboradores";
 //$www = "http://elfiservice.eco.br/colaboradores";
-//require '../Config/SistemConfig.php';
-//$tree = $_SERVER['DOCUMENT_ROOT'].'/site ELFI/colaboradores/';
-//$tree = $_SERVER['DOCUMENT_ROOT'].'/colaboradores/'; //servidor
-//echo $tree;
+
 
 
 spl_autoload_register(function ($pClass) {
-    $tree = $_SERVER['DOCUMENT_ROOT'].'/site ELFI/colaboradores/classes';
+    //$tree = $_SERVER['DOCUMENT_ROOT'].'/site ELFI/colaboradores/classes';
+    $tree = __DIR__;
     
       if(file_exists("{$tree}/model/{$pClass}.class.php")){
         //echo "tem Arquivo!";

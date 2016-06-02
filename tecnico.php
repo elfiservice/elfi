@@ -1,6 +1,6 @@
 <?php
 include "checkuserlog.php";
-require 'Config/SistemConfig.php';
+//require 'Config/SistemConfig.php';
 //include 'classes/util/Formatar.class.php';
 //include_once "Config/config_sistema.php";
 //include_once "classes/controller/UsuarioCtrl.class.php";
@@ -60,7 +60,7 @@ if (!isset($_SESSION ['idx'])) {
                 style="background: url(imagens/topo1.png) repeat-x; padding: 5px 0px 30px 0px;">
             </div>
 
-            <h2 style="text-align: center;">Técnico</h2>
+            <h2 style="text-align: center;">Setor Técnico</h2>
             <div style="">
 
                 <div id="colaborador_logado"></div>
@@ -70,14 +70,11 @@ if (!isset($_SESSION ['idx'])) {
                 </div>
             </div>
 
-            <?php
-            $consulta_colab = mysql_query("select * from colaboradores where id_colaborador = '$logOptions_id'");
-            $linha_colab = mysql_fetch_object($consulta_colab);
-
-            $tipo_conta = $linha_colab->tipo;
+<?php
+            $tipo_conta = $_SESSION['tipo_user'];
 
             if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh") {
-                ?>
+  ?>
 
                 <div style="margin: 20px 0px 20px 0px;">
                     <div class="barra_menu"
@@ -88,7 +85,7 @@ if (!isset($_SESSION ['idx'])) {
                         <ul>
                             <!-- 				<li><a href="#" class="menuanchorclass myownclass" -->
                             <!-- 					rel="tecnico_cliente">Cliente</a></li> -->
-                            <li><a href="tecnico.php?id_menu=cliente" class="" rel="">Cliente</a></li>
+                            <li><a href="tecnico.php?id_menu=cliente" class="" rel="">Clientes</a></li>
                             <li><a href="tecnico.php?id_menu=orcamento" class="" rel="">Orcamentos</a></li>
                             <!-- 				<li><a href="#" class="menuanchorclass myownclass" -->
                             <!-- 					rel="tecnico_orcamento">Orçamento</a></li> -->
@@ -103,7 +100,8 @@ if (!isset($_SESSION ['idx'])) {
                 <div style="margin: 20px 0px 20px 0px;">
 
         <?php
-        /* ------------ Manter Cliente --------------- */
+       
+/* ------------ Manter Cliente --------------- */
 
         if ($menu == "cliente") {
 
@@ -136,9 +134,9 @@ if (!isset($_SESSION ['idx'])) {
 
             include 'cliente/excluir/salvar_excluir_cliente.php';
         }
-        /* ------------ FIM Manter Cliente --------------- */
+ /* ------------ FIM Manter Cliente --------------- */
 
-        /* ------------- Manter Orçamentos ----------------- */
+/* ------------- Manter Orçamentos ----------------- */
         if ($menu == "orcamento") {
 
             require 'orcamento/manterOrcamentos.php';
@@ -164,27 +162,20 @@ if (!isset($_SESSION ['idx'])) {
             if ($menu == "excluir_orcamento") {
                 require './orcamento/excluir_orcamento.php';
             }
+/* ------------- FIM Manter Orçamentos ----------------- */
+            
+/* ------------- Manter Orçamentos APROVADOS ----------------- */            
+            if ($menu == "acompanhar_orcamentos") {
+                require './orcamento/aprovados/acompanhar_orcamentos.php';
+                exit();
+            }
 
-            if ($menu == "acompanhar_orc") {
-                ?>
-                            <h3>Acompanhamento Orçamento Aguaradando Aprovação</h3>
-                            <iframe class="iframeStyle"
-                                    src="acompanhamento_nao_aprovado/acompanhar_orc_n_aprovados.php?ano_orc=<?php echo date('Y'); ?>"></iframe>
-
-                            <?php
-                        }
-                        ?>		   
-
-                    </div>	
-
-
-
-
-                        <?php
-                    } else {
-
-                        echo "Acesso restrito.";
-                    }
+  } else {
+    //echo "Acesso restrito.";
+           echo "<div  style=\"padding: 10px 0px 10px 0px;\">";
+            WSErro("Acesso Restrito.", E_USER_WARNING);
+            echo"</div>";
+ }
                     ?>	
 
 

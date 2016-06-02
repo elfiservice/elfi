@@ -28,22 +28,8 @@ MAscaras em campos
 -->
 <?php require 'includes/javascripts/somar_valores_monetarios.php';?>
 
- 
-
-        
    <?php
 
-   
-   
-   
-   //$ColabCtrl = new ColaboradorCtrl();
-   //$ColabBd = $ColabCtrl->buscarColaborador("*", "where id_colaborador = $logOptions_id");
-  // extract($ColabBd[0]);
-  // $tipo_conta = $ColabBd->getTipo();
-   //var_dump($ColabBd);
-   //$tipo_conta = $_SESSION['tipo_user'];
-   //var_dump($_SESSION['tipo_user']);
-   
     if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh")
         
     {

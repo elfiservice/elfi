@@ -377,7 +377,8 @@ display: inline;
 }
 
  .alinhamentoHorizontal ul li a{
-
+ padding: 8px 10px 10px 10px;
+ margin: 0px 10px 0px 0px;
  float:left;
  /* visual do link */
 
@@ -398,7 +399,7 @@ display: inline-block;
  .bt_link:link, .bt_link:visited{
    
 
-    padding: 10px 10px;
+    padding: 8px 10px 10px 10px;
     text-align: center;	
     text-decoration: none;
     display: inline-block;
