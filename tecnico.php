@@ -48,6 +48,8 @@ if (!isset($_SESSION ['idx'])) {
             <!-- Mostra colaborador Logado -->
             <?php include 'includes/javascripts/mostra_colab_logado.php'; ?>
 
+            <?php require 'includes/javascripts/menu_vertical_escoder_mostrar.php';?>
+            
             <!-- Tabela  -->
             <?php include_once 'includes/javascripts/tabela_no_head.php'; ?> 
 

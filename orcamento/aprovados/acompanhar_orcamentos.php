@@ -1,10 +1,16 @@
 <?php
+
+
+
+
 if (!isset($_SESSION['idx'])) {
     if (!isset($_COOKIE['idCookie'])) {
         echo "Voce nao esta conectado <a href=\"../../index.php\">Conectar</a>";
     }
 } else {
     $ano_atual = date('Y');
+    $orcCtrl = new OrcamentoCtrl();
+    
     ?>				
 
  <div>
@@ -86,9 +92,10 @@ if (!isset($_SESSION['idx'])) {
 
             <div id="situacao_orc">
 
-                <fieldset>
-                    <legend><b>Programados</b></legend>
-
+               
+                <fieldset  >
+                    <legend class="mypets"><b>Programados</b></legend>
+ <div class="thepet" >
                     <TABLE  class="display" id="example2">
                         <thead>
                             <TR>
@@ -111,15 +118,12 @@ if (!isset($_SESSION['idx'])) {
 
                             <?php
                             $data_hj = date('Y-m-d');
-                            $sql = "SELECT * FROM orcamentos WHERE data_inicio > '$data_hj' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado' ORDER BY id";
-                            $res = mysql_query($sql);
-                            while ($row = mysql_fetch_assoc($res)) {
-
-
+                            $orc = $orcCtrl->buscarOrcamentos("*", "WHERE data_inicio > '$data_hj' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado' ORDER BY id");
+if($orc && $orc[0] != false){
+                            foreach ($orc as $row){
                                 $id_orc = $row['id'];
-                                //echo $id_orc;
-                                $sql_n_orc = mysql_query("SELECT * FROM historico_orc_aprovado WHERE id_acompanhamento = '$id_orc'");
-                                $n_orc_check = mysql_num_rows($sql_n_orc);
+                                   $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc'", "historico_orc_aprovado");
+                                    $n_orc_check = count($orcHistorico);
                                 ?>
                                 <TR>
                                     <td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">atualizar</a><br>
@@ -140,16 +144,19 @@ if (!isset($_SESSION['idx'])) {
 
         <?php
     }
+}
+
     ?>
 
                         </tbody>
                     </TABLE>
+                     </div>
                 </fieldset>	
-
+               
 
                 <fieldset>
-                    <legend><b>Em Execução</b></legend>
-
+                    <legend class="mypets"><b>Em Execução</b></legend>
+<div class="thepet" >
                     <TABLE  class="display" id="example">
                         <thead>
                             <TR>
@@ -171,16 +178,13 @@ if (!isset($_SESSION['idx'])) {
                         <tbody>
 
     <?php
-    $sql = "SELECT * FROM orcamentos WHERE data_inicio <= '$data_hj' AND data_inicio <> '0000-00-00' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado' ORDER BY id";
-    $res = mysql_query($sql);
-    while ($row = mysql_fetch_assoc($res)) {
-
+$orc = $orcCtrl->buscarOrcamentos("*", "WHERE data_inicio <= '$data_hj' AND data_inicio <> '0000-00-00' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado' ORDER BY id");
+if($orc && $orc[0] != false){
+                            foreach ($orc as $row){    
         $id_orc = $row['id'];
-        //echo $id_orc;
-        $sql_n_orc = mysql_query("SELECT * FROM historico_orc_aprovado WHERE id_acompanhamento = '$id_orc'");
-        $n_orc_check = mysql_num_rows($sql_n_orc);
+                                   $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc'", "historico_orc_aprovado");
+                                    $n_orc_check = count($orcHistorico);
 
-        // $data = new DateTime($row['data_conclusao']);
         ?>
                                 <TR>
                                     <td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">atualizar</a><br>
@@ -201,17 +205,20 @@ if (!isset($_SESSION['idx'])) {
 
         <?php
     }
+}
     ?>
 
                         </tbody>
                     </TABLE>
+</div>
                 </fieldset>
 
 
                 <fieldset>
-                    <legend><b>Aguardando Programação</b></legend>
-
+                    <legend class="mypets"><b>Aguardando Programação</b></legend>
+ <div class="thepet" >
                     <TABLE  class="display" id="example3">
+                       
                         <thead>
                             <TR>
                                 <TH></TH>
@@ -232,14 +239,13 @@ if (!isset($_SESSION['idx'])) {
                         <tbody>
 
     <?php
-    $sql = "SELECT * FROM orcamentos WHERE data_inicio = '0000-00-00' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado'  ORDER BY id";
-    $res = mysql_query($sql);
-    while ($row = mysql_fetch_assoc($res)) {
-
+  
+$orc = $orcCtrl->buscarOrcamentos("*", "WHERE data_inicio = '0000-00-00' AND data_conclusao = '0000-00-00' AND situacao_orc = 'Aprovado'  ORDER BY id");
+if($orc && $orc[0] != false){
+                            foreach ($orc as $row){        
         $id_orc = $row['id'];
-        //echo $id_orc;
-        $sql_n_orc = mysql_query("SELECT * FROM historico_orc_aprovado WHERE id_acompanhamento = '$id_orc'");
-        $n_orc_check = mysql_num_rows($sql_n_orc);
+                                   $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc'", "historico_orc_aprovado");
+                                    $n_orc_check = count($orcHistorico);
         ?>
                                 <TR>
                                     <td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">atualizar</a><br>
@@ -260,10 +266,12 @@ if (!isset($_SESSION['idx'])) {
 
         <?php
     }
+}
     ?>
 
                         </tbody>
                     </TABLE>
+</div>
                 </fieldset>			
 
             </div>

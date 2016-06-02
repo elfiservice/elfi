@@ -11,7 +11,7 @@ class OrcamentoCtrl{
                        return $this->result;
                    }
 
-                   function setResult($result) {
+                  private function setResult($result) {
                        $this->result = $result;
                    }
 
@@ -169,6 +169,11 @@ class OrcamentoCtrl{
                       }
                   }
                   
+                  public function buscarHistoricoOrcamento($campos, $termos, $tabela) {
+                      $orcamentoDao = $this->OrcDao->select($campos, $termos, $tabela);
+                      return $orcamentoDao;
+                  }
+                  
                   public function inserirOrcamento($orcamentoObj){
                       $camposBd = "n_orc, ano_orc, colaborador_orc, razao_social_contr, cnpj_contr, endereco_contr, bairro_contr, cidade_contr, estado_contr, cep_contr, telefone_contr, celular_contr, email_contr, atividade, classificacao, quantidade, unidade, descricao_servico_orc, prazo_exec_orc, validade_orc, pagamento_orc, obs_orc, duvida_orc, vr_servco_orc, vr_material_orc, vr_total_orc, data_adicionado_orc, razao_social_obra, cnpj_obra, endereco_obra, bairro_obra, estado_obra, cidade_obra, cep_obra, telefone_obra, celular_obra, email_obra, situacao_orc, contato_clint, novo_cliente";
                       if($orcamentoObj instanceof Orcamento){
@@ -238,6 +243,7 @@ class OrcamentoCtrl{
                       
                   }
 
+                  
 
 
 
