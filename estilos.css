@@ -97,6 +97,13 @@ input[type=submit]:hover,input[type=button]:hover{
 	
 } 
 
+
+legend{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
 .iframeStyle{
 	
 	width: 100%;

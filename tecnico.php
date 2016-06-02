@@ -171,6 +171,11 @@ if (!isset($_SESSION ['idx'])) {
                 require './orcamento/aprovados/acompanhar_orcamentos.php';
                 exit();
             }
+            
+            if ($menu == "relatorios_orc_aprovados") {
+                require './orcamento/aprovados/relatorios_orc_aprovados.php';
+                exit();
+            }            
 
   } else {
     //echo "Acesso restrito.";
