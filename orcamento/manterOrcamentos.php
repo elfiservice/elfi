@@ -1,16 +1,6 @@
 <?php
+$ano_orc_selec = date('Y');
 
-$ano_orc = "";
-if(isSet ($_GET['ano_orc'])) {
-
-	$ano_orc = $_GET['ano_orc'];
-	$ano_orc_selec=$ano_orc;
-}else{
-	$ano_orc = date('Y');
-	$ano_orc_selec=$ano_orc;
-}
-
-//$ano_orc_selec="";
 if(isSet ($_POST['ano'])) {
 
 	$ano_orc_selec = $_POST['ano'];
@@ -52,7 +42,7 @@ if(isSet ($_POST['ano'])) {
 	</form>
         </li>
         <li>
-	<form name="acomp_aprovados" action="acompanhamento/acompanhar_orcamentos.php" method="POST" enctype="multipart/form-data">
+	<form name="acomp_aprovados" action="tecnico.php?id_menu=acompanhar_orcamentos" method="POST" enctype="multipart/form-data">
                         <input class="bt_incluir"  type="submit" value="Aprovados" name="acomp_aprovados_btn" />
 	</form>
         </li>     
@@ -60,7 +50,7 @@ if(isSet ($_POST['ano'])) {
 </div>
 <hr>
 	<div>
-		<form action="tecnico.php?ano_orc=<?php echo $ano_orc_selec; ?>&id_menu=orcamento" method="post" enctype="multipart/form-data" name="formAgenda">
+		<form action="tecnico.php?id_menu=orcamento" method="post" enctype="multipart/form-data" name="formAgenda">
 			Selecione o ANO:	
 			<select name="ano" id="ano" class="formFieldsAno">
 				<option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>
@@ -108,7 +98,7 @@ if(isSet ($_POST['ano'])) {
                                     
             
 <?php
-	     $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = $ano_orc ORDER BY id  DESC");
+	     $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = $ano_orc_selec ORDER BY id  DESC");
 
              
              
@@ -150,7 +140,7 @@ if(isSet ($_POST['ano'])) {
                                             <?php
                                                 if($row['situacao_orc'] == "Aguardando aprovação"){
                                                     ?>
-                                            <a class="bt_link bt_azul" href="#" onclick="window.open('acompanhamento_nao_aprovado/historico_acompanhamento.php?id_orc=<?php echo $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
+                                            <a class="bt_link bt_azul" href="#" onclick="window.open('orcamento/nao_aprovados/historico_acompanhamento.php?id_orc=<?php echo $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
 			<?=$row['situacao_orc']?>
 			</a>
                                             <?php
