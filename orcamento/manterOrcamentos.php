@@ -185,8 +185,9 @@ if(isSet ($_POST['ano'])) {
                                             <?php
                                             if($clienteDao && !empty($clienteDao)){
                                             ?>
-                                            <a href="#" class="" onclick="window.open('cliente/perfil.php?id_cliente=<?php echo $clienteDao->getId(); ?>&tipo_cliente=<?php echo $clienteDao->getTipo() ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
-<?php 
+                                            
+                                            <a href="tecnico.php?id_menu=perfil_cliente&id_cliente=<?= $clienteDao->getId();?>&tipo_cliente=<?= $clienteDao->getTipo();?>">
+                                                <?php 
                                                         echo $row['razao_social_contr'];
 ?>
                                                          </a>                                            

@@ -104,9 +104,9 @@ if (isSet($_POST['ano'])) {
             <?php
             echo "<br>Total propostas Aprovadas: " . $total . " de " . $total_orc_feitos . " feitas<br>";
             ?>	
-
+ </fieldset>
     <fieldset>
-        <legend>Principais Clientes</legend>	
+        <legend>Principais Clientes Por Ano Selecionado: <?= $ano_orc_selec ?></legend>	
 
 
         <TABLE class="display" id="example"  >
@@ -114,7 +114,9 @@ if (isSet($_POST['ano'])) {
                 <TR>
 
                     <TH>Cliente</TH>
-                    <TH>No Serviços Executado</TH>
+                    <TH>Nº Propostas Feitas</TH>
+                    <TH>Nº Propostas Aprovadas</TH>
+                    <TH>% de Aprovação</TH>
 
 
 
@@ -128,17 +130,26 @@ while ($row = mysql_fetch_assoc($res)) {
     //echo '<option id="clientID" value="'.$row['razao_social'].'">'.$row['razao_social'].'</option>';
 
     $id_cliente = $row['id'];
+    $tipo_cliente = $row['tipo'];
     $nome_cliente = $row['razao_social'];
 
 
 
     $sql = mysql_query("SELECT * FROM orcamentos WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec'");
     $total = mysql_num_rows($sql);
-    //echo $total;
+    $sqlAprovadas = mysql_query("SELECT * FROM orcamentos WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec' AND situacao_orc = 'Aprovado'");
+$totalAprovados = mysql_num_rows($sqlAprovadas);    
+//echo $total;
+
+                if ($total == 0) {
+                    $em_porcentagem_aprovados = 0;
+                } else {
+
+                    $em_porcentagem_aprovados = ($totalAprovados / $total) * 100;
+                }
 
 
-
-    echo "<TR align=\"center\"><TD><a href=\"cliente.php?id=" . $id_cliente . "\">" . $nome_cliente . "</a></TD> <td>" . $total . "</td></TR>";
+    echo "<TR align=\"center\"><TD><a href=\"tecnico.php?id_menu=perfil_cliente&id_cliente={$id_cliente}&tipo_cliente={$tipo_cliente}\">" . $nome_cliente . "</a></TD> <td>" . $total . "</td><td>{$totalAprovados} </td><td> {$em_porcentagem_aprovados}% </td></TR>";
 }
 ?>  
 

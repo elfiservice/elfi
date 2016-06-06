@@ -175,7 +175,14 @@ if (!isset($_SESSION ['idx'])) {
             if ($menu == "relatorios_orc_aprovados") {
                 require './orcamento/aprovados/relatorios_orc_aprovados.php';
                 exit();
-            }            
+            }        
+            
+                     if ($menu == "perfil_cliente") {
+                     require './cliente/perfil.php';
+                exit();
+            }    
+            
+            
 
   } else {
     //echo "Acesso restrito.";

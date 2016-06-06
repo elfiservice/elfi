@@ -78,7 +78,10 @@
                                         
                                         
                                         <td>
-                                            <?php echo $row['razao_social'];?>
+                                            <a href="tecnico.php?id_menu=perfil_cliente&id_cliente=<?= $row['id'];?>&tipo_cliente=<?= $row['tipo'];?>">
+                                            <?php 
+                                            echo $row['razao_social'];?>
+                                                </a>
                                         </td>
                                         <td>
                                             <?php echo $row['nome_fantasia'];?>

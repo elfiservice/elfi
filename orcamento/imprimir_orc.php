@@ -349,7 +349,7 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                     $vr_servco_orc      = $row['vr_servco_orc'];
                     $vr_material_orc  = $row['vr_material_orc'];
                     $desconto_orc     = $row['desconto_orc'];
-                    $vr_total_orc     = $row['vr_total_orc'];
+                    $vr_total_orc     = number_format($row['vr_total_orc'], '2',',','.');
                   
                     if ($desconto_orc == "" || $desconto_orc == null)
                         {
@@ -685,8 +685,7 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
            if($obs_orc == ""){
                
                
-           }else
-           {
+           }else {
  
  ?>
                 <tr bordercolor="" style = "border-style: solid; border-width: 1px;" >
