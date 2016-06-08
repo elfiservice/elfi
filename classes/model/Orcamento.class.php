@@ -3,6 +3,8 @@
 class Orcamento {
 
 	private $id;
+        private $id_cliente;
+                private $id_colab;
 	private	$n_orc;
 	private	$ano_orc;
 	private	$colaborador_orc;
@@ -62,8 +64,10 @@ class Orcamento {
             private $novo_cliente;
 	
 
-	public function __construct($id, $n_orc, $ano_orc, $colaborador_orc, $situacao_orc, $razao_social_contr, $cnpj_contr, $endereco_contr, $bairro_contr, $cidade_contr, $estado_contr, $cep_contr, $telefone_contr, $celular_contr, $email_contr, $contato_clint, $razao_social_obra, $cnpj_obra, $endereco_obra, $bairro_obra, $cidade_obra, $estado_obra, $cep_obra, $telefone_obra, $celular_obra, $email_obra, $atividade, $classificacao, $quantidade, $unidade, $descricao_servico_orc, $prazo_exec_orc, $validade_orc, $pagamento_orc, $obs_orc, $duvida_orc, $vr_servco_orc, $vr_material_orc, $desconto_orc, $vr_total_orc, $obra_igual_contrat, $data_adicionado_orc, $data_ultima_alteracao, $colaborador_ultim_alteracao, $data_aprovada, $data_inicio, $data_conclusao, $dias_d_aprovado, $dias_d_exec, $dias_ultrapassad, $serv_concluido, $feito_pos_entreg, $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, $data_ultimo_cont_cliente, $colab_ultimo_contato_client, $novo_cliente) {
+	public function __construct($id, $id_cliente,  $id_colab, $n_orc, $ano_orc, $colaborador_orc, $situacao_orc, $razao_social_contr, $cnpj_contr, $endereco_contr, $bairro_contr, $cidade_contr, $estado_contr, $cep_contr, $telefone_contr, $celular_contr, $email_contr, $contato_clint, $razao_social_obra, $cnpj_obra, $endereco_obra, $bairro_obra, $cidade_obra, $estado_obra, $cep_obra, $telefone_obra, $celular_obra, $email_obra, $atividade, $classificacao, $quantidade, $unidade, $descricao_servico_orc, $prazo_exec_orc, $validade_orc, $pagamento_orc, $obs_orc, $duvida_orc, $vr_servco_orc, $vr_material_orc, $desconto_orc, $vr_total_orc, $obra_igual_contrat, $data_adicionado_orc, $data_ultima_alteracao, $colaborador_ultim_alteracao, $data_aprovada, $data_inicio, $data_conclusao, $dias_d_aprovado, $dias_d_exec, $dias_ultrapassad, $serv_concluido, $feito_pos_entreg, $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, $data_ultimo_cont_cliente, $colab_ultimo_contato_client, $novo_cliente) {
             $this->id = $id;
+            $this->id_cliente = $id_cliente;
+            $this->id_colab = $id_colab;
             $this->n_orc = $n_orc;
             $this->ano_orc = $ano_orc;
             $this->colaborador_orc = $colaborador_orc;
@@ -123,6 +127,24 @@ class Orcamento {
             $this->novo_cliente = $novo_cliente;
         }
 
+        public function getId_cliente() {
+            return $this->id_cliente;
+        }
+
+        public function getId_colab() {
+            return $this->id_colab;
+        }
+
+        public function setId_cliente($id_cliente) {
+            $this->id_cliente = $id_cliente;
+        }
+
+        public function setId_colab($id_colab) {
+            $this->id_colab = $id_colab;
+        }
+
+                
+        
         function getNovo_cliente() {
             return $this->novo_cliente;
         }

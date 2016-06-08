@@ -404,11 +404,9 @@ function formCheck(formobj){
 				<table border="0">
 
 					<tr align="left">
-						<td><input type="submit" value="Salvar novo Orçamento"
-							name="salvar_orc" /> <input type="hidden"
-							value="<?php echo date('Y'); ?>" name="ano_atual_orc"
-							hidden="hidden" /> <input type="hidden" name="usuario"
-							value="<?php echo $logOptions_id; ?>" readonly="readonly" /></td>
+						<td><input type="submit" value="Salvar novo Orçamento" name="salvar_orc" /> 
+                                                    <input type="hidden" value="<?php echo date('Y'); ?>" name="ano_atual_orc" hidden="hidden" /> 
+                                                    <input  type="hidden"  id="id_cliente" name="id_cliente" value="<?php echo $row['id']; ?>"  hidden="hidden" /></td>
 
 
 

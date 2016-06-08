@@ -1,13 +1,9 @@
 no BD
-Alterado estrutura da tabela -> orcamentos OK
-Feita a tablea -> historico_orc_n_aprovado OK
+07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab
 
 
+Fazer alteraÃ§Ãµes:
+- Alterar as Instancias de Orcamento() pois foram add 2 variaveis a mais 
 
-Histotico do Desenvolvimento:
-01/03: no GIT -> continuar fazendo o botão Editar de cada histotico na tebela de Tratar Historico nao aprovados OK
-02/03: fazer o botão excluir
-09/03: feito pasta Usuario, iniciada pagia Perfil.php, criada pasta Classes e classes de Usuarios e iniciada Classe Orcamento
-22/04: corrigido os minutos da hora adicionado a proposta arquivo acompanhar_orc_n_aprovados
 
 

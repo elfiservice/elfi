@@ -8,7 +8,9 @@
 //Este código será executado somente se o nome de usuário é Postado
 if (filter_has_var(INPUT_POST, "razao_social"))
     {
-
+    
+    $id_colab = $_SESSION['id'];
+    $id_cliente = filter_input(INPUT_POST, 'id_cliente');
     $colaborador_orc =  $_SESSION['Login'];
     $ano_orc         = $_POST['ano_atual_orc'];
     $dataAdicionadoOrc = date('Y-m-d H:i:s');
@@ -89,7 +91,9 @@ if (isset ($_POST['razao_social2']))
      
     
     $OrcObjNovo = new Orcamento(
-            "", 
+            "",
+            $id_cliente,
+            $id_colab,
             "", 
             $ano_orc, 
             $colaborador_orc, 

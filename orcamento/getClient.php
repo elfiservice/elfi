@@ -9,6 +9,7 @@ if (isset($_GET['getClientId'])) {
 
     if ($cliente != null) {
 
+        echo "formObj.id_cliente.value = '" . $cliente->getId() . "';\n";
         echo "formObj.razao_social.value = '" . $cliente->getRazaoSocial() . "';\n";
         //echo "formObj.cnpj.value = '".Formatar::formatTelCnpjCpf($inf["cnpj_cpf"])."';\n";    
         echo "formObj.cnpj.value = '" . ($cliente->getTipo() == "PJ" ? $cliente->getCnpj() : $cliente->getCpf()) . "';\n";
@@ -21,6 +22,7 @@ if (isset($_GET['getClientId'])) {
         echo utf8_encode("formObj.city.value = '" . $cliente->getCidade() . "';\n");
         echo utf8_encode("formObj.estado.value = '" . $cliente->getEstado() . "';\n");
     } else {
+        echo "formObj.id_cliente.value = '';\n";
         echo "formObj.razao_social.value = 'ERRO';\n";
         echo "formObj.cnpj.value = '';\n";
         echo "formObj.endereco.value = '';\n";

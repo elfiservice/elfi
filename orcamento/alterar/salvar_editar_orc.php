@@ -47,6 +47,9 @@ if (filter_has_var(INPUT_POST, "razao_social"))
          $email_orc_obra    = "";
 
         }     
+        
+            $id_colab = $_SESSION['id'];
+    $id_cliente = filter_input(INPUT_POST, 'id_cliente');
     //dados Descrição do Orçamento
      $descricao_servicos    = $_POST['descricao_servicos'];
      $descricao_servicos    = nl2br($descricao_servicos);
@@ -59,7 +62,9 @@ if (filter_has_var(INPUT_POST, "razao_social"))
      $data_ultima_alteracao = date('Y-m-d H:i:s') ;
         
         $orcamentoObj = new Orcamento(
-                $_POST['id_orc_editado'], 
+                $_POST['id_orc_editado'],
+                $id_cliente,
+                $id_colab,
                 "", 
                 "", 
                 $_SESSION['Login'], 

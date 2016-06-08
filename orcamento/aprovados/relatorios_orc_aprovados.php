@@ -106,7 +106,7 @@ if (isSet($_POST['ano'])) {
             ?>	
  </fieldset>
     <fieldset>
-        <legend>Principais Clientes Por Ano Selecionado: <?= $ano_orc_selec ?></legend>	
+        <legend>Principais Clientes Por Ano Selecionado: <span style="color: red;"><?= $ano_orc_selec ?></span></legend>	
 
 
         <TABLE class="display" id="example"  >
@@ -138,6 +138,65 @@ while ($row = mysql_fetch_assoc($res)) {
     $sql = mysql_query("SELECT * FROM orcamentos WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec'");
     $total = mysql_num_rows($sql);
     $sqlAprovadas = mysql_query("SELECT * FROM orcamentos WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec' AND situacao_orc = 'Aprovado'");
+$totalAprovados = mysql_num_rows($sqlAprovadas);    
+//echo $total;
+
+                if ($total == 0) {
+                    $em_porcentagem_aprovados = 0;
+                } else {
+
+                    $em_porcentagem_aprovados = ($totalAprovados / $total) * 100;
+                }
+
+
+    echo "<TR align=\"center\"><TD><a href=\"tecnico.php?id_menu=perfil_cliente&id_cliente={$id_cliente}&tipo_cliente={$tipo_cliente}\">" . $nome_cliente . "</a></TD> <td>" . $total . "</td><td>{$totalAprovados} </td><td> {$em_porcentagem_aprovados}% </td></TR>";
+}
+?>  
+
+
+
+
+            </tbody>
+        </TABLE>
+
+
+
+
+    </fieldset>
+
+   <fieldset>
+        <legend>Clientes Geral (Todos os Anos)</legend>	
+
+
+        <TABLE class="display" id="example2"  >
+            <thead>
+                <TR>
+
+                    <TH>Cliente</TH>
+                    <TH>Nº Propostas Feitas</TH>
+                    <TH>Nº Propostas Aprovadas</TH>
+                    <TH>% de Aprovação</TH>
+
+
+
+                </TR>
+            </thead>
+            <tbody>
+<?php
+$sql = "SELECT * FROM clientes";
+$res = mysql_query($sql);
+while ($row = mysql_fetch_assoc($res)) {
+    //echo '<option id="clientID" value="'.$row['razao_social'].'">'.$row['razao_social'].'</option>';
+
+    $id_cliente = $row['id'];
+    $tipo_cliente = $row['tipo'];
+    $nome_cliente = $row['razao_social'];
+
+
+
+    $sql = mysql_query("SELECT * FROM orcamentos WHERE razao_social_contr = '$nome_cliente' ");
+    $total = mysql_num_rows($sql);
+    $sqlAprovadas = mysql_query("SELECT * FROM orcamentos WHERE razao_social_contr = '$nome_cliente'  AND situacao_orc = 'Aprovado'");
 $totalAprovados = mysql_num_rows($sqlAprovadas);    
 //echo $total;
 

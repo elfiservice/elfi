@@ -23,7 +23,14 @@ class ColaboradorCtrl{
 	}
         
         public function montarObjeto($colabBD){
-                $colabBD0 = $colabBD[0];
-            return new Colaborador($colabBD0['id_colaborador'], $colabBD0['Login'], $colabBD0['Senha'], $colabBD0['cpf'], $colabBD0['tipo'], $colabBD0['Email'], $colabBD0['last_log_date'], $colabBD0['email_activated']);
+                //$colabBD0 = $colabBD[0];
+//                var_dump($colabBD);
+            $arrayObjColab = array();
+                foreach ($colabBD as $colabBD0){
+                    
+                    $arrayObjColab[] = new Colaborador($colabBD0['id_colaborador'], $colabBD0['Login'], $colabBD0['Senha'], $colabBD0['cpf'], $colabBD0['tipo'], $colabBD0['Email'], $colabBD0['last_log_date'], $colabBD0['email_activated']);
+                }
+                
+            return $arrayObjColab;
         }
 }
