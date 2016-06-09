@@ -10,11 +10,9 @@
     <div class="alinhamentoHorizontal">
         <ul>
 
-            <li><a class="bt_link" href="tecnico.php?id_menu=relatorios_orc_aprovados" > Relatórios </a>
+            <li><a class="bt_link" href="tecnico.php?id_menu=relatorios_orc_aprovados" > Relatório Orçamentos </a>
             </li>
-            <li><a class="bt_link"  href="#" onclick="window.open('link_pesquisa_satisfacao.php?mes=fev&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    Link Pesquisa
-                </a>
+            <li><a class="bt_link"  href="tecnico.php?id_menu=relatorio_pos_venda" >  Relatório Pós Venda </a>
             </li>
             <li><a class="bt_link" href="#" onclick="window.open('email_situacao_orc.php', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                     Enviar Situação Orc.
@@ -114,7 +112,7 @@
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
-                                    <td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">atualizar</a><br>
+                                    <td><a href="tecnico.php?id_menu=editar_orc_aprovado" >atualizar</a><br>
                                         <a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>
@@ -173,7 +171,7 @@
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
-                                    <td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">atualizar</a><br>
+                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><br>
                                         <a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>

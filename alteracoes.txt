@@ -1,9 +1,24 @@
 no BD
 07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab
 
+Emails:
+- alterar Emails no arquivo:
+ - editar_orc_aprovado.php
+ - editar_orcamento.php
 
 Fazer alterações:
-- Alterar as Instancias de Orcamento() pois foram add 2 variaveis a mais 
+
+ao por Orcamento como concluido: 
+- alterar situação orc para Concluido
+- não ser mais possivel Editar o Orc.
+- Enviar Email informando que o Orçamento foi posto como Concluido no sistema
+- Após 2 dias enviar email automatico para Pesquisa de Satisfação, para os Orcamentos q estao como Feito Pos Entrega = n 
+   -> ficar enviando de 10 em 10 dias ate ser preenchido pelo CLiente e salvo e Alterado tabela ORcamento para Feito-pos-entrega = s
 
 
 
+apos Orc Aprovado:
+- não deixar Editar mais, nem Excluir
+
+
+- enviar email para clientes q estao marcados os orcamentos como novo cliente quando fizer 1 ano

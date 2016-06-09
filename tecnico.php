@@ -48,10 +48,13 @@ if (!isset($_SESSION ['idx'])) {
             <!-- Mostra colaborador Logado -->
             <?php include 'includes/javascripts/mostra_colab_logado.php'; ?>
 
-            <?php require 'includes/javascripts/menu_vertical_escoder_mostrar.php';?>
-            
+            <?php require 'includes/javascripts/menu_vertical_escoder_mostrar.php'; ?>
+            <?php
+require 'includes/javascripts/mascaras_campos_valores_monetario.php';
+?>
             <!-- Tabela  -->
             <?php include_once 'includes/javascripts/tabela_no_head.php'; ?> 
+
 
 
         </head>
@@ -72,11 +75,11 @@ if (!isset($_SESSION ['idx'])) {
                 </div>
             </div>
 
-<?php
+            <?php
             $tipo_conta = $_SESSION['tipo_user'];
 
             if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh") {
-  ?>
+                ?>
 
                 <div style="margin: 20px 0px 20px 0px;">
                     <div class="barra_menu"
@@ -101,103 +104,116 @@ if (!isset($_SESSION ['idx'])) {
 
                 <div style="margin: 20px 0px 20px 0px;">
 
-        <?php
-       
-/* ------------ Manter Cliente --------------- */
+                    <?php
+                    /* ------------ Manter Cliente --------------- */
 
-        if ($menu == "cliente") {
+                    if ($menu == "cliente") {
 
-            require_once 'cliente/manterCliente.php';
-        }
+                        require_once 'cliente/manterCliente.php';
+                         exit();
+                    }
 
-        if ($menu == "novo_cliente") {
-            include 'cliente/novo_cliente.php';
-        }
+                    if ($menu == "novo_cliente") {
+                        include 'cliente/novo_cliente.php';
+                         exit();
+                    }
 
-        if ($menu == "salvar_novo_cliente") {
-            require 'cliente/incluir/salvar_novo_cliente.php';
-        }
+                    if ($menu == "salvar_novo_cliente") {
+                        require 'cliente/incluir/salvar_novo_cliente.php';
+                         exit();
+                    }
 
-        if ($menu == "editar_cliente") {
+                    if ($menu == "editar_cliente") {
 
-            include 'cliente/editar_cliente.php';
-        }
+                        include 'cliente/editar_cliente.php';
+                         exit();
+                    }
 
-        if ($menu == "salvar_editar_cliente") {
-            require 'cliente/alterar/salvar_alteracao_cliente.php';
-        }
+                    if ($menu == "salvar_editar_cliente") {
+                        require 'cliente/alterar/salvar_alteracao_cliente.php';
+                         exit();
+                    }
 
-        if ($menu == "excluir_cliente") {
+                    if ($menu == "excluir_cliente") {
 
-            include 'cliente/excluir_cliente.php';
-        }
+                        include 'cliente/excluir_cliente.php';
+                         exit();
+                    }
 
-        if ($menu == "salvar_excluir_cliente") {
+                    if ($menu == "salvar_excluir_cliente") {
 
-            include 'cliente/excluir/salvar_excluir_cliente.php';
-        }
- /* ------------ FIM Manter Cliente --------------- */
+                        include 'cliente/excluir/salvar_excluir_cliente.php';
+                         exit();
+                    }
+                    
+                    if ($menu == "perfil_cliente") {
+                        require './cliente/perfil.php';
+                        exit();
+                    }                    
+                    /* ------------ FIM Manter Cliente --------------- */
 
-/* ------------- Manter Orçamentos ----------------- */
-        if ($menu == "orcamento") {
+                    /* ------------- Manter Orçamentos ----------------- */
+                    if ($menu == "orcamento") {
 
-            require 'orcamento/manterOrcamentos.php';
-        }
+                        require 'orcamento/manterOrcamentos.php';
+                         exit();
+                    }
 
-        if ($menu == "editar_orcamento") {
-            require 'orcamento/editar_orcamento.php';
-            
-        }
+                    if ($menu == "editar_orcamento") {
+                        require 'orcamento/editar_orcamento.php';
+                         exit();
+                    }
 
-            if ($menu == "salvar_editar_orcamento") {
-                require 'orcamento/alterar/salvar_editar_orc.php';
-            }
-            
-            if ($menu == "novo_orcamento") {
-                require './orcamento/novo_orcamento.php';
-            }
-                        
-           if ($menu == "salvar_novo_orc") {
-                require './orcamento/incluir/salvar_novo_orc.php';
-            }
-            
-            if ($menu == "excluir_orcamento") {
-                require './orcamento/excluir_orcamento.php';
-            }
-/* ------------- FIM Manter Orçamentos ----------------- */
-            
-/* ------------- Manter Orçamentos APROVADOS ----------------- */            
-            if ($menu == "acompanhar_orcamentos") {
-                require './orcamento/aprovados/acompanhar_orcamentos.php';
-                exit();
-            }
-            
-            if ($menu == "relatorios_orc_aprovados") {
-                require './orcamento/aprovados/relatorios_orc_aprovados.php';
-                exit();
-            }        
-            
-                     if ($menu == "perfil_cliente") {
-                     require './cliente/perfil.php';
-                exit();
-            }    
-            
-            
+                    if ($menu == "salvar_editar_orcamento") {
+                        require 'orcamento/alterar/salvar_editar_orc.php';
+                         exit();
+                    }
 
-  } else {
-    //echo "Acesso restrito.";
-           echo "<div  style=\"padding: 10px 0px 10px 0px;\">";
-            WSErro("Acesso Restrito.", E_USER_WARNING);
-            echo"</div>";
- }
-                    ?>	
+                    if ($menu == "novo_orcamento") {
+                        require './orcamento/novo_orcamento.php';
+                         exit();
+                    }
+
+                    if ($menu == "salvar_novo_orc") {
+                        require './orcamento/incluir/salvar_novo_orc.php';
+                         exit();
+                    }
+
+                    if ($menu == "excluir_orcamento") {
+                        require './orcamento/excluir_orcamento.php';
+                         exit();
+                    }
+                    /* ------------- FIM Manter Orçamentos ----------------- */
+
+                    /* ------------- Manter Orçamentos APROVADOS ----------------- */
+                    if ($menu == "acompanhar_orcamentos") {
+                        require './orcamento/aprovados/acompanhar_orcamentos.php';
+                        exit();
+                    }
+
+                    if ($menu == "relatorios_orc_aprovados") {
+                        require './orcamento/aprovados/relatorios_orc_aprovados.php';
+                        exit();
+                    }
+                    
+                    if ($menu == "editar_orc_aprovado") {
+                                     require './orcamento/aprovados/editar_orc_aprovado.php';
+                        exit();
+                    }                    
+
+
+                } else {
+                    //echo "Acesso restrito.";
+                    echo "<div  style=\"padding: 10px 0px 10px 0px;\">";
+                    WSErro("Acesso Restrito.", E_USER_WARNING);
+                    echo"</div>";
+                }
+                ?>	
 
 
                 <footer> </footer>
 
-            </body>
-        </html>
+        </body>
+    </html>
 <?php }
-
-
-                    ?>
+?>

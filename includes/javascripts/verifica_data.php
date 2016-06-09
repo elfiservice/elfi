@@ -1,7 +1,6 @@
-<?php
-require './../classes/Config.inc.php';
-?>
-<html><script language="JavaScript">
+
+<!-- VERIFICA SE DATA É VALIDA-->
+<script language="JavaScript">
     //VALIDAÇÃO DA DATA 
     function VerificaData(digData) {
         var bissexto = 0;
@@ -21,7 +20,7 @@ require './../classes/Config.inc.php';
                     case '10':
                     case '12':
                         if (dia <= 31) {
-                            alert("A Data " + data + " OK!");
+                            //alert("A Data " + data + " OK!");
                             return true;
                         }
                         break
@@ -31,7 +30,7 @@ require './../classes/Config.inc.php';
                     case '11':
                         if (dia <= 30) {
                             
-                            alert("A Data " + data + " OK!");
+                            //alert("A Data " + data + " OK!");
                             return true;
                         }
                         break
@@ -53,19 +52,7 @@ require './../classes/Config.inc.php';
             }
         }
         document.getElementById("data").value = "";
-        alert("A Data " + data + " e invalida!");
+        alert("A Data " + data + " NAO e valida!");
         return false;
-    }</script>
-    <body>
-        
-        <?php
-        $tete = filter_input(INPUT_POST, 'data');
-        echo $tete;
-        ?>
-        
-        Digite a data no seu nascimento:
-        <form method="POST" action="teste.php" target="_self" name="frm" >
-            <INPUT type=text NAME="data" id="data" SIZE=10 MAXLENGTH=10 onblur=" return VerificaData(this.value);" >
-            <input type="submit" value="enviar" name="submit"/>
-        </form>   					
-    </body></html>
+    }
+            </script>

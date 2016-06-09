@@ -427,7 +427,7 @@ display: inline-block;
 display: inline-block;
  }
  
- 
+ /*-----------PADRÕES --------------------*/
  /* -------- formatação BOtão LINK geral --------------*/
  
  .bt_link:link, .bt_link:visited{
@@ -454,4 +454,8 @@ display: inline-block;
 	  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 	 -webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
 	 cursor:pointer;
+}
+
+.padding_padrao{
+    padding: 10px;
 }

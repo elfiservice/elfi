@@ -5,6 +5,10 @@ class Formatar {
     public static function formatarDataComHora($dataBD) {
         return date('d/m/Y, H:i', strtotime($dataBD));
     }
+    
+        public static function formatarDataSemHora($dataBD) {
+        return date('d/m/Y', strtotime($dataBD));
+    }
 
     public static function limpaCPF_CNPJ($valor) {
         $valor = trim($valor);

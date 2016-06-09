@@ -27,7 +27,6 @@ class Update extends Conexao{
 	
 	private function executar(){
 		$this->conectarBD();
-	
 		//$this->sql = mysql_query($this->select);
                 $this->sql = $this->conexao->query($this->select);
 		if($this->sql){

@@ -1,7 +1,8 @@
 <?php
 $www = "http://localhost/site%20ELFI/colaboradores";
 //$www = "http://elfiservice.eco.br/colaboradores";
-
+define('WWW', 'http://localhost/site%20ELFI/colaboradores');
+//define('WWW', 'http://elfiservice.eco.br/colaboradores');
 
 
 spl_autoload_register(function ($pClass) {
@@ -81,4 +82,12 @@ set_error_handler('PHPErro');   //informar para p PHP q essa sera a Mensagem res
 
 
 
-
+//Lista EMAILS da Empresa ###################
+//seram copiados quando um Email for enviado para o Cliente.
+ $listaEmails = array(
+ 'junior@elfiservice.com.br',
+ 'lana@elfiservice.com.br',
+ 'edson@elfiservice.com.br',
+ 'armando@elfiservice.com.br',
+ 'samuel@elfiservice.com.br',
+     'eduardo@elfiservice.com.br');
