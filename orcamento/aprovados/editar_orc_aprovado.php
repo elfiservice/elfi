@@ -74,29 +74,34 @@ if ($id_orc) {
                   //var_dump($orcamento);
                      if($orcamentoCtrl->atualizarOrcamento($orcamento)){
                          WSErro("Orçamento atualizado com Sucesso!", WS_ACCEPT);
-                         //enviar Email
+//enviar Email Qaundo APENAS DATA INICIO DO SERVIÇO----------------------------------------------------
                          
                          if($data_inicio != "0000-00-00" && $data_conclusao == "0000-00-00"){
                              $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
-                         $email = new EmailGenerico("elfiservice@hotmail.com", "Proposta com Data programada", "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br> <p> Data de inicio agendada para: <b>{$dataInicioBr}</b> </p><br>Em breve entraremos em contato para acertar do detalhes. <br>Grato. ");
+                         //$listaEmailCliente = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
+                             $listaEmailCliente = array("junior@elfiservice.com.br");
+                         $textoCorpoDataInicio = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br> <p> Data de inicio agendada para: <b>{$dataInicioBr}</b> </p><br>Em breve entraremos em contato para acertar do detalhes. <br>Grato. ";
+                         $email = new EmailGenerico($listaEmailCliente, "Proposta com Data programada", $textoCorpoDataInicio,array(), $listaEmails);
                          if($email->enviarEmailSMTP()){
-                             WSErro("Enviado email informando Alteração para {$orcObj->getEmailContrat()}, informando a Data de Inicio!", WS_ALERT);
+                             WSErro("Enviado email informando Alteração para <b>{$orcObj->getEmailContrat()}</b>, informando a Data de Inicio!", WS_ALERT);
                          } else{
-                             WSErro("Houve um erro ao tentar Enviar email informando Alteração para {$orcObj->getEmailContrat()}, informando a Data de Inicio!", WS_ERROR);
+                             WSErro("Houve um erro ao tentar Enviar email informando Alteração para <b>{$orcObj->getEmailContrat()}</b>, informando a Data de Inicio!", WS_ERROR);
                          }     
                          exit();
                          }else if($data_inicio != "0000-00-00" && $data_conclusao != "0000-00-00"){
+ //enviar Email Qaundo DATA INICIO E CONCLUSÃO DO SERVIÇO----------------------------------------------------
                              $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
                              $dataConcluidoBr = Formatar::formatarDataSemHora($data_conclusao);
                             //WWW/orcamento/aprovados/pesquisa_pos_venda.php?ido=2&idc=23
-                             
+                             //$listaEmailClienteConcluido = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
+                             $listaEmailClienteConcluido = array("junior@elfiservice.com.br");
                              $textoCorpo = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br>"
                                      . "<p> Ela foi marcada como <b>\"Concluida\"</b>, tendo seu inicio em <b>{$dataInicioBr}</b> e seu termino em <b>{$dataConcluidoBr}</b> </p><br>"
                                      . "Por favor, nos dê seu parecer sobre nosso atendimento, será de grande ajuda para o desenvolvimento de nossa parceria.<br><br>"
                                              . "Apenas acesse o Link abaixo ou copie e cole no navegar:<br>"
                                              . "<a href=\"{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente}\" >"
                                              . "{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente} </a> <br>";
-                         $email = new EmailGenerico("elfiservice@hotmail.com", "Proposta Concluida!", $textoCorpo);
+                         $email = new EmailGenerico($listaEmailClienteConcluido, "Proposta Concluida!", $textoCorpo,array(), $listaEmails);
                          if($email->enviarEmailSMTP()){
                              WSErro("Enviado email informando Alteração para {$orcObj->getEmailContrat()}, informando Data da Conclusão!", WS_ALERT);
                          }else{

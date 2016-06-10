@@ -7,9 +7,9 @@
 abstract class EmailModel {
 
     private $emailFrom = "elfi@elfiservice.com.br";
-    private $emailTo;
-    private $emailCopia;
-    private $emailCopiaOculta;
+    private $emailTo = array();
+    private $emailCopia = array();
+    private $emailCopiaOculta = array();
     private $assunto_email;
     private $corpoEmail;
     private $altCorpoEmail; //quando nao tem formato HTML, pow so texto aqui
@@ -31,7 +31,7 @@ abstract class EmailModel {
         $this->getPhpMailer()->Host = 'smtp.elfiservice.com.br';
         $this->getPhpMailer()->SMTPAuth = true;
         $this->getPhpMailer()->Username = 'elfi@elfiservice.com.br';
-        $this->getPhpMailer()->Password = '';
+        $this->getPhpMailer()->Password = 'Sapato44';
         $this->getPhpMailer()->Port = 587;
         $this->getPhpMailer()->AddAttachment($this->getImage_name());
         $this->getPhpMailer()->IsHTML(true);

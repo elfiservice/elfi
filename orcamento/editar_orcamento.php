@@ -48,7 +48,7 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 
 	//$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
 	$situacao_orc = $_POST['itens_situcao_orc'];
-
+ $id_cliente = filter_input(INPUT_POST, 'id_cliente');
         $data_aprovada="";
         if($situacao_orc == "Aprovado"){
             $data_aprovada = date('Y-m-d');
@@ -58,15 +58,18 @@ if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
         }
 
                   $nome_usuario = $_SESSION['Login'];
-	$orcObj = new Orcamento($orc, "", "", $nome_usuario, $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", ""); 
+                  $id_user = $_SESSION['id'];
+	$orcObj = new Orcamento($orc,$id_cliente, $id_user, "", "", $nome_usuario, $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", ""); 
 	$orcCrtlObj = new OrcamentoCtrl();
 	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
 
         if($resultAtualizOrcamento[0]){
                     $dataHj = date('d/m/Y');
+                    //$listaEmailClienteSituacaoOrc = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
+                    $listaEmailClienteSituacaoOrc = array("junior@elfiservice.com.br");
                     $assuntoEmail = "Alteração Situação do Orçamento";
-                    $textoCorpo = "Olá, a situação do orçamento Nº <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b>, cliente <b>{$OrcBd['razao_social_contr']}</b> foi alterado para <b>\"{$situacao_orc}\"</b> em <b>{$dataHj }</b>. Pelo colaborador <b>{$OrcBd['colaborador_orc']}</b>";
-                    $email = new EmailGenerico("junior@elfiservice.com.br", $assuntoEmail, $textoCorpo,  "","");
+                    $textoCorpo = "<p>Olá, <b>{$OrcBd['razao_social_contr']}</b> a proposta de Nº <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b> foi alterada:</p> <p> A situação dela agora esta como: <b>\"{$situacao_orc}\"</b> em <b>{$dataHj }</b>. </p> ";
+                    $email = new EmailGenerico($listaEmailClienteSituacaoOrc, $assuntoEmail, $textoCorpo,  array(),$listaEmails);
                     
                     if($email->enviarEmailSMTP()){
                         WSErro("Orçamento <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b> foi Alterado para <b>\"{$situacao_orc}\"</b>! e Email enviado para o cliente <b>{$OrcBd['email_contr']}</b>!", WS_ACCEPT);
@@ -576,7 +579,8 @@ history.back();
 										
                                         <input type="hidden" value="<?php echo $orc; ?>" name="id_orc_editado" hidden="hidden" />
                                         <input type="hidden" name="usuario" value="<?php echo $logOptions_id; ?>" readonly="readonly" />
-                                      <input  type="hidden"  id="id_cliente" name="id_cliente" value="<?php echo $row['id']; ?>"  hidden="hidden" />
+                                      <input  type="hidden"  id="id_cliente" name="id_cliente" value="<?php echo $row['id']; ?>"   />
+                                      
                                     </td>
 
                                  

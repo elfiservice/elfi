@@ -1,5 +1,7 @@
-no BD
+﻿no BD
 07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab
+ALTERAR no BD: inserir Tabela da Pesquisa Pos Venda. (10/06/2016)
+
 
 Emails:
 - alterar Emails no arquivo:
@@ -7,12 +9,17 @@ Emails:
  - editar_orcamento.php
 
 Fazer alterações:
-
+- Alterar o botao Historico em Aprovados
 ao por Orcamento como concluido: 
-- alterar situação orc para Concluido
-- não ser mais possivel Editar o Orc.
-- Enviar Email informando que o Orçamento foi posto como Concluido no sistema
-- Após 2 dias enviar email automatico para Pesquisa de Satisfação, para os Orcamentos q estao como Feito Pos Entrega = n 
+- alterar situação orc para Concluido OK
+- não ser mais possivel Editar o Orc. OK
+- no Botão Concluido em ManterOrc:
+    - por Historico dos ORçamento Antes de Aprovado e Depois de Aprovado
+    - por os dados do ORC ( descrição dos serviços, tipo de Atividade, valor, descontos, dia de aprova, dia inicio, dia conclusao, quantos dias durou o serviço, dias de atraso, se teve nao conformidade)
+    - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa
+    - se foi respondida pos VEnda informar as respostas do Cliente para essa Proposta.
+    - informar historico desconto ?!
+
    -> ficar enviando de 10 em 10 dias ate ser preenchido pelo CLiente e salvo e Alterado tabela ORcamento para Feito-pos-entrega = s
 
 

@@ -112,7 +112,7 @@
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
-                                    <td><a href="tecnico.php?id_menu=editar_orc_aprovado" >atualizar</a><br>
+                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><br>
                                         <a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>
@@ -231,7 +231,7 @@
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
-                                    <td><a href="#" onclick="window.open('editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">atualizar</a><br>
+                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><br>
                                         <a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>

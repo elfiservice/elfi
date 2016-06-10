@@ -147,37 +147,34 @@ if(isSet ($_POST['ano'])) {
                                                 }else if($row['situacao_orc'] == "Aprovado"){
                                                     ?>
                                                 
-                                            <a class="bt_link bt_azul" href="acompanhamento/acompanhar_orcamentos.php" >
+                                            <a class="bt_link bt_azul" href="tecnico.php?id_menu=acompanhar_orcamentos" >
 			<?=$row['situacao_orc']?>
 			</a>
                                                 <?php
                                                             
+                                                }else if($row['situacao_orc'] == "concluido"){
+                                                       ?>
+                                            <a class="bt_link bt_azul" href="#" >
+			<?=$row['situacao_orc']?>
+                                            </a>
+                                            
+                                                <?php                                                 
+                                                   if($row['feito_pos_entreg'] == 'n'){
+                                                       echo"<small>Pos-venda ainda não respondida</small>";
+                                                   } 
                                                 }else{
                                                     echo    $row['situacao_orc'];
                                                 }
                                             ?>
-
-                                         
-											
-                                        </td>   
-                                        <td>
-                                      
-
+                                       </td>   
+                                        <td><?php  if($row['situacao_orc'] != "concluido"){  ?>
                                             <form name="editarOrcamento" action="tecnico.php?id_menu=editar_orcamento&id_orc=<?php echo $row['id'];?>&msg_erro=" method="POST" enctype="multipart/form-data">
-                                                
                                                 <input class="bt_verde" type="submit" value="Editar" name="editarOrcBtn" />
-                                                
                                             </form>
-                                            
                                              <form name="excluirOrcamento" action="tecnico.php?id_menu=excluir_orcamento&id_orc=<?php echo $row['id'];?>&msg_erro=" method="POST" enctype="multipart/form-data">
-                                                
-                                                 <input class="bt_vermelho" type="submit" value="Exluir" name="excluirOrcBtn" />
-                                                
+                                                    <input class="bt_vermelho" type="submit" value="Exluir" name="excluirOrcBtn" />
                                             </form>
-												
-
-												
-                                            
+                                            <?php   }  ?>
                                         </td>
                                         
                                         

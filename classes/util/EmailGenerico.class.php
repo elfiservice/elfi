@@ -1,4 +1,5 @@
 <?php
+
 //http://elfiservice.eco.br/colaboradores/imagens/
 /**
  * EmailGenerico.class [ utilitario ]
@@ -6,11 +7,12 @@
  * @copyright (c) 2016, Armando JR. ELFISERVICE
  */
 require 'PHPMailerAutoload.php';
+
 class EmailGenerico extends EmailModel {
 
     private $textoCorpo;
 
-    public function __construct($emailTo, $assunto, $textoCorpo, $emailCopia = null, $emailCopiaOculta=null) {
+    public function __construct(array $emailTo, $assunto, $textoCorpo, array $emailCopia = null, array $emailCopiaOculta = null) {
         $this->setEmailTo($emailTo);
         $this->setAssunto_email($assunto);
         $this->setTextoCorpo($textoCorpo);
@@ -31,16 +33,41 @@ class EmailGenerico extends EmailModel {
 
     public function enviarEmailSMTP() {
 
-        $this->montrCorpoEmail();
+        
         $this->configEmailSmtp();
         $this->getPhpMailer()->SetFrom($this->getEmailFrom(), 'Sistema Elfi');
-        $this->getPhpMailer()->AddAddress($this->getEmailTo());
-        $this->getPhpMailer()->AddCC($this->getEmailCopia());
-        $this->getPhpMailer()->AddBCC($this->getEmailCopiaOculta());
+        //monta Destinatarios no Email TO
+        $this->preparaDestinatarios($this->getEmailTo(), $this->getEmailCopia(), $this->getEmailCopiaOculta());
+        //$this->getPhpMailer()->AddAddress($this->getEmailTo());
+        //$this->getPhpMailer()->AddCC($this->getEmailCopia());
+        //$this->getPhpMailer()->AddBCC($this->getEmailCopiaOculta());
         $this->getPhpMailer()->Subject = $this->getAssunto_email();
+        $this->montrCorpoEmail();
         $this->getPhpMailer()->Body = $this->getCorpoEmail();
         //var_dump($this->getPhpMailer());
         return $this->enviar();
+    }
+
+    private function preparaDestinatarios(array $listaEmailTo, array $listaEmailCopia, array $listaEmailCopiaOculta) {
+        if (!empty($listaEmailTo)) {
+            foreach ($listaEmailTo as $email) {
+                $this->getPhpMailer()->AddAddress($email);
+            }
+        } else {
+            $this->getPhpMailer()->AddAddress(EMAIL_ADMIN);
+        }
+
+        if (!empty($listaEmailCopia)) {
+            foreach ($listaEmailCopia as $email) {
+                $this->getPhpMailer()->AddCC($email);
+            }
+        }
+
+        if (!empty($listaEmailCopiaOculta)) {
+            foreach ($listaEmailCopiaOculta as $email) {
+                $this->getPhpMailer()->AddBCC($email);
+            }
+        }
     }
 
     private function montrCorpoEmail() {
@@ -67,16 +94,19 @@ class EmailGenerico extends EmailModel {
 			<tr>
 			<td>
 			<div style=\"padding: 10px 5px; font: 12px verdana, arial, helvetica, sans-serif; color: #000;\">
-			Estamos a disposição para quais quer esclarecimentos, dúvidas ou
-			negociações.</div>
+			<p>Estamos a disposição para quais quer esclarecimentos, dúvidas ou
+			negociações.</p></div>
 			</td>
 			<td></td>
 			</tr>
 			<tr>
 			<td>
 			<div style=\"padding: 10px 5px; font: 12px verdana, arial, helvetica, sans-serif; color: #000;\">
-			Desde já adradecemos sua preferência. <br> Atenciosamente, equipe
-			Elfi.<br>
+			<p>
+                                                      Desde já adradecemos sua preferência. <br> Atenciosamente, equipe
+			Elfi.
+                                                      </p>  
+                                                      <br>
 			<br> <i>Email enviado de forma automática</i>
 			</div>
 			</td>
