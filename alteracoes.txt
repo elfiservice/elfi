@@ -3,14 +3,14 @@
 ALTERAR no BD: inserir Tabela da Pesquisa Pos Venda. (10/06/2016)
 Add colunada "id_colab" na tabela historico_orc_aprovado (13/06/2016)
 Add colunada "mostra" na tabela historico_orc_aprovado (13/06/2016)
-
+-------
 
 Emails:
 - alterar Emails no arquivo:
  - editar_orc_aprovado.php
  - editar_orcamento.php
 - pesquisa_pos_venda.php
-
+--------------
 Fazer alterações:
 - Alterar o botao Historico em Aprovados
 ao por Orcamento como concluido: 
@@ -26,7 +26,7 @@ ao por Orcamento como concluido:
    -> ficar enviando de 10 em 10 dias ate ser preenchido pelo CLiente e salvo e Alterado tabela ORcamento para Feito-pos-entrega = s
 
 
-
+----------------------
 apos Orc Aprovado:
 - não deixar Editar mais, nem Excluir
 
