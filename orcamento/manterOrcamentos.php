@@ -45,8 +45,14 @@ if(isSet ($_POST['ano'])) {
 	<form name="acomp_aprovados" action="tecnico.php?id_menu=acompanhar_orcamentos" method="POST" enctype="multipart/form-data">
                         <input class="bt_incluir"  type="submit" value="Aprovados" name="acomp_aprovados_btn" />
 	</form>
-        </li>     
-    </ul>        
+        </li>    
+                <li>
+	<form name="relatorios_orc" action="tecnico.php?id_menu=relatorios_orc_aprovados" method="POST" enctype="multipart/form-data">
+                        <input class="bt_incluir"  type="submit" value="Relatorios" name="arelatorios_orc_btn" />
+	</form>
+        </li>    
+    </ul>
+    
 </div>
 <hr>
 	<div>

@@ -25,16 +25,6 @@ $emails = array(
 foreach ($emails as $email) {
 
 
-// $arquivo=fopen($imagem_nome,'r');
-// $contents = fread($arquivo, filesize($imagem_nome));
-// $encoded_attach = chunk_split(base64_encode($contents));
-// fclose($arquivo);
-$limitador = "_=======". date('YmdHms'). time() . "=======_";
-
-$mailheaders = "From: junior@elfiservice.com.br\r\n";
-$mailheaders .= "MIME-version: 1.0\r\n";
-$mailheaders .= "Content-type: multipart/related; boundary=\"$limitador\"\r\n";
-$cid = date('YmdHms').'.'.time();
 
 $texto = "
 <style>

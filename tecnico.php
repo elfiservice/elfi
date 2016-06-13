@@ -183,6 +183,11 @@ require 'includes/javascripts/mascaras_campos_valores_monetario.php';
                         require './orcamento/excluir_orcamento.php';
                          exit();
                     }
+                    
+                    if ($menu == "relatorios_orc_aprovados") {
+                        require './orcamento/relatorios_orc_aprovados.php';
+                        exit();
+                    }                    
                     /* ------------- FIM Manter Orçamentos ----------------- */
 
                     /* ------------- Manter Orçamentos APROVADOS ----------------- */
@@ -190,17 +195,26 @@ require 'includes/javascripts/mascaras_campos_valores_monetario.php';
                         require './orcamento/aprovados/acompanhar_orcamentos.php';
                         exit();
                     }
-
-                    if ($menu == "relatorios_orc_aprovados") {
-                        require './orcamento/aprovados/relatorios_orc_aprovados.php';
-                        exit();
-                    }
                     
                     if ($menu == "editar_orc_aprovado") {
                                      require './orcamento/aprovados/editar_orc_aprovado.php';
                         exit();
                     }                    
+                       //Manter Historico ORC Aprovados
+                    if ($menu == "hitorico_orc_aprovado") {
+                                     require './orcamento/aprovados/hitorico_orc_aprovado.php';
+                        exit();
+                    }
+                    
+                    if ($menu == "editar_historico_orc_aprovado") {
+                                     require './orcamento/aprovados/editar_historico_orc_aprovado.php';
+                        exit();
+                    }    
 
+                    if ($menu == "excluir_historico_orc_aprovado") {
+                                     require './orcamento/aprovados/excluir_historico_orc_aprovado.php';
+                        exit();
+                    }                        
 
                 } else {
                     //echo "Acesso restrito.";

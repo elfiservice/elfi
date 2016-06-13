@@ -11,13 +11,24 @@ require 'PHPMailerAutoload.php';
 class EmailGenerico extends EmailModel {
 
     private $textoCorpo;
+    private $tipoEmail;
 
-    public function __construct(array $emailTo, $assunto, $textoCorpo, array $emailCopia = null, array $emailCopiaOculta = null) {
+    /**
+     * Prepara Email SMTP para ser enviado
+     * @param array $emailTo
+     * @param string $assunto
+     * @param string $textoCorpo
+     * @param array $emailCopia
+     * @param array $emailCopiaOculta
+     * @param int $tipoEmail = deixar NULL para envio Cliente e macar com 1 para envio Colaboradores (interno)
+     */
+    public function __construct(array $emailTo, $assunto, $textoCorpo, array $emailCopia = array(), array $emailCopiaOculta = array(), $tipoEmail=NULL) {
         $this->setEmailTo($emailTo);
         $this->setAssunto_email($assunto);
         $this->setTextoCorpo($textoCorpo);
         $this->setEmailCopia($emailCopia);
         $this->setEmailCopiaOculta($emailCopiaOculta);
+        $this->tipoEmail = $tipoEmail;
     }
 
     private function enviar() {
@@ -38,11 +49,10 @@ class EmailGenerico extends EmailModel {
         $this->getPhpMailer()->SetFrom($this->getEmailFrom(), 'Sistema Elfi');
         //monta Destinatarios no Email TO
         $this->preparaDestinatarios($this->getEmailTo(), $this->getEmailCopia(), $this->getEmailCopiaOculta());
-        //$this->getPhpMailer()->AddAddress($this->getEmailTo());
-        //$this->getPhpMailer()->AddCC($this->getEmailCopia());
-        //$this->getPhpMailer()->AddBCC($this->getEmailCopiaOculta());
         $this->getPhpMailer()->Subject = $this->getAssunto_email();
-        $this->montrCorpoEmail();
+        
+        $this->selecionarCorpoEmail($this->tipoEmail);
+        
         $this->getPhpMailer()->Body = $this->getCorpoEmail();
         //var_dump($this->getPhpMailer());
         return $this->enviar();
@@ -70,6 +80,13 @@ class EmailGenerico extends EmailModel {
         }
     }
 
+    private function selecionarCorpoEmail($tipoEmail) {
+        if($tipoEmail == null){
+            $this->montrCorpoEmail();
+        }else if($tipoEmail == 1){
+            $this->montrCorpoEmailColaborares();
+        }
+    }
     private function montrCorpoEmail() {
         $corpo = "
 			<html>
@@ -132,6 +149,51 @@ class EmailGenerico extends EmailModel {
         $this->setCorpoEmail($corpo);
     }
 
+        private function montrCorpoEmailColaborares() {
+        $corpo = "
+			<html>
+			<body>
+                        <div style=\"font-size: 11px;\">
+			<table width=\"auto\" align=\"center\" style=\"margin: 0 auto; \">
+			<tr>
+			<td>
+			<div style=\"text-align: center; padding: 10px 10px; font: 11px verdana, arial, helvetica, sans-serif; color: #332E88; border: 1px solid #DDD;\">
+			<img src=\"{$this->getImage_name()}\">
+			<h2>{$this->getAssunto_email()}</h2>
+			</div>
+			</td>
+			</tr>
+			<tr>
+			<td>
+			<div style=\"padding: 15px 5px; font: 12px verdana, arial, helvetica, sans-serif; color: #000;\">
+                                                        {$this->getTextoCorpo()}
+			</div>
+			</td>
+				
+			</tr>
+
+
+			<tr>
+			<td>
+			<div style=\"border: 1px solid #DDD; padding: 10px 5px; font: 10px verdana, arial, helvetica, sans-serif; color: #332E88;\">
+			<div style=\"text-align: center;\">
+			Rua Capitão Vasconcelos, 645 - Fortaleza - CE <br> e-mail:
+			elfi@elfiservice.com.br - Fone: (85) 3227-6307 - Fax(85) 3227-6068
+			</div>
+			</div>
+			</td>
+			<td></td>
+			</tr>
+			</table>
+                        </div>
+			</body>
+			</html>
+				
+				
+			";
+        $this->setCorpoEmail($corpo);
+    }
+    
     public function getTextoCorpo() {
         return $this->textoCorpo;
     }

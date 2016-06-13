@@ -13,10 +13,21 @@ if (isSet($_POST['ano'])) {
 }
 ?>
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> <a href="tecnico.php?id_menu=acompanhar_orcamentos">Aprovados</a> -> Relatórios</h2>
+    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> ->  Relatórios</h2>
 </div>
 <hr>
-
+<div class="alinhamentoHorizontal">
+    <ul>
+        <li>
+	<form name="rel_pos_venda" action="tecnico.php?id_menu=relatorio_pos_venda" method="POST" enctype="multipart/form-data">
+                        <input class="bt_incluir"  type="submit" value="Pos-venda" name="nrel_pos_venda_btn" />
+	</form>
+        </li>
+  
+    </ul>
+    
+</div>
+<hr>
 <fieldset>
     <legend>Busca por ano</legend>
     <div>

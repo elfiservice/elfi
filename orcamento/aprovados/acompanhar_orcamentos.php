@@ -10,68 +10,39 @@
     <div class="alinhamentoHorizontal">
         <ul>
 
-            <li><a class="bt_link" href="tecnico.php?id_menu=relatorios_orc_aprovados" > Relatório Orçamentos </a>
-            </li>
-            <li><a class="bt_link"  href="tecnico.php?id_menu=relatorio_pos_venda" >  Relatório Pós Venda </a>
-            </li>
-            <li><a class="bt_link" href="#" onclick="window.open('email_situacao_orc.php', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+
+<!--            <li><a class="bt_link" href="#" onclick="window.open('email_situacao_orc.php', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                     Enviar Situação Orc.
                 </a>
-            </li>
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=jan&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+            </li>-->
+            <li>
+<!--                <a href="#" onclick="window.open('acompanhamento.php?mes=jan&ano_orc=<?php //echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                     JAN
-                </a>
-            </li>
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=fev&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    FEV
-                </a>
-            </li>
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=mar&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    MAR
-                </a>
-            </li>
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=abr&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    ABR
-                </a>
-            </li>
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=mai&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    MAI
-                </a>
-            </li>
+                </a>-->
+                <
+               
+            <form name="orc_aprovado_por_mes" action="tecnico.php" method="POST" enctype="multipart/form-data">
+                Selecionar por Mês:
+                <select name="mes_orc_aprovado" id="mes_orc_aprovado" >
+                    <option id="opcao" value=""></option>
+                        ﻿<option value="1">Jan</option>
+                        <option value="2">Fev  </option>
+                        <option value="3">  Mar </option>
+                        <option value="4">  Abr </option>
+                        <option value="5">  Mai </option>
+                        <option value="6">  Jun </option>
+                        <option value="7">  Jul </option>
+                        <option value="8">  Ago </option>
+                        <option value="9">  Set </option>
+                        <option value="10">  Out </option>
+                        <option value="11">  Nov </option>
+                        <option value="12">  Dez </option>
+                </select>
+                <input type="submit" value="Pesquisar" name="ir_orc_aprovado_por_mes" id="ir_orc_aprovado_por_mes"  />
 
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=jun&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    JUN
-                </a>
-            </li>
-
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=jul&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    JUL
-                </a>
-            </li>
-
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=ago&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    AGO
-                </a>
-            </li>
-
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=set&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    SET
-                </a>
-            </li>
-
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=out&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    OUT
-                </a>
-            </li>
-
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=nov&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    NOV
-                </a>
-            </li>
-
-            <li><a href="#" onclick="window.open('acompanhamento.php?mes=dez&ano_orc=<?php echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    DEZ
-                </a>
+            </form>                
+                
+                
             </li>
         </ul>
     </div>
@@ -108,12 +79,12 @@
     if ($orc && $orc[0] != false) {
         foreach ($orc as $row) {
             $id_orc = $row['id'];
-            $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc'", "historico_orc_aprovado");
+            $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc' AND mostrar = '0'", "historico_orc_aprovado");
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
                                     <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><br>
-                                        <a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
+                                       <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?=$row['id']?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>
                                     <TD><?php echo $row['classificacao']; ?></TD>
@@ -167,12 +138,12 @@
     if ($orc && $orc[0] != false) {
         foreach ($orc as $row) {
             $id_orc = $row['id'];
-            $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc'", "historico_orc_aprovado");
+            $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc' AND mostrar = '0'", "historico_orc_aprovado");
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
-                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><br>
-                                        <a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
+                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><hr>
+                                        <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?=$row['id']?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>
                                     <TD><?php echo $row['classificacao']; ?></TD>
@@ -227,12 +198,12 @@
     if ($orc && $orc[0] != false) {
         foreach ($orc as $row) {
             $id_orc = $row['id'];
-            $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc'", "historico_orc_aprovado");
+            $orcHistorico = $orcCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc' AND mostrar = '0'", "historico_orc_aprovado");
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
                                     <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><br>
-                                        <a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
+                                        <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?=$row['id']?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>
                                     <TD><?php echo $row['classificacao']; ?></TD>

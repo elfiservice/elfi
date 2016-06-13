@@ -1,12 +1,15 @@
 ﻿no BD
 07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab
 ALTERAR no BD: inserir Tabela da Pesquisa Pos Venda. (10/06/2016)
+Add colunada "id_colab" na tabela historico_orc_aprovado (13/06/2016)
+Add colunada "mostra" na tabela historico_orc_aprovado (13/06/2016)
 
 
 Emails:
 - alterar Emails no arquivo:
  - editar_orc_aprovado.php
  - editar_orcamento.php
+- pesquisa_pos_venda.php
 
 Fazer alterações:
 - Alterar o botao Historico em Aprovados
