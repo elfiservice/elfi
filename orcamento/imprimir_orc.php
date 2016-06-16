@@ -2,8 +2,8 @@
 
 
         include "../checkuserlog.php";
-require '../Config/SistemConfig.php';
-        include_once "../Config/config_sistema.php"; 
+
+      
         require '../classes/Config.inc.php';
 //header('Content-Type: text/html; charset=utf-8');
         $dyn_www = $_SERVER['HTTP_HOST'];  
@@ -746,7 +746,8 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                         
                     </td>
 
-                </tr>                 
+                </tr>
+
                  <tr>
 
                     <Td colspan="4" width="" align="center">  
@@ -777,7 +778,13 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                     
                 </tr>                 
 
-                
+                                <tr>
+                    <td colspan="10" width="" align="center">
+                <div>
+                    <?php echo "Fortaleza, Ce em  ". Formatar::formatarDataComHora($row['data_adicionado_orc']); ?>
+                </div>
+                        </td>
+                </tr>
                  <tr>
 
                     <Td colspan="10" width="" align="center">  <div style="color: #3E4B95; font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">

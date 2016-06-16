@@ -39,21 +39,17 @@ class ControleNOrcCtrl {
      * @return boolean = TRUE se Sucesso ao inserir dados no BD e FALSE se houver algum problema na INSERÇÃO ou se o OBJETO não foi passado corretamente
      */
     public function inserirControleNOrc(ControleNOrc $controleNOrcObj) {
-
         if ($controleNOrcObj instanceof ControleNOrc) {
-            $valores = " '{$controleNOrcObj->getId()}',"
-                    . " '{$controleNOrcObj->getMes()}',"
-                    . " '{$controleNOrcObj->getAno()}',"
-                    . " '{$controleNOrcObj->getN_orc_feitos()}',"
-                    . " '{$controleNOrcObj->getProdutividade()}',"
-                    . " '{$controleNOrcObj->getPontual_entrega()}',"
-                    . " '{$controleNOrcObj->getPos_entrega()} ',"
-                    . " '{$controleNOrcObj->getNao_conforme()}',"
-                    . " '{$controleNOrcObj->getAcompanh_proposta()}',"
-                    . " '{$controleNOrcObj->getNovos_clientes()}',"
-                    . " '{$controleNOrcObj->getInsatisfacao()}' ";
 
-            if ($this->controleNOrcDAO->insert($this->controleNOrcDAO->getCamposBd(), $valores)) {
+            foreach ((array) $controleNOrcObj as $campo => $valor) {
+                $campo = str_replace("\0ControleNOrc\0", "", $campo);
+                $campoArr[$campo] = $campo;
+            }
+
+            $campoArr = implode(', ', array_keys($campoArr));
+            $valores = " '" . implode("','", array_values((array) $controleNOrcObj)) . "' ";
+
+            if ($this->controleNOrcDAO->insert($campoArr, $valores)) {
                 return TRUE;
             } else {
                 return FALSE;
@@ -72,37 +68,24 @@ class ControleNOrcCtrl {
         if ($controleNOrcObj instanceof ControleNOrc) {
             $mes = $controleNOrcObj->getMes();
             $ano = $controleNOrcObj->getAno();
-//           
-//                    $fields = implode(', ', array_keys((array) $controleNOrcObj));
-//        $places = implode('\'', array_values((array) $controleNOrcObj));
-//        var_dump($places, $fields);
-            $contador = 1;
+
             foreach ((array) $controleNOrcObj as $campo => $valor) {
                 if (!$valor == NULL || !$valor == "" || $valor == "0") {
                     $campo = str_replace("\0ControleNOrc\0", "", $campo);
-
-                    if ($contador == 1) {
-                        $campoDados = "{$campo}='{$valor}'";
-                        $arrayResultAtualizacao[$campo] = "atualizado para {$valor}";
-                        $contador++;
-                    } else {
-                        $campoDados .= ",{$campo}='{$valor}'";
-                        $arrayResultAtualizacao[$campo] = "atualizado para {$valor}";
-                        $contador++;
-                    }
+                    $camposDados[] = $campo . ' = ' . $valor;
                 }
             }
-            
-            if($this->controleNOrcDAO->update($campoDados, "WHERE mes = '$mes' AND ano = '$ano'")){
+
+            $camposDados = implode(', ', $camposDados);
+
+            if ($this->controleNOrcDAO->update($camposDados, "WHERE mes = '$mes' AND ano = '$ano'")) {
                 return TRUE;
-            }else{
+            } else {
                 return FALSE;
             }
-
-        }else{
+        } else {
             return FALSE;
         }
-        
     }
 
     //--------------------------------------------------

@@ -25,7 +25,7 @@ ao por Orcamento como concluido:
 
    -> ficar enviando de 10 em 10 dias ate ser preenchido pelo CLiente e salvo e Alterado tabela ORcamento para Feito-pos-entrega = s
 
-- Correigir Insert Generico igual Creat.class WS 
+
 
 ----------------------
 apos Orc Aprovado:

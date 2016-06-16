@@ -1,3 +1,8 @@
+    <div>
+        <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> <a href="tecnico.php?id_menu=acompanhar_orcamentos">Aprovados</a> -> Por Mês</h2>
+    </div>
+    <hr>
+
 <?php
 $mes_orc_selec = date('m');
 $ano_orc_selec = date('Y');
@@ -308,8 +313,8 @@ foreach ($n_orc_total as $row){
             $n_orc_check = count($orcHistorico);
     ?>
                 <TR>
-                    <td><a href="editar_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#" target="_self">editar</a>
-                        <a href="#" onclick="window.open('hitorico_orc_aprovado.php?id_orc=<?php echo $row['id']; ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">historico (<?php echo $n_orc_check; ?>)</a></td>
+                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><hr>
+                                       <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?=$row['id']?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                     <TD><?php echo $row['atividade']; ?></TD>
                     <TD><?php echo $row['classificacao']; ?></TD>
