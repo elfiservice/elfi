@@ -7,16 +7,15 @@
  */
 class ControleNOrcDAO implements CRUD {
 
-    private $tabela;
     private $camposBd;
-
+const Tabela = 'controle_n_orc';
 
     public function __construct() {
         $this->tabela = "controle_n_orc";
         $this->camposBd = "id, mes, ano, n_orc_feitos, produtividade, pontual_entrega, pos_entrega, nao_conforme, acompanh_proposta, novos_clientes, insatisfacao";
     }
 
-        public function delete($termos, $tabela = "controle_n_orc") {
+        public function delete($termos, $tabela = self::Tabela) {
         
     }
 
@@ -25,28 +24,21 @@ class ControleNOrcDAO implements CRUD {
     }
 
         
-    public function insert($camposBd, $valores, $tabela = NULL) {
-        $tabelaInsert = ($tabela == NULL ? $this->tabela : $tabela);
-        $insert = new Insert();
-        $insert->ExecInsert($tabelaInsert, $camposBd, $valores);
+    public function insert($camposBd, $valores, $tabela = self::Tabela) {
+            $insert = new Insert();
+        $insert->ExecInsert($tabela, $camposBd, $valores);
         return $insert->getResultado();
     }
 
-    public function select($campos, $termos, $tabela = NULL) {
-        if ($tabela) {
-            $this->tabela = $tabela;
-        }
+    public function select($campos, $termos, $tabela = self::Tabela) {
         $read = new Read();
-        $read->ExecRead($campos, $this->tabela, $termos);
+        $read->ExecRead($campos, $tabela, $termos);
         return $read->getResultado();
     }
 
-    public function update($camposDados, $termos, $tabela = NULL) {
-                if ($tabela) {
-            $this->tabela = $tabela;
-        }
+    public function update($camposDados, $termos, $tabela = self::Tabela) {
         $update = new Update();
-        $update->ExecUpdate($this->tabela, $camposDados, $termos);
+        $update->ExecUpdate($tabela, $camposDados, $termos);
         return $update->getResultado();
     }
 

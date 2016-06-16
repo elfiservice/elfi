@@ -72,6 +72,10 @@ class ControleNOrcCtrl {
         if ($controleNOrcObj instanceof ControleNOrc) {
             $mes = $controleNOrcObj->getMes();
             $ano = $controleNOrcObj->getAno();
+//           
+//                    $fields = implode(', ', array_keys((array) $controleNOrcObj));
+//        $places = implode('\'', array_values((array) $controleNOrcObj));
+//        var_dump($places, $fields);
             $contador = 1;
             foreach ((array) $controleNOrcObj as $campo => $valor) {
                 if (!$valor == NULL || !$valor == "" || $valor == "0") {
