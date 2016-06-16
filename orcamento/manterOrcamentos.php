@@ -106,10 +106,7 @@ if(isSet ($_POST['ano'])) {
 <?php
 	     $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = $ano_orc_selec ORDER BY id  DESC");
 
-             
-             
-             
-		foreach ($orcamentosArray as $orc => $row)
+foreach ($orcamentosArray as $orc => $row)
                 {
                     
                     //Buscar ID do CLIENTE

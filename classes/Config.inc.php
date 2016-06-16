@@ -6,29 +6,27 @@ define('WWW', 'http://localhost/site%20ELFI/colaboradores');
 define('EMAIL_ADMIN', 'junior@elfiservice.com.br');
 
 spl_autoload_register(function ($pClass) {
-    //$tree = $_SERVER['DOCUMENT_ROOT'].'/site ELFI/colaboradores/classes';
-    $tree = __DIR__;
     
-      if(file_exists("{$tree}/model/{$pClass}.class.php")){
-        //echo "tem Arquivo!";
-        require_once "{$tree}/model/{$pClass}.class.php";
+    $cDir = array('model', 'controller', 'dao', 'util');
+$iDir = null;   //se houve a inclusao do diretorio caso não, lança um ERRO
+
+//__DIR__ => pega o nome do diretorio deste Arquivo Config.inc.php no caso _app
+
+foreach ($cDir as $dirName){
+    if(!$iDir && file_exists(__DIR__ . "\\{$dirName}\\{$pClass}.class.php") && !is_dir(__DIR__ . "\\{$dirName}\\{$pClass}.class.php")){  //  \ -> para incluir como Arquivo(mas ele quebra o codigo, então poe a segunda ->  \
+        include_once (__DIR__ . "\\{$dirName}\\{$pClass}.class.php");
+        $iDir = true;
         
-        }else if(file_exists("{$tree}/controller/{$pClass}.class.php")){
-        //echo "tem Arquivo!";
-        require_once "{$tree}/controller/{$pClass}.class.php";
-        
-        }else if(file_exists("{$tree}/dao/{$pClass}.class.php")){
-        //echo "tem Arquivo!";
-        require_once "{$tree}/dao/{$pClass}.class.php";
-        
-        }else if(file_exists("{$tree}/util/{$pClass}.class.php")){
-        //echo "tem Arquivo!";
-        require_once "{$tree}/util/{$pClass}.class.php";
-        
-        } else {
-            die ("Erro ao incluir {$pClass}.class.php<hr>");
-        }
+    }
+}
+
+if(!$iDir){
+    trigger_error("Não foi possivel incluir {$pClass}.class.php", E_USER_ERROR); //pra garantir em TRAVAR o CODIGO
+}
+
+
 });
+
 
 //    $dirName = array('model', 'controller', 'dao', 'util');
 //   

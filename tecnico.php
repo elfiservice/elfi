@@ -1,19 +1,12 @@
 <?php
 include "checkuserlog.php";
-//require 'Config/SistemConfig.php';
-//include 'classes/util/Formatar.class.php';
-//include_once "Config/config_sistema.php";
-//include_once "classes/controller/UsuarioCtrl.class.php";
-//require "classes/controller/OrcamentosCtrl.class.php";
 require 'classes/Config.inc.php';
 
 
 
 if (!isset($_SESSION ['idx'])) {
     if (!isset($_COOKIE ['idCookie'])) {
-
-        // include_once '../conectar.php';
-        header("location: index.php");
+       include_once 'conectar.php';
     }
 } else {
 
@@ -46,7 +39,7 @@ if (!isset($_SESSION ['idx'])) {
             <link rel="stylesheet" href="estilos.css">
 
             <!-- Mostra colaborador Logado -->
-            <?php include 'includes/javascripts/mostra_colab_logado.php'; ?>
+            <?php //include 'includes/javascripts/mostra_colab_logado.php'; ?>
 
             <?php require 'includes/javascripts/menu_vertical_escoder_mostrar.php'; ?>
             <?php
@@ -68,7 +61,9 @@ require 'includes/javascripts/mascaras_campos_valores_monetario.php';
             <h2 style="text-align: center;">Setor Técnico</h2>
             <div style="">
 
-                <div id="colaborador_logado"></div>
+                <div id="colaborador_logado">
+                    <?php require './includes/colaborador_logado.inc.php'; ?>
+                </div>
 
                 <div style="float: right">
                     <?php echo $logOptions; ?>
@@ -214,8 +209,13 @@ require 'includes/javascripts/mascaras_campos_valores_monetario.php';
                     if ($menu == "excluir_historico_orc_aprovado") {
                                      require './orcamento/aprovados/excluir_historico_orc_aprovado.php';
                         exit();
-                    }                        
-
+                    }
+                    
+                    
+                    if ($menu == "orc_aprovado_por_mes") {
+                                     require './orcamento/aprovados/orc_aprovado_por_mes.php';
+                        exit();
+                    }
                 } else {
                     //echo "Acesso restrito.";
                     echo "<div  style=\"padding: 10px 0px 10px 0px;\">";

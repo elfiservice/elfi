@@ -105,10 +105,12 @@ class OrcamentoCtrl{
 			
 			);
 			
-                     
+                       
 			$contador=1;			
 			foreach ($arrayItensOrc as $campoDb=>$itemOrc){
-				if(!$itemOrc == "" || !$itemOrc == null){
+                            
+				if(!$itemOrc == NULL || !$itemOrc == "" || $itemOrc == "0" ){
+                                     //var_dump($itemOrc);
 					if($contador == 1){
 						$campoDados = "{$campoDb}='{$itemOrc}'";
 						$arrayResultAtualizacao[$campoDb]="atualizado para {$itemOrc}";

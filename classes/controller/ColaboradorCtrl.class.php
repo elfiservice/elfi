@@ -22,7 +22,7 @@ class ColaboradorCtrl{
                                
 	}
         
-        public function montarObjeto($colabBD){
+        private function montarObjeto($colabBD){
                 //$colabBD0 = $colabBD[0];
 //                var_dump($colabBD);
             $arrayObjColab = array();

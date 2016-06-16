@@ -1,5 +1,5 @@
 <?php
-    $ano_atual = date('Y');
+    //$ano_atual = date('Y');
     $orcCtrl = new OrcamentoCtrl();
     ?>				
 
@@ -10,36 +10,13 @@
     <div class="alinhamentoHorizontal">
         <ul>
 
-
-<!--            <li><a class="bt_link" href="#" onclick="window.open('email_situacao_orc.php', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                    Enviar Situação Orc.
-                </a>
-            </li>-->
-            <li>
 <!--                <a href="#" onclick="window.open('acompanhamento.php?mes=jan&ano_orc=<?php //echo $ano_atual; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                     JAN
                 </a>-->
-                <
-               
-            <form name="orc_aprovado_por_mes" action="tecnico.php" method="POST" enctype="multipart/form-data">
-                Selecionar por Mês:
-                <select name="mes_orc_aprovado" id="mes_orc_aprovado" >
-                    <option id="opcao" value=""></option>
-                        ﻿<option value="1">Jan</option>
-                        <option value="2">Fev  </option>
-                        <option value="3">  Mar </option>
-                        <option value="4">  Abr </option>
-                        <option value="5">  Mai </option>
-                        <option value="6">  Jun </option>
-                        <option value="7">  Jul </option>
-                        <option value="8">  Ago </option>
-                        <option value="9">  Set </option>
-                        <option value="10">  Out </option>
-                        <option value="11">  Nov </option>
-                        <option value="12">  Dez </option>
-                </select>
-                <input type="submit" value="Pesquisar" name="ir_orc_aprovado_por_mes" id="ir_orc_aprovado_por_mes"  />
-
+   
+            <li>        
+            <form name="orc_aprovado_por_mes" action="tecnico.php?id_menu=orc_aprovado_por_mes" method="POST" enctype="multipart/form-data">
+                <input class="bt_azul" type="submit" value="Ver por Mês" name="ir_orc_aprovado_por_mes" id="ir_orc_aprovado_por_mes"  />
             </form>                
                 
                 
@@ -83,7 +60,7 @@
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
-                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><br>
+                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><hr>
                                        <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?=$row['id']?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>
@@ -202,7 +179,7 @@
             $n_orc_check = count($orcHistorico);
             ?>
                                 <TR>
-                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><br>
+                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><hr>
                                         <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?=$row['id']?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                                     <TD><?php echo $row['atividade']; ?></TD>

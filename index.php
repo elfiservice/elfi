@@ -1,7 +1,8 @@
 <?php
 include "checkuserlog.php";
 
-include_once "Config/config_sistema.php";
+//include_once "Config/config_sistema.php";
+require './classes/Config.inc.php';
 
 $dyn_www = $_SERVER['HTTP_HOST'];
 
@@ -13,27 +14,11 @@ if (!isset($_SESSION['idx'])) {
     if (!isset($_COOKIE['idCookie'])) {
 
         include_once 'conectar.php';
-        //header("location: conectar.php");
-        //exit();
+
     }
 } else {
 
-    /*
-      echo $logOptions;
-      echo "TA LOGADO CARA!!";
-      $id="";
-      $email = "";
 
-
-
-      $id = $_GET['id_colab'];
-      $email_colab = $_GET['email'];
-      echo $id .'<br>';
-      echo $email_colab;
-     */
-
-    $consulta_colab = mysql_query("select * from colaboradores where id_colaborador = '$logOptions_id'");
-    $linha_colab = mysql_fetch_object($consulta_colab);
     ?>
 
 
@@ -56,20 +41,6 @@ if (!isset($_SESSION['idx'])) {
             <script src="js/jquery.min.js" type="text/javascript"></script>
 
 
-
-
-            <script type="text/javascript">
-            // Chama aba Seu Estado
-                $(document).ready(function () {
-
-                    $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo $logOptions_id; ?>');
-
-
-                });
-
-            </script>
-
-
         </head>
         <body>
 
@@ -87,6 +58,7 @@ if (!isset($_SESSION['idx'])) {
             <div style="">
 
                 <div id="colaborador_logado">
+                    <?php require './includes/colaborador_logado.inc.php'; ?>
                 </div>
 
                 <div style="float: right">

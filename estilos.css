@@ -65,6 +65,7 @@ table {
     
 }
 
+.text-left{text-align: left;}
 .tableComum{
     border: 1px solid #fff;
     empty-cells: show;
