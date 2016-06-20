@@ -12,11 +12,11 @@ if (!isset($_SESSION ['idx'])) {
 
     $dyn_www = $_SERVER ['HTTP_HOST'];
 
-    $menu = "";
-    if (isSet($_GET ['id_menu'])) {
-
-        $menu = $_GET ['id_menu'];
-    }
+    $menu = filter_input(INPUT_GET, 'id_menu', FILTER_DEFAULT);
+//    if (isSet($_GET ['id_menu'])) {
+//
+//        $menu = $_GET ['id_menu'];
+//    }
     ?>
 
 
@@ -42,9 +42,7 @@ if (!isset($_SESSION ['idx'])) {
             <?php //include 'includes/javascripts/mostra_colab_logado.php'; ?>
 
             <?php require 'includes/javascripts/menu_vertical_escoder_mostrar.php'; ?>
-            <?php
-require 'includes/javascripts/mascaras_campos_valores_monetario.php';
-?>
+            <?php require 'includes/javascripts/mascaras_campos_valores_monetario.php'; ?>
             <!-- Tabela  -->
             <?php include_once 'includes/javascripts/tabela_no_head.php'; ?> 
 
@@ -183,6 +181,11 @@ require 'includes/javascripts/mascaras_campos_valores_monetario.php';
                         require './orcamento/relatorios_orc_aprovados.php';
                         exit();
                     }                    
+                    
+                    if ($menu == "historico_completo_orc") {
+                        require './orcamento/historico_completo_orc.php';
+                        exit();
+                    }                                        
                     /* ------------- FIM Manter Orçamentos ----------------- */
 
                     /* ------------- Manter Orçamentos APROVADOS ----------------- */

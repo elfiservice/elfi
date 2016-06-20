@@ -53,8 +53,11 @@ if (filter_has_var(INPUT_POST, "razao_social"))
 //dados VAlor do orçamento
 
      
-     $vr_servco_orc    = $_POST['sum_vr_servico_orc'];
-     $vr_material_orc   = $_POST['sum_vr_material_orc'];
+//     $vr_servco_orc    = $_POST['sum_vr_servico_orc'];
+//     $vr_material_orc   = $_POST['sum_vr_material_orc'];
+     
+          $vr_servco_orc = Formatar::moedaBD($_POST['sum_vr_servico_orc']);
+     $vr_material_orc = Formatar::moedaBD($_POST['sum_vr_material_orc']);
      //$total_orc             = number_format($_POST['totalSum'], 2, ',', '.');
       $total_orc             = $_POST['totalSum'];
      

@@ -346,8 +346,23 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                     $atividade_completo = "$atividade - $classificacao";
                     
              //valor da proposta
-                    $vr_servco_orc      = $row['vr_servco_orc'];
-                    $vr_material_orc  = $row['vr_material_orc'];
+                    //$valor_do_servico = $row['vr_servco_orc'];
+                    if(strpos($row['vr_servco_orc'], ',')){     //VERIFICA SE TEM , NA NUMERAÇÃO
+                        $vr_servco_orc = $row['vr_servco_orc'];
+                    }else{
+                         $vr_servco_orc      = number_format($row['vr_servco_orc'], '2',',','.');
+                    }
+
+                    if(strpos($row['vr_material_orc'], ',')){     //VERIFICA SE TEM , NA NUMERAÇÃO
+                        $vr_material_orc = $row['vr_material_orc'];
+                    }else{
+                         $vr_material_orc      = number_format($row['vr_material_orc'], '2',',','.');
+                    }                    
+                    
+                   // $valor_do_material = $row['vr_material_orc'];
+                    
+                    
+                   
                     $desconto_orc     = $row['desconto_orc'];
                     $vr_total_orc     = number_format($row['vr_total_orc'], '2',',','.');
                   

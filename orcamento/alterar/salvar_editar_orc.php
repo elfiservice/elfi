@@ -57,8 +57,17 @@ if (filter_has_var(INPUT_POST, "razao_social"))
      //dados Observações
      $observacoes_servico   = nl2br($_POST['observacoes_servico']);
      
-     $total_orc             = number_format($_POST['totalSum'], 2, ',', '.');
+    // $total_orc             = number_format($_POST['totalSum'], 2, ',', '.');
+     $total_orc             = $_POST['totalSum'];
+
+//     $mystring = (string) $_POST['sum_vr_servico_orc'];
+////$findme   = ',';
+////$pos = strpos($mystring, ',');
+
      
+     $valor_do_servico = Formatar::moedaBD($_POST['sum_vr_servico_orc']);
+     $valo_do_material = Formatar::moedaBD($_POST['sum_vr_material_orc']);
+ 
      $data_ultima_alteracao = date('Y-m-d H:i:s') ;
         
         $orcamentoObj = new Orcamento(
@@ -100,8 +109,8 @@ if (filter_has_var(INPUT_POST, "razao_social"))
                 $_POST['pagamento_orc'], 
                 $observacoes_servico, 
                 $_POST['duvida_orc'], 
-                $_POST['sum_vr_servico_orc'], 
-                $_POST['sum_vr_material_orc'], 
+                $valor_do_servico, 
+                $valo_do_material, 
                 "", 
                 $total_orc, 
                 "", 

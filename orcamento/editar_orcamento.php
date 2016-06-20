@@ -20,7 +20,7 @@ if($orc){		// TESTA SE o id_orc no link é VALIDO
 <!--
 MAscaras em campos
 -->
-<?php require 'includes/javascripts/mascaras_campos_valores_monetario.php';?>
+<?php //require 'includes/javascripts/mascaras_campos_valores_monetario.php';?>
 
   
 <!--
