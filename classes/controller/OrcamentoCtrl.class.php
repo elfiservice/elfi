@@ -172,38 +172,6 @@ class OrcamentoCtrl{
                           return false;
                       }
                   }
-                 //HITORICO ORC
-                  public function buscarHistoricoOrcamento($campos, $termos, $tabela) {
-                      $orcamentoDao = $this->OrcDao->select($campos, $termos, $tabela);
-                      return $orcamentoDao;
-                  }
-                  
-                  public function inserirHistoricoOrcAprovado(array $valores, $tabela = "historico_orc_aprovado") {
-                      $camposBd = "id_acompanhamento, data, descricao, id_colab, colaborador";
-                      $valoresUser = "'{$valores[0]}','{$valores[1]}', '{$valores[2]}', '{$valores[3]}', '{$valores[4]}'";
-                                     
-                      
-                      if($this->OrcDao->insert($camposBd, $valoresUser, $tabela)){
-                          return TRUE;
-                      }else{
-                          return FALSE;
-                      }
-                  }
-                  
-                  public function atualizarHistoricoOrcAprovado(array $valores, $tabela = "historico_orc_aprovado") {
-                     // $camposBd = "id_acompanhamento, data, descricao, id_colab, colaborador";
-                    // var_dump($valores);
-                     //die;
-                      $valoresUser = "id_acompanhamento='{$valores[1]}', data='{$valores[2]}', descricao= '{$valores[3]}', id_colab= '{$valores[4]}', colaborador= '{$valores[5]}', mostrar= '{$valores[6]}'";
-                                     
-                      
-                      if($this->OrcDao->update($valores[0], $valoresUser, $tabela = "historico_orc_aprovado")){
-                          return TRUE;
-                      }else{
-                          return FALSE;
-                      }
-                  }
-
 
                   public function inserirOrcamento($orcamentoObj){
                       $camposBd = "n_orc, id_cliente, id_colab, ano_orc, colaborador_orc, razao_social_contr, cnpj_contr, endereco_contr, bairro_contr, cidade_contr, estado_contr, cep_contr, telefone_contr, celular_contr, email_contr, atividade, classificacao, quantidade, unidade, descricao_servico_orc, prazo_exec_orc, validade_orc, pagamento_orc, obs_orc, duvida_orc, vr_servco_orc, vr_material_orc, vr_total_orc, data_adicionado_orc, razao_social_obra, cnpj_obra, endereco_obra, bairro_obra, estado_obra, cidade_obra, cep_obra, telefone_obra, celular_obra, email_obra, situacao_orc, contato_clint, novo_cliente";
@@ -275,6 +243,39 @@ class OrcamentoCtrl{
                       
                       
                   }
+
+                                   //HITORICO ORC
+                  public function buscarHistoricoOrcamento($campos, $termos, $tabela) {
+                      $orcamentoDao = $this->OrcDao->select($campos, $termos, $tabela);
+                      return $orcamentoDao;
+                  }
+                  
+                  public function inserirHistoricoOrcAprovado(array $valores, $tabela = "historico_orc_aprovado") {
+                      $camposBd = "id_acompanhamento, data, descricao, id_colab, colaborador";
+                      $valoresUser = "'{$valores[0]}','{$valores[1]}', '{$valores[2]}', '{$valores[3]}', '{$valores[4]}'";
+                                     
+                      
+                      if($this->OrcDao->insert($camposBd, $valoresUser, $tabela)){
+                          return TRUE;
+                      }else{
+                          return FALSE;
+                      }
+                  }
+                  
+                  public function atualizarHistoricoOrcAprovado(array $valores, $tabela = "historico_orc_aprovado") {
+                     // $camposBd = "id_acompanhamento, data, descricao, id_colab, colaborador";
+                    // var_dump($valores);
+                     //die;
+                      $valoresUser = "id_acompanhamento='{$valores[1]}', data='{$valores[2]}', descricao= '{$valores[3]}', id_colab= '{$valores[4]}', colaborador= '{$valores[5]}', mostrar= '{$valores[6]}'";
+                                     
+                      
+                      if($this->OrcDao->update($valores[0], $valoresUser, $tabela = "historico_orc_aprovado")){
+                          return TRUE;
+                      }else{
+                          return FALSE;
+                      }
+                  }
+
 
 
 

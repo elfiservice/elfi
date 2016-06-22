@@ -1,35 +1,81 @@
+ONDE PAREI:
+editar_historico_n_aprovado.php 22/06
+
+#########################################################################################
+A FAZER antes de ENVIAR para o SERVIDOR:
+------------------------------------------------------------------------
 ﻿no BD
 07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab
 ALTERAR no BD: inserir Tabela da Pesquisa Pos Venda. (10/06/2016)
 Add colunada "id_colab" na tabela historico_orc_aprovado (13/06/2016)
 Add colunada "mostra" na tabela historico_orc_aprovado (13/06/2016)
--------
 
+Usar arquivo teste.php -> para alterar valores do Serviço, material e Total para moeda formato -> 0000000.00
+
+------------------------------------------------------------------------
 Emails:
 - alterar Emails no arquivo:
  - editar_orc_aprovado.php
  - editar_orcamento.php
 - pesquisa_pos_venda.php
---------------
-Fazer alterações:
-- Alterar o botao Historico em Aprovados
-ao por Orcamento como concluido: 
-- alterar situação orc para Concluido OK
-- não ser mais possivel Editar o Orc. OK
-- no Botão Concluido em ManterOrc:
-    - por Historico dos ORçamento Antes de Aprovado e Depois de Aprovado
-    - por os dados do ORC ( descrição dos serviços, tipo de Atividade, valor, descontos, dia de aprova, dia inicio, dia conclusao, quantos dias durou o serviço, dias de atraso, se teve nao conformidade)
-    - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa
-    - se foi respondida pos VEnda informar as respostas do Cliente para essa Proposta.
-    - informar historico desconto ?!
-
-   -> ficar enviando de 10 em 10 dias ate ser preenchido pelo CLiente e salvo e Alterado tabela ORcamento para Feito-pos-entrega = s
 
 
+##########################################################################################
+ALTERAÇÕES NO SISTEMA:
+------------------------------------------------------------------------
+NO SISTEMA GERAL:
+- fazer LOGs ( data, descricao, user, ip, visualizações)
+- fazer TimeLine usando o LOG para mostrar toda a movimentação dentro do Sistam
 
-----------------------
-apos Orc Aprovado:
-- não deixar Editar mais, nem Excluir
+##########################################################################################
+SETOR TECNICO:
+------------------------------------------------------------------------
+manterOrcamento:
+- Corrigir orcamento/nao_aprovados/salvar/historico.php ao SALVAR! ( ** criar Entidade para Historico Orc não Aprovado **)
+- apos Aprovado: não deixar Editar mais, nem Excluir
+- Orçamento -> Histórico Orçamento Completo: calcular DATA de Execução ( diferença de dias do Inicio ao Termino dos Serviços)
+- em Orcamentos -> Relatórios: fazer o Botao Pos-Venda ( abaixo Relatorio POS VENDA:)
+ - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa ( OU POR no CRON a cada 10 dias )
+ - informar historico desconto ?!
+- Botao Enviar Proposta por Email com anexo o PDF
+- em Cliente -> Perfil: por Nº orc aprovados, perdidos, cancelados, em abertos ( % aprovado geral deste cliente, % satisfação deste cliente)
+
+OK - apos Concluido ORC: alterar situação orc para Concluido
+OK - apos Concluido ORC: não ser mais possivel Editar o Orc. 
+OK - apos Concluido/cancelado/perdido ORC   - por Historico dos ORçamento Antes de Aprovado e Depois de Aprovado
+OK - em Histórico Orçamento Completo: se foi respondida pos VEnda informar as respostas do Cliente para essa Proposta.
+------------------------------------------------------------------------
+CRON:
+- enviar email para clientes q estao marcados nos Orcamentos como novo cliente quando fizer 1 ano CLIENTE
+- enviar Email cada 10 dias cobrando o Envio d aPesquisa Pos VENDA CLIENTE
+- propostas com 1 ano de manutençlão Subestação Executada CLIENTE
+- Enviar Email quando For o primeiro Orçamento/Novo Cliente ( Saudação )
 
 
-- enviar email para clientes q estao marcados os orcamentos como novo cliente quando fizer 1 ano
+- Atualização do Historico dos Orçmaentos 1 vez por dia (se proposta nova, alteração no Historico das propostas, alteração da Situaação ) para os COLABO.
+
+
+------------------------------------------------------------------------
+Relatorio POS VENDA:
+- por tabela com Nome Cliente - Nº porpostas Executadas - Nºde Pesquisas Respondidas
+- um link no Cliente para ir para pagina mostrar todas as respostas para esse cliente por Orcamento em uma Tabela
+
+##########################################################################################
+SETOR COMERCIAL
+------------------------------------------------------------------------
+Marketing
+- Enviar Email Informativo com dicas, informações, serviços etc. (criar um Manter Email Informativo) CLIENTE
+
+------------------------------------------------------------------------
+ManterServiços:
+- padronizar SErviços, par aserem lançados nos Orçmanetos já com opreço calculado
+
+##########################################################################################
+SETOR RH
+------------------------------------------------------------------------
+ManterColaboradores:
+- CRUD de funcionarios
+
+manterHorasExtras:
+- crud de Horas Extras usando Colaboradores
+
