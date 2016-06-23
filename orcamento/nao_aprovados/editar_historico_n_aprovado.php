@@ -33,8 +33,6 @@ require './../../classes/Config.inc.php';
             }
         } else {
 
-            $ano_atual = date('Y');
-
             $id_historico = filter_input(INPUT_GET, 'id_historico', FILTER_VALIDATE_INT);
 
             if (!$id_historico) {
@@ -43,9 +41,43 @@ require './../../classes/Config.inc.php';
             }
 
             $histoNACtrl = new HistoricoOrcNaoAprovadoCtrl();
+            $selectHistorico = $histoNACtrl->buscarBD("*", "WHERE id = '$id_historico' LIMIT 1");
+            if ($selectHistorico) { //Verifica se Existe o ID 
+                if ($selectHistorico[0]->getId_colab() == $_SESSION['id']) {
 
-            $selectHistorico = $histoNACtrl->buscarBD("*", "WHERE id = '$id_historico' ORDER BY id DESC");
-          
+                    $salvar = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+                    if (isset($salvar) && $salvar['salvar']) {
+                        $contato_cliente = $salvar['contato_cliente'];
+                        $tel_cliente = $salvar['tel_cliente'];
+                        $conversado = $salvar['conversado'];
+                        $conversa = nl2br($conversado);
+
+                        $selectHistorico[0]->setContato_cliente($contato_cliente);
+                        $selectHistorico[0]->setTel_cliente($tel_cliente);
+                        $selectHistorico[0]->setConversa($conversa);
+
+                        if ($histoNACtrl->atualizarBD($selectHistorico[0])) {
+                            WSErro("Atualizado com sucesso!", WS_ACCEPT);
+                            echo"<a class=\"bt_link\" href=\"historico_acompanhamento.php?id_orc={$selectHistorico[0]->getId_orc()}\">Voltar</a>";
+                            die();
+                        } else {
+                            WSErro("Ocorreu um Erro ao tentar atualizar !", WS_ERROR);
+                            echo"<a class=\"bt_link\" href=\"historico_acompanhamento.php?id_orc={$selectHistorico[0]->getId_orc()}\">Voltar</a>";
+                            die();
+                        }
+                    }
+                } else {
+                    WSErro("Ocorreu um Erro: você não tem permissão para isso !", WS_ERROR);
+                    echo"<a class=\"bt_link\" href=\"historico_acompanhamento.php?id_orc={$selectHistorico[0]->getId_orc()}\">Voltar</a>";
+                    die();
+                }
+            } else {
+                WSErro("Ocorreu um Erro: historico não encontrado !", WS_ERROR);
+
+                die();
+            }
+            
+            
             if ($selectHistorico) {
                 foreach ($selectHistorico as $obj) {
                     ?>
@@ -55,11 +87,11 @@ require './../../classes/Config.inc.php';
 
                     <fieldset>
                         <legend><b>Dados</b></legend>
-                        <form action="salvar/historico_editado.php" method="post" enctype="multipart/form-data" name="formEditarOrcNAprovado">
+                        <form action="editar_historico_n_aprovado.php?id_historico=<?= $id_historico ?>" method="post" enctype="multipart/form-data" name="formEditarOrcNAprovado">
                             <table>
                                 <tr>
                                     <td>Data do contato:</td>
-                                    <td><b><?= Formatar::formatarDataComHora($obj->getDia_do_contato())?></b></td>
+                                    <td><b><?= Formatar::formatarDataComHora($obj->getDia_do_contato()) ?></b></td>
                                 </tr>
                                 <tr>
                                     <td>Colaborador ELFI: </td>
@@ -71,7 +103,7 @@ require './../../classes/Config.inc.php';
                                 </tr>
                                 <tr>
                                     <td>Telefone do Cliente:</td>
-                                    <td><input type="text" value="<?=$obj->getTel_cliente()?>" name="tel_cliente"  /></td>
+                                    <td><input type="text" value="<?= $obj->getTel_cliente() ?>" name="tel_cliente"  /></td>
                                 </tr>
                                 <tr>
                                     <td>Conversado:</td>
@@ -79,21 +111,21 @@ require './../../classes/Config.inc.php';
                                 </tr>
                             </table>			
 
-                            <input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="salvar" value="Salvar" id="salvar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  />
+                            <input  type="submit" name="salvar" value="Salvar" id="salvar"  />
 
-                            <input type="hidden" name="id_usuario_BD" value="<?=$obj->getId_colab() ?>"  />
+                            <input type="hidden" name="id_usuario_BD" value="<?= $obj->getId_colab() ?>"  />
                             <input type="hidden" name="id_orc" value="<?= $obj->getId_orc() ?>" />
-                         			
+
                         </form >
                     </fieldset>
 
                     <?php
                 }
             }
-                ?>
-            </body>
-        </html>
+            ?>
+        </body>
+    </html>
 
 
 
-        <?php } ?>
+<?php } ?>

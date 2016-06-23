@@ -16,8 +16,9 @@ class HistoricoOrcNaoAprovado {
     private $contato_cliente;
     private $tel_cliente;
     private $conversa;
+    private $mostrar;
 
-    public function __construct($id, $id_orc, $dia_do_contato, $dia_da_edicao, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa) {
+    public function __construct($id, $id_orc, $dia_do_contato, $dia_da_edicao, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, $mostrar) {
         $this->id = $id;
         $this->id_orc = $id_orc;
         $this->dia_do_contato = $dia_do_contato;
@@ -27,8 +28,19 @@ class HistoricoOrcNaoAprovado {
         $this->contato_cliente = $contato_cliente;
         $this->tel_cliente = $tel_cliente;
         $this->conversa = $conversa;
+        $this->mostrar = $mostrar;
     }
 
+    
+    public function getMostrar() {
+        return $this->mostrar;
+    }
+
+    public function setMostrar($mostrar) {
+        $this->mostrar = $mostrar;
+    }
+
+        
     public function getId() {
         return $this->id;
     }

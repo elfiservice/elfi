@@ -1,5 +1,5 @@
 ONDE PAREI:
-editar_historico_n_aprovado.php 22/06
+OK editar_historico_n_aprovado.php 22/06 - 23/06
 
 #########################################################################################
 A FAZER antes de ENVIAR para o SERVIDOR:
@@ -9,6 +9,7 @@ A FAZER antes de ENVIAR para o SERVIDOR:
 ALTERAR no BD: inserir Tabela da Pesquisa Pos Venda. (10/06/2016)
 Add colunada "id_colab" na tabela historico_orc_aprovado (13/06/2016)
 Add colunada "mostra" na tabela historico_orc_aprovado (13/06/2016)
+Add coluna mostrar tabela historico_orc_n_aprovado -> mostrar 1 por padrao -> se 0 não mostrar
 
 Usar arquivo teste.php -> para alterar valores do Serviço, material e Total para moeda formato -> 0000000.00
 
@@ -31,15 +32,16 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-- Corrigir orcamento/nao_aprovados/salvar/historico.php ao SALVAR! ( ** criar Entidade para Historico Orc não Aprovado **)
 - apos Aprovado: não deixar Editar mais, nem Excluir
 - Orçamento -> Histórico Orçamento Completo: calcular DATA de Execução ( diferença de dias do Inicio ao Termino dos Serviços)
 - em Orcamentos -> Relatórios: fazer o Botao Pos-Venda ( abaixo Relatorio POS VENDA:)
+- em Orcamentos -> Relatórios: fazer relatorio Por Atividade e Classificação
  - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa ( OU POR no CRON a cada 10 dias )
  - informar historico desconto ?!
 - Botao Enviar Proposta por Email com anexo o PDF
 - em Cliente -> Perfil: por Nº orc aprovados, perdidos, cancelados, em abertos ( % aprovado geral deste cliente, % satisfação deste cliente)
 
+OK - Corrigir orcamento/nao_aprovados/salvar/historico.php ao SALVAR! ( ** criar Entidade para Historico Orc não Aprovado **)
 OK - apos Concluido ORC: alterar situação orc para Concluido
 OK - apos Concluido ORC: não ser mais possivel Editar o Orc. 
 OK - apos Concluido/cancelado/perdido ORC   - por Historico dos ORçamento Antes de Aprovado e Depois de Aprovado

@@ -56,13 +56,17 @@ require './../../classes/Config.inc.php';
                 $id_colab = $_SESSION['id'];
                 $id_orc = $salvar['id_orc'];
 
-                $historicoObj = new HistoricoOrcNaoAprovado("", $id_orc, $dia_do_contato, "", $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa);
+                $historicoObj = new HistoricoOrcNaoAprovado("", $id_orc, $dia_do_contato, "", $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, 1);
 
                 $orcObj->setDataUltimContatoCliente($dia_do_contato);
                 $orcObj->setColabUltimContatoCliente($colab_elfi);
 
                 if ($orcamentoCtrl->atualizarOrcamento($orcObj) && $histoNACtrl->inserirBD($historicoObj)) {
                     WSErro("Inserido com sucesso!", WS_ACCEPT);
+                    echo"<a class=\"bt_link\" href=\"historico_acompanhamento.php?id_orc={$id_orc}\">Voltar</a>";
+                    die();
+                } else {
+                    WSErro("Ocorreu um Erro ao tentar inserir !", WS_ERROR);
                     echo"<a class=\"bt_link\" href=\"historico_acompanhamento.php?id_orc={$id_orc}\">Voltar</a>";
                     die();
                 }
@@ -132,15 +136,19 @@ require './../../classes/Config.inc.php';
                     <tbody>
 
                         <?php
-                        $selectHistorico = $histoNACtrl->buscarBD("*", "historico_orc_n_aprovado WHERE id_orc = '$id_orc' ORDER BY id DESC");
+                        $selectHistorico = $histoNACtrl->buscarBD("*", "historico_orc_n_aprovado WHERE id_orc = '$id_orc' AND mostrar = '1' ORDER BY id DESC");
 
                         if ($selectHistorico) {
                             foreach ($selectHistorico as $obj) {
                                 ?>
                                 <TR>
-                                    <td><a class="bt_link bt_verde" href="editar_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>" >editar</a>
-                                        <br>
-                                        <a class="bt_link bt_vermelho" href="#" onclick="window.open('excluir_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>&msg_erro=#', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">excluir</a>
+                                    <td><?php
+                                        if ($obj->getId_colab() == $_SESSION['id']) {
+                                            ?>
+                                            <a class="bt_link bt_verde" href="editar_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>" >editar</a>
+                                            <br>
+                                            <a class="bt_link bt_vermelho" href="excluir_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>">excluir</a>
+                                        <?php } ?>
                                     </td>
                                     <Td><?= Formatar::formatarDataComHora($obj->getDia_do_contato()); ?></Td>
                                     <TD><?= $obj->getColab_elfi() ?></TD>

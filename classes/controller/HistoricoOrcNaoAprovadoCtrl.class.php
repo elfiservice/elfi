@@ -38,9 +38,8 @@ class HistoricoOrcNaoAprovadoCtrl {
             return FALSE;
         }
     }
-    
-    
-        /**
+
+    /**
      * Fazer SELECT no BD na tabela = historico_orc_n_aprovado
      * @param string $campos = Campos do BD a serem pesquisados
      * @param string $termos = Termos para Filtrar a Busca no BD (WHERE, etc)
@@ -55,15 +54,48 @@ class HistoricoOrcNaoAprovadoCtrl {
             return NULL;
         }
     }
-    
-     //--------------------------------------------------
+
+    /**
+     * Fazer UPDATE no BD na tabela = historico_orc_n_aprovado
+     * @param HistoricoOrcNaoAprovado $obj =  passar uma Instancia deste tipo para inserir no BD
+     * @return boolean = TRUE se Sucesso ao ATUALIZAR dados no BD e FALSE se houver algum problema na ATUALIZAÇÃO ou se o OBJETO não foi passado DO TIPO CORRETO
+     */
+    public function atualizarBD(HistoricoOrcNaoAprovado $obj) {
+        if ($obj instanceof HistoricoOrcNaoAprovado) {
+            $id = $obj->getId();
+            $idOrc = $obj->getId_orc();
+
+            foreach ((array) $obj as $campo => $valor) {
+                if (!$valor == NULL || !$valor == "" || $valor == "0") {
+                    $campo = str_replace("\0HistoricoOrcNaoAprovado\0", "", $campo);
+                    $camposDados[] = $campo . " = '" . $valor . "'";
+                }
+            }
+               
+                unset($camposDados[0]);
+                unset($camposDados[3]);
+                
+            $camposDados = implode(', ', $camposDados);
+           
+            if ($this->historicoOrcNAprovadoDAO->update($camposDados, "WHERE id = '$id' AND id_orc = '$idOrc'")) {
+
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    //--------------------------------------------------
     //----------------PRIVATES---------------------
     //--------------------------------------------------
     private function montarObjeto($arrayDados) {
         $arrayObjColab = array();
         foreach ($arrayDados as $dado) {
             extract($dado);
-            $arrayObjColab[] = new HistoricoOrcNaoAprovado($id, $id_orc, $dia_do_contato, $dia_da_edicao, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa);
+            $arrayObjColab[] = new HistoricoOrcNaoAprovado($id, $id_orc, $dia_do_contato, $dia_da_edicao, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, $mostrar);
         }
 
         return $arrayObjColab;

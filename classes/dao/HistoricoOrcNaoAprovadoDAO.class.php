@@ -26,7 +26,9 @@ class HistoricoOrcNaoAprovadoDAO implements CRUD {
     }
 
     public function update($camposDados, $termos, $tabela = self::Tabela) {
-        
+        $update = new Update();
+        $update->ExecUpdate($tabela, $camposDados, $termos);
+        return $update->getResultado();
     }
 
 }
