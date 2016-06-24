@@ -104,7 +104,7 @@ if (!isset($_SESSION['idx'])) {
                             <a class="bt_link bt_vermelho" href="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $row['id']?>">excluir</a>
                         </td>
                     
-                        <td><?php echo $row['data']; ?></td>
+                        <td><?= Formatar::formatarDataSemHora( $row['data']) ?></td>
                         <td><?php echo $row['descricao']; ?></td>
                         <td><?php echo $row['colaborador']; ?></td>
 

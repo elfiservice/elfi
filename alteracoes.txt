@@ -32,14 +32,16 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-- Orçamento -> Histórico Orçamento Completo: calcular DATA de Execução ( diferença de dias do Inicio ao Termino dos Serviços)
-- em Orcamentos -> Relatórios: fazer o Botao Pos-Venda ( abaixo Relatorio POS VENDA:)
+
+- em Orcamentos -> Relatórios: impl. o Botao Pos-Venda ( LER abaixo --> Relatorio POS VENDA:)
 - em Orcamentos -> Relatórios: fazer relatorio Por Atividade e Classificação
  - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa ( OU POR no CRON a cada 10 dias )
  - informar historico desconto ?!
 - Botao Enviar Proposta por Email com anexo o PDF
 - em Cliente -> Perfil: por Nº orc aprovados, perdidos, cancelados, em abertos ( % aprovado geral deste cliente, % satisfação deste cliente)
 
+OK - Corrigir Atualização Dias de Atraso e total de Dias de Execução -> ao por data de Concluido o Serviço em AProvados
+OK - Orçamento -> Histórico Orçamento Completo: calcular DATA de Execução ( diferença de dias do Inicio ao Termino dos Serviços)
 OK - apos Aprovado: não deixar Editar mais, nem Excluir
 OK - Corrigir orcamento/nao_aprovados/salvar/historico.php ao SALVAR! ( ** criar Entidade para Historico Orc não Aprovado **)
 OK - apos Concluido ORC: alterar situação orc para Concluido

@@ -136,7 +136,7 @@ require './../../classes/Config.inc.php';
                     <tbody>
 
                         <?php
-                        $selectHistorico = $histoNACtrl->buscarBD("*", "historico_orc_n_aprovado WHERE id_orc = '$id_orc' AND mostrar = '1' ORDER BY id DESC");
+                        $selectHistorico = $histoNACtrl->buscarBD("*", "WHERE id_orc = '$id_orc' AND mostrar = '1' ORDER BY id DESC");
 
                         if ($selectHistorico) {
                             foreach ($selectHistorico as $obj) {

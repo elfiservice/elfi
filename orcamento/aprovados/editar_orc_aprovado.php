@@ -5,7 +5,6 @@
 
 
 <?php
-
 $id_orc = filter_input(INPUT_GET, 'id_orc', FILTER_VALIDATE_INT);
 
 if ($id_orc) {
@@ -25,107 +24,110 @@ if ($id_orc) {
 
 
 //-----------------SALVA NO BD SE POSTADO ------------------------------//
-        $form = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        if ($form && $form['salvar_orc']){
-            $data_inicio = filter_input(INPUT_POST, 'data_inicio');
-            $data_conclusao = filter_input(INPUT_POST, 'data_conclusao');
-            $nao_conformidade = filter_input(INPUT_POST, 'nao_conformidade');
-            $client_insatisfeito = filter_input(INPUT_POST, 'client_insatisfeito');
-            $obs_n_conformidad = filter_input(INPUT_POST, 'obs_n_conformidad');
-            $id_orc = filter_input(INPUT_POST, 'id_orc');
-            $id_cliente = filter_input(INPUT_POST, 'id_cliente');
-           $colaborador_ultim_alteracao = filter_input(INPUT_POST, 'id_colab'); //colaborador_ultim_alteracao na TAbela 
-            $data_ultima_alteracao = date('Y-m-d H:i:s');
-                                            $situacao_orc = "Aprovado";
-                $serv_concluido = 'n';
-            
-           // var_dump($data_inicio < $data_conclusao);
-            
-            if($data_inicio == "00/00/0000" || $data_inicio == ""){
-                $data_inicio = "0000-00-00";
-            }else {
-                $data = DateTime::createFromFormat('d/m/Y', $data_inicio);
-                $data_inicio = $data->format('Y-m-d');
+$form = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+if ($form && $form['salvar_orc']) {
+    $data_inicio = filter_input(INPUT_POST, 'data_inicio');
+    $data_conclusao = filter_input(INPUT_POST, 'data_conclusao');
+    $nao_conformidade = filter_input(INPUT_POST, 'nao_conformidade');
+    $client_insatisfeito = filter_input(INPUT_POST, 'client_insatisfeito');
+    $obs_n_conformidad = filter_input(INPUT_POST, 'obs_n_conformidad');
+    $id_orc = filter_input(INPUT_POST, 'id_orc');
+    $id_cliente = filter_input(INPUT_POST, 'id_cliente');
+    $colaborador_ultim_alteracao = filter_input(INPUT_POST, 'id_colab'); //colaborador_ultim_alteracao na TAbela 
+    $data_ultima_alteracao = date('Y-m-d H:i:s');
+    $situacao_orc = "Aprovado";
+    $serv_concluido = 'n';
 
-                
-            }
-                
-                
-                if($data_conclusao == "00/00/0000" || $data_conclusao == "" ){
-                $data_conclusao = "0000-00-00";
-                 }else{
-                  $data = DateTime::createFromFormat('d/m/Y', $data_conclusao);
-                $data_conclusao = $data->format('Y-m-d');         
-                $situacao_orc = "concluido";
-                $serv_concluido = 's';
-                 }
-            
-           // echo $data_inicio."<br>";
-               // echo $data_conclusao."<br>";
-                 //var_dump($data_inicio < $data_conclusao);
-                
-                 if( ($data_inicio < $data_conclusao) || ($data_inicio == "0000-00-00" && $data_conclusao == "0000-00-00") || ($data_inicio != "0000-00-00" && $data_conclusao == "0000-00-00") ){
-                     //salva
-                     if($data_inicio == "0000-00-00" && $data_conclusao != "0000-00-00"){
-                     WSErro("Data inicial sem valor e a Data de Conclusão com Valor! Favor corrigir.", WS_ALERT);
-                     echo"<a href=\"javascript:window.history.go(-1)\" class=\"bt_imprimir\" > Voltar</a>";
-                     die();
-                     }
-                   $orcamento = new Orcamento($id_orc, "", "", "", "", "", $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_ultima_alteracao, $colaborador_ultim_alteracao, "", $data_inicio, $data_conclusao, "", "", "", $serv_concluido, "", $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, "", "", "");
-                  //var_dump($orcamento);
-                     if($orcamentoCtrl->atualizarOrcamento($orcamento)){
-                         WSErro("Orçamento atualizado com Sucesso!", WS_ACCEPT);
-//enviar Email Qaundo APENAS DATA INICIO DO SERVIÇO----------------------------------------------------
-                         
-                         if($data_inicio != "0000-00-00" && $data_conclusao == "0000-00-00"){
-                             $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
-                         //$listaEmailCliente = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
-                             $listaEmailCliente = array("junior@elfiservice.com.br");
-                         $textoCorpoDataInicio = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br> <p> Data de inicio agendada para: <b>{$dataInicioBr}</b> </p><br>Em breve entraremos em contato para acertar do detalhes. <br>Grato. ";
-                         $email = new EmailGenerico($listaEmailCliente, "Proposta com Data programada", $textoCorpoDataInicio,array(), $listaEmails);
-                         if($email->enviarEmailSMTP()){
-                             WSErro("Enviado email informando Alteração para <b>{$orcObj->getEmailContrat()}</b>, informando a Data de Inicio!", WS_ALERT);
-                         } else{
-                             WSErro("Houve um erro ao tentar Enviar email informando Alteração para <b>{$orcObj->getEmailContrat()}</b>, informando a Data de Inicio!", WS_ERROR);
-                         }     
-                         exit();
-                         }else if($data_inicio != "0000-00-00" && $data_conclusao != "0000-00-00"){
- //enviar Email Qaundo DATA INICIO E CONCLUSÃO DO SERVIÇO----------------------------------------------------
-                             $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
-                             $dataConcluidoBr = Formatar::formatarDataSemHora($data_conclusao);
-                            //WWW/orcamento/aprovados/pesquisa_pos_venda.php?ido=2&idc=23
-                             //$listaEmailClienteConcluido = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
-                             $listaEmailClienteConcluido = array("junior@elfiservice.com.br");
-                             $textoCorpo = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br>"
-                                     . "<p> Ela foi marcada como <b>\"Concluida\"</b>, tendo seu inicio em <b>{$dataInicioBr}</b> e seu termino em <b>{$dataConcluidoBr}</b> </p><br>"
-                                     . "Por favor, nos dê seu parecer sobre nosso atendimento, será de grande ajuda para o desenvolvimento de nossa parceria.<br><br>"
-                                             . "Apenas acesse o Link abaixo ou copie e cole no navegar:<br>"
-                                             . "<a href=\"{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente}\" >"
-                                             . "{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente} </a> <br>";
-                         $email = new EmailGenerico($listaEmailClienteConcluido, "Proposta Concluida!", $textoCorpo,array(), $listaEmails);
-                         if($email->enviarEmailSMTP()){
-                             WSErro("Enviado email informando Alteração para {$orcObj->getEmailContrat()}, informando Data da Conclusão!", WS_ALERT);
-                         }else{
-                             WSErro("Houve um Erro ao tentar Enviar um email informando Alteração para {$orcObj->getEmailContrat()}, informando Data da Conclusão!", WS_ERROR);
-                         }                             
-                         }
-                     }else{
-                         WSErro("Ocorreu um Erro ao tentar Atualizar o cliente, favor repetir a operação. :(", WS_ERROR);
-                         die();
-                     }
-                               
-                 }else{
-                     WSErro("Data inicial maior que a Data de Conclusão! Favor corrigir.", WS_ALERT);
-                     echo"<a href=\"javascript:window.history.go(-1)\" class=\"bt_imprimir\" > Voltar</a>";
-                 }
-                 
-           
+    // var_dump($data_inicio < $data_conclusao);
 
-            exit;
-            
+    if ($data_inicio == "00/00/0000" || $data_inicio == "") {
+        $data_inicio = "0000-00-00";
+    } else {
+        $data = DateTime::createFromFormat('d/m/Y', $data_inicio);
+        $data_inicio = $data->format('Y-m-d');
+    }
+
+
+    if ($data_conclusao == "00/00/0000" || $data_conclusao == "") {
+        $data_conclusao = "0000-00-00";
+        $dias_d_exec = "0";
+        $dias_ultrapassad = "0";
+    } else {
+        $data = DateTime::createFromFormat('d/m/Y', $data_conclusao);
+        $data_conclusao = $data->format('Y-m-d');
+        $situacao_orc = "concluido";
+        $serv_concluido = 's';
+        $dias_d_exec = Formatar::diffDuasDatas($data_inicio, $data_conclusao);
+        $praz_exec = $orcObj->getPrazoExec();
+        if (($dias_d_exec - $praz_exec) > 0) {
+            $dias_ultrapassad = $dias_d_exec - $praz_exec;
+        }else{
+            $dias_ultrapassad = "0";
         }
+    }
 
-        
+    // echo $data_inicio."<br>";
+    // echo $data_conclusao."<br>";
+    //var_dump($data_inicio < $data_conclusao);
+
+    if (($data_inicio < $data_conclusao) || ($data_inicio == "0000-00-00" && $data_conclusao == "0000-00-00") || ($data_inicio != "0000-00-00" && $data_conclusao == "0000-00-00")) {
+        //salva
+        if ($data_inicio == "0000-00-00" && $data_conclusao != "0000-00-00") {
+            WSErro("Data inicial sem valor e a Data de Conclusão com Valor! Favor corrigir.", WS_ALERT);
+            echo"<a href=\"javascript:window.history.go(-1)\" class=\"bt_imprimir\" > Voltar</a>";
+            die();
+        }
+        $orcamento = new Orcamento($id_orc, "", "", "", "", "", $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_ultima_alteracao, $colaborador_ultim_alteracao, "", $data_inicio, $data_conclusao, "", $dias_d_exec, $dias_ultrapassad, $serv_concluido, "", $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, "", "", "");
+        //var_dump($orcamento);
+        if ($orcamentoCtrl->atualizarOrcamento($orcamento)) {
+            WSErro("Orçamento atualizado com Sucesso!", WS_ACCEPT);
+//enviar Email Qaundo APENAS DATA INICIO DO SERVIÇO----------------------------------------------------
+
+            if ($data_inicio != "0000-00-00" && $data_conclusao == "0000-00-00") {
+                $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
+                //$listaEmailCliente = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
+                $listaEmailCliente = array("junior@elfiservice.com.br");
+                $textoCorpoDataInicio = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br> <p> Data de inicio agendada para: <b>{$dataInicioBr}</b> </p><br>Em breve entraremos em contato para acertar do detalhes. <br>Grato. ";
+                $email = new EmailGenerico($listaEmailCliente, "Proposta com Data programada", $textoCorpoDataInicio, array(), $listaEmails);
+                if ($email->enviarEmailSMTP()) {
+                    WSErro("Enviado email informando Alteração para <b>{$orcObj->getEmailContrat()}</b>, informando a Data de Inicio!", WS_ALERT);
+                } else {
+                    WSErro("Houve um erro ao tentar Enviar email informando Alteração para <b>{$orcObj->getEmailContrat()}</b>, informando a Data de Inicio!", WS_ERROR);
+                }
+                exit();
+            } else if ($data_inicio != "0000-00-00" && $data_conclusao != "0000-00-00") {
+                //enviar Email Qaundo DATA INICIO E CONCLUSÃO DO SERVIÇO----------------------------------------------------
+                $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
+                $dataConcluidoBr = Formatar::formatarDataSemHora($data_conclusao);
+                //WWW/orcamento/aprovados/pesquisa_pos_venda.php?ido=2&idc=23
+                //$listaEmailClienteConcluido = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
+                $listaEmailClienteConcluido = array("junior@elfiservice.com.br");
+                $textoCorpo = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br>"
+                        . "<p> Ela foi marcada como <b>\"Concluida\"</b>, tendo seu inicio em <b>{$dataInicioBr}</b> e seu termino em <b>{$dataConcluidoBr}</b> </p><br>"
+                        . "Por favor, nos dê seu parecer sobre nosso atendimento, será de grande ajuda para o desenvolvimento de nossa parceria.<br><br>"
+                        . "Apenas acesse o Link abaixo ou copie e cole no navegar:<br>"
+                        . "<a href=\"{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente}\" >"
+                        . "{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente} </a> <br>";
+                $email = new EmailGenerico($listaEmailClienteConcluido, "Proposta Concluida!", $textoCorpo, array(), $listaEmails);
+                if ($email->enviarEmailSMTP()) {
+                    WSErro("Enviado email informando Alteração para {$orcObj->getEmailContrat()}, informando Data da Conclusão!", WS_ALERT);
+                } else {
+                    WSErro("Houve um Erro ao tentar Enviar um email informando Alteração para {$orcObj->getEmailContrat()}, informando Data da Conclusão!", WS_ERROR);
+                }
+            }
+        } else {
+            WSErro("Ocorreu um Erro ao tentar Atualizar o cliente, favor repetir a operação. :(", WS_ERROR);
+            die();
+        }
+    } else {
+        WSErro("Data inicial maior que a Data de Conclusão! Favor corrigir.", WS_ALERT);
+        echo"<a href=\"javascript:window.history.go(-1)\" class=\"bt_imprimir\" > Voltar</a>";
+    }
+
+
+
+    exit;
+}
 ?>	
 
 
@@ -194,10 +196,10 @@ if ($id_orc) {
         var bissexto = 0;
         var data = digData;
         var tam = data.length;
-        
-                    var dia = data.substr(0, 2)
-            var mes = data.substr(3, 2)
-            var ano = data.substr(6, 4)
+
+        var dia = data.substr(0, 2)
+        var mes = data.substr(3, 2)
+        var ano = data.substr(6, 4)
         if (tam == 10) {
 
             if ((ano > 1900) || (ano < 2100)) {
@@ -219,7 +221,7 @@ if ($id_orc) {
                     case '09':
                     case '11':
                         if (dia <= 30) {
-                            
+
                             //alert("A Data " + data + " OK!");
                             return true;
                         }
@@ -241,31 +243,31 @@ if ($id_orc) {
                 }
             }
         }
-        
-        if(ano == 0000 && mes == 00 && dia == 00){
-            
+
+        if (ano == 0000 && mes == 00 && dia == 00) {
+
             return true;
-        }else
+        } else
         {
-        
-        
-        if(document.getElementById(idData).id === 'data_inicio'){
-                    document.getElementById("data_inicio").value = "00/00/0000";
-                    alert("A Data " + data + " e invalida!");
-        return false;
-        }else if(document.getElementById(idData).id === 'data_conclusao'){
-                     document.getElementById("data_conclusao").value = "00/00/0000";
-        alert("A Data " + data + " e invalida!");
-        return false;
-        }
-        
+
+
+            if (document.getElementById(idData).id === 'data_inicio') {
+                document.getElementById("data_inicio").value = "00/00/0000";
+                alert("A Data " + data + " e invalida!");
+                return false;
+            } else if (document.getElementById(idData).id === 'data_conclusao') {
+                document.getElementById("data_conclusao").value = "00/00/0000";
+                alert("A Data " + data + " e invalida!");
+                return false;
+            }
+
         }
     }</script>
-    
+
 
 <div class="" style="">
 
-    <form name="clientForm" method="post" action="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$orcObj->getId()?>" onsubmit="return formCheck(this);">       
+    <form name="clientForm" method="post" action="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?= $orcObj->getId() ?>" onsubmit="return formCheck(this);">       
 
         <fieldset>
             <legend><b>Dados</b></legend>
@@ -346,13 +348,13 @@ if ($id_orc) {
         </fieldset>
 
         <div class="padding_padrao">
-                   <input type="submit" value="Atualizar Orçamento" name="salvar_orc" />
-                    
-                   <input type="hidden" value="<?php echo date('Y'); ?>" name="ano_atual_orc" hidden="hidden" />
-                    <input type="hidden" name="id_colab" value="<?php echo $_SESSION['id']; ?>" hidden="hidden"/>
-                    <input type="hidden" name="id_orc" value="<?php echo $orcObj->getId(); ?>" hidden="hidden" />
-                    <input type="hidden" name="id_cliente" value="<?php echo $orcObj->getId_cliente(); ?>" hidden="hidden" />
+            <input type="submit" value="Atualizar Orçamento" name="salvar_orc" />
+
+            <input type="hidden" value="<?php echo date('Y'); ?>" name="ano_atual_orc" hidden="hidden" />
+            <input type="hidden" name="id_colab" value="<?php echo $_SESSION['id']; ?>" hidden="hidden"/>
+            <input type="hidden" name="id_orc" value="<?php echo $orcObj->getId(); ?>" hidden="hidden" />
+            <input type="hidden" name="id_cliente" value="<?php echo $orcObj->getId_cliente(); ?>" hidden="hidden" />
         </div>
     </form>
-    
-    </div>
+
+</div>

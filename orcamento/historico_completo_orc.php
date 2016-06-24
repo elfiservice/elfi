@@ -13,6 +13,8 @@ if ($id_orc) {
     WSErro("Erro na URL!", WS_ERROR);
     die();
 }
+
+
 ?>
 
 <div>
@@ -33,13 +35,15 @@ if ($id_orc) {
         if ($orcObj->getDataAprovada() != "0000-00-00") {
             ?>
             <p>Data Aprovado: <b><?= Formatar::formatarDataSemHora($orcObj->getDataAprovada()); ?></b></p>
+            <p>Prazo de execução: <b><?= $orcObj->getPrazoExec() ?> dia(s)</b></p>
             <p> Data Inicio: <b><?= Formatar::formatarDataSemHora($orcObj->getDataInicio()); ?></b></p>
             <p>Data Conclusão: <b><?= Formatar::formatarDataSemHora($orcObj->getDataConclusao()); ?></b></p>
             <p>Dias de execução: <b><?= $orcObj->getDiasDExecucao() ?> dia(s)</b></p>
-            <p>Dias de atraso: <b><?= $orcObj->getDiasUltrapassado() ?> dia(s)</b></p>
-            <p>Não conformidade? <b><?= $orcObj->getNaoConformidade() ?></b></p>
-            <p>Obs. da Não conformidade: <b><?= $orcObj->getObsNConformidade() ?></b></p>
 
+            <p>Dias de atraso: <b><?= ( $orcObj->getDiasUltrapassado() == 0 ? "0" : "<span class=\"bt_vermelho\">{$orcObj->getDiasUltrapassado()}</span>" ) ?> dia(s)</b></p>
+            <p>Não conformidade? <b><?= $orcObj->getNaoConformidade() ?></b></p>
+            <p>Obs. da Não conformidade: <b><?= ( $orcObj->getObsNConformidade() != "" ? $orcObj->getObsNConformidade() : "<i>Não informado</i>" ) ?></b></p>
+            <hr>
             <div>
                 <h3>Pesquisa Pós entrega do serviço:</h3>
                 <?php
