@@ -1,11 +1,11 @@
 ONDE PAREI:
-OK editar_historico_n_aprovado.php 22/06 - 23/06
+
 
 #########################################################################################
 A FAZER antes de ENVIAR para o SERVIDOR:
 ------------------------------------------------------------------------
 ﻿no BD
-07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab
+07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab -> usar arquivo teste para preenchar as colunas 
 ALTERAR no BD: inserir Tabela da Pesquisa Pos Venda. (10/06/2016)
 Add colunada "id_colab" na tabela historico_orc_aprovado (13/06/2016)
 Add colunada "mostra" na tabela historico_orc_aprovado (13/06/2016)
@@ -32,7 +32,6 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-- apos Aprovado: não deixar Editar mais, nem Excluir
 - Orçamento -> Histórico Orçamento Completo: calcular DATA de Execução ( diferença de dias do Inicio ao Termino dos Serviços)
 - em Orcamentos -> Relatórios: fazer o Botao Pos-Venda ( abaixo Relatorio POS VENDA:)
 - em Orcamentos -> Relatórios: fazer relatorio Por Atividade e Classificação
@@ -41,6 +40,7 @@ manterOrcamento:
 - Botao Enviar Proposta por Email com anexo o PDF
 - em Cliente -> Perfil: por Nº orc aprovados, perdidos, cancelados, em abertos ( % aprovado geral deste cliente, % satisfação deste cliente)
 
+OK - apos Aprovado: não deixar Editar mais, nem Excluir
 OK - Corrigir orcamento/nao_aprovados/salvar/historico.php ao SALVAR! ( ** criar Entidade para Historico Orc não Aprovado **)
 OK - apos Concluido ORC: alterar situação orc para Concluido
 OK - apos Concluido ORC: não ser mais possivel Editar o Orc. 
