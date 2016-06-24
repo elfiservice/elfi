@@ -5,11 +5,13 @@ ONDE PAREI:
 A FAZER antes de ENVIAR para o SERVIDOR:
 ------------------------------------------------------------------------
 ﻿no BD
-07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab -> usar arquivo teste para preenchar as colunas 
-ALTERAR no BD: inserir Tabela da Pesquisa Pos Venda. (10/06/2016)
-Add colunada "id_colab" na tabela historico_orc_aprovado (13/06/2016)
-Add colunada "mostra" na tabela historico_orc_aprovado (13/06/2016)
-Add coluna mostrar tabela historico_orc_n_aprovado -> mostrar 1 por padrao -> se 0 não mostrar
+
+
+OK 07/06/2016: Alterada tabela orcamentos -> add 2 colunas id_clinete e id_colab -> usar arquivo teste para preenchar as colunas 
+OK 04/06: ALTERAR no BD: inserir Tabela da Pesquisa Pos Venda. (10/06/2016)
+OK 04/06: Add colunada "id_colab" na tabela historico_orc_aprovado (13/06/2016)
+OK 04/06: Add colunada "mostra" na tabela historico_orc_aprovado (13/06/2016)
+OK 04/06: Add coluna mostrar tabela historico_orc_n_aprovado -> mostrar 1 por padrao -> se 0 não mostrar
 
 Usar arquivo teste.php -> para alterar valores do Serviço, material e Total para moeda formato -> 0000000.00
 
