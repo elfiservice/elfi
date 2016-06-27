@@ -23,5 +23,3 @@ class ClienteDAO {
 		return $read->getResultado();
 	}
 }
-
-?>

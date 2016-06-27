@@ -1,7 +1,7 @@
 <?php
 include "../checkuserlog.php";
-include_once "../Config/config_sistema.php";
-include_once "../Config/SistemConfig.php";
+
+
 //include_once "../classes/controller/UsuarioCtrl.class.php";
 //include_once "../classes/controller/OrcamentosCtrl.class.php";
 require '../classes/Config.inc.php';
@@ -14,19 +14,17 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 	}
 } else {
 	
-	$id_user = "";
-	if(isSet ($_GET['id_user'])) {
+	$id_user = filter_input(INPUT_GET, 'id_user', FILTER_VALIDATE_INT);
+	if(!$id_user) {
 	
-		$id_user = $_GET['id_user'];
+            WSErro("Erro na URL!", WS_ERROR);
+            die();
 	}
 	
-//	$usuario_logado = new UsuarioCtrl();
-//	$user = $usuario_logado->buscarUserPorId($id_user);
 	$orc_ctrl = new OrcamentoCtrl();
         
                     $colabCtrl = new ColaboradorCtrl();
                     $user = $colabCtrl->buscarColaborador("*", "where id_colaborador = $id_user");
-                   //var_dump($user);   
 
 ?>
 <!doctype html>
@@ -54,39 +52,40 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 </div>
 <hr>
 <?php
-    if($user != null){
+    if($user){
+    foreach ($user as $usuario){
 ?>
 
 <fieldset>
-	<legend><b>Dados do Usuario: <?php echo $user->getLogin();?></b></legend>
+	<legend><b>Dados do Usuario: <?php echo $usuario->getLogin();?></b></legend>
 		<table>
 			<tr>
 				<td>Email:</td>
-				<td><?php echo $user->getEmail();?></td>
+				<td><?php echo $usuario->getEmail();?></td>
 			</tr>
 			<tr>
 				<td>CPF:</td>
-				<td><?php if($logOptions_id == $id_user){echo $user->getCpf();}?></td>
+				<td><?php if($_SESSION['id'] == $id_user){echo $usuario->getCpf();}?></td>
 			</tr>
 			<tr>
 				<td>Ultimo Log:</td>
-				<td><?php echo date('d/m/Y \á\s H:m', strtotime($user->getUltDataLogado()));?></td>
+				<td><?php echo date('d/m/Y \á\s H:m', strtotime($usuario->getUltDataLogado()));?></td>
 			</tr>
 			<tr>
 				<td>Nº de Orçamentos feitos:</td>
-				<td><?php echo $orc_ctrl->nDeOrcPorUsuario($user->getLogin());?></td>
+				<td><?php echo $orc_ctrl->nDeOrcPorUsuario($usuario->getLogin());?></td>
 			</tr>
 			<tr>
 				<td>Nº de Orçamentos que esta acompanhando:</td>
-				<td><?php echo $orc_ctrl->nOrcUsuarioAcompanhando($user->getLogin());?></td>
+				<td><?php echo $orc_ctrl->nOrcUsuarioAcompanhando($usuario->getLogin());?></td>
 			</tr>
 			<tr>
 				<td>Nº de Hitoricos em Orçamentos Não Aprovados:</td>
-				<td><?php echo $orc_ctrl->nOrcNAprovadoPorUsuarioAcompanhando($user->getLogin());?></td>
+				<td><?php echo $orc_ctrl->nOrcNAprovadoPorUsuarioAcompanhando($usuario->getLogin());?></td>
 			</tr>
 			<tr>
 				<td>Nº de Historicos em Orçamentos Aprovados:</td>
-				<td><?php echo $orc_ctrl->nOrcAprovadoPorUsuarioAcompanhando($user->getLogin());?></td>
+				<td><?php echo $orc_ctrl->nOrcAprovadoPorUsuarioAcompanhando($usuario->getLogin());?></td>
 			</tr>
 			
 		</table>
@@ -101,6 +100,7 @@ if (!isset($_SESSION['idx'])) { 			//TESTE para saber se esta LOGADO!
 
 
 <?php 
+}
     }else{
         echo "Usuario não encontrado.";
     }

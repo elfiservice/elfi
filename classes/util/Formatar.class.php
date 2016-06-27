@@ -6,6 +6,10 @@ class Formatar {
         return date('d/m/Y, H:i', strtotime($dataBD));
     }
 
+    public static function formatarDataSemHora($dataBD) {
+        return date('d/m/Y', strtotime($dataBD));
+    }
+
     public static function limpaCPF_CNPJ($valor) {
         $valor = trim($valor);
         $valor = str_replace(".", "", $valor);
@@ -74,6 +78,42 @@ class Formatar {
         }
         // Retorna o valor formatado    
         return $novo_texto;
+    }
+
+    public static function moedaBD($get_valor) {
+        $source = array('.', ',');
+        $replace = array('', '.');
+        $valor = str_replace($source, $replace, $get_valor); //remove os pontos e substitui a virgula pelo ponto
+        return $valor; //retorna o valor formatado para gravar no banco
+    }
+
+    /**
+     * Faz a diferença em DIAS das duas datas fornecidas <b>(NOTA: sem as HORAS e formato AMERICANO -> xxxx-xx-xx )</b> 
+     * @param date $dataInical = Data no Formato US ( xxxx-xx-xx ) inicial a Menor
+     * @param date $dataFinal = Data no Formato US ( xxxx-xx-xx ) Final a Maior
+     * @return int = Diferença de Dias entre as duas datas
+     */
+    public static function diffDuasDatas($dataInical, $dataFinal) {
+        // Define os valores a serem usados
+        $data_inicial = $dataInical;
+        $data_final = $dataFinal;
+// Usa a função strtotime() e pega o timestamp das duas datas:
+        $time_inicial = strtotime($data_inicial);
+        $time_final = strtotime($data_final);
+// Calcula a diferença de segundos entre as duas datas:
+        $diferenca = $time_final - $time_inicial; // 19522800 segundos
+// Calcula a diferença de dias
+        return (int) floor($diferenca / (60 * 60 * 24)); // 225 dias
+    }
+
+    /**
+     * Resp. Formatar Data do Padrão Brasileiro para o Americano <b>(NOTA: sem as HORAS)</b>
+     * @param date $dataFormBr = Data no Formato Brasil(Br) <b>ex.: xx/xx/xxxx</b>
+     * @return date = Data no Formato Americano(US) <b>ex.: xxxx-xx-xx</b>
+     */
+    public static function dataBrToUS($dataFormBr) {
+        $data = DateTime::createFromFormat('d/m/Y', $dataFormBr);
+        return $data->format('Y-m-d');
     }
 
 }

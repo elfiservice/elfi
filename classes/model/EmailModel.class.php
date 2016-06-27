@@ -7,9 +7,9 @@
 abstract class EmailModel {
 
     private $emailFrom = "elfi@elfiservice.com.br";
-    private $emailTo;
-    private $emailCopia;
-    private $emailCopiaOculta;
+    private $emailTo = array();
+    private $emailCopia = array();
+    private $emailCopiaOculta = array();
     private $assunto_email;
     private $corpoEmail;
     private $altCorpoEmail; //quando nao tem formato HTML, pow so texto aqui

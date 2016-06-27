@@ -28,12 +28,13 @@ class Read extends Conexao{
 	private function executar(){
 		$this->conectarBD();
  			
-		$this->sql = mysql_query($this->select);
+		//$this->sql = @mysql_query($this->select);
+                                    $this->sql = $this->conectarMysqli()->query($this->select);
 		if($this->sql){
-		if(mysql_num_rows($this->sql) == 1){
-			$this->resultado[]=mysql_fetch_assoc($this->sql);
-		}else if(mysql_num_rows($this->sql) > 1){
-			while($linha =  mysql_fetch_assoc($this->sql)){
+		if(mysqli_num_rows($this->sql) == 1){
+			$this->resultado[]=mysqli_fetch_assoc($this->sql);
+		}else if(mysqli_num_rows($this->sql) > 1){
+			while($linha =  mysqli_fetch_assoc($this->sql)){
 				$this->resultado[]=$linha;
 			}
 		} 

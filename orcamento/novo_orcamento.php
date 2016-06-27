@@ -14,7 +14,7 @@
 
 
 <!-- MAscaras em campos valores-->
-<?php require 'includes/javascripts/mascaras_campos_valores_monetario.php'; ?>
+<?php //require 'includes/javascripts/mascaras_campos_valores_monetario.php'; ?>
 <!-- FIM  MAscaras em campos -->
 
 
@@ -385,8 +385,8 @@ function formCheck(formobj){
 
 						</tr>
 						<tr align="left">
-							<td><input onchange="soma11()" name="sum_vr_servico_orc"
-								id="vr_servico_orc" alt="decimal" size="15" maxlength="15"></td>
+                                                    <td><input  onchange="soma11()" name="sum_vr_servico_orc"
+								id="vr_servico_orc" alt="decimal"  ></td>
 
 							<td><input onchange="soma11()" name="sum_vr_material_orc"
 								id="vr_material_orc" alt="decimal" size="15" maxlength="15"></td>
@@ -404,11 +404,9 @@ function formCheck(formobj){
 				<table border="0">
 
 					<tr align="left">
-						<td><input type="submit" value="Salvar novo Orçamento"
-							name="salvar_orc" /> <input type="hidden"
-							value="<?php echo date('Y'); ?>" name="ano_atual_orc"
-							hidden="hidden" /> <input type="hidden" name="usuario"
-							value="<?php echo $logOptions_id; ?>" readonly="readonly" /></td>
+						<td><input type="submit" value="Salvar novo Orçamento" name="salvar_orc" /> 
+                                                    <input type="hidden" value="<?php echo date('Y'); ?>" name="ano_atual_orc" hidden="hidden" /> 
+                                                    <input  type="hidden"  id="id_cliente" name="id_cliente" value="<?php echo $row['id']; ?>"  hidden="hidden" /></td>
 
 
 

@@ -37,9 +37,9 @@ class OrcamentoDAO {
 			
 // 	}
 	
-	public function update($idOrc, $camposDados){
+	public function update($idOrc, $camposDados, $tabela = "orcamentos"){
 		$update = new Update();
-		$update->ExecUpdate("orcamentos", $camposDados, "WHERE id ='$idOrc'");
+		$update->ExecUpdate($tabela, $camposDados, "WHERE id ='$idOrc'");
 		return $update->getResultado();	
 	}
 	

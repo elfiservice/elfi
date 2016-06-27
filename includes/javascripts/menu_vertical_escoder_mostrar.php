@@ -1,11 +1,12 @@
 <?php
+//echo "{$www}/js/esconder_mostrar/ddaccordion.js";
 ?>
 <!--
 Inicio menu colaps (esconder ou mostrar) Vertical
 -->
 <script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-		<script type="text/javascript" src="../../js/esconder_mostrar/ddaccordion.js">
+		<script type="text/javascript" src="<?=$www?>/js/esconder_mostrar/ddaccordion.js">
 
 		/***********************************************
 		 * Accordion Content script- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
@@ -19,6 +20,13 @@ Inicio menu colaps (esconder ou mostrar) Vertical
 	cursor: hand;
 	cursor: pointer;
 	padding: 2px 5px;
+}
+
+.mypets:active, .mypets:visited { /*header of 1st demo*/
+	
+	cursor: pointer;
+	padding: 2px 5px;
+        color:red;
 }
 
 .openpet { /*class added to contents of 1st demo when they are open*/

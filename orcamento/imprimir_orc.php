@@ -2,8 +2,8 @@
 
 
         include "../checkuserlog.php";
-require '../Config/SistemConfig.php';
-        include_once "../Config/config_sistema.php"; 
+
+      
         require '../classes/Config.inc.php';
 //header('Content-Type: text/html; charset=utf-8');
         $dyn_www = $_SERVER['HTTP_HOST'];  
@@ -346,10 +346,25 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                     $atividade_completo = "$atividade - $classificacao";
                     
              //valor da proposta
-                    $vr_servco_orc      = $row['vr_servco_orc'];
-                    $vr_material_orc  = $row['vr_material_orc'];
+                    //$valor_do_servico = $row['vr_servco_orc'];
+                    if(strpos($row['vr_servco_orc'], ',')){     //VERIFICA SE TEM , NA NUMERAÇÃO
+                        $vr_servco_orc = $row['vr_servco_orc'];
+                    }else{
+                         $vr_servco_orc      = number_format($row['vr_servco_orc'], '2',',','.');
+                    }
+
+                    if(strpos($row['vr_material_orc'], ',')){     //VERIFICA SE TEM , NA NUMERAÇÃO
+                        $vr_material_orc = $row['vr_material_orc'];
+                    }else{
+                         $vr_material_orc      = number_format($row['vr_material_orc'], '2',',','.');
+                    }                    
+                    
+                   // $valor_do_material = $row['vr_material_orc'];
+                    
+                    
+                   
                     $desconto_orc     = $row['desconto_orc'];
-                    $vr_total_orc     = $row['vr_total_orc'];
+                    $vr_total_orc     = number_format($row['vr_total_orc'], '2',',','.');
                   
                     if ($desconto_orc == "" || $desconto_orc == null)
                         {
@@ -685,8 +700,7 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
            if($obs_orc == ""){
                
                
-           }else
-           {
+           }else {
  
  ?>
                 <tr bordercolor="" style = "border-style: solid; border-width: 1px;" >
@@ -747,7 +761,8 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                         
                     </td>
 
-                </tr>                 
+                </tr>
+
                  <tr>
 
                     <Td colspan="4" width="" align="center">  
@@ -778,7 +793,13 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                     
                 </tr>                 
 
-                
+                                <tr>
+                    <td colspan="10" width="" align="center">
+                <div>
+                    <?php echo "Fortaleza, Ce em  ". Formatar::formatarDataComHora($row['data_adicionado_orc']); ?>
+                </div>
+                        </td>
+                </tr>
                  <tr>
 
                     <Td colspan="10" width="" align="center">  <div style="color: #3E4B95; font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">

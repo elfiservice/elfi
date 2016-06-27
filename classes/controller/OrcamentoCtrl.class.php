@@ -11,7 +11,7 @@ class OrcamentoCtrl{
                        return $this->result;
                    }
 
-                   function setResult($result) {
+                  private function setResult($result) {
                        $this->result = $result;
                    }
 
@@ -44,6 +44,8 @@ class OrcamentoCtrl{
 			
 			$arrayItensOrc = array(
 					"n_orc" => $ocamentoObj->getNOrc(),
+                            "id_cliente" => $ocamentoObj->getId_cliente(),
+                            "id_colab" => $ocamentoObj->getId_colab(),
 					"ano_orc" => $ocamentoObj->getAnoOrc(),
 					"colaborador_orc" => $ocamentoObj->getColabOrc(),
 					"situacao_orc" => $ocamentoObj->getSituacaoOrc(),
@@ -103,10 +105,12 @@ class OrcamentoCtrl{
 			
 			);
 			
-                     
+                       
 			$contador=1;			
 			foreach ($arrayItensOrc as $campoDb=>$itemOrc){
-				if(!$itemOrc == "" || !$itemOrc == null){
+                            
+				if(!$itemOrc == NULL || !$itemOrc == "" || $itemOrc == "0" ){
+                                     //var_dump($itemOrc);
 					if($contador == 1){
 						$campoDados = "{$campoDb}='{$itemOrc}'";
 						$arrayResultAtualizacao[$campoDb]="atualizado para {$itemOrc}";
@@ -126,14 +130,17 @@ class OrcamentoCtrl{
 			
 			
 			if($this->OrcDao->update($ocamentoObj->getId(), $campoDados)){
-                                                                        $arrayResultAtualizacao["resultado"]='OK, atualizado!';
+                             $arrayResultAtualizacao[0]=true;                                            
+                            $arrayResultAtualizacao["resultado"]='OK, atualizado!';
 			}else{
+                                                                             $arrayResultAtualizacao[0]=false;
 				$arrayResultAtualizacao["resultado"]='Erro ao tentar atualizar!!';
 			}
 			
 			
 			
 		}else{
+                                                        $arrayResultAtualizacao[0]=false;
 			$arrayResultAtualizacao["resultado"]='Erro, Objeto nao e valido!';
 		}
 		
@@ -153,7 +160,7 @@ class OrcamentoCtrl{
                        $orcamentoDao2 = $orcamentoDao2[0];
                         extract($orcamentoDao2);
                         
-                      return  new Orcamento($id, 
+                      return  new Orcamento($id, $id_cliente, $id_colab, 
                                 $n_orc, 
                                 $ano_orc, 
                                 $colaborador_orc, 
@@ -162,12 +169,12 @@ class OrcamentoCtrl{
                                 $cnpj_contr, 
                                 $endereco_contr, $bairro_contr, $cidade_contr, $estado_contr, $cep_contr, $telefone_contr, $celular_contr, $email_contr, $contato_clint, $razao_social_obra, $cnpj_obra, $endereco_obra, $bairro_obra, $cidade_obra, $estado_obra, $cep_obra, $telefone_obra, $celular_obra, $email_obra, $atividade, $classificacao, $quantidade, $unidade, $descricao_servico_orc, $prazo_exec_orc, $validade_orc, $pagamento_orc, $obs_orc, $duvida_orc, $vr_servco_orc, $vr_material_orc, $desconto_orc, $vr_total_orc, $obra_igual_contrat, $data_adicionado_orc, $data_ultima_alteracao, $colaborador_ultim_alteracao, $data_aprovada, $data_inicio, $data_conclusao, $dias_d_aprovado, $dias_d_exec, $dias_ultrapassad, $serv_concluido, $feito_pos_entreg, $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, $data_ultimo_cont_cliente, $colab_ultimo_contato_client, $novo_cliente);
                       }else{
-                          return "";
+                          return false;
                       }
                   }
-                  
+
                   public function inserirOrcamento($orcamentoObj){
-                      $camposBd = "n_orc, ano_orc, colaborador_orc, razao_social_contr, cnpj_contr, endereco_contr, bairro_contr, cidade_contr, estado_contr, cep_contr, telefone_contr, celular_contr, email_contr, atividade, classificacao, quantidade, unidade, descricao_servico_orc, prazo_exec_orc, validade_orc, pagamento_orc, obs_orc, duvida_orc, vr_servco_orc, vr_material_orc, vr_total_orc, data_adicionado_orc, razao_social_obra, cnpj_obra, endereco_obra, bairro_obra, estado_obra, cidade_obra, cep_obra, telefone_obra, celular_obra, email_obra, situacao_orc, contato_clint, novo_cliente";
+                      $camposBd = "n_orc, id_cliente, id_colab, ano_orc, colaborador_orc, razao_social_contr, cnpj_contr, endereco_contr, bairro_contr, cidade_contr, estado_contr, cep_contr, telefone_contr, celular_contr, email_contr, atividade, classificacao, quantidade, unidade, descricao_servico_orc, prazo_exec_orc, validade_orc, pagamento_orc, obs_orc, duvida_orc, vr_servco_orc, vr_material_orc, vr_total_orc, data_adicionado_orc, razao_social_obra, cnpj_obra, endereco_obra, bairro_obra, estado_obra, cidade_obra, cep_obra, telefone_obra, celular_obra, email_obra, situacao_orc, contato_clint, novo_cliente";
                       if($orcamentoObj instanceof Orcamento){
                           $this->numeroDoOrc($orcamentoObj->getAnoOrc());
                          $orcamentoObj->setNOrc($this->getResult());
@@ -177,6 +184,8 @@ class OrcamentoCtrl{
                         
                         
                          $valores = "'{$orcamentoObj->getNOrc()}',"
+                         . "'{$orcamentoObj->getId_cliente()}',"
+                         . "'{$orcamentoObj->getId_colab()}',"
                          . "'{$orcamentoObj->getAnoOrc()}',"
                          . "'{$orcamentoObj->getColabOrc()}',"
                          . "'{$orcamentoObj->getRazaoSocialContrat()}',"
@@ -235,6 +244,40 @@ class OrcamentoCtrl{
                       
                   }
 
+                                   //HITORICO ORC
+                  public function buscarHistoricoOrcamento($campos, $termos, $tabela) {
+                      $orcamentoDao = $this->OrcDao->select($campos, $termos, $tabela);
+                      return $orcamentoDao;
+                  }
+                  
+                  public function inserirHistoricoOrcAprovado(array $valores, $tabela = "historico_orc_aprovado") {
+                      $camposBd = "id_acompanhamento, data, descricao, id_colab, colaborador";
+                      $valoresUser = "'{$valores[0]}','{$valores[1]}', '{$valores[2]}', '{$valores[3]}', '{$valores[4]}'";
+                                     
+                      
+                      if($this->OrcDao->insert($camposBd, $valoresUser, $tabela)){
+                          return TRUE;
+                      }else{
+                          return FALSE;
+                      }
+                  }
+                  
+                  public function atualizarHistoricoOrcAprovado(array $valores, $tabela = "historico_orc_aprovado") {
+                     // $camposBd = "id_acompanhamento, data, descricao, id_colab, colaborador";
+                    // var_dump($valores);
+                     //die;
+                      $valoresUser = "id_acompanhamento='{$valores[1]}', data='{$valores[2]}', descricao= '{$valores[3]}', id_colab= '{$valores[4]}', colaborador= '{$valores[5]}', mostrar= '{$valores[6]}'";
+                                     
+                      
+                      if($this->OrcDao->update($valores[0], $valoresUser, $tabela = "historico_orc_aprovado")){
+                          return TRUE;
+                      }else{
+                          return FALSE;
+                      }
+                  }
+
+
+
 
 
 
@@ -255,12 +298,15 @@ class OrcamentoCtrl{
 
                         $consulta_ORC          = $this->OrcDao->select("n_orc", "WHERE ano_orc = $ano_orc", "orcamentos");
                             //var_dump($consulta_ORC);
-                        if ($consulta_ORC == false) 
+                            
+                        if ($consulta_ORC == false || $consulta_ORC == null) 
                         {
                             $numero_ORC = "1";
                         } else {
-                            $quant_orc = count($consulta_ORC);
-                            $numero_ORC = $quant_orc + 1;
+                            //$quant_orc = count($consulta_ORC);
+                            //$numero_ORC = $quant_orc + 1;
+                            $ultimaPos = end($consulta_ORC);
+                             $numero_ORC = $ultimaPos['n_orc'] + 1;
                          }
                         
                         $this->result = $numero_ORC;
@@ -279,4 +325,3 @@ class OrcamentoCtrl{
 	}
 }
 
-?>

@@ -55,7 +55,34 @@ body {
 
 .trigger.error{background-color: #FAD0D0; border-color: #F6ABAB;}
 
+table {
+  font: 100% sans-serif;
+  
+  }
+  
+  th, td {
+    padding: 5px;
+    
+}
 
+.text-left{text-align: left;}
+.tableComum{
+    border: 1px solid #fff;
+    empty-cells: show;
+    background-color: #DAE2F5;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.tableComum th{
+     background-color: #fff;
+      border: 1px solid #DAE2F5;
+      border-bottom: 1px solid #000;
+}
+
+.indiceTabelaComum{
+     background-color: #C6CFE4;
+}
 
  select, input, textarea, checkbox{
 	background-color: #DAE2F5;
@@ -96,6 +123,13 @@ input[type=submit]:hover,input[type=button]:hover{
 	  
 	
 } 
+
+
+legend{
+    font-size: 18px;
+    font-weight: bold;
+}
+
 
 .iframeStyle{
 	
@@ -289,6 +323,7 @@ color: #000;
     background-position: 10px 10px; 
     background-repeat: no-repeat;
     padding: 10px 20px 10px 40px;
+    margin-bottom: 5px;
 }
 
 .inputProcurar:focus {
@@ -297,7 +332,7 @@ color: #000;
     border: 2px solid #012B8B;
     border-radius: 4px;
     font-size: 16px;
-    background-color: #D3D6FF;
+  
     background-image: none;
     background-position: 10px 10px; 
     background-repeat: no-repeat;
@@ -377,7 +412,8 @@ display: inline;
 }
 
  .alinhamentoHorizontal ul li a{
-
+ padding: 8px 10px 10px 10px;
+ margin: 0px 10px 0px 0px;
  float:left;
  /* visual do link */
 
@@ -392,13 +428,13 @@ display: inline-block;
 display: inline-block;
  }
  
- 
+ /*-----------PADRÕES --------------------*/
  /* -------- formatação BOtão LINK geral --------------*/
  
  .bt_link:link, .bt_link:visited{
    
 
-    padding: 10px 10px;
+    padding: 8px 10px 10px 10px;
     text-align: center;	
     text-decoration: none;
     display: inline-block;
@@ -419,4 +455,8 @@ display: inline-block;
 	  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 	 -webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
 	 cursor:pointer;
+}
+
+.padding_padrao{
+    padding: 10px;
 }
