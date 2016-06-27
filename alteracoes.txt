@@ -34,7 +34,7 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-- Editar Orçamentos: alterar a DATA da Proposta 
+- Editar Orçamentos: alterar a DATA da Proposta ( fazer IF para por data da ultima alteção se ela não for 000-00-00 )
 - Ao Editar o Orçamento Lançar no Historico a Alteração
 - em Orcamentos -> Relatórios: impl. o Botao Pos-Venda ( LER abaixo --> Relatorio POS VENDA:)
 - em Orcamentos -> Relatórios: fazer relatorio Por Atividade e Classificação
