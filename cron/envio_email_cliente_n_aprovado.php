@@ -1,4 +1,5 @@
 <?php
+
 include_once "../Config/config_sistema.php";
 include_once "../classes/model/EmailOrcamentoNaoAprovado.class.php";
 //$row ['email_contr']
@@ -23,7 +24,7 @@ while ( $row = mysql_fetch_array ( $consulta_usuarios ) )
 	$dias = ( int ) floor ( $diferenca / (60 * 60 * 24) ); // 225 dias
 	                                                     
 	if (! $row ['email_contr'] == null) {
-		if ($dias == 5 || $dias == 10 || $dias == 15 || $dias == 25 || $dias == 30 || $dias == 45 || $dias == 60) {
+		if ($dias == 10 || $dias == 20 || $dias == 30 || $dias == 40 || $dias == 50 || $dias == 60 || $dias == 80|| $dias == 100 || $dias == 120 || $dias == 150 || $dias == 180) {
 			$email = new EmailOrcNaoAprovado ( $row ['email_contr'], $row ['razao_social_contr'], $dias, $row ['n_orc'], $row ['ano_orc'] );
 			$email->enviarEmail ();
 			
@@ -41,10 +42,3 @@ while ( $row = mysql_fetch_array ( $consulta_usuarios ) )
 	}
 	
 }
-
-?>
-           
- 
-
-
-
