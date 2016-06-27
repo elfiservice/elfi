@@ -203,7 +203,7 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
         <form name="clientForm" method="post" action="tecnico.php?id_menu=salvar_editar_orcamento" onsubmit="return formCheck(this);">       
 
             <fieldset class="fieldsetGeral">
-                <legend ><h3>Contratante</h3></legend>
+                <legend ><b>Contratante</b></legend>
                 <table border="0">
                     <tbody>
 
