@@ -17,10 +17,10 @@ Usar arquivo teste.php -> para alterar valores do Serviço, material e Total par
 
 ------------------------------------------------------------------------
 Emails:
-- alterar Emails no arquivo:
- - editar_orc_aprovado.php
- - editar_orcamento.php
-- pesquisa_pos_venda.php
+alterar Emails no arquivo:
+ OK - editar_orc_aprovado.php -> para o cliente e copia para colab da ELFI
+ OK - editar_orcamento.php -> posto pra enviar apenas pra mim
+OK - pesquisa_pos_venda.php -.> Cliente e pra mim!
 
 
 ##########################################################################################
@@ -34,7 +34,7 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-- Editar Orçamentos: alterar a DATA da Proposta ( fazer IF para por data da ultima alteção se ela não for 000-00-00 )
+
 - Ao Editar o Orçamento Lançar no Historico a Alteração
 - em Orcamentos -> Relatórios: impl. o Botao Pos-Venda ( LER abaixo --> Relatorio POS VENDA:)
 - em Orcamentos -> Relatórios: fazer relatorio Por Atividade e Classificação
@@ -43,6 +43,7 @@ manterOrcamento:
 - Botao Enviar Proposta por Email com anexo o PDF
 - em Cliente -> Perfil: por Nº orc aprovados, perdidos, cancelados, em abertos ( % aprovado geral deste cliente, % satisfação deste cliente)
 
+OK - Editar Orçamentos: alterar a DATA da Proposta ( fazer IF para por data da ultima alteção se ela não for 000-00-00 )
 OK - Corrigir Atualização Dias de Atraso e total de Dias de Execução -> ao por data de Concluido o Serviço em AProvados
 OK - Orçamento -> Histórico Orçamento Completo: calcular DATA de Execução ( diferença de dias do Inicio ao Termino dos Serviços)
 OK - apos Aprovado: não deixar Editar mais, nem Excluir

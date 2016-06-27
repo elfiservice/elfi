@@ -83,7 +83,7 @@ set_error_handler('PHPErro');   //informar para p PHP q essa sera a Mensagem res
 //Lista EMAILS da Empresa ###################
 //seram copiados quando um Email for enviado para o Cliente.
  $listaEmails = array(
- 'elfiservice@hotmail.com','elfiservice@gmail.com');
+ 'elfiservice@hotmail.com');
  
 //  $listaEmails = array(
 // 'junior@elfiservice.com.br',

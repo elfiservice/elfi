@@ -111,7 +111,8 @@
                 //enviar Email confirmando o Envio da Pesquisa e agradecendo o Cliente.
                // $listaEmailTo = array($orcObj->getEmailContrat(), $orcObj->getEmailObra());
                 $listaEmailTo = array("elfiservice@hotmail.com");
-                 $email = new EmailGenerico($listaEmailTo, "Recebemos sua pesquisa", "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> recebemos a sua pesquisa. <br>Grato. ");
+                               
+                 $email = new EmailGenerico($listaEmailTo, "Recebemos sua pesquisa", "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> recebemos a sua pesquisa. ", array(), array());
                          if($email->enviarEmailSMTP()){
                              //WSErro("Enviado email informando Alteração para {$orcObj->getEmailContrat()}, informando a Data de Inicio!", WS_ALERT);
                          } else{
