@@ -796,7 +796,16 @@ $("#colaborador_logado").load('colaborador_logado.php?id_colaborador=<?php echo 
                                 <tr>
                     <td colspan="10" width="" align="center">
                 <div>
-                    <?php echo "Fortaleza, Ce em  ". Formatar::formatarDataComHora($row['data_adicionado_orc']); ?>
+                    
+                    <?php 
+                    if($row['data_ultima_alteracao'] == "0000-00-00 00:00:00"){
+                    
+                                  echo "Fortaleza, Ce em  ". Formatar::formatarDataComHora($row['data_adicionado_orc']); 
+                    }else{
+                         echo "Fortaleza, Ce em  ". Formatar::formatarDataComHora($row['data_ultima_alteracao']); 
+                    }
+                    
+                    ?>
                 </div>
                         </td>
                 </tr>
