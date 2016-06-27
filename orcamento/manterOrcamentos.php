@@ -128,16 +128,6 @@ $orcCrtl = new OrcamentoCtrl();
                         </a>                                            
                     </td>                                        
                     <td>
-
-        <!--                                            <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php //echo date('Y');  ?>&id_orc=<?php //echo $row['id'];   ?>&id_menu=orcamento" method="POST" enctype="multipart/form-data">
-            <select name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
-        <option value="<?php //echo $row['situacao_orc'];  ?>"><?php //echo $row['situacao_orc'];  ?></option>
-                        <?php //include "includes/orcamento/lista_situacao_orc.php";  ?>
-            </select>
-                                            
-               <input type="submit" value="Alterar" name="alterar_situacao" />
-        </form>-->
-
                         <?php
                         if ($row['situacao_orc'] == "Aguardando aprovação") {
                             ?>
@@ -152,18 +142,23 @@ $orcCrtl = new OrcamentoCtrl();
                                 <?= $row['situacao_orc'] ?>
                             </a>
                             <?php
+                        } else if ($row['situacao_orc'] == "concluido") {
+                            ?>
+
+                            <a class="bt_link bt_azul" href="tecnico.php?id_menu=historico_completo_orc&id_orc=<?= $row['id'] ?>" >
+                                <?= $row['situacao_orc'] ?>
+                            </a>
+                            <?php
+                            if ($row['feito_pos_entreg'] == 'n') {
+                                echo"<small>Pos-venda ainda não respondida</small>";
+                            }
                         } else {
                             ?>
 
                             <a class="bt_link bt_azul" href="tecnico.php?id_menu=historico_completo_orc&id_orc=<?= $row['id'] ?>" >
                                 <?= $row['situacao_orc'] ?>
                             </a>
-
-
                             <?php
-                            if ($row['feito_pos_entreg'] == 'n') {
-                                echo"<small>Pos-venda ainda não respondida</small>";
-                            }
                         }
                         ?>
                     </td>   
