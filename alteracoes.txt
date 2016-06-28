@@ -18,6 +18,8 @@ Usar arquivo teste.php -> para alterar valores do Serviço, material e Total par
 ------------------------------------------------------------------------
 Emails:
 alterar Emails no arquivo:
+Por DATA <hr> <small> Recebida em: " . date('d/m/Y H:i') . "</small>   --> pode envitaR SPAM
+
  OK - editar_orc_aprovado.php -> para o cliente e copia para colab da ELFI
  OK - editar_orcamento.php -> posto pra enviar apenas pra mim
 OK - pesquisa_pos_venda.php -.> Cliente e pra mim!
@@ -34,7 +36,7 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-
+- em Salvar_editar_orc por botao Imprimir
 - Ao Editar o Orçamento Lançar no Historico a Alteração
 - em Orcamentos -> Relatórios: impl. o Botao Pos-Venda ( LER abaixo --> Relatorio POS VENDA:)
 - em Orcamentos -> Relatórios: fazer relatorio Por Atividade e Classificação
@@ -58,6 +60,7 @@ CRON:
 - enviar Email cada 10 dias cobrando o Envio d aPesquisa Pos VENDA CLIENTE
 - propostas com 1 ano de manutençlão Subestação Executada CLIENTE
 - Enviar Email quando For o primeiro Orçamento/Novo Cliente ( Saudação )
+- em envio_email_cliente_n_aprovado -> passar para envio SMTP
 
 
 - Atualização do Historico dos Orçmaentos 1 vez por dia (se proposta nova, alteração no Historico das propostas, alteração da Situaação ) para os COLABO.

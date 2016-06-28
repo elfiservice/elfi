@@ -1,10 +1,31 @@
 <?php
+//DEFINE A BASE DO SITE ###################
 $www = "http://localhost/site%20ELFI/colaboradores";
 //$www = "http://elfiservice.eco.br/colaboradores";
 define('WWW', 'http://localhost/site%20ELFI/colaboradores');
 //define('WWW', 'http://elfiservice.eco.br/colaboradores');
+
+
+//CONFIG. DO SITE ##########################
+define('HOST', 'localhost');  //via RunTime = em tempo de execução
+define('USER', 'root');
+define('PASS', '');
+define('DBSA', 'wsphp');
 define('EMAIL_ADMIN', 'junior@elfiservice.com.br');
 
+//DEFINE SERVIDOR DE EMAILS###################
+define('MAILUSER', 'elfi@elfiservice.com.br');
+define('MAILPASS', '');
+define('MAILPORT', '587');
+define('MAILHOST', 'smtp.elfiservice.com.br');
+
+//DEFINE IDENTIDADE DO SITE ###################
+define('SITENAME', 'Sistema ELFI');    //SEO titulo do SITE
+define('SITEDESCRICAO', ' Sistema de gestão da empresa ELFI  ');    // SEO descriçao do SITE
+
+
+
+//AUTO LOAD DE CALSSES ###################
 spl_autoload_register(function ($pClass) {
     
     $cDir = array('model', 'controller', 'dao', 'util');
