@@ -7,10 +7,13 @@ define('WWW', 'http://localhost/site%20ELFI/colaboradores');
 
 
 //CONFIG. DO SITE ##########################
+//Banco de DADOS
 define('HOST', 'localhost');  //via RunTime = em tempo de execução
 define('USER', 'root');
 define('PASS', '');
-define('DBSA', 'wsphp');
+define('DBSA', 'elfiserv_sistema_elfi');
+//Dados do ADMIN
+define('NOME_ADMIN', 'Armando Jr.');
 define('EMAIL_ADMIN', 'junior@elfiservice.com.br');
 
 //DEFINE SERVIDOR DE EMAILS###################
