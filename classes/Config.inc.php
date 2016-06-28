@@ -37,11 +37,18 @@ $iDir = null;   //se houve a inclusao do diretorio caso não, lança um ERRO
 //__DIR__ => pega o nome do diretorio deste Arquivo Config.inc.php no caso _app
 
 foreach ($cDir as $dirName){
-    if(!$iDir && file_exists(__DIR__ . "\\{$dirName}\\{$pClass}.class.php") && !is_dir(__DIR__ . "\\{$dirName}\\{$pClass}.class.php")){  //  \ -> para incluir como Arquivo(mas ele quebra o codigo, então poe a segunda ->  \
-        include_once (__DIR__ . "\\{$dirName}\\{$pClass}.class.php");
-        $iDir = true;
+//    if(!$iDir && file_exists(__DIR__ . "\\{$dirName}\\{$pClass}.class.php") && !is_dir(__DIR__ . "\\{$dirName}\\{$pClass}.class.php")){  //  \ -> para incluir como Arquivo(mas ele quebra o codigo, então poe a segunda ->  \
+//        include_once (__DIR__ . "\\{$dirName}\\{$pClass}.class.php");
+//        $iDir = true;
+//        
+//    }
+    
+         if(!$iDir && file_exists(__DIR__  . "/{$dirName}/{$pClass}.class.php") && !is_dir(__DIR__  . "/{$dirName}/{$pClass}.class.php")){  //  MODELO DO SERVIDOR
+         include_once (__DIR__  . "/{$dirName}/{$pClass}.class.php");
+         $iDir = true;
         
-    }
+     }
+    
 }
 
 if(!$iDir){

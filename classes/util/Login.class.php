@@ -1,4 +1,9 @@
 <?php
+/**
+ * Login.class [ utilitario ]
+ * Resp por autenticar, validar, e checar usuario do sistema Login.
+ * @copyright (c) 2016, Armando JR. ELFISERVICE
+ */
 class Login extends Conexao{
 	
 	private $login;

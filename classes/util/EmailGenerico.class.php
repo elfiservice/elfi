@@ -1,6 +1,4 @@
 <?php
-
-//http://elfiservice.eco.br/colaboradores/imagens/
 /**
  * EmailGenerico.class [ utilitario ]
  * Enviar Email de forma generica, qualquer tipo de Email
