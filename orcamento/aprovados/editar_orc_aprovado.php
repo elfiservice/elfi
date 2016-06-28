@@ -87,7 +87,7 @@ if ($form && $form['salvar_orc']) {
                 $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
                 //$listaEmailCliente = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
                 $listaEmailCliente = array("junior@elfiservice.com.br");
-                $textoCorpoDataInicio = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br> <p> Data de inicio agendada para: <b>{$dataInicioBr}</b> </p><br>Em breve entraremos em contato para acertar do detalhes. <br>Grato. ";
+                $textoCorpoDataInicio = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br> <p> Data de inicio agendada para: <b>{$dataInicioBr}</b> </p><br>Em breve entraremos em contato para acertar os detalhes. ";
                 $email = new EmailGenerico($listaEmailCliente, "Proposta com Data programada", $textoCorpoDataInicio, array(), $listaEmails);
                 if ($email->enviarEmailSMTP()) {
                     WSErro("Enviado email informando Alteração para <b>{$orcObj->getEmailContrat()}</b>, informando a Data de Inicio!", WS_ALERT);
@@ -103,7 +103,7 @@ if ($form && $form['salvar_orc']) {
                 //$listaEmailClienteConcluido = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
                 $listaEmailClienteConcluido = array("junior@elfiservice.com.br");
                 $textoCorpo = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br>"
-                        . "<p> Ela foi marcada como <b>\"Concluida\"</b>, tendo seu inicio em <b>{$dataInicioBr}</b> e seu termino em <b>{$dataConcluidoBr}</b> </p><br>"
+                        . "<p> Ela foi marcada como <b>\"Concluída\"</b>, tendo seu inicio em <b>{$dataInicioBr}</b> e seu término em <b>{$dataConcluidoBr}</b> </p><br>"
                         . "Por favor, nos dê seu parecer sobre nosso atendimento, será de grande ajuda para o desenvolvimento de nossa parceria.<br><br>"
                         . "Apenas acesse o Link abaixo ou copie e cole no navegar:<br>"
                         . "<a href=\"{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente}\" >"

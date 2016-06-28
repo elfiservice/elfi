@@ -109,7 +109,7 @@ class EmailGenerico extends EmailModel {
 			<tr>
 			<td>
 			<div style=\"padding: 10px 5px; font: 12px verdana, arial, helvetica, sans-serif; color: #000;\">
-			<p>Estamos a disposição para quais quer esclarecimentos, dúvidas ou
+			<p>Estamos à disposição para quaisquer esclarecimentos, dúvidas ou
 			negociações.</p></div>
 			</td>
 			<td></td>

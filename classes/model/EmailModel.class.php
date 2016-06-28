@@ -1,5 +1,5 @@
 <?php
-//$tree = $_SERVER['DOCUMENT_ROOT'].'/site ELFI/colaboradores/';
+//$tree = $_SERVER['DOCUMENT_ROOT'].'/site ELFI/colaboradores/imagens';
 //$tree = $_SERVER['DOCUMENT_ROOT'].'/colaboradores/classes'; //servidor
 
 //require $tree.'classes/util/PHPMailerAutoload.php';

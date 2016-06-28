@@ -27,7 +27,7 @@ class EmailOrcNaoAprovado extends EmailModel{
         private function enviar(){
         // echo 'ar';
                     if(!$this->getPhpMailer()->Send()) {
-                         echo 'NAO';
+                         echo 'Erro';
             return false;
                 } else {
                      echo 'ok';
