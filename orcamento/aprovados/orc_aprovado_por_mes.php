@@ -7,6 +7,10 @@
 $mes_orc_selec = date('m');
 $ano_orc_selec = date('Y');
 
+if (filter_has_var(INPUT_GET, 'ano') && filter_has_var(INPUT_GET, 'mes')) {
+    $mes_orc_selec = filter_input(INPUT_GET, 'mes');
+$ano_orc_selec = filter_input(INPUT_GET, 'ano');
+}
 
 if (filter_has_var(INPUT_POST, 'ano')) {
 
@@ -33,6 +37,8 @@ if(!$controles){
     }
     
 }
+
+
 ?>
 
 
@@ -320,8 +326,8 @@ foreach ($n_orc_total as $row){
                     <TD><?php echo $row['classificacao']; ?></TD>
                     <TD><?php echo $row['descricao_servico_orc']; ?></TD>
                     <TD><?php echo $row['novo_cliente']; ?></TD>
-                    <TD><?php echo $row['n_orc']; ?></TD>
-                    <TD><?php echo $row['prazo_exec_orc']; ?></TD>
+                    <TD><div id="<?=$row['id']?>"><?php echo $row['n_orc']; ?></div></TD>
+                    <TD><?php echo $row['prazo_exec_orc']; ?> dia(s)</TD>
                     <TD><?php echo date('d/m/Y', strtotime($data_aprovada)); ?></TD>
                     <TD><?php if ($row['data_inicio'] == "0000-00-00") {
                 echo "--";

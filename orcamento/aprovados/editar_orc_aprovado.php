@@ -37,6 +37,7 @@ if ($form && $form['salvar_orc']) {
     $data_ultima_alteracao = date('Y-m-d H:i:s');
     $situacao_orc = "Aprovado";
     $serv_concluido = 'n';
+    
 
     // var_dump($data_inicio < $data_conclusao);
 
