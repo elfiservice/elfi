@@ -44,10 +44,10 @@ if (isSet($_POST['ano'])) {
                 }
                 ?>
             </select>
-            <input style="cursor: pointer;  color:#012B8B; border:1px solid #569ABC;" type="submit" name="logar" value="Buscar" id="logar" style="font: 13px verdana, arial, helvetica, sans-serif; background-color: #D5F8D8"  />
+            <input  type="submit" name="logar" value="Buscar" id="logar"   />
         </form>
     </div>
-</fieldset>
+
 
 
 <fieldset>

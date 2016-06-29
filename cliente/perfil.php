@@ -31,7 +31,7 @@ if (filter_has_var(INPUT_GET, 'tipo_cliente')) {
 }
 
 //$usuario_logado = new Usuario($logOptions_id);
-$orc_ctrl = new OrcamentoCtrl();
+
 $cliente = new ClienteCtrl();
 $clienteFinal = $cliente->buscar("*", "WHERE id = $id_cliente AND tipo = '$tipo_cliente'");
 //var_dump($clienteFinal);
@@ -41,85 +41,125 @@ if (!$clienteFinal) {
     exit();
 }
 ?>
-<div  style="background: url(../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"></div>
-<fieldset>
-    <legend><b>Dados do Cliente: <?php echo $clienteFinal->getRazaoSocial(); ?></b></legend>
-    <table>
-        <tr>
-            <td>Cod:</td>
-            <td><?php echo $clienteFinal->getId() . " - TIPO: " . $clienteFinal->getClassificacao(); ?></td>
-        </tr>
-        <tr>
-            <td>Razão Social:</td>
-            <td><?php echo $clienteFinal->getRazaoSocial(); ?></td>
-        </tr>
-        <tr>
-            <td>CNPJ/CPF:</td>
-            <td><?php
-if ($tipo_cliente == "PJ") {
-    echo $clienteFinal->getCnpj();
-} else {
-    echo $clienteFinal->getCpf();
-}
-?></td>
-        </tr>     
-        <tr>
-            <td>IE:</td>
-            <td><?php echo $clienteFinal->getIe(); ?></td>
-        </tr>                    
-        <tr>
-            <td>Endereço:</td>
-            <td><?php echo $clienteFinal->getEndereco() . ", " . $clienteFinal->getBairro() . ", CEP: " . $clienteFinal->getCep() . ", " . $clienteFinal->getCidade() . ", " . $clienteFinal->getEstado(); ?></td>
-        </tr>
+<section>
+    <fieldset>
+        <legend><b>Dados do Cliente: <?php echo $clienteFinal->getRazaoSocial(); ?></b></legend>
+        <table>
+            <tr>
+                <td>Cod:</td>
+                <td><?php echo $clienteFinal->getId() . " - TIPO: " . $clienteFinal->getClassificacao(); ?></td>
+            </tr>
+            <tr>
+                <td>Razão Social:</td>
+                <td><?php echo $clienteFinal->getRazaoSocial(); ?></td>
+            </tr>
+            <tr>
+                <td>CNPJ/CPF:</td>
+                <td><?php
+                    if ($tipo_cliente == "PJ") {
+                        echo $clienteFinal->getCnpj();
+                    } else {
+                        echo $clienteFinal->getCpf();
+                    }
+                    ?></td>
+            </tr>     
+            <tr>
+                <td>IE:</td>
+                <td><?php echo $clienteFinal->getIe(); ?></td>
+            </tr>                    
+            <tr>
+                <td>Endereço:</td>
+                <td><?php echo $clienteFinal->getEndereco() . ", " . $clienteFinal->getBairro() . ", CEP: " . $clienteFinal->getCep() . ", " . $clienteFinal->getCidade() . ", " . $clienteFinal->getEstado(); ?></td>
+            </tr>
 
-        <tr>
-            <td>Email Técnico:</td>
-            <td><?php echo $clienteFinal->getEmailTec(); ?></td>
-        </tr>
-        <tr>
-            <td>Email Admin:</td>
-            <td><?php echo $clienteFinal->getEmailAdmFin(); ?></td>
-        </tr>
-        <tr>
-            <td>Tel:</td>
-            <td><?php echo $clienteFinal->getTel(); ?></td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td><?php echo $clienteFinal->getCel(); ?></td>
-        </tr>
-        <tr>
-            <td>Data de inclusão:</td>
-            <td><?php echo Formatar::formatarDataComHora($clienteFinal->getDataAdd()); ?></td>
-        </tr>
-    </table>
-</fieldset>
+            <tr>
+                <td>Email Técnico:</td>
+                <td><?php echo $clienteFinal->getEmailTec(); ?></td>
+            </tr>
+            <tr>
+                <td>Email Admin:</td>
+                <td><?php echo $clienteFinal->getEmailAdmFin(); ?></td>
+            </tr>
+            <tr>
+                <td>Tel:</td>
+                <td><?php echo $clienteFinal->getTel(); ?></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><?php echo $clienteFinal->getCel(); ?></td>
+            </tr>
+            <tr>
+                <td>Data de inclusão:</td>
+                <td><?php echo Formatar::formatarDataComHora($clienteFinal->getDataAdd()); ?></td>
+            </tr>
 
-<fieldset>
-    <legend><h3>Orçamentos Aprovados (todos os Anos)</h3></legend>	
+            <tr>
+                <td>Satisfação geral do cliente:</td>
+                <td>implementar</td>
+            </tr>        
+        </table>
+        <div>
+            <section>
+                <h4>Quantidade de Orçamentos:</h4>
+                <div class="col-md-3" >
+                    <?php
+                    $orcCtrl = new OrcamentoCtrl();
+                    $orcPorClienteSituacaoAguardando = $orcCtrl->buscarOrcamentos("situacao_orc", "WHERE id_cliente = '$id_cliente' AND situacao_orc = 'Aguardando Aprovação' ");
+                    $orcPorClienteSituacaoAprovado = $orcCtrl->buscarOrcamentos("situacao_orc", "WHERE id_cliente = '$id_cliente' AND situacao_orc = 'Aprovado' ");
+                    $orcPorClienteSituacaoConcluido = $orcCtrl->buscarOrcamentos("situacao_orc", "WHERE id_cliente = '$id_cliente' AND situacao_orc = 'concluido' ");
+                    $orcPorClienteSituacaoCancelado = $orcCtrl->buscarOrcamentos("situacao_orc", "WHERE id_cliente = '$id_cliente' AND situacao_orc = 'Cancelado' ");
+                    $orcPorClienteSituacaoPerdido = $orcCtrl->buscarOrcamentos("situacao_orc", "WHERE id_cliente = '$id_cliente' AND situacao_orc = 'Perdido' ");
+
+                    $totalOrcCliente = count($orcPorClienteSituacaoPerdido) + count($orcPorClienteSituacaoCancelado) + count($orcPorClienteSituacaoConcluido) + count($orcPorClienteSituacaoAprovado) + count($orcPorClienteSituacaoAguardando);
+                    $aguardandoPercent = (count($orcPorClienteSituacaoAguardando) / $totalOrcCliente) * 100;
+                    $aprovadoPercent = (count($orcPorClienteSituacaoAprovado) / $totalOrcCliente) * 100;
+                    $concluidoPercent = (count($orcPorClienteSituacaoConcluido) / $totalOrcCliente) * 100;
+                    $canceladoPercent = (count($orcPorClienteSituacaoCancelado) / $totalOrcCliente) * 100;
+                    $perdidoPercent = (count($orcPorClienteSituacaoPerdido) / $totalOrcCliente) * 100;
+                    ?>
+                    <ul class="list-group">
+                        <li class="list-group-item"><span class="badge"><?= "{$aguardandoPercent}%" ?></span><span class="badge"><?= count($orcPorClienteSituacaoAguardando) ?></span> Aguardando Aprovação</li>
+                        <li class="list-group-item"><span class="badge"><?= "{$aprovadoPercent}%" ?></span><span class="badge"><?= count($orcPorClienteSituacaoAprovado) ?></span> Aprovados</li> 
+                        <li class="list-group-item"><span class="badge"><?= "{$concluidoPercent}%" ?></span><span class="badge"><?= count($orcPorClienteSituacaoConcluido) ?></span> Concluidos</li> 
+                        <li class="list-group-item"><span class="badge"><?= "{$canceladoPercent}%" ?></span><span class="badge"><?= count($orcPorClienteSituacaoCancelado) ?></span> Cancelados</li> 
+                        <li class="list-group-item"><span class="badge"><?= "{$perdidoPercent}%" ?></span><span class="badge"><?= count($orcPorClienteSituacaoPerdido) ?></span> Perdidos</li> 
+                        <li class="list-group-item active"><span class="badge">100%</span><span class="badge"><?= $totalOrcCliente ?></span> Total</li> 
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+
+    </fieldset>
+
+    <fieldset>
+        <legend><b>Orçamentos (Todos os Anos) </b></legend>	
 
 
 
-    <TABLE class="display" id="example"  >
-        <thead>
-            <TR>
+        <TABLE class="display" id="example"  >
+            <thead>
+                <TR>
 
-                <TH>Nº ORC</TH>
+                    <TH>Nº ORC</TH>
+                    <TH>Situação</TH>
+                    <TH>Atividade</TH>
+                    <TH>Classificação</TH>
+                    <TH>Valor</TH>
+                    <TH>Pos-Venda e Historicos  (por se satisfeito ou nao e  Bt historico_completo_orc.php)</TH>
 
-                <TH>Serviço</TH>
-                <TH>Valor</TH>
 
 
 
-            </TR>
-        </thead>
-        <tbody>
+                </TR>
+            </thead>
+            <tbody>
 <?php
 $valor_total = 0;
+
 $nome_cliente = $clienteFinal->getRazaoSocial();
 
-$orcCtrl = new OrcamentoCtrl();
-$orcamentos = $orcCtrl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND situacao_orc = 'Aprovado'");
+$orcamentos = $orcCtrl->buscarOrcamentos("*", "WHERE  id_cliente = '$id_cliente'  ");
 if ($orcamentos) {
     foreach ($orcamentos as $row) {
         // var_dump($row);
@@ -131,15 +171,14 @@ if ($orcamentos) {
 
         $valor_total = $valor_total + $valor_orc;
 
-        echo "<TR><TD align=\"center\">" . $n_orc . "." . $ano_orc . "</TD> <td>" . Formatar::limita_texto($inf_servicos, 200) . "</td> <TD align=\"center\">" . number_format($valor_orc, 2, ',', '.') . "</TD></TR>";
+        echo "<TR><TD align=\"center\">" . $n_orc . "." . $ano_orc . "</TD><td> </td> <td>" . $row['atividade'] . "</td> <TD align=\"center\">" . $row['classificacao'] . "</TD><td>" . number_format($valor_orc, 2, ',', '.') . "</td><td>--</td></TR>";
     }
 }
 ?>  
-        </tbody>
-    </TABLE>
-<?php echo "Valor Total dos Orçamentos Executados: <b>R$ " . number_format($valor_total, 2, ',', '.') . "</b>"; ?>
-</fieldset>	
+            </tbody>
+        </TABLE>
+                <?php echo "Valor Total dos Orçamentos Executados: <b>R$ " . number_format($valor_total, 2, ',', '.') . "</b>"; ?>
+    </fieldset>	
 
-
-
+</section>
 

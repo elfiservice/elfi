@@ -35,8 +35,6 @@ SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
 - Enviar Email ao alterar ou inserir Historico ORC aprovado e nao Aprovado (TEMPORARIAMENTE ATE O SISTEMA DE LOG_)
-OK - ao por a data de Conclusão -> atualizar Dias de Aprovado ( dias_de_aprovado ) na tabela orcamentos -> Fiz dias_d_aprovado, dias_d_execucao, dias_d_ultrapassado em acompanhar_orcamentos.php Atualizando sempre q entrar na pagina
-OK - em Salvar_editar_orc por botao Imprimir
 - Ao Editar o Orçamento Lançar no Historico a Alteração
 - em Orcamentos -> Relatórios: impl. o Botao Pos-Venda ( LER abaixo --> Relatorio POS VENDA:)
 - em Orcamentos -> Relatórios: fazer relatorio Por Atividade e Classificação

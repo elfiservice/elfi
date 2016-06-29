@@ -35,7 +35,10 @@ if (!isset($_SESSION ['idx'])) {
             <meta name="author" content="Elfi Service">
 
             <meta name="viewport" content="width=device-width,initial-scale=1">
-            <link rel="stylesheet" href="estilos.css">
+                        <link rel="stylesheet" href="../css/bootstrap.min.css">
+                        <link rel="stylesheet" href="estilos.css">
+
+
 
             <!-- Mostra colaborador Logado -->
             <?php //include 'includes/javascripts/mostra_colab_logado.php'; ?>
