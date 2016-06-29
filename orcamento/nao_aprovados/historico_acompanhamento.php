@@ -62,6 +62,14 @@ require './../../classes/Config.inc.php';
                 $orcObj->setColabUltimContatoCliente($colab_elfi);
 
                 if ($orcamentoCtrl->atualizarOrcamento($orcObj) && $histoNACtrl->inserirBD($historicoObj)) {
+                    $textoCorpo = "A proposta N. <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b>, cliente <b>{$orcObj->getRazaoSocialContrat()}</b>, teve historico atualizado:"
+                            . "<p> O colaborador <b>{$colab_elfi}</b> falou com <b>{$contato_cliente}</b> no tel/cel <b>{$tel_cliente}</b> o seguinte: <br> <b>{$conversa}</b> </p>";
+                    
+                    $emailHistAcomNAprov = new EmailGenerico($listaEmails, "Adicionado Historico Orc Aguardando Aprovação", $textoCorpo, array(), array(), 1);
+                    if(!$emailHistAcomNAprov->enviarEmailSMTP()){
+                        WSErro("Ocorreu um erro ao tentar enviar o Email!", WS_ERROR);
+                    }
+                    
                     WSErro("Inserido com sucesso!", WS_ACCEPT);
                     echo"<a class=\"bt_link\" href=\"historico_acompanhamento.php?id_orc={$id_orc}\">Voltar</a>";
                     die();
