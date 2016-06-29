@@ -1,15 +1,35 @@
 <?php
+/**
+ * Formatar.class [ utilitario ]
+ * Auxilia na Formatação de dados do Sistema
+ * @copyright (c) 2016, Armando JR. ELFISERVICE
+ */
 
 class Formatar {
 
+    /**
+     * Formatar data do Banco de Dados para o Padrão Brasileiro <b>com</b> a HORA e MINUTOS inclusos
+     * @param date $dataBD = valor da DATA no formato do Banco de Dados <b>0000-00-00 00:00:00</b>
+     * @return date  = retorna valor no formato BR <b>00/00/0000, 00:00</b>
+     */
     public static function formatarDataComHora($dataBD) {
         return date('d/m/Y, H:i', strtotime($dataBD));
     }
 
+        /**
+     * Formatar data do Banco de Dados para o Padrão Brasileiro <b>SEM</b> a HORA e MINUTOS inclusos
+     * @param date $dataBD = valor da DATA no formato do Banco de Dados <b>0000-00-00 00:00:00</b>
+     * @return date  = retorna valor no formato BR <b>00/00/0000</b>
+     */
     public static function formatarDataSemHora($dataBD) {
         return date('d/m/Y', strtotime($dataBD));
     }
 
+    /**
+     * Formatar <b>CPF</b> ou <b>CNPJ</b> para apenas <b>Numeros</b>
+     * @param string $valor = valor do CPF ou CNPJ <b>com</b> pontos e traços e/ou barras
+     * @return string  =  retorna valor <b>sem</b> pontos, traços e/ou barras, apenas numeros
+     */
     public static function limpaCPF_CNPJ($valor) {
         $valor = trim($valor);
         $valor = str_replace(".", "", $valor);
@@ -19,6 +39,12 @@ class Formatar {
         return $valor;
     }
 
+    /**
+     * Formatar <b>Tel, CEP, CNPJ ou CPF</b> para ser mostrado em <b>TELA</b>
+     * @param string $string = recebe valor com <b>apenas numeros</b> do <b>tipo </b>FONE, CEP, CPF OU CNPJ
+     * @param string $tipo = <b>caso queira</b>, informe o <b>tipo</b> que quer Formatar explicitamente ou não preencha
+     * @return string = retonar o valor FONE <b>(XX) XXXX-XXXX</b>, CEP <b>XXXXX-XXX</b>, CPF <b>XXX.XXX.XXX-XX</b>, CNPJ <b>XX.XXX.XXX/XXXX-XX</b>
+     */
     public static function formatTelCnpjCpf($string, $tipo = "") {
         $string = preg_replace("[^0-9]", "", $string);
         if (!$tipo) {
@@ -58,6 +84,13 @@ class Formatar {
         return $string;
     }
 
+    /**
+     * Formata o TEXTO <b>limitando</b> na TELA
+     * @param string $texto = Recebe o TEXTO completo
+     * @param int $limite = <b>Numero</b> de CARACTERES a serem Mostrados na TELA
+     * @param boolean $quebra = se TRUE para deixar Quebrar o TEXTO
+     * @return string = Texto com a limitação <b>" ... "</b>
+     */
     public static function limita_texto($texto, $limite, $quebra = true) {
         $tamanho = strlen($texto);
         // Verifica se o tamanho do texto é menor ou igual ao limite    
@@ -80,6 +113,11 @@ class Formatar {
         return $novo_texto;
     }
 
+    /**
+     * Formata valor MONETARIO para INSERIR no Banco de Dados
+     * @param float $get_valor = recebe valor Formato Brasileiro 
+     * @return float = retorna valor no Formato 00000.00 para INSERIR no BD
+     */
     public static function moedaBD($get_valor) {
         $source = array('.', ',');
         $replace = array('', '.');
@@ -89,9 +127,9 @@ class Formatar {
 
     /**
      * Faz a diferença em DIAS das duas datas fornecidas <b>(NOTA: sem as HORAS e formato AMERICANO -> xxxx-xx-xx )</b> 
-     * @param date $dataInical = Data no Formato US ( xxxx-xx-xx ) inicial a Menor
-     * @param date $dataFinal = Data no Formato US ( xxxx-xx-xx ) Final a Maior
-     * @return int = Diferença de Dias entre as duas datas
+     * @param date $dataInical = Data no Formato <b>US ( xxxx-xx-xx ) inicial</b> a Menor
+     * @param date $dataFinal = Data no Formato <b>US ( xxxx-xx-xx ) Final</b> a Maior
+     * @return int = <b>Numero</b> da Diferença de <b>Dias</b> entre as duas datas
      */
     public static function diffDuasDatas($dataInical, $dataFinal) {
         // Define os valores a serem usados

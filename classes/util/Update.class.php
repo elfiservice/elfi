@@ -5,8 +5,13 @@ class Update extends Conexao {
     private $select;
     private $sql;
     private $resultado;
+    
+    /**
+     *
+     * @var mysqli
+     */
     private $conexao;
-    private $query;
+ 
 
     public function ExecUpdate($tabela, $camposDados, $termos, $parseString = null) {
 
@@ -19,9 +24,17 @@ class Update extends Conexao {
     public function getResultado() {
         return $this->resultado;
     }
+    
+            /**
+     * <b>GetRowCount</b> retorna o numero de linhas da atualziação
+     * @return int
+     */
+    public function getRowCount() {
+        return $this->conexao->affected_rows;
+    }
 
     private function conectarBD() {
-        $this->conexao = parent::conectarMysqli();
+        $this->conexao = parent::getConn();
     }
 
     private function executar() {

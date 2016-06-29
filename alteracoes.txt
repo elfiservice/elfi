@@ -36,6 +36,8 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
+
+- ao por a data de Conclusão -> atualizar Dias de Aprovado ( dias_de_aprovado ) na tabela orcamentos
 - em Salvar_editar_orc por botao Imprimir
 - Ao Editar o Orçamento Lançar no Historico a Alteração
 - em Orcamentos -> Relatórios: impl. o Botao Pos-Venda ( LER abaixo --> Relatorio POS VENDA:)
@@ -45,15 +47,7 @@ manterOrcamento:
 - Botao Enviar Proposta por Email com anexo o PDF
 - em Cliente -> Perfil: por Nº orc aprovados, perdidos, cancelados, em abertos ( % aprovado geral deste cliente, % satisfação deste cliente)
 
-OK - Editar Orçamentos: alterar a DATA da Proposta ( fazer IF para por data da ultima alteção se ela não for 000-00-00 )
-OK - Corrigir Atualização Dias de Atraso e total de Dias de Execução -> ao por data de Concluido o Serviço em AProvados
-OK - Orçamento -> Histórico Orçamento Completo: calcular DATA de Execução ( diferença de dias do Inicio ao Termino dos Serviços)
-OK - apos Aprovado: não deixar Editar mais, nem Excluir
-OK - Corrigir orcamento/nao_aprovados/salvar/historico.php ao SALVAR! ( ** criar Entidade para Historico Orc não Aprovado **)
-OK - apos Concluido ORC: alterar situação orc para Concluido
-OK - apos Concluido ORC: não ser mais possivel Editar o Orc. 
-OK - apos Concluido/cancelado/perdido ORC   - por Historico dos ORçamento Antes de Aprovado e Depois de Aprovado
-OK - em Histórico Orçamento Completo: se foi respondida pos VEnda informar as respostas do Cliente para essa Proposta.
+
 ------------------------------------------------------------------------
 CRON:
 - enviar email para clientes q estao marcados nos Orcamentos como novo cliente quando fizer 1 ano CLIENTE

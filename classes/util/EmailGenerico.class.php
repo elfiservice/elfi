@@ -1,6 +1,5 @@
 <?php
 
-//http://elfiservice.eco.br/colaboradores/imagens/
 /**
  * EmailGenerico.class [ utilitario ]
  * Enviar Email de forma generica, qualquer tipo de Email
@@ -10,7 +9,15 @@ require 'PHPMailerAutoload.php';
 
 class EmailGenerico extends EmailModel {
 
+    /**
+     *
+     * @var String = Texto vai que vai inserido no Corpo do Email
+     */
     private $textoCorpo;
+    /**
+     *
+     * @var int = Por padrão é NULL para enviar corpo do Email Cliente e passando 1 Envia corpo de EMail Colaboradores
+     */
     private $tipoEmail;
 
     /**
@@ -22,39 +29,36 @@ class EmailGenerico extends EmailModel {
      * @param array $emailCopiaOculta
      * @param int $tipoEmail = deixar NULL para envio Cliente e macar com 1 para envio Colaboradores (interno)
      */
-    public function __construct(array $emailTo, $assunto, $textoCorpo, array $emailCopia = array(), array $emailCopiaOculta = array(), $tipoEmail=NULL) {
+    public function __construct(array $emailTo, $assunto, $textoCorpo, array $emailCopia = array(), array $emailCopiaOculta = array(), $tipoEmail = NULL) {
         $this->setEmailTo($emailTo);
         $this->setAssunto_email($assunto);
-        $this->setTextoCorpo($textoCorpo);
         $this->setEmailCopia($emailCopia);
         $this->setEmailCopiaOculta($emailCopiaOculta);
         $this->tipoEmail = $tipoEmail;
+        $this->textoCorpo = $textoCorpo;
+         //$this->setTextoCorpo($textoCorpo);
     }
 
     private function enviar() {
-        // echo 'ar';
         if (!$this->getPhpMailer()->Send()) {
-            //echo 'NAO';
             return false;
         } else {
-            //echo 'ok';
             return true;
         }
     }
 
     public function enviarEmailSMTP() {
 
-        
-        $this->configEmailSmtp();
-        $this->getPhpMailer()->SetFrom($this->getEmailFrom(), 'Sistema Elfi');
+        parent::configEmailSmtp();
+        $this->getPhpMailer()->SetFrom($this->getEmailFrom(), SITENAME);
         //monta Destinatarios no Email TO
         $this->preparaDestinatarios($this->getEmailTo(), $this->getEmailCopia(), $this->getEmailCopiaOculta());
         $this->getPhpMailer()->Subject = $this->getAssunto_email();
-        
+
         $this->selecionarCorpoEmail($this->tipoEmail);
-        
+
         $this->getPhpMailer()->Body = $this->getCorpoEmail();
-        //var_dump($this->getPhpMailer());
+
         return $this->enviar();
     }
 
@@ -81,12 +85,13 @@ class EmailGenerico extends EmailModel {
     }
 
     private function selecionarCorpoEmail($tipoEmail) {
-        if($tipoEmail == null){
+        if ($tipoEmail == null) {
             $this->montrCorpoEmail();
-        }else if($tipoEmail == 1){
+        } else if ($tipoEmail == 1) {
             $this->montrCorpoEmailColaborares();
         }
     }
+
     private function montrCorpoEmail() {
         $corpo = "
 			<html>
@@ -102,8 +107,8 @@ class EmailGenerico extends EmailModel {
 			</tr>
 			<tr>
 			<td>
-			<div style=\"padding: 15px 5px; font: 12px verdana, arial, helvetica, sans-serif; color: #000;\">
-                                                        {$this->getTextoCorpo()}
+			<div style=\"margin: 15px 0px; font: 12px verdana, arial, helvetica, sans-serif; color: #000;\">
+                                                        <p>{$this->getTextoCorpo()}</p>
 			</div>
 			</td>
 				
@@ -111,7 +116,7 @@ class EmailGenerico extends EmailModel {
 			<tr>
 			<td>
 			<div style=\"padding: 10px 5px; font: 12px verdana, arial, helvetica, sans-serif; color: #000;\">
-			<p>Estamos a disposição para quais quer esclarecimentos, dúvidas ou
+			<p>Estamos à disposição para quaisquer esclarecimentos, dúvidas ou
 			negociações.</p></div>
 			</td>
 			<td></td>
@@ -149,7 +154,7 @@ class EmailGenerico extends EmailModel {
         $this->setCorpoEmail($corpo);
     }
 
-        private function montrCorpoEmailColaborares() {
+    private function montrCorpoEmailColaborares() {
         $corpo = "
 			<html>
 			<body>
@@ -193,7 +198,7 @@ class EmailGenerico extends EmailModel {
 			";
         $this->setCorpoEmail($corpo);
     }
-    
+
     public function getTextoCorpo() {
         return $this->textoCorpo;
     }

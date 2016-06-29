@@ -1,51 +1,49 @@
 <?php
-
+/**
+ * Conexao.class [ Conexão ]
+ * Classe conexão padrão Singleton
+ * Retorna um OBJ mysqli pelo metodo estatico getConn();
+ * 
+ * @copyright (c) 2016, Armando JR. ELFISERVICE
+ */
 class Conexao {
 
-    private $servidor = "localhost";
-    private $usuario_servidor = "root";
-    private $senha_servidor = "";
-    private $bando_de_dados = "elfiserv_sistema_elfi";
+    private static $host = HOST;
+    private static $user = USER;
+    private static $pass = PASS;
+    private static $dbsa = DBSA;
 
-    /* 	public function __construct($pServidor, $pUsuario_servidor, $pSenha_servidor, $pBanco_de_dados){
-      $this->servidor = $pServidor;
-      $this->usuario_servidor = $pUsuario_servidor;
-      $this->senha_servidor = $pSenha_servidor;
-      $this->bando_de_dados = $pBanco_de_dados;
-      }
+    /**
+     * @var mysqli
      */
+    private static $connect = null; //só vai executar a conexão se o Connect estiver NULL 
 
-    public function conectar() {
-        //$conn = @mysql_connect("localhost","root","") or die ("O servidor nao responde!");
-        //conecta-se ao banco de dados
-        //$db = @mysql_select_db("elfiserv_sistema_elfi",$conn)
-        //or die ("Nao foi possivel conectar-se ao banco de dados!");
-        new mysqli('localhost', 'root', '', 'elfiserv_sistema_elfi');
-        //$mysqli = new mysqli($this->servidor,$this->usuario_servidor,'','elfiserv_sistema_elfi');
-        // = $mysqli->query('SELECT * FROM colaboradores');
-        //$query->num_rows;
-    }
+    private static function conectarMysqli() {
 
-    public function conectarMysqli() {
-        // faz conex�o com o servidor MySQL
-//        $local_serve = "localhost";   // local do servidor
-//        $usuario_serve = "root";   // nome do usuario
-//        $senha_serve = "";      // senha
-//        $banco_de_dados = "elfiserv_sistema_elfi";   // nome do banco de dados
-//
-//        $conn = @mysql_connect($local_serve, $usuario_serve, $senha_serve) or die("O servidor n�o responde!");
-//
-//// conecta-se ao banco de dados
-//        $db = @mysql_select_db($banco_de_dados, $conn)
-//                or die("N�o foi possivel conectar-se ao banco de dados!");
-        
-        return new mysqli('localhost', 'root', '', 'elfiserv_sistema_elfi');
-        
+        try {
+            if (self::$connect == null) { //Padrão SINGLETON -> so se tem uma unica INSTANCIA deste tipo PDO no sistema
+                self::$connect = new mysqli(self::$host, self::$user, self::$pass, self::$dbsa);
+            }
+        } catch (Exception $ex) {
+            PHPErro($ex->getCode(), $ex->getMessage(), $ex->getFile(), $ex->getLine());
+            die();
+        }
+
+        return self::$connect;
     }
 
     public static function desconectar() {
-        mysql_close(mysql_connect($this->servidor, $this->usuario_servidor, $this->senha_servidor)) or die("N�o foi possivel DESconectar-se ao banco de dados!");
-        ;
+        self::$connect->close();
     }
 
+    
+    public static function getConn() {
+        return self::conectarMysqli();
+    }
+
+    
+    public static function getCloseConn() {
+        return self::desconectar();
+    }
+    
 }

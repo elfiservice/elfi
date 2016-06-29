@@ -1,19 +1,19 @@
 <?php
-//$tree = $_SERVER['DOCUMENT_ROOT'].'/site ELFI/colaboradores/';
-//$tree = $_SERVER['DOCUMENT_ROOT'].'/colaboradores/classes'; //servidor
-
-//require $tree.'classes/util/PHPMailerAutoload.php';
-
+/**
+ * EmailModel.class [ MODEL ]
+ * Modelo Resp por configurar a PHPMailer e validar os dados e disparar emails do sistema
+ * @copyright (c) 2016, Armando JR. ELFISERVICE
+ */
 abstract class EmailModel {
 
-    private $emailFrom = "elfi@elfiservice.com.br";
+    private $emailFrom = MAILUSER;
     private $emailTo = array();
     private $emailCopia = array();
     private $emailCopiaOculta = array();
     private $assunto_email;
     private $corpoEmail;
     private $altCorpoEmail; //quando nao tem formato HTML, pow so texto aqui
-    private $image_name = "logo_elfi_email.jpg";
+    private $image_name;
     
 
     /**
@@ -22,17 +22,16 @@ abstract class EmailModel {
      */
     private $phpMailer;
 
-    public function configEmailSmtp() {
-//            $this->phpMailer = new PHPMailer();
-//            $this->phpMailer->CharSet = "UTF-8";
+    protected function configEmailSmtp() {
+        $this->setImage_name(WWW . "/imagens/logo_elfi_email.jpg");
         $this->setPhpMailer(new PHPMailer);
         $this->getPhpMailer()->CharSet = "UTF-8";
         $this->getPhpMailer()->IsSMTP();
-        $this->getPhpMailer()->Host = 'smtp.elfiservice.com.br';
+        $this->getPhpMailer()->Host = MAILHOST;
         $this->getPhpMailer()->SMTPAuth = true;
-        $this->getPhpMailer()->Username = 'elfi@elfiservice.com.br';
-        $this->getPhpMailer()->Password = '';
-        $this->getPhpMailer()->Port = 587;
+        $this->getPhpMailer()->Username = MAILUSER;
+        $this->getPhpMailer()->Password = MAILPASS;
+        $this->getPhpMailer()->Port = MAILPORT;
         $this->getPhpMailer()->AddAttachment($this->getImage_name());
         $this->getPhpMailer()->IsHTML(true);
     }

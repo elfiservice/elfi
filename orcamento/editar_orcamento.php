@@ -21,10 +21,10 @@ $orc = filter_input(INPUT_GET, 'id_orc', FILTER_VALIDATE_INT);
 if ($orc) {  // TESTA SE o id_orc no link é VALIDO
     //BUSCAR Orçamento
     $OrcCtrl = new OrcamentoCtrl();
-    $OrcBdCtrl = $OrcCtrl->buscarOrcamentos("*", "where id = $orc");
+    $OrcBdCtrl = $OrcCtrl->buscarOrcamentos("*", "where id= $orc ");
     $OrcBd = $OrcBdCtrl[0];
     
-    if (!$OrcBdCtrl) {
+    if (!$OrcBd) {
         WSErro("Orçamento não encontrado!", WS_ALERT);
         die();
     }
@@ -87,7 +87,7 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
             </a>
         </li>
 <?php
-if ($situacao_orc == "Aguardando aprovação" || $_SESSION['id'] == $id_colab) {
+if ($situacao_orc == "Aguardando aprovação" || $_SESSION['id'] == $id_colab && $situacao_orc != "concluido") {
     ?>        
             <li>
                 <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y'); ?>&id_orc=<?php echo $id; ?>&id_menu=editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
@@ -195,7 +195,7 @@ if ($situacao_orc == "Aguardando aprovação" || $_SESSION['id'] == $id_colab) {
 
 
 <?php
-if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc != "Perdido") {
+if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc != "Perdido" && $situacao_orc != "concluido") {
     ?>
 
     <div  class="" style="margin-top: 20px;">

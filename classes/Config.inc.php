@@ -7,10 +7,13 @@ define('WWW', 'http://localhost/site%20ELFI/colaboradores');
 
 
 //CONFIG. DO SITE ##########################
+//Banco de DADOS
 define('HOST', 'localhost');  //via RunTime = em tempo de execução
 define('USER', 'root');
 define('PASS', '');
-define('DBSA', 'wsphp');
+define('DBSA', 'elfiserv_sistema_elfi');
+//Dados do ADMIN
+define('NOME_ADMIN', 'Armando Jr.');
 define('EMAIL_ADMIN', 'junior@elfiservice.com.br');
 
 //DEFINE SERVIDOR DE EMAILS###################
@@ -34,11 +37,18 @@ $iDir = null;   //se houve a inclusao do diretorio caso não, lança um ERRO
 //__DIR__ => pega o nome do diretorio deste Arquivo Config.inc.php no caso _app
 
 foreach ($cDir as $dirName){
-    if(!$iDir && file_exists(__DIR__ . "\\{$dirName}\\{$pClass}.class.php") && !is_dir(__DIR__ . "\\{$dirName}\\{$pClass}.class.php")){  //  \ -> para incluir como Arquivo(mas ele quebra o codigo, então poe a segunda ->  \
-        include_once (__DIR__ . "\\{$dirName}\\{$pClass}.class.php");
-        $iDir = true;
+//    if(!$iDir && file_exists(__DIR__ . "\\{$dirName}\\{$pClass}.class.php") && !is_dir(__DIR__ . "\\{$dirName}\\{$pClass}.class.php")){  //  \ -> para incluir como Arquivo(mas ele quebra o codigo, então poe a segunda ->  \
+//        include_once (__DIR__ . "\\{$dirName}\\{$pClass}.class.php");
+//        $iDir = true;
+//        
+//    }
+    
+         if(!$iDir && file_exists(__DIR__  . "/{$dirName}/{$pClass}.class.php") && !is_dir(__DIR__  . "/{$dirName}/{$pClass}.class.php")){  //  MODELO DO SERVIDOR
+         include_once (__DIR__  . "/{$dirName}/{$pClass}.class.php");
+         $iDir = true;
         
-    }
+     }
+    
 }
 
 if(!$iDir){
