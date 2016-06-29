@@ -1,5 +1,5 @@
 ONDE PAREI:
-
+- Perfil Cliente
 
 #########################################################################################
 A FAZER antes de ENVIAR para o SERVIDOR:
@@ -36,12 +36,15 @@ SETOR TECNICO:
 manterOrcamento:
 - Enviar Email ao alterar ou inserir Historico ORC aprovado e nao Aprovado (TEMPORARIAMENTE ATE O SISTEMA DE LOG_)
 - Ao Editar o Orçamento Lançar no Historico a Alteração
+- Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa ( OU POR no CRON a cada 10 dias )
+- em Orcamentos -> Relatórios: por dodos as SITAUÇÕES COM %
+ - informar historico desconto ?! --> ao alterar preço da Proposta (Editar) lançar no historico Proposta Não AProvada
 - em Orcamentos -> Relatórios: impl. o Botao Pos-Venda ( LER abaixo --> Relatorio POS VENDA:)
 - em Orcamentos -> Relatórios: fazer relatorio Por Atividade e Classificação
- - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa ( OU POR no CRON a cada 10 dias )
- - informar historico desconto ?!
+ - em Cliente -> Perfil: % satisfação deste cliente
+
 - Botao Enviar Proposta por Email com anexo o PDF
-- em Cliente -> Perfil: por Nº orc aprovados, perdidos, cancelados, em abertos ( % aprovado geral deste cliente, % satisfação deste cliente)
+
 
 
 ------------------------------------------------------------------------
