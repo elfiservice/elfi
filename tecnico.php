@@ -3,7 +3,6 @@ include "checkuserlog.php";
 require 'classes/Config.inc.php';
 
 
-
 if (!isset($_SESSION ['idx'])) {
     if (!isset($_COOKIE ['idCookie'])) {
        include_once 'conectar.php';
@@ -70,7 +69,7 @@ if (!isset($_SESSION ['idx'])) {
 
             <?php
             $tipo_conta = $_SESSION['tipo_user'];
-
+            
             if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh") {
                 ?>
 
