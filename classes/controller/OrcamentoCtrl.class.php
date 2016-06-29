@@ -252,7 +252,7 @@ class OrcamentoCtrl{
                   
                   public function inserirHistoricoOrcAprovado(array $valores, $tabela = "historico_orc_aprovado") {
                       $camposBd = "id_acompanhamento, data, descricao, id_colab, colaborador";
-                      $valoresUser = "'{$valores[0]}','{$valores[1]}', '{$valores[2]}', '{$valores[3]}', '{$valores[4]}'";
+                      $valoresUser = " '{$valores[0]}','{$valores[1]}', '{$valores[2]}', '{$valores[3]}', '{$valores[4]}' ";
                                      
                       
                       if($this->OrcDao->insert($camposBd, $valoresUser, $tabela)){

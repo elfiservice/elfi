@@ -21,14 +21,21 @@ class HistoricoOrcNaoAprovadoCtrl {
     public function inserirBD(HistoricoOrcNaoAprovado $obj) {
         if ($obj instanceof HistoricoOrcNaoAprovado) {
 
+            
+           
             foreach ((array) $obj as $campo => $valor) {
                 $campo = str_replace("\0HistoricoOrcNaoAprovado\0", "", $campo);
                 $campoArr[$campo] = $campo;
             }
-
+            
+            unset($campoArr['id']);
+            $arrObj = array_values((array) $obj);
+            unset($arrObj[0]);
+            
             $campoArr = implode(', ', array_keys($campoArr));
-            $valores = " '" . implode("','", array_values((array) $obj)) . "' ";
+            $valores = " '" . implode("','", array_values($arrObj)) . "' ";
 
+            
             if ($this->historicoOrcNAprovadoDAO->insert($campoArr, $valores)) {
                 return TRUE;
             } else {

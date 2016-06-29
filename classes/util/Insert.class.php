@@ -39,7 +39,7 @@ class Insert extends Conexao {
     private function executar() {
         $this->conectarBD();
         $this->sql = $this->conexao->query($this->select);
-
+        //var_dump($this);
         if ($this->sql) {
             $this->resultado = true;
         } else {

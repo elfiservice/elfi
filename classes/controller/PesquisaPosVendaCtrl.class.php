@@ -14,7 +14,7 @@ class PesquisaPosVendaCtrl {
         $this->OrcDao = new PesquisaPosVendaDAO();
     }
 
-        /**
+    /**
      * Fazer INSERT no BD na tabela = pesquisa_pos_venda
      * @param PesquisaPosVenda $pesquisaObj = passar uma Instancia deste tipo para inserir no BD
      * @return boolean = TRUE se Sucesso ao inserir dados no BD e FALSE se houver algum problema na INSERÇÃO ou se o OBJETO não foi passado corretamente
@@ -23,12 +23,17 @@ class PesquisaPosVendaCtrl {
         if ($pesquisaObj instanceof PesquisaPosVenda) {
 
             foreach ((array) $pesquisaObj as $campo => $valor) {
+
                 $campo = str_replace("\0PesquisaPosVenda\0", "", $campo);
                 $campoArr[$campo] = $campo;
             }
 
+            unset($campoArr['id']);
+            $arrObj = array_values((array) $pesquisaObj);
+            unset($arrObj[0]);
+
             $campoArr = implode(', ', array_keys($campoArr));
-            $valores = " '" . implode("','", array_values((array) $pesquisaObj)) . "' ";
+            $valores = " '" . implode("','", array_values($arrObj)) . "' ";
 
             if ($this->OrcDao->insert($campoArr, $valores)) {
                 return true;
