@@ -33,6 +33,8 @@ if ($orc) {  // TESTA SE o id_orc no link é VALIDO
     die();
 }
 
+$_SESSION['orcObjInicial'] = array($OrcBd); //envia objeto para pagina de Salvar a Edição do Orcamento
+
 extract($OrcBd);
 
 //ALTERAR SITUAÇÃO ORC

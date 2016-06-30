@@ -18,7 +18,7 @@ class HistoricoOrcNaoAprovado {
     private $conversa;
     private $mostrar;
 
-    public function __construct($id, $id_orc, $dia_do_contato, $dia_da_edicao, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, $mostrar) {
+    public function __construct($id, $id_orc, $dia_do_contato, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, $mostrar=1, $dia_da_edicao = NULL ) {
         $this->id = $id;
         $this->id_orc = $id_orc;
         $this->dia_do_contato = $dia_do_contato;

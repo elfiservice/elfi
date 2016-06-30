@@ -56,7 +56,7 @@ require './../../classes/Config.inc.php';
                 $id_colab = $_SESSION['id'];
                 $id_orc = $salvar['id_orc'];
 
-                $historicoObj = new HistoricoOrcNaoAprovado("", $id_orc, $dia_do_contato, "0000-00-00 00:00:00", $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, 1);
+                $historicoObj = new HistoricoOrcNaoAprovado("", $id_orc, $dia_do_contato, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, 1);
 
                 $orcObj->setDataUltimContatoCliente($dia_do_contato);
                 $orcObj->setColabUltimContatoCliente($colab_elfi);

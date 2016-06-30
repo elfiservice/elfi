@@ -124,7 +124,17 @@ class Formatar {
         $valor = str_replace($source, $replace, $get_valor); //remove os pontos e substitui a virgula pelo ponto
         return $valor; //retorna o valor formatado para gravar no banco
     }
+    
+    /**
+     * Formatar valor do BD para Monetario Brasileiro
+     * @param float $valorDoBancoDados = Valor vindo do Banco de Dados no formato <b>00000.00 </b>
+     * @return number = formatado ex: 0.000,00
+     */
+    public static function moedaBR($valorDoBancoDados) {
+        return number_format($valorDoBancoDados, '2',',','.');
+    }
 
+    
     /**
      * Faz a diferença em DIAS das duas datas fornecidas <b>(NOTA: sem as HORAS e formato AMERICANO -> xxxx-xx-xx )</b> 
      * @param date $dataInical = Data no Formato <b>US ( xxxx-xx-xx ) inicial</b> a Menor
