@@ -34,7 +34,7 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-- Enviar Email ao alterar ou inserir Historico ORC aprovado e nao Aprovado (TEMPORARIAMENTE ATE O SISTEMA DE LOG_)
+OK - Enviar Email ao alterar ou inserir Historico ORC aprovado e nao Aprovado (TEMPORARIAMENTE ATE O SISTEMA DE LOG_)
 - Ao Editar o Orçamento Lançar no Historico a Alteração
 - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa ( OU POR no CRON a cada 10 dias )
 - em Orcamentos -> Relatórios: por dodos as SITAUÇÕES COM %

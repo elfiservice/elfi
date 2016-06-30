@@ -4,29 +4,7 @@
 <hr>
 <?php
 //$ano_atual = date('Y');
-//Salva Historico no BD
-if(filter_has_var(INPUT_POST, 'salvar_historico_orc_aprov')){
-    $id_orc = filter_input(INPUT_POST, 'id_orc', FILTER_DEFAULT);
-    $data = filter_input(INPUT_POST, 'dia_hoje', FILTER_DEFAULT);
-    $descricao_historico = filter_input(INPUT_POST, 'descricao_historico', FILTER_DEFAULT);
-    $id_colab = $_SESSION['id'];
-    $colab = $_SESSION['Login'];
-    
-    if($descricao_historico){
-     $orcamentoCtrl = new OrcamentoCtrl();
-     $valores = array($id_orc, $data, $descricao_historico,  $id_colab, $colab ); //Por na seguencia CERTA da TAbela
-    if($orcamentoCtrl->inserirHistoricoOrcAprovado($valores)){
-        WSErro("Salvo com sucesso.", WS_ACCEPT);
-    }else{
-        WSErro("Ocorreu algum Erro ao tentar salvar.", WS_ERROR);
-    }
-    }else{
-        WSErro("Campo Descrição em branco!", WS_ALERT);
-    }
-    echo"<a class=\"bt_link\" href=\"tecnico.php?id_menu=hitorico_orc_aprovado&id_orc={$id_orc}\">Voltar</a>";
-    
-    die();
-}
+
 
 //VERIFICA A URL E PARAMETRO PASSADO
 $id_orc = filter_input(INPUT_GET, 'id_orc', FILTER_VALIDATE_INT);
@@ -41,6 +19,40 @@ if ($id_orc) {
     }
 } else {
     WSErro("Erro na URL!", WS_ERROR);
+    die();
+}
+
+//Salva Historico no BD
+if (filter_has_var(INPUT_POST, 'salvar_historico_orc_aprov')) {
+    $id_orc = filter_input(INPUT_POST, 'id_orc', FILTER_DEFAULT);
+    $data = filter_input(INPUT_POST, 'dia_hoje', FILTER_DEFAULT);
+    $descricao_hist = filter_input(INPUT_POST, 'descricao_historico', FILTER_DEFAULT);
+    $descricao_historico = nl2br($descricao_hist);
+    $id_colab = $_SESSION['id'];
+    $colab = $_SESSION['Login'];
+
+    if ($descricao_historico) {
+        $orcamentoCtrl = new OrcamentoCtrl();
+        $valores = array($id_orc, $data, $descricao_historico, $id_colab, $colab); //Por na seguencia CERTA da TAbela
+        if ($orcamentoCtrl->inserirHistoricoOrcAprovado($valores)) {
+
+            $textoCorpo = "A proposta N. <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b>, cliente <b>{$orcObj->getRazaoSocialContrat()}</b>, teve historico atualizado:"
+                    . "<p> O colaborador <b>{$colab}</b> adicionou o seguinte: <br> <b>{$descricao_historico}</b> </p>";
+
+            $emailHistAcomNAprov = new EmailGenerico($listaEmails, "Adicionado Historico Orc Aprovado", $textoCorpo, array(), array(), 1);
+            if (!$emailHistAcomNAprov->enviarEmailSMTP()) {
+                WSErro("Ocorreu um erro ao tentar enviar o Email!", WS_ERROR);
+            }
+
+            WSErro("Salvo com sucesso.", WS_ACCEPT);
+        } else {
+            WSErro("Ocorreu algum Erro ao tentar salvar.", WS_ERROR);
+        }
+    } else {
+        WSErro("Campo Descrição em branco!", WS_ALERT);
+    }
+    echo"<a class=\"bt_link\" href=\"tecnico.php?id_menu=hitorico_orc_aprovado&id_orc={$id_orc}\">Voltar</a>";
+
     die();
 }
 
@@ -63,7 +75,7 @@ if (!isset($_SESSION['idx'])) {
 
     <fieldset>
         <legend><b>Dados</b></legend>
-        <form action="tecnico.php?id_menu=hitorico_orc_aprovado" method="post" enctype="multipart/form-data" name="formAgenda">
+        <form action="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?= $orcObj->getId() ?>" method="post" enctype="multipart/form-data" name="formAgenda">
             Data deste Historico: 	<b><?= Formatar::formatarDataSemHora($data_hj); ?></b>
             </br></br>
             <label for="email_orc">Descrição:</label></br>
@@ -71,7 +83,7 @@ if (!isset($_SESSION['idx'])) {
             </br></br>
             <input  type="submit" name="salvar_historico_orc_aprov" value="Salvar" id="logar"  />
             <input type="hidden" value="<?= $data_hj; ?>" name="dia_hoje"  />
-             <input type="hidden" name="id_orc" value="<?= $orcObj->getId() ?>" />				
+            <input type="hidden" name="id_orc" value="<?= $orcObj->getId() ?>" />				
         </form>
 
     </fieldset>
@@ -94,26 +106,26 @@ if (!isset($_SESSION['idx'])) {
 
                 <?php
                 $histoORc = $orcamentoCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc' AND mostrar= '0' ORDER BY id DESC", "historico_orc_aprovado");
-                if($histoORc){
-                foreach ($histoORc as $row) {
-                    ?>
-                    <tr>
-                        <td class="center">
-                            <a class="bt_link bt_verde" href="tecnico.php?id_menu=editar_historico_orc_aprovado&id_historico=<?= $row['id']?>" >editar</a>
-                            <hr>
-                            <a class="bt_link bt_vermelho" href="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $row['id']?>">excluir</a>
-                        </td>
-                    
-                        <td><?= Formatar::formatarDataSemHora( $row['data']) ?></td>
-                        <td><?php echo $row['descricao']; ?></td>
-                        <td><?php echo $row['colaborador']; ?></td>
+                if ($histoORc) {
+                    foreach ($histoORc as $row) {
+                        ?>
+                        <tr>
+                            <td class="center">
+                                <a class="bt_link bt_verde" href="tecnico.php?id_menu=editar_historico_orc_aprovado&id_historico=<?= $row['id'] ?>" >editar</a>
+                                <hr>
+                                <a class="bt_link bt_vermelho" href="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $row['id'] ?>">excluir</a>
+                            </td>
+
+                            <td><?= Formatar::formatarDataSemHora($row['data']) ?></td>
+                            <td><?php echo $row['descricao']; ?></td>
+                            <td><?php echo $row['colaborador']; ?></td>
 
 
-                    </tr>
+                        </tr>
 
 
-                    <?php
-                }
+                        <?php
+                    }
                 }
                 ?>
 
