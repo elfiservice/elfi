@@ -34,13 +34,24 @@ body {
 }
 
 /**************************************
-
-/************ CSS TRIGGER - tratamento ERROS *************
-
+/************ CSS CORES de TEXTO  - Padrões Cores do Sistema *************
 **************************************/
+.elfi_cor_padrao_texto{    color: #012B8B;}
+
+/**************************************
+/************ CSS CORES de FUNDO  - Padrões Cores do Sistema *************
+**************************************/
+.elfi_cor_fundo_indice{background-color: #C6CFE4;}
+.elfi_cor_fundo_branco{ background-color: white;}
+.elfi_cor_fundo_tabela{ background-color: #DAE2F5;}
 
 
 
+
+
+/**************************************
+/************ CSS TRIGGER - tratamento ERROS *************
+**************************************/
 .trigger{position: relative; padding: 20px; color: #333; background: #ccc; border: 1px solid #333; font:400 14px 'Verdana', sans-serif;}
 
 .trigger{border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;}

@@ -118,13 +118,13 @@ if (!$clienteFinal) {
                     $perdidoPercent = (count($orcPorClienteSituacaoPerdido) / $totalOrcCliente) * 100;
                     ?>
 
-                    <ul class="w3-ul w3-border ">
-                        <li><span class="w3-badge w3-blue-grey w3-right"><?= "{$aguardandoPercent}%" ?></span><span class="w3-badge w3-blue-grey w3-right"><?= count($orcPorClienteSituacaoAguardando) ?></span> Aguardando Aprovação</li>
-                        <li ><span class="w3-badge w3-blue-grey w3-right"><?= "{$aprovadoPercent}%" ?></span><span class="w3-badge w3-blue-grey w3-right"><?= count($orcPorClienteSituacaoAprovado) ?></span> Aprovados</li> 
-                        <li ><span class="w3-badge w3-blue-grey w3-right"><?= "{$concluidoPercent}%" ?></span><span class="w3-badge w3-blue-grey w3-right"><?= count($orcPorClienteSituacaoConcluido) ?></span> Concluidos</li> 
-                        <li ><span class="w3-badge w3-blue-grey w3-right"><?= "{$canceladoPercent}%" ?></span><span class="w3-badge  w3-blue-grey w3-right"><?= count($orcPorClienteSituacaoCancelado) ?></span> Cancelados</li> 
-                        <li ><span class="w3-badge w3-blue-grey w3-right"><?= "{$perdidoPercent}%" ?></span><span class="w3-badge w3-blue-grey w3-right"><?= count($orcPorClienteSituacaoPerdido) ?></span> Perdidos</li> 
-                        <li class=""><span class="w3-badge w3-blue-grey w3-right">100%</span><span class="w3-badge w3-blue-grey w3-right"><?= $totalOrcCliente ?></span> Total</li> 
+                    <ul class="w3-ul w3-border w3-col l4 m5">
+                        <li><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto w3-right"><?= Formatar::moedaBR($aguardandoPercent) . "%" ?></span><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto w3-right"><?= count($orcPorClienteSituacaoAguardando) ?></span> Aguardando Aprovação</li>
+                        <li ><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto  w3-right"><?= Formatar::moedaBR($aprovadoPercent) . "%" ?></span><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto  w3-right"><?= count($orcPorClienteSituacaoAprovado) ?></span> Aprovados</li> 
+                        <li ><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto w3-right"><?= Formatar::moedaBR($concluidoPercent) . "%" ?></span><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto  w3-right"><?= count($orcPorClienteSituacaoConcluido) ?></span> Concluidos</li> 
+                        <li ><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto w3-right"><?= Formatar::moedaBR($canceladoPercent) . "%" ?></span><span class="w3-badge  elfi_cor_fundo_tabela elfi_cor_padrao_texto  w3-right"><?= count($orcPorClienteSituacaoCancelado) ?></span> Cancelados</li> 
+                        <li ><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto  w3-right"><?= Formatar::moedaBR($perdidoPercent) . "%" ?></span><span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto w3-right"><?= count($orcPorClienteSituacaoPerdido) ?></span> Perdidos</li> 
+                        <li class="elfi_cor_fundo_indice elfi_cor_padrao_texto"><span class="w3-badge elfi_cor_fundo_branco elfi_cor_padrao_texto w3-right">100%</span><span class="w3-badge w3-white elfi_cor_padrao_texto w3-right"><?= $totalOrcCliente ?></span> Total</li> 
                     </ul>
                 </div>
             </section>
