@@ -106,12 +106,23 @@ class ClienteCtrl{
 		return null;
 	}
 	
+        /**
+         * Buscar Lista de Clientes 
+         * @param type $campo
+         * @param type $termos
+         * @return ARRAY
+         */
 	public function buscarCliente($campo, $termos) {
 		return $this->clienteDao->select($campo, $termos);
 		
 	}
         
-        
+        /**
+         * BUSCA CLIENTE POR ID
+         * @param type $campo
+         * @param type $termos
+         * @return type
+         */
                 public function buscar($campo, $termos) {
                     $clienteBD =  $this->clienteDao->select($campo, $termos);
                     $clienteBD =$clienteBD[0];
