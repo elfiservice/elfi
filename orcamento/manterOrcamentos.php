@@ -46,7 +46,7 @@ $orcCrtl = new OrcamentoCtrl();
             </form>
         </li>    
         <li>
-            <form name="relatorios_orc" action="tecnico.php?id_menu=relatorios_orc_aprovados" method="POST" enctype="multipart/form-data">
+            <form name="relatorios_orc" action="tecnico.php?id_menu=relatorios_orc" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Relatorios" name="arelatorios_orc_btn" />
             </form>
         </li>    

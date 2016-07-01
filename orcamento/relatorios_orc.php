@@ -31,7 +31,7 @@ if (isSet($_POST['ano'])) {
 <fieldset>
     <legend>Busca por ano</legend>
     <div>
-        <form action="tecnico.php?id_menu=relatorios_orc_aprovados" method="post" enctype="multipart/form-data" name="formAgenda">
+        <form action="tecnico.php?id_menu=relatorios_orc" method="post" enctype="multipart/form-data" name="formAgenda">
             Selecione o ANO:	
             <select name="ano" id="ano" class="formFieldsAno">
                 <option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>

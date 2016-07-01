@@ -180,8 +180,8 @@ if (!isset($_SESSION ['idx'])) {
                          exit();
                     }
                     
-                    if ($menu == "relatorios_orc_aprovados") {
-                        require './orcamento/relatorios_orc_aprovados.php';
+                    if ($menu == "relatorios_orc") {
+                        require './orcamento/relatorios_orc.php';
                         exit();
                     }                    
                     
