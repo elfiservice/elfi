@@ -34,10 +34,9 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-OK - Enviar Email ao alterar ou inserir Historico ORC aprovado e nao Aprovado (TEMPORARIAMENTE ATE O SISTEMA DE LOG_)
-OK - Ao Editar o Orçamento Lançar no Historico a Alteração
--  mostrar "Histo Orc Na Aprovado" no Historico Orc Aprovado
+OK -  mostrar "Histo Orc Na Aprovado" no Historico Orc Aprovado
 - em Orcamentos -> Relatórios: por totas as SITAUÇÕES do ORC COM %
+- concluir Perfil Cliente (tabela de todos os Orçamentos do cliente)
 - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa ( OU POR no CRON a cada 10 dias )
  - informar historico desconto ?! --> ao alterar preço da Proposta (Editar) lançar no historico Proposta Não AProvada
 - em Orcamentos -> Relatórios: impl. o Botao Pos-Venda ( LER abaixo --> Relatorio POS VENDA:)
@@ -45,7 +44,7 @@ OK - Ao Editar o Orçamento Lançar no Historico a Alteração
  - em Cliente -> Perfil: % satisfação deste cliente
 
 - Botao Enviar Proposta por Email com anexo o PDF
-
+- refatorar salvar_editar_orcamento.php
 
 
 ------------------------------------------------------------------------

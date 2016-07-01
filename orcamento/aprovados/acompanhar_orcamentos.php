@@ -217,7 +217,8 @@ $orcCtrl = new OrcamentoCtrl();
                             //var_dump($arrData[1]);
                             ?>
                             <TR>
-                                <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a><hr>
+                                <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a>
+                                    <hr>
                                     <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?= $row['id'] ?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                 <Td><?php echo $row['razao_social_contr']; ?> <br> <a href="tecnico.php?id_menu=orc_aprovado_por_mes&mes=<?= $arrData[1] ?>&ano=<?= $arrData[0] ?>#<?= $row['id'] ?>"><small>mais... </small> </a></Td>
                                 <TD><?php echo $row['atividade']; ?></TD>
