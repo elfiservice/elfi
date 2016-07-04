@@ -14,7 +14,7 @@ if (filter_has_var(INPUT_POST, 'ano')) {
 $orcCrtl = new OrcamentoCtrl();
 ?>
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> ->  Relatórios</h2>
+    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> ->  Relatórios </h2>
 </div>
 <hr>
 <div class="alinhamentoHorizontal">
@@ -24,6 +24,11 @@ $orcCrtl = new OrcamentoCtrl();
                 <input class="bt_incluir"  type="submit" value="Pos-venda" name="nrel_pos_venda_btn" />
             </form>
         </li>
+        <li>
+            <form name="rel_cliente" action="tecnico.php?id_menu=relatorios_cliente" method="POST" enctype="multipart/form-data">
+                <input class="bt_incluir"  type="submit" value="Cliente" name="rel_cliente_btn" />
+            </form>
+        </li>        
 
     </ul>
 
@@ -142,14 +147,8 @@ $orcCrtl = new OrcamentoCtrl();
 
             </tbody>
         </TABLE>	
-
-
-
-
-        <?php
-        echo "<br>Total propostas Aprovadas: <b>" . $total . "</b> de <b>" . $total_orc_feitos . "</b> feitas<br>";
-        ?>	
     </fieldset>
+    
     <fieldset>
         <legend>Orçamentos Totais Por Ano: <span style="color: red;"><?= $ano_orc_selec ?></span></legend>
         <div class="col-md-3" >
@@ -180,124 +179,3 @@ $orcCrtl = new OrcamentoCtrl();
         </div>
     </fieldset>    
 
-
-    <fieldset>
-        <legend>Principais Clientes Por Ano Selecionado: <span style="color: red;"><?= $ano_orc_selec ?></span></legend>	
-
-
-        <TABLE class="display" id="example"  >
-            <thead>
-                <TR>
-
-                    <TH>Cliente</TH>
-                    <TH>Nº Propostas Feitas</TH>
-                    <TH>Aprovadas</TH>
-                   <TH>Canceladas</TH>
-<TH>Perdidas</TH>
-<TH>Concluidas</TH>
-
-
-                </TR>
-            </thead>
-            <tbody>
-                <?php
-                $clienteCtrl = new ClienteCtrl();
-                $clientes = $clienteCtrl->buscarCliente("*", "clientes");
-
-                foreach ($clientes as $row) {
-                    $id_cliente = $row['id'];
-                    $tipo_cliente = $row['tipo'];
-                    $nome_cliente = $row['razao_social'];
-
-                    $orcPorCliente = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec' ");
-                    $total = count($orcPorCliente);
-                    $orcPorClienteAprovados = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec' AND situacao_orc = 'Aprovado' ");
-                    $totalAprovados = count($orcPorClienteAprovados);
-
-                    $orcPorClienteCancelado = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec' AND situacao_orc = 'Cancelado' ");
-                    $totalCancelado = count($orcPorClienteCancelado);
-                    
-                    $orcPorClientePerdido = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec' AND situacao_orc = 'Perdido' ");
-                    $totalPerdido = count($orcPorClientePerdido);                    
-                  
-                    $orcPorClienteConcluido = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec' AND situacao_orc = 'concluido' ");
-                    $totalConcluido = count($orcPorClienteConcluido);         
-                    
-
-                    if ($total == 0) {
-                        $em_porcentagem_aprovados = 0;
-                        $em_porcentagem_Can = 0;
-                        $em_porcentagem_perd = 0;
-                        $em_porcentagem_conc = 0;
-                    } else {
-
-                        $em_porcentagem_aprovados = ($totalAprovados / $total) * 100;
-                        $em_porcentagem_Can = ($totalCancelado / $total) * 100;
-                        $em_porcentagem_perd = ($totalPerdido / $total) * 100;
-                        $em_porcentagem_conc = ($totalConcluido / $total) * 100;
-                    }
-?>
-                    <tr align="center">
-                        <td><a href="tecnico.php?id_menu=perfil_cliente&id_cliente=<?=$id_cliente?>&tipo_cliente=<?=$tipo_cliente?>"><?= $nome_cliente?></a></td>
-                        <td> <?= $total ?></td>
-                        <td> <?= $totalAprovados . " - (" . number_format($em_porcentagem_aprovados, 2, '.', '') . "%)" ?></td>
-                        <td> <?= $totalCancelado . " - (" . number_format($em_porcentagem_Can, 2, '.', '') . "%)" ?></td>
-                        <td> <?= $totalPerdido . " - (" . number_format($em_porcentagem_perd, 2, '.', '') . "%)" ?></td>
-                        <td> <?= $totalConcluido . " - (" . number_format($em_porcentagem_conc, 2, '.', '') . "%)" ?></td>
-                    </tr>
-                    <?php
-
-                }
-                ?>  
-
-            </tbody>
-        </TABLE>
-    </fieldset>
-
-
-    <fieldset>
-        <legend>Clientes Geral (Todos os Anos)</legend>	
-        <TABLE class="display" id="example2"  >
-            <thead>
-                <TR>
-                    <TH>Cliente</TH>
-                    <TH>Nº Propostas Feitas</TH>
-                    <TH>Nº Propostas Aprovadas</TH>
-                    <TH>% de Aprovação</TH>
-
-                </TR>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($clientes as $row) {
-                    $id_cliente = $row['id'];
-                    $tipo_cliente = $row['tipo'];
-                    $nome_cliente = $row['razao_social'];
-
-                    $orcPorCliente = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' ");
-                    $total = count($orcPorCliente);
-                    $orcPorClienteAprovados = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND situacao_orc = 'Aprovado' ");
-                    $totalAprovados = count($orcPorClienteAprovados);
-
-                    if ($total == 0) {
-                        $em_porcentagem_aprovados = 0;
-                    } else {
-
-                        $em_porcentagem_aprovados = ($totalAprovados / $total) * 100;
-                    }
-?>
-                                    <tr align="center">
-                        <td><a href="tecnico.php?id_menu=perfil_cliente&id_cliente=<?=$id_cliente?>&tipo_cliente=<?=$tipo_cliente?>"><?= $nome_cliente?></a></td>
-                        <td> <?= $total ?></td>
-                        <td> <?= $totalAprovados . " - (" . number_format($em_porcentagem_aprovados, 2, '.', '') . "%)" ?></td>
-                        <td> <?= number_format($em_porcentagem_aprovados, 2, '.', '')  ?></td>
-
-                    </tr>
-                
-                <?php
-
-                }
-                ?>  
-            </tbody>
-        </TABLE>
-    </fieldset>	
