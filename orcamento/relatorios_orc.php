@@ -60,7 +60,7 @@ $orcCrtl = new OrcamentoCtrl();
                 <TR>
 
                     <TH>MÊS</TH>
-                    <TH>ORC APROVADOR</TH>
+                    <TH>ORC APROVADOS</TH>
                     <TH>TOTAL ORC NO MêS</TH>
                     <TH>% ORC APROVADOS NO MêS</TH>
 
