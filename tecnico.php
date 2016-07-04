@@ -189,13 +189,17 @@ if (!isset($_SESSION ['idx'])) {
                         require './orcamento/relatorios/relatorios_cliente.php';
                         exit();
                     }
-                    
-                    
+
                     if ($menu == "relatorios_atividade") {
                         require './orcamento/relatorios/relatorios_atividade.php';
                         exit();
                     }
-                    
+
+                    if ($menu == "relatorios_pos_venda") {
+                        require './orcamento/relatorios/relatorios_pos_venda.php';
+                        exit();
+                    }
+
                     if ($menu == "historico_completo_orc") {
                         require './orcamento/historico_completo_orc.php';
                         exit();
