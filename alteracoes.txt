@@ -34,11 +34,11 @@ NO SISTEMA GERAL:
 SETOR TECNICO:
 ------------------------------------------------------------------------
 manterOrcamento:
-OK -  mostrar "Histo Orc Na Aprovado" no Historico Orc Aprovado
-- em Orcamentos -> Relatórios: por totas as SITAUÇÕES do ORC COM %
+
+
 - concluir Perfil Cliente (tabela de todos os Orçamentos do cliente)
 - Informar se a Pos Venda foi respondida, se nao, ter um botao pra reenviar a pesquisa ( OU POR no CRON a cada 10 dias )
- OK - informar historico desconto ?! --> ao alterar preço da Proposta (Editar) lançar no historico Proposta Não AProvada
+
 
  - em Cliente -> Perfil: % satisfação deste cliente
 

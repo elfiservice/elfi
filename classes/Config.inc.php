@@ -18,7 +18,7 @@ define('EMAIL_ADMIN', 'junior@elfiservice.com.br');
 
 //DEFINE SERVIDOR DE EMAILS###################
 define('MAILUSER', 'elfi@elfiservice.com.br');
-define('MAILPASS', 'Sapato44');
+define('MAILPASS', '');
 define('MAILPORT', '587');
 define('MAILHOST', 'smtp.elfiservice.com.br');
 
