@@ -102,7 +102,7 @@ $orcCrtl = new OrcamentoCtrl();
 
 
             <?php
-            $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = $ano_orc_selec ORDER BY id  DESC");
+            $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = '$ano_orc_selec' ORDER BY id DESC");
 
             foreach ($orcamentosArray as $orc => $row) {
 
@@ -195,7 +195,9 @@ $orcCrtl = new OrcamentoCtrl();
                         <?php echo $row['atividade'] . '-' . $row['classificacao']; ?>
                     </td>
                     <td>
-                        <?php echo date('d/m/Y \a\s H:i', strtotime($row['data_adicionado_orc'])); ?>
+
+                        <?php echo date('d/m/Y, H:i', strtotime($row['data_adicionado_orc'])); ?>
+
                     </td> 
                     <td>
                         <?php echo $row['cnpj_contr']; ?>
