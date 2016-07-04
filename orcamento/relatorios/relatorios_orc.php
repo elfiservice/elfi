@@ -28,7 +28,12 @@ $orcCrtl = new OrcamentoCtrl();
             <form name="rel_cliente" action="tecnico.php?id_menu=relatorios_cliente" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Cliente" name="rel_cliente_btn" />
             </form>
-        </li>        
+        </li>    
+        <li>
+            <form name="rel_atividade" action="tecnico.php?id_menu=relatorios_atividade" method="POST" enctype="multipart/form-data">
+                <input class="bt_incluir"  type="submit" value="Atividade" name="rel_atividade_btn" />
+            </form>
+        </li>            
 
     </ul>
 
