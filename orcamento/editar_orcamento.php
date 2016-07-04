@@ -23,7 +23,7 @@ if ($orc) {  // TESTA SE o id_orc no link é VALIDO
     $OrcCtrl = new OrcamentoCtrl();
     $OrcBdCtrl = $OrcCtrl->buscarOrcamentos("*", "where id= $orc ");
     $OrcBd = $OrcBdCtrl[0];
-    
+
     if (!$OrcBd) {
         WSErro("Orçamento não encontrado!", WS_ALERT);
         die();
@@ -50,13 +50,27 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
         $data_aprovada = date('0000-00-00');
     }
 
+
+    $data_ultima_alteracao = date('Y-m-d H:i:s');
     $nome_usuario = $_SESSION['Login'];
     $id_user = $_SESSION['id'];
-    $orcObj = new Orcamento($orc, $id_cliente, $id_user, "", "", $nome_usuario, $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", "");
+    $orcObj = new Orcamento($orc, $id_cliente, $id_user, "", "", $nome_usuario, $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_ultima_alteracao, "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", "");
     $orcCrtlObj = new OrcamentoCtrl();
     $resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
 
+
+
+
     if ($resultAtualizOrcamento[0]) {
+
+        $historicoNAproCtrl = new HistoricoOrcNaoAprovadoCtrl();
+        $conversa = "Alterado situação do Orçamento para <b>{$situacao_orc}</b>";
+        $histOrcNAproOb = new HistoricoOrcNaoAprovado("", $orc, $data_ultima_alteracao, $id_user, $_SESSION['Login'], $contato_clint, $telefone_contr, $conversa);
+        if (!$historicoNAproCtrl->inserirBD($histOrcNAproOb)) {
+
+            WSErro("Não foi possível Atualizar no historico, favor informar ao Administrador do sistema.", WS_ALERT);
+        }
+
         $dataHj = date('d/m/Y');
         //$listaEmailClienteSituacaoOrc = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
         $listaEmailClienteSituacaoOrc = array("junior@elfiservice.com.br");
@@ -88,22 +102,22 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
                 Imprimir
             </a>
         </li>
-<?php
-if ($situacao_orc == "Aguardando aprovação" || $_SESSION['id'] == $id_colab && $situacao_orc != "concluido") {
-    ?>        
+        <?php
+        if ($situacao_orc == "Aguardando aprovação" || $_SESSION['id'] == $id_colab && $situacao_orc != "concluido") {
+            ?>        
             <li>
                 <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y'); ?>&id_orc=<?php echo $id; ?>&id_menu=editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
                     <select onchange="habilitaBtn()" name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
                         <option id="opcao" value=""><?php echo $situacao_orc; ?></option>
-    <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
+                        <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
                     </select>
                     <input type="submit" value="Alterar" name="alterar_situacao" id="salvar_situacao" disabled="disabled" />
 
                 </form>
             </li>   
-    <?php
-}
-?>
+            <?php
+        }
+        ?>
     </ul>       
 </div>
 
@@ -213,14 +227,14 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
                             <td><label for="clientID">Cliente:</label></br>
                                 <select id="clientID" name="clientID">
                                     <option value="<?php echo $razao_social_contr; ?>"><?php echo $razao_social_contr; ?></option>
-    <?php
-    $clienteCtrl = new ClienteCtrl();
-    $clienteBd = $clienteCtrl->buscarCliente("razao_social", "ORDER BY razao_social");
+                                    <?php
+                                    $clienteCtrl = new ClienteCtrl();
+                                    $clienteBd = $clienteCtrl->buscarCliente("razao_social", "ORDER BY razao_social");
 
-    foreach ($clienteBd as $cliente => $row) {
-        echo '<option id="clientID" value="' . $row['razao_social'] . '">' . $row['razao_social'] . '</option>';
-    }
-    ?>
+                                    foreach ($clienteBd as $cliente => $row) {
+                                        echo '<option id="clientID" value="' . $row['razao_social'] . '">' . $row['razao_social'] . '</option>';
+                                    }
+                                    ?>
 
                                 </select>
 
@@ -402,26 +416,26 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
                             <td>
                                 <select name="atividade1">
                                     <option name="" value="<?php echo $atividade; ?>" ><?php echo $atividade; ?> </option>
-    <?php
-    $listaAtivBd = $OrcCtrl->listaAtividades();
-    foreach ($listaAtivBd as $lista => $row) {
-        echo '<option id="" value="' . utf8_encode($row['atividade']) . '" >' . utf8_encode($row['atividade']) . '</option>';
-    }
-    ?>
+                                    <?php
+                                    $listaAtivBd = $OrcCtrl->listaAtividades();
+                                    foreach ($listaAtivBd as $lista => $row) {
+                                        echo '<option id="" value="' . utf8_encode($row['atividade']) . '" >' . utf8_encode($row['atividade']) . '</option>';
+                                    }
+                                    ?>
 
                                 </select>
 
                             </td>
-    <?php //echo  var_dump($clienteBd);  ?>
+                            <?php //echo  var_dump($clienteBd);  ?>
                             <td>
                                 <select  name="classificacao1">
                                     <option value="<?php echo $classificacao; ?>" ><?php echo $classificacao; ?></option>
-    <?php
-    $listaClassfBd = $OrcCtrl->listarClassificacao();
-    foreach ($listaClassfBd as $lista => $row) {
-        echo '<option id="" value="' . utf8_encode($row['classificacao']) . '" >' . utf8_encode($row['classificacao']) . '</option>';
-    }
-    ?>
+                                    <?php
+                                    $listaClassfBd = $OrcCtrl->listarClassificacao();
+                                    foreach ($listaClassfBd as $lista => $row) {
+                                        echo '<option id="" value="' . utf8_encode($row['classificacao']) . '" >' . utf8_encode($row['classificacao']) . '</option>';
+                                    }
+                                    ?>
 
                                 </select>
 
@@ -433,12 +447,12 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
                             <td>
                                 <select name="unidade1">
                                     <option value="<?php echo $unidade; ?>" ><?php echo $unidade; ?></option>
-    <?php
-    $listaUnidBd = $OrcCtrl->listarUnidades();
-    foreach ($listaUnidBd as $lista => $row) {
-        echo '<option id="" value="' . utf8_encode($row['unidade']) . '" >' . utf8_encode($row['unidade']) . '</option>';
-    }
-    ?>
+                                    <?php
+                                    $listaUnidBd = $OrcCtrl->listarUnidades();
+                                    foreach ($listaUnidBd as $lista => $row) {
+                                        echo '<option id="" value="' . utf8_encode($row['unidade']) . '" >' . utf8_encode($row['unidade']) . '</option>';
+                                    }
+                                    ?>
 
                                 </select>
 
