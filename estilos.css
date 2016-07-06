@@ -394,6 +394,12 @@ display: inline-block;
 display: inline-block;
  }
 
+ .editarOrcOpcoes li{
+
+  list-style:none;
+   float:left;
+  display: inline-block;
+ }
  
  .alinhamentoHorizontal ul {
  padding:0px 0px 0px 0px;

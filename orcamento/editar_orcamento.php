@@ -95,8 +95,8 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 <hr>	           
 
 
-<div id="editarOrcOpcoes"> 
-    <ul>
+<div class="alinhamentoHorizontal" > 
+    <ul >
         <li>
             <a href="#" class="bt_imprimir" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?php echo $orc; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
                 Imprimir
@@ -120,7 +120,7 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
         ?>
     </ul>       
 </div>
-
+<hr>
 <script type="text/javascript">
     var opInicial = document.getElementById("opcao").value;
     function habilitaBtn() {
@@ -140,10 +140,16 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
         }
     }
 </script>
-<hr>
+
 
 <!-- Campos obrigatorios -->  
 
+
+
+
+<?php
+if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc != "Perdido" && $situacao_orc != "concluido") {
+    ?>
 <script language="JavaScript">
 
 
@@ -208,12 +214,6 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
     }
 
 </script>
-
-
-<?php
-if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc != "Perdido" && $situacao_orc != "concluido") {
-    ?>
-
     <div  class="" style="margin-top: 20px;">
 
         <form name="clientForm" method="post" action="tecnico.php?id_menu=salvar_editar_orcamento" onsubmit="return formCheck(this);">       
@@ -609,7 +609,10 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
 
     <?php
 } else {
+    
+    echo "<div style=\"margin-top: 100px;\">";
     WSErro("Esse orçamento foi <b>{$situacao_orc}</b> pelo colaborador <b>{$colaborador_orc}</b>, não pode ser Editado.", WS_ALERT);
+    echo "</div>";
 }
 
 
