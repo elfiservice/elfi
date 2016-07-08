@@ -107,7 +107,12 @@ if ($id_orc) {
                             <b><?= ($itemPesquisa->getOutrosComentarios() == "" ? "<small><i>Não deixou</i></small>" : $itemPesquisa->getOutrosComentarios()) ?></b>
 
                         </p>
-                    </div>                 
+                    </div>
+                <div>
+                    <h3>
+                        Resultado: <span class="w3-text-red"><?=Formatar::moedaBR($orcamentoCtrl->satisfacaoOrc($orcObj->getId(), $orcObj->getId_cliente()))?>%</span>
+                    </h3>
+                </div>
 
 
 

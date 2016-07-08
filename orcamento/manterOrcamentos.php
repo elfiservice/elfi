@@ -105,7 +105,8 @@ $orcCrtl = new OrcamentoCtrl();
             $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = '$ano_orc_selec' ORDER BY id DESC");
 
             foreach ($orcamentosArray as $orc => $row) {
-
+                        $id_orc = $row['id'];
+                        $id_cliente = $row['id_cliente'];
                 //Buscar ID do CLIENTE
                 $clienteCtrl = new ClienteCtrl();
                 $clienteDao = $clienteCtrl->buscarClientePorRazaoSocial($row['razao_social_contr']);
@@ -151,6 +152,8 @@ $orcCrtl = new OrcamentoCtrl();
                             <?php
                             if ($row['feito_pos_entreg'] == 'n') {
                                 echo"<small>Pos-venda ainda não respondida</small>";
+                            } else {
+                                echo"<small>Pos-venda " . Formatar::moedaBR($orcCrtl->satisfacaoOrc($id_orc, $id_cliente)) . "%</small>";
                             }
                         } else {
                             ?>

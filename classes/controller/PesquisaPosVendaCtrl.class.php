@@ -61,6 +61,50 @@ class PesquisaPosVendaCtrl {
         }
     }
 
+    /**
+     * Realiza o algoritimo para obter o valor da porcentagem de Satisfacao para 1 Orçamento com base na Pesquisa de Satisfação
+     * @param int $orcId = ID do Orcamento
+     * @param int $clienteId = ID do cliente
+     * @return float = valor sem formatação representando o valor já em porcentagem
+     */
+    public function percentagemSatisfacao($orcId, $clienteId) {
+        $itensPesquisa = $this->buscarControleNOrc("*", "WHERE id_orc = '$orcId' AND id_cliente = '$clienteId' ");
+
+        if (!empty($itensPesquisa)) {
+            $somaDos12 = $itensPesquisa[0]->getConfiabilidade() + $itensPesquisa[0]->getPontualidade() + $itensPesquisa[0]->getDisponibilide() + $itensPesquisa[0]->getQualidade() + $itensPesquisa[0]->getNormasseguranca() + $itensPesquisa[0]->getApresentacao() + $itensPesquisa[0]->getEnvolvimento() + $itensPesquisa[0]->getEducacao() + $itensPesquisa[0]->getOrganizacao() + $itensPesquisa[0]->getCompetencia() + $itensPesquisa[0]->getOrcamento() + $itensPesquisa[0]->getServico();
+            $somaDos12emPerct = $somaDos12 * 8.33333334;
+            if ($itensPesquisa[0]->getSatisfeito() == 1) {
+                $somaDos12emPerct = $somaDos12emPerct + 100;
+                $somaDos12emPerctResult = $somaDos12emPerct / 2;
+            } else {
+                $somaDos12emPerctResult = $somaDos12emPerct / 2;
+            }
+            return $somaDos12emPerctResult;
+        }else{
+            return NULL;
+        }
+    }
+
+    public function mediaSatisfacao($id_cliente) {
+        $orcCtrl = new OrcamentoCtrl();
+        $orcamentos = $orcCtrl->buscarOrcamentos("*", "WHERE  id_cliente = '$id_cliente' AND situacao_orc = 'concluido' AND feito_pos_entreg = 's' ");
+
+        $somaPesquisa = 0;
+        if (!empty($orcamentos)) {
+            foreach ($orcamentos as $row) {
+                $id_orc = $row['id'];
+                $resultPesquisaOrc = $this->percentagemSatisfacao($id_orc, $id_cliente);
+                $somaPesquisa = $somaPesquisa + $resultPesquisaOrc;
+            }
+            
+            return $somaPesquisa / count($orcamentos);
+            //var_dump($mediaSatisfacaoCliente);
+        }
+        
+        
+        
+    }
+
     //--------------------------------------------------
     //----------------PRIVATES---------------------
     //--------------------------------------------------

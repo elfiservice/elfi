@@ -36,14 +36,21 @@ $cliente = new ClienteCtrl();
 $clienteFinal = $cliente->buscar("*", "WHERE id = $id_cliente AND tipo = '$tipo_cliente'");
 //var_dump($clienteFinal);
 
+
 if (!$clienteFinal) {
     WSErro('Cliente não encontrado: Erro na URL', E_USER_WARNING);
     exit();
 }
+
+if(!empty($cliente->mediaSatisfacao($clienteFinal->getId()))){
+    $mostrarSatisfacao = Formatar::moedaBR($cliente->mediaSatisfacao($clienteFinal->getId())) . '% de satisfação';
+}else{
+    $mostrarSatisfacao = "<small><i>Não respondeu à nenhuma pesquisa até o momento</i></small>";
+}
 ?>
 <section>
     <fieldset>
-        <legend><b>Dados do Cliente: <?php echo $clienteFinal->getRazaoSocial(); ?></b></legend>
+        <legend><b>Dados do Cliente: <?= $clienteFinal->getRazaoSocial(); ?> - <span class="w3-text-red"><?= $mostrarSatisfacao ?></span></b></legend>
         <table>
             <tr>
                 <td>Cod:</td>
@@ -157,8 +164,8 @@ if (!$clienteFinal) {
             </thead>
             <tbody>
                 <?php
-                $valor_total = 0;
 
+                $valor_total = 0;
                 $nome_cliente = $clienteFinal->getRazaoSocial();
 
                 $orcamentos = $orcCtrl->buscarOrcamentos("*", "WHERE  id_cliente = '$id_cliente'  ");
@@ -166,11 +173,14 @@ if (!$clienteFinal) {
                     foreach ($orcamentos as $row) {
                         // var_dump($row);
                         $id_orc = $row['id'];
+                        $id_cliente = $row['id_cliente'];
                         $n_orc = $row['n_orc'];
                         $ano_orc = $row['ano_orc'];
                         $valor_orc = $row['vr_total_orc'];
-       
+
                         $valor_total = $valor_total + $valor_orc;
+                        
+                                              
                         ?>
                         <TR>
                             <TD align="center"> <?= $n_orc . '.' . $ano_orc ?> </TD>
@@ -198,6 +208,8 @@ if (!$clienteFinal) {
                                     <?php
                                     if ($row['feito_pos_entreg'] == 'n') {
                                         echo"<small>Pos-venda ainda não respondida</small>";
+                                    }else{
+                                        echo"<small>Pos-venda " . Formatar::moedaBR($orcCtrl->satisfacaoOrc($id_orc, $id_cliente)) . "%</small>";
                                     }
                                 } else {
                                     ?>
@@ -226,4 +238,8 @@ if (!$clienteFinal) {
     </fieldset>	
 
 </section>
+
+
+
+
 
