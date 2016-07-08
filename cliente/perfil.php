@@ -146,8 +146,9 @@ if (!$clienteFinal) {
                     <TH>Situação</TH>
                     <TH>Atividade</TH>
                     <TH>Classificação</TH>
+                    <th>Serviço</th>
                     <TH>Valor</TH>
-                    <TH>Pos-Venda e Historicos  (por se satisfeito ou nao e  Bt historico_completo_orc.php)</TH>
+
 
 
 
@@ -155,30 +156,73 @@ if (!$clienteFinal) {
                 </TR>
             </thead>
             <tbody>
-<?php
-$valor_total = 0;
+                <?php
+                $valor_total = 0;
 
-$nome_cliente = $clienteFinal->getRazaoSocial();
+                $nome_cliente = $clienteFinal->getRazaoSocial();
 
-$orcamentos = $orcCtrl->buscarOrcamentos("*", "WHERE  id_cliente = '$id_cliente'  ");
-if ($orcamentos) {
-    foreach ($orcamentos as $row) {
-        // var_dump($row);
-        $id_orc = $row['id'];
-        $n_orc = $row['n_orc'];
-        $ano_orc = $row['ano_orc'];
-        $valor_orc = $row['vr_total_orc'];
-        $inf_servicos = $row['descricao_servico_orc'];
+                $orcamentos = $orcCtrl->buscarOrcamentos("*", "WHERE  id_cliente = '$id_cliente'  ");
+                if ($orcamentos) {
+                    foreach ($orcamentos as $row) {
+                        // var_dump($row);
+                        $id_orc = $row['id'];
+                        $n_orc = $row['n_orc'];
+                        $ano_orc = $row['ano_orc'];
+                        $valor_orc = $row['vr_total_orc'];
+       
+                        $valor_total = $valor_total + $valor_orc;
+                        ?>
+                        <TR>
+                            <TD align="center"> <?= $n_orc . '.' . $ano_orc ?> </TD>
+                            <td>
+                                <?php
+                                if ($row['situacao_orc'] == "Aguardando aprovação") {
+                                    ?>
+                                    <a class="bt_link bt_azul" href="#" onclick="window.open('orcamento/nao_aprovados/historico_acompanhamento.php?id_orc=<?php echo $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
+                                        <?= $row['situacao_orc'] ?>
+                                    </a>
+                                    <?php
+                                } else if ($row['situacao_orc'] == "Aprovado") {
+                                    ?>
 
-        $valor_total = $valor_total + $valor_orc;
+                                    <a class="bt_link bt_azul" href="tecnico.php?id_menu=acompanhar_orcamentos" >
+                                        <?= $row['situacao_orc'] ?>
+                                    </a>
+                                    <?php
+                                } else if ($row['situacao_orc'] == "concluido") {
+                                    ?>
 
-        echo "<TR><TD align=\"center\">" . $n_orc . "." . $ano_orc . "</TD><td> </td> <td>" . $row['atividade'] . "</td> <TD align=\"center\">" . $row['classificacao'] . "</TD><td>" . number_format($valor_orc, 2, ',', '.') . "</td><td>--</td></TR>";
-    }
-}
-?>  
+                                    <a class="bt_link bt_azul" href="tecnico.php?id_menu=historico_completo_orc&id_orc=<?= $row['id'] ?>" >
+                                        <?= $row['situacao_orc'] ?>
+                                    </a>
+                                    <?php
+                                    if ($row['feito_pos_entreg'] == 'n') {
+                                        echo"<small>Pos-venda ainda não respondida</small>";
+                                    }
+                                } else {
+                                    ?>
+
+                                    <a class="bt_link bt_azul" href="tecnico.php?id_menu=historico_completo_orc&id_orc=<?= $row['id'] ?>" >
+                                        <?= $row['situacao_orc'] ?>
+                                    </a>
+                                    <?php
+                                }
+                                ?>
+
+                            </td>
+                            <td> <?= $row['atividade'] ?></td>
+                            <TD align="center"><?= $row['classificacao'] ?> </TD>
+                            <td><?= Formatar::limita_texto($row['descricao_servico_orc'], 200) ?> </td>
+                            <td>  <?= number_format($valor_orc, 2, ',', '.') ?></td>
+
+                        </TR>
+                        <?php
+                    }
+                }
+                ?>  
             </tbody>
         </TABLE>
-                <?php echo "Valor Total dos Orçamentos Executados: <b>R$ " . number_format($valor_total, 2, ',', '.') . "</b>"; ?>
+        <?php echo "Valor Total dos Orçamentos Executados: <b>R$ " . number_format($valor_total, 2, ',', '.') . "</b>"; ?>
     </fieldset>	
 
 </section>
