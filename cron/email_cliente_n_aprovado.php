@@ -21,9 +21,9 @@ foreach ($orcamentos as $row) {
             $assunto = "Orçamento aguardando sua aprovação";
             $textoCorpo = "Olá, <b>{$row ['razao_social_contr']}</b> hoje faz <b>{$dias} dias</b> que nos foi solicitado um orçamento cujo o número é <b>{$row ['n_orc']}.{$row ['ano_orc']}</b>. ";
             $emailCopiaOculta = array();
-            $email = new EmailGenerico($emailTo, $assunto, $textoCorpo, array(), $emailCopiaOculta);
+            $email2 = new EmailGenerico($emailTo, $assunto, $textoCorpo, array(), $emailCopiaOculta);
 
-            if ($email->enviarEmailSMTP()) {
+            if ($email2->enviarEmailSMTP()) {
                 echo "OK<br>";
                 $f = fopen("registro_email_cliente_nao_aprovado.txt", "a+", 0);
                 $linha = "Email enviado em: " . date('d/m/Y H:i') . " para " . $row ['razao_social_contr'] . " Orc N. " . $row ['n_orc'] . "/" . $row ['ano_orc'] . " Email: " . $row ['email_contr'] . "\r\n";

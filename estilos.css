@@ -33,58 +33,16 @@ body {
 	width:auto;
 }
 
+
+
 /**************************************
-
-/************ CSS TRIGGER - tratamento ERROS *************
-
+/************ CSS TAGs  - Padrões TAGs DO SISTEMA *************
 **************************************/
-
-
-
-.trigger{position: relative; padding: 20px; color: #333; background: #ccc; border: 1px solid #333; font:400 14px 'Verdana', sans-serif;}
-
-.trigger{border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;}
-
-.trigger .ajax_close{position: absolute; right: 10px; cursor: pointer; top: 10px; background: black; width: 20px; height: 20px; display: none;}
-
-.trigger.accept{background-color: #E5F8CE; border-color: #D0F1A6;}  /*UTILIZANDO NA MESMA INTANCIA - sendo chamado de CSS OO .trigger.accept*/
-
-.trigger.infor{background-color: #D1ECF7; border-color: #BCDFEF;}
-
-.trigger.alert{background-color: #FFF6BF; border-color: #FCEB77;}
-
-.trigger.error{background-color: #FAD0D0; border-color: #F6ABAB;}
-
-table {
-  font: 100% sans-serif;
-  
-  }
-  
-  th, td {
-    padding: 5px;
-    
-}
-
-.text-left{text-align: left;}
-.tableComum{
-    border: 1px solid #fff;
-    empty-cells: show;
-    background-color: #DAE2F5;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-.tableComum th{
-     background-color: #fff;
-      border: 1px solid #DAE2F5;
-      border-bottom: 1px solid #000;
-}
-
-.indiceTabelaComum{
-     background-color: #C6CFE4;
-}
-
- select, input, textarea, checkbox{
+h2 {    font-family: "lucida grande",tahoma,verdana,arial,sans-serif; }
+hr{margin: 10px 0; color: gray;}
+table {  font: 100% sans-serif;  }
+th, td {    padding: 5px; }
+select, input, textarea, checkbox{
 	background-color: #DAE2F5;
 	 box-sizing: border-box;
 	  border: 2px solid #012B8B;
@@ -124,11 +82,52 @@ input[type=submit]:hover,input[type=button]:hover{
 	
 } 
 
+legend{    font-size: 18px;   font-weight: bold;  }
 
-legend{
-    font-size: 18px;
-    font-weight: bold;
+/**************************************
+/************ CSS CORES de TEXTO  - Padrões Cores do Sistema *************
+**************************************/
+.elfi_cor_padrao_texto{    color: #012B8B;}
+
+/**************************************
+/************ CSS CORES de FUNDO  - Padrões Cores do Sistema *************
+**************************************/
+.elfi_cor_fundo_indice{background-color: #C6CFE4;}
+.elfi_cor_fundo_branco{ background-color: white;}
+.elfi_cor_fundo_tabela{ background-color: #DAE2F5;}
+
+
+/**************************************
+/************ CSS TRIGGER - tratamento ERROS *************
+**************************************/
+.trigger{position: relative; padding: 20px; color: #333; background: #ccc; border: 1px solid #333; font:400 14px 'Verdana', sans-serif;}
+.trigger{border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;}
+.trigger .ajax_close{position: absolute; right: 10px; cursor: pointer; top: 10px; background: black; width: 20px; height: 20px; display: none;}
+.trigger.accept{background-color: #E5F8CE; border-color: #D0F1A6;}  /*UTILIZANDO NA MESMA INTANCIA - sendo chamado de CSS OO .trigger.accept*/
+.trigger.infor{background-color: #D1ECF7; border-color: #BCDFEF;}
+.trigger.alert{background-color: #FFF6BF; border-color: #FCEB77;}
+.trigger.error{background-color: #FAD0D0; border-color: #F6ABAB;}
+
+
+.text-left{text-align: left;}
+.tableComum{
+    border: 1px solid #fff;
+    empty-cells: show;
+    background-color: #DAE2F5;
+    border-collapse: collapse;
+    text-align: center;
 }
+
+.tableComum th{
+     background-color: #fff;
+      border: 1px solid #DAE2F5;
+      border-bottom: 1px solid #000;
+}
+
+.indiceTabelaComum{
+     background-color: #C6CFE4;
+}
+
 
 
 .iframeStyle{
@@ -138,9 +137,7 @@ legend{
 	frameborder: 1;
 }
 
-h2 {
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
-}
+
 
 
 
@@ -397,6 +394,12 @@ display: inline-block;
 display: inline-block;
  }
 
+ .editarOrcOpcoes li{
+
+  list-style:none;
+   float:left;
+  display: inline-block;
+ }
  
  .alinhamentoHorizontal ul {
  padding:0px 0px 0px 0px;
@@ -459,4 +462,11 @@ display: inline-block;
 
 .padding_padrao{
     padding: 10px;
+}
+
+
+legend.scheduler-border {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
 }

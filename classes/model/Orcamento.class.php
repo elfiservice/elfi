@@ -64,7 +64,7 @@ class Orcamento {
             private $novo_cliente;
 	
 
-	public function __construct($id, $id_cliente,  $id_colab, $n_orc, $ano_orc, $colaborador_orc, $situacao_orc, $razao_social_contr, $cnpj_contr, $endereco_contr, $bairro_contr, $cidade_contr, $estado_contr, $cep_contr, $telefone_contr, $celular_contr, $email_contr, $contato_clint, $razao_social_obra, $cnpj_obra, $endereco_obra, $bairro_obra, $cidade_obra, $estado_obra, $cep_obra, $telefone_obra, $celular_obra, $email_obra, $atividade, $classificacao, $quantidade, $unidade, $descricao_servico_orc, $prazo_exec_orc, $validade_orc, $pagamento_orc, $obs_orc, $duvida_orc, $vr_servco_orc, $vr_material_orc, $desconto_orc, $vr_total_orc, $obra_igual_contrat, $data_adicionado_orc, $data_ultima_alteracao, $colaborador_ultim_alteracao, $data_aprovada, $data_inicio, $data_conclusao, $dias_d_aprovado, $dias_d_exec, $dias_ultrapassad, $serv_concluido, $feito_pos_entreg, $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, $data_ultimo_cont_cliente, $colab_ultimo_contato_client, $novo_cliente) {
+	public function __construct($id = NULL, $id_cliente = NULL,  $id_colab = NULL, $n_orc = NULL, $ano_orc = NULL, $colaborador_orc = NULL, $situacao_orc = NULL, $razao_social_contr = NULL, $cnpj_contr = NULL, $endereco_contr= NULL, $bairro_contr= NULL, $cidade_contr= NULL, $estado_contr= NULL, $cep_contr= NULL, $telefone_contr = NULL, $celular_contr = NULL, $email_contr = NULL, $contato_clint = NULL, $razao_social_obra = NULL, $cnpj_obra = NULL, $endereco_obra = NULL, $bairro_obra = NULL, $cidade_obra = NULL, $estado_obra = NULL, $cep_obra = NULL, $telefone_obra = NULL, $celular_obra = NULL, $email_obra = NULL, $atividade = NULL, $classificacao = NULL, $quantidade = NULL, $unidade= NULL, $descricao_servico_orc = NULL, $prazo_exec_orc = NULL, $validade_orc = NULL, $pagamento_orc = NULL, $obs_orc = NULL, $duvida_orc = NULL, $vr_servco_orc = NULL, $vr_material_orc = NULL, $desconto_orc = NULL, $vr_total_orc = NULL, $obra_igual_contrat = NULL, $data_adicionado_orc = NULL, $data_ultima_alteracao = NULL, $colaborador_ultim_alteracao = NULL, $data_aprovada = NULL , $data_inicio = NULL, $data_conclusao = NULL, $dias_d_aprovado = NULL, $dias_d_exec = NULL, $dias_ultrapassad = NULL, $serv_concluido = NULL, $feito_pos_entreg = NULL, $nao_conformidade = NULL, $obs_n_conformidad = NULL, $client_insatisfeito = NULL, $data_ultimo_cont_cliente = NULL, $colab_ultimo_contato_client  = NULL, $novo_cliente = NULL) {
             $this->id = $id;
             $this->id_cliente = $id_cliente;
             $this->id_colab = $id_colab;
@@ -126,6 +126,8 @@ class Orcamento {
             $this->colab_ultimo_contato_client = $colab_ultimo_contato_client;
             $this->novo_cliente = $novo_cliente;
         }
+        
+        
 
         public function getId_cliente() {
             return $this->id_cliente;

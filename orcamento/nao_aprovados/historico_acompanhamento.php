@@ -56,12 +56,20 @@ require './../../classes/Config.inc.php';
                 $id_colab = $_SESSION['id'];
                 $id_orc = $salvar['id_orc'];
 
-                $historicoObj = new HistoricoOrcNaoAprovado("", $id_orc, $dia_do_contato, "0000-00-00 00:00:00", $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, 1);
+                $historicoObj = new HistoricoOrcNaoAprovado("", $id_orc, $dia_do_contato, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, 1);
 
                 $orcObj->setDataUltimContatoCliente($dia_do_contato);
                 $orcObj->setColabUltimContatoCliente($colab_elfi);
 
                 if ($orcamentoCtrl->atualizarOrcamento($orcObj) && $histoNACtrl->inserirBD($historicoObj)) {
+                    $textoCorpo = "A proposta N. <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b>, cliente <b>{$orcObj->getRazaoSocialContrat()}</b>, teve historico atualizado:"
+                            . "<p> O colaborador <b>{$colab_elfi}</b> falou com <b>{$contato_cliente}</b> no tel/cel <b>{$tel_cliente}</b> o seguinte: <br> <b>{$conversa}</b> </p>";
+                    
+                    $emailHistAcomNAprov = new EmailGenerico($listaEmails, "Adicionado Historico Orc Aguardando Aprovação", $textoCorpo, array(), array(), 1);
+                    if(!$emailHistAcomNAprov->enviarEmailSMTP()){
+                        WSErro("Ocorreu um erro ao tentar enviar o Email!", WS_ERROR);
+                    }
+                    
                     WSErro("Inserido com sucesso!", WS_ACCEPT);
                     echo"<a class=\"bt_link\" href=\"historico_acompanhamento.php?id_orc={$id_orc}\">Voltar</a>";
                     die();

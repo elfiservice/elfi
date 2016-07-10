@@ -102,7 +102,7 @@ class HistoricoOrcNaoAprovadoCtrl {
         $arrayObjColab = array();
         foreach ($arrayDados as $dado) {
             extract($dado);
-            $arrayObjColab[] = new HistoricoOrcNaoAprovado($id, $id_orc, $dia_do_contato, $dia_da_edicao, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, $mostrar);
+            $arrayObjColab[] = new HistoricoOrcNaoAprovado($id, $id_orc, $dia_do_contato, $id_colab, $colab_elfi, $contato_cliente, $tel_cliente, $conversa, $mostrar, $dia_da_edicao);
         }
 
         return $arrayObjColab;

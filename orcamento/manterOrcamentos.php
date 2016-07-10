@@ -46,7 +46,7 @@ $orcCrtl = new OrcamentoCtrl();
             </form>
         </li>    
         <li>
-            <form name="relatorios_orc" action="tecnico.php?id_menu=relatorios_orc_aprovados" method="POST" enctype="multipart/form-data">
+            <form name="relatorios_orc" action="tecnico.php?id_menu=relatorios_orc" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Relatorios" name="arelatorios_orc_btn" />
             </form>
         </li>    
@@ -102,10 +102,11 @@ $orcCrtl = new OrcamentoCtrl();
 
 
             <?php
-            $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = $ano_orc_selec ORDER BY id  DESC");
+            $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = '$ano_orc_selec' ORDER BY id DESC");
 
             foreach ($orcamentosArray as $orc => $row) {
-
+                        $id_orc = $row['id'];
+                        $id_cliente = $row['id_cliente'];
                 //Buscar ID do CLIENTE
                 $clienteCtrl = new ClienteCtrl();
                 $clienteDao = $clienteCtrl->buscarClientePorRazaoSocial($row['razao_social_contr']);
@@ -151,6 +152,8 @@ $orcCrtl = new OrcamentoCtrl();
                             <?php
                             if ($row['feito_pos_entreg'] == 'n') {
                                 echo"<small>Pos-venda ainda não respondida</small>";
+                            } else {
+                                echo"<small>Pos-venda " . Formatar::moedaBR($orcCrtl->satisfacaoOrc($id_orc, $id_cliente)) . "%</small>";
                             }
                         } else {
                             ?>
@@ -195,7 +198,9 @@ $orcCrtl = new OrcamentoCtrl();
                         <?php echo $row['atividade'] . '-' . $row['classificacao']; ?>
                     </td>
                     <td>
-                        <?php echo date('d/m/Y \a\s H:i', strtotime($row['data_adicionado_orc'])); ?>
+
+                        <?php echo date('d/m/Y, H:i', strtotime($row['data_adicionado_orc'])); ?>
+
                     </td> 
                     <td>
                         <?php echo $row['cnpj_contr']; ?>
