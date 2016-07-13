@@ -80,7 +80,7 @@ if (filter_has_var(INPUT_POST, "razao_social")) {
         //Adiciona alteração no Historico Orc Não AProvado
         $historicoNAproCtrl = new HistoricoOrcNaoAprovadoCtrl();
 
-        $conversa = "==>Atualização do Orcamento<==<br>";
+        $conversa = "##### Atualização do Orcamento #####<br>";
 
         if ($orcAlterado[7] != $arrOrcInicial[7]) {
             $conversa.= "- Nome do Cliente de <b>{$arrOrcInicial[7]}</b> para <b> {$orcAlterado[7] }</b><br>";
@@ -139,7 +139,12 @@ if (filter_has_var(INPUT_POST, "razao_social")) {
         }
 
         if ($orcAlterado[44] != $arrOrcInicial[44]) {
-            $arrOrcInicialBr = Formatar::formatarDataComHora($arrOrcInicial[44]);
+            if($arrOrcInicial[44] == "0000-00-00 00:00:00"){
+                $arrOrcInicialBr = Formatar::formatarDataComHora($arrOrcInicial[43]);
+            }else{
+                $arrOrcInicialBr = Formatar::formatarDataComHora($arrOrcInicial[44]);
+            }
+            
             $orcAlteradoBr = Formatar::formatarDataComHora($orcAlterado[44]);
             $conversa.= "- Nova Data do Orçamento de <b>{$arrOrcInicialBr} </b>para <b> {$orcAlteradoBr}</b><br>";
         }
