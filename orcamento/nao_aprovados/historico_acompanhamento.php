@@ -151,7 +151,12 @@ require './../../classes/Config.inc.php';
                                 ?>
                                 <TR>
                                     <td><?php
-                                        if ($obj->getId_colab() == $_SESSION['id']) {
+                                                            
+                                    if(strpos($obj->getConversa(), '##### Atualização do Orcamento #####') !== false){
+                                        echo "Sistema";
+                                    }
+                                    
+                                        if ($obj->getId_colab() == $_SESSION['id'] && strpos($obj->getConversa(), '##### Atualização do Orcamento #####') === false) {
                                             ?>
                                             <a class="bt_link bt_verde" href="editar_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>" >editar</a>
                                             <br>
