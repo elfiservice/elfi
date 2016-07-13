@@ -83,7 +83,7 @@ $orcCrtl = new OrcamentoCtrl();
                 <th>Editar</th>
                 <th>Razao Social / Nome</th>
                 <th>Classificacao</th>
-                <th>Data do ORC</th>
+                                <th>Data do ORC</th>
                 <th>CNPJ</th>
                 <th>Endereco</th>
                 <th>Bairro</th>
@@ -103,7 +103,7 @@ $orcCrtl = new OrcamentoCtrl();
 
             <?php
             $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = '$ano_orc_selec' ORDER BY id DESC");
-
+            
             foreach ($orcamentosArray as $orc => $row) {
                         $id_orc = $row['id'];
                         $id_cliente = $row['id_cliente'];
@@ -113,6 +113,7 @@ $orcCrtl = new OrcamentoCtrl();
                 ?>
                 <tr>
                     <td>
+                         <span style="display: none;"><?=$row['id']?></span>
                         <a href="#" class="" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?php echo $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
                             <?php
                             echo $row['n_orc'] . '.' . $row['ano_orc'];
@@ -197,7 +198,7 @@ $orcCrtl = new OrcamentoCtrl();
                     <td>
                         <?php echo $row['atividade'] . '-' . $row['classificacao']; ?>
                     </td>
-                    <td>
+                                        <td>
 
                         <?php echo date('d/m/Y, H:i', strtotime($row['data_adicionado_orc'])); ?>
 
