@@ -5,51 +5,83 @@ include '../classes/Config.inc.php';
 $ano_orc = date('Y');
 
 $clienteCtrl = new ClienteCtrl();
-$clientes = $clienteCtrl->buscarCliente("*", "");
+$clientes = $clienteCtrl->buscarCliente("*", "WHERE mostrar = '1' ");
 
-//var_dump($clientes);
-//die;
-
+$count = 0;
+$count2 = 0;
+$countErro = 0;
+$textoCorpoErro = "";
 foreach ($clientes as $row) {
 
 
     if (!$row ['email_tec'] == null) {
-
-        for ($dia = 10; $dia <= 365; $dia = $dia + 10) {
-           // echo $dia . ' == ' . $dias . '<br>';
-            if ($dia == $dias) {
-                echo $dia . ' == ' . $dias . " enviar - ";
+                $count2++;
+                if($count2 == 5){
+                    sleep(3);
+                    $count2 = 0;
+                }
+                
 
                 //$emailTo = array(EMAIL_ADMIN);
-                $emailTo = array($row['email_contr'], $row['email_obra']);
-                $assunto = "Lembrete preenchimento Pesquisa :)";
+                $emailTo = array($row['email_tec'], $row['email_adm_fin']);
+                $assunto = "Estamos à disposição";
+                $mensagem = "Que seja uma semana produtiva e com ótimos resultados.<br><br>"
+                        . "Já conhece <b>nossos valores</b>? segue abaixo<br><br>"
+                        . "<i>Qualidade, confiança, ética, responsabilidade socioambiental, respeito, segurança e trabalho de equipe.</i> <br>";
 
-                $textoCorpo = "Olá, <b>{$row ['razao_social_contr']}</b> a proposta de Nº <b>{$row ['n_orc']}.{$row ['ano_orc']}</b> foi <b>concluida</b> à <b>{$dias} dias.</b> <br>"
-                        . "Por favor, nos dê seu parecer sobre nosso atendimento, será de grande ajuda para o desenvolvimento de nossa parceria.<br><br>"
-                        . "Apenas acesse o Link abaixo ou copie e cole no navegar:<br>"
-                        . "<a href=\"{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$row ['id']}&idc={$row ['id_cliente']}\" >"
-                        . "{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$row ['id']}&idc={$row ['id_cliente']} </a> <br>";
+                $textoCorpo = "Olá, <b>{$row ['razao_social']}</b>, lembramos de você. <br> {$mensagem}";
 
-                //$emailCopiaOculta = array();
-                $emailCopiaOculta = array(EMAIL_ADMIN);
+                $emailCopiaOculta = array();
+                //$emailCopiaOculta = array(EMAIL_ADMIN);
                 $email2 = new EmailGenerico($emailTo, $assunto, $textoCorpo, array(), $emailCopiaOculta);
 
                 if ($email2->enviarEmailSMTP()) {
-                    echo "OK<br>";
+                    $count++;
+                    echo "OK => {$count}<br>";
+                   
                     $f = fopen("registro_email_pos_venda.txt", "a+", 0);
-                    $linha = "Email enviado em: " . date('d/m/Y H:i') . " para " . $row ['razao_social_contr'] . " Orc N. " . $row ['n_orc'] . "/" . $row ['ano_orc'] . " Email: " . $row ['email_contr'] . "\r\n";
+                    $linha = "Email enviado em: " . date('d/m/Y H:i') . " para " . $row ['razao_social'] . " Email: " . $row ['email_tec'] . "\r\n";
                     fwrite($f, $linha, strlen($linha));
                     fclose($f);
                 } else {
-                    echo "ERROr <br>";
+                    $countErro++;
+                    $textoCorpoErro .= "- {$row ['id']} == {$row ['razao_social']} == {$row['email_tec']}<br>";
+                    echo "ERROr => {$row ['id']} - {$row ['razao_social']}<br>";
                 }
-            }
-        }
+                
+             //   die;
+          
+  
        
     } else {
         $f = fopen("registro_email_pos_venda.txt", "a+", 0);
-        $linha = "Email NÃO enviado em: " . date('d/m/Y H:i') . " para " . $row ['razao_social_contr'] . " Orc N. " . $row ['n_orc'] . "/" . $row ['ano_orc'] . "\r\n";
+        $linha = "Email NÃO enviado em: " . date('d/m/Y H:i') . " para " . $row ['razao_social'] . " Email: " . $row ['email_tec'] . "\r\n";
         fwrite($f, $linha, strlen($linha));
         fclose($f);
     }
 }
+
+
+               $emailTo = array(EMAIL_ADMIN);
+               $assunto = "Relatorio Envio Email Todos Clientes";
+
+                $textoCorpo = "Enviado Email para <b>{$count}</b> clientes, com a seguinte mensagem: <br> <b>{$mensagem}</b> <br>";
+                    if($countErro > 0){
+                        $textoCorpo .= "Houve(ram) {$countErro} erro(s) ao tentar Enviar: <br> {$textoCorpoErro} <br>";
+                    }
+                
+
+                $emailCopiaOculta = array($listaEmails);
+                //$emailCopiaOculta = array(EMAIL_ADMIN);
+                $email2 = new EmailGenerico($emailTo, $assunto, $textoCorpo, array(), $emailCopiaOculta);
+
+                if ($email2->enviarEmailSMTP()) {
+                        echo "OK => Envio Relatorio!<br>";
+                   
+                    $f = fopen("registro_email_pos_venda.txt", "a+", 0);
+                    $linha = "Email enviado em: " . date('d/m/Y H:i') . " para " . $row ['razao_social'] . " Email: " . $row ['email_tec'] . "\r\n";
+                    fwrite($f, $linha, strlen($linha));
+                    fclose($f);
+                } else {
+                    echo "ERROr => No Envio do Relatorio !<br>";
+                }
