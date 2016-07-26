@@ -70,6 +70,8 @@ require './../../classes/Config.inc.php';
                         WSErro("Ocorreu um erro ao tentar enviar o Email!", WS_ERROR);
                     }
                     
+                    //LogCtrl::inserirLog($id_colab, $textoCorpo, $_SESSION['tipo_user']);
+                    
                     WSErro("Inserido com sucesso!", WS_ACCEPT);
                     echo"<a class=\"bt_link\" href=\"historico_acompanhamento.php?id_orc={$id_orc}\">Voltar</a>";
                     die();

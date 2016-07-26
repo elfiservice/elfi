@@ -37,6 +37,10 @@ class HistoricoOrcNaoAprovadoCtrl {
 
             
             if ($this->historicoOrcNAprovadoDAO->insert($campoArr, $valores)) {
+               
+                $orcCtrl = new OrcamentoCtrl();
+                $orcOb = $orcCtrl->buscarOrcamentoPorId("*", "WHERE id = '$arrObj[1]' ");
+                LogCtrl::inserirLog($arrObj[4], "Adicionado Historico no orçamento não aprovado {$orcOb->getNOrc()}.{$orcOb->getAnoOrc()}", "tec");
                 return TRUE;
             } else {
                 return FALSE;

@@ -157,7 +157,7 @@ if (filter_has_var(INPUT_POST, "razao_social")) {
         $histOrcNAproOb = new HistoricoOrcNaoAprovado("", $_POST['id_orc_editado'], $data_ultima_alteracao, $id_colab, $_SESSION['Login'], $_POST['contato_clint'], $_POST['tel'], $conversa);
 
         if ($historicoNAproCtrl->inserirBD($histOrcNAproOb)) {
-            echo "atualizado no gistorico";
+            echo "atualizado no historico";
         }
         ?>
         <p>

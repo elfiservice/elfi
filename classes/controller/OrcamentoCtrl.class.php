@@ -131,9 +131,8 @@ class OrcamentoCtrl {
                 $arrayResultAtualizacao[0] = true;
                 $arrayResultAtualizacao["resultado"] = 'OK, atualizado!';
                 
-                $ip = $_SERVER['REMOTE_ADDR'];
-                $log = new Log(null, date('Y-m-d H:i:s'), $ocamentoObj->getId_colab(), "Atualizado Orcamento {$ocamentoObj->getNOrc()}.{$ocamentoObj->getAnoOrc()}", "tec", "", $ip);
-                LogCtrl::inserirBD($log);
+               // $log = new Log(null, date('Y-m-d H:i:s'), $ocamentoObj->getId_colab(), "Atualizado Orcamento {$ocamentoObj->getNOrc()}.{$ocamentoObj->getAnoOrc()}", "tec", "", filter_input(INPUT_SERVER, 'REMOTE_ADDR'));
+                //LogCtrl::inserirLog($ocamentoObj->getId_colab(), "Atualizado Orcamento {$ocamentoObj->getNOrc()}.{$ocamentoObj->getAnoOrc()}", "tec");
                 
             } else {
                 $arrayResultAtualizacao[0] = false;
@@ -224,6 +223,9 @@ class OrcamentoCtrl {
             // var_dump($this->OrcDao->insert($camposBd, $valores, "orcamentos"));
 
             if ($this->OrcDao->insert($camposBd, $valores)) {
+                
+                LogCtrl::inserirLog($orcamentoObj->getId_colab(), "Adicionado novo Orcamento {$orcamentoObj->getNOrc()}.{$orcamentoObj->getAnoOrc()}", "tec");
+                
                 $this->result = true;
             } else {
                 $this->result = false;
@@ -245,6 +247,9 @@ class OrcamentoCtrl {
 
 
         if ($this->OrcDao->insert($camposBd, $valoresUser, $tabela)) {
+            
+            $orc = $this->buscarOrcamentoPorId("*", "WHERE id = '$valores[0]' ");
+            LogCtrl::inserirLog($valores[3], "Adicionado <b>historico</b> no Orcamento {$orc->getNOrc()}.{$orc->getAnoOrc()}", "tec");
             return TRUE;
         } else {
             return FALSE;
