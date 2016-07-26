@@ -78,7 +78,7 @@ if ($form && $form['salvar_orc']) {
             echo"<a href=\"javascript:window.history.go(-1)\" class=\"bt_imprimir\" > Voltar</a>";
             die();
         }
-        $orcamento = new Orcamento($id_orc, "", "", "", "", "", $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_ultima_alteracao, $colaborador_ultim_alteracao, "", $data_inicio, $data_conclusao, "", $dias_d_exec, $dias_ultrapassad, $serv_concluido, "", $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, "", "", "");
+        $orcamento = new Orcamento($id_orc, "", "", $orcObj->getNOrc(), $orcObj->getAnoOrc(), "", $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_ultima_alteracao, $colaborador_ultim_alteracao, "", $data_inicio, $data_conclusao, "", $dias_d_exec, $dias_ultrapassad, $serv_concluido, "", $nao_conformidade, $obs_n_conformidad, $client_insatisfeito, "", "", "");
         //var_dump($orcamento);
         if ($orcamentoCtrl->atualizarOrcamento($orcamento)) {
             WSErro("Orçamento atualizado com Sucesso!", WS_ACCEPT);

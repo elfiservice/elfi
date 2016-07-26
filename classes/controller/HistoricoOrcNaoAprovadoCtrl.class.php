@@ -21,26 +21,24 @@ class HistoricoOrcNaoAprovadoCtrl {
     public function inserirBD(HistoricoOrcNaoAprovado $obj) {
         if ($obj instanceof HistoricoOrcNaoAprovado) {
 
-            
-           
+
+
             foreach ((array) $obj as $campo => $valor) {
                 $campo = str_replace("\0HistoricoOrcNaoAprovado\0", "", $campo);
                 $campoArr[$campo] = $campo;
             }
-            
+
             unset($campoArr['id']);
             $arrObj = array_values((array) $obj);
             unset($arrObj[0]);
-            
+
             $campoArr = implode(', ', array_keys($campoArr));
             $valores = " '" . implode("','", array_values($arrObj)) . "' ";
 
-            
+
             if ($this->historicoOrcNAprovadoDAO->insert($campoArr, $valores)) {
-               
-                $orcCtrl = new OrcamentoCtrl();
-                $orcOb = $orcCtrl->buscarOrcamentoPorId("*", "WHERE id = '$arrObj[1]' ");
-                LogCtrl::inserirLog($arrObj[4], "Adicionado Historico no orçamento não aprovado {$orcOb->getNOrc()}.{$orcOb->getAnoOrc()}", "tec");
+
+                $this->logSituacoes($arrObj[1], $arrObj[4]);
                 return TRUE;
             } else {
                 return FALSE;
@@ -82,12 +80,12 @@ class HistoricoOrcNaoAprovadoCtrl {
                     $camposDados[] = $campo . " = '" . $valor . "'";
                 }
             }
-               
-                unset($camposDados[0]);
-                unset($camposDados[3]);
-                
+
+            unset($camposDados[0]);
+            unset($camposDados[3]);
+
             $camposDados = implode(', ', $camposDados);
-           
+
             if ($this->historicoOrcNAprovadoDAO->update($camposDados, "WHERE id = '$id' AND id_orc = '$idOrc'")) {
 
                 return TRUE;
@@ -110,6 +108,20 @@ class HistoricoOrcNaoAprovadoCtrl {
         }
 
         return $arrayObjColab;
+    }
+
+    private function logSituacoes($idOrc, $id_colab) {
+        $orcCtrl = new OrcamentoCtrl();
+        $orcOb = $orcCtrl->buscarOrcamentoPorId("*", "WHERE id = '$idOrc' ");
+        $situacao = "";
+        if ($orcOb->getSituacaoOrc() == "Aprovado") {
+            $situacao = "- situacao <b>Aprovado</b>";
+        }elseif($orcOb->getSituacaoOrc() == "Cancelado"){
+            $situacao = "- situacao <b>Cancelado</b>";
+        }elseif($orcOb->getSituacaoOrc() == "Perdido"){
+             $situacao = "- situacao <b>Perdido</b>";
+        }
+        LogCtrl::inserirLog($id_colab, "Adicionado <b>Historico</b> no orçamento <b>não aprovado</b> <b>{$orcOb->getNOrc()}.{$orcOb->getAnoOrc()}</b> {$situacao}", "tec");
     }
 
 }

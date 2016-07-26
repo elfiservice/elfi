@@ -6,7 +6,6 @@
 class OrcamentoCtrl {
 
     private $OrcDao;
-
     private $result;
 
     function getResult() {
@@ -19,7 +18,6 @@ class OrcamentoCtrl {
 
     public function OrcamentoCtrl() {
         $this->OrcDao = new OrcamentoDAO();
-       
     }
 
     public function nDeOrcPorUsuario($nomeUsuarioLogado) {
@@ -130,10 +128,11 @@ class OrcamentoCtrl {
             if ($this->OrcDao->update($ocamentoObj->getId(), $campoDados)) {
                 $arrayResultAtualizacao[0] = true;
                 $arrayResultAtualizacao["resultado"] = 'OK, atualizado!';
-                
-               // $log = new Log(null, date('Y-m-d H:i:s'), $ocamentoObj->getId_colab(), "Atualizado Orcamento {$ocamentoObj->getNOrc()}.{$ocamentoObj->getAnoOrc()}", "tec", "", filter_input(INPUT_SERVER, 'REMOTE_ADDR'));
+
+                $this->logAtualizarOrcAprovado($ocamentoObj);
+
+                // $log = new Log(null, date('Y-m-d H:i:s'), $ocamentoObj->getId_colab(), "Atualizado Orcamento {$ocamentoObj->getNOrc()}.{$ocamentoObj->getAnoOrc()}", "tec", "", filter_input(INPUT_SERVER, 'REMOTE_ADDR'));
                 //LogCtrl::inserirLog($ocamentoObj->getId_colab(), "Atualizado Orcamento {$ocamentoObj->getNOrc()}.{$ocamentoObj->getAnoOrc()}", "tec");
-                
             } else {
                 $arrayResultAtualizacao[0] = false;
                 $arrayResultAtualizacao["resultado"] = 'Erro ao tentar atualizar!!';
@@ -223,9 +222,9 @@ class OrcamentoCtrl {
             // var_dump($this->OrcDao->insert($camposBd, $valores, "orcamentos"));
 
             if ($this->OrcDao->insert($camposBd, $valores)) {
-                
-                LogCtrl::inserirLog($orcamentoObj->getId_colab(), "Adicionado novo Orcamento {$orcamentoObj->getNOrc()}.{$orcamentoObj->getAnoOrc()}", "tec");
-                
+
+                LogCtrl::inserirLog($orcamentoObj->getId_colab(), "Adicionado <b>novo</b> Orcamento <b>{$orcamentoObj->getNOrc()}.{$orcamentoObj->getAnoOrc()}</b>", "tec");
+
                 $this->result = true;
             } else {
                 $this->result = false;
@@ -247,9 +246,9 @@ class OrcamentoCtrl {
 
 
         if ($this->OrcDao->insert($camposBd, $valoresUser, $tabela)) {
-            
+
             $orc = $this->buscarOrcamentoPorId("*", "WHERE id = '$valores[0]' ");
-            LogCtrl::inserirLog($valores[3], "Adicionado <b>historico</b> no Orcamento {$orc->getNOrc()}.{$orc->getAnoOrc()}", "tec");
+            LogCtrl::inserirLog($valores[3], "Adicionado <b>Historico</b> no orcamento <b>aprovado</b> <b>{$orc->getNOrc()}.{$orc->getAnoOrc()}</b>", "tec");
             return TRUE;
         } else {
             return FALSE;
@@ -264,6 +263,9 @@ class OrcamentoCtrl {
 
 
         if ($this->OrcDao->update($valores[0], $valoresUser, $tabela = "historico_orc_aprovado")) {
+
+            $orc = $this->buscarOrcamentoPorId("*", "WHERE id = '$valores[1]' ");
+            LogCtrl::inserirLog($valores[4], "Atualizado <b>Historico</b> no orcamento <b>aprovado</b> <b>{$orc->getNOrc()}.{$orc->getAnoOrc()}</b>", "tec");
             return TRUE;
         } else {
             return FALSE;
@@ -316,6 +318,19 @@ class OrcamentoCtrl {
         } else {
             $this->result = 's';
         }
+    }
+
+    private function logAtualizarOrcAprovado(Orcamento $objOrc) {
+        if ($objOrc->getSituacaoOrc() == "concluido" && $objOrc->getServConcluido() == 's') {
+            LogCtrl::inserirLog($objOrc->getColabUltimaAlteracao(), "Orcamento <b>{$objOrc->getNOrc()}.{$objOrc->getAnoOrc()}</b> marcado como <b>concluido</b>", "tec");
+        }
+
+        if ($objOrc->getSituacaoOrc() == "Aprovado" && $objOrc->getServConcluido() == 'n' && $objOrc->getDataInicio() != "0000-00-00") {
+            $dataInicio = Formatar::formatarDataSemHora($objOrc->getDataInicio());
+            LogCtrl::inserirLog($objOrc->getColabUltimaAlteracao(), "Orcamento <b>{$objOrc->getNOrc()}.{$objOrc->getAnoOrc()}</b> marcado com <b>data de inicio {$dataInicio}</b>", "tec");
+        }
+
+
     }
 
 }
