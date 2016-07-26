@@ -6,6 +6,7 @@
 class OrcamentoCtrl {
 
     private $OrcDao;
+
     private $result;
 
     function getResult() {
@@ -18,6 +19,7 @@ class OrcamentoCtrl {
 
     public function OrcamentoCtrl() {
         $this->OrcDao = new OrcamentoDAO();
+       
     }
 
     public function nDeOrcPorUsuario($nomeUsuarioLogado) {
@@ -42,10 +44,10 @@ class OrcamentoCtrl {
         if ($ocamentoObj instanceof Orcamento) {
 
             $arrayItensOrc = array(
-                "n_orc" => $ocamentoObj->getNOrc(),
+                "n_orc" => "",
                 "id_cliente" => $ocamentoObj->getId_cliente(),
                 "id_colab" => $ocamentoObj->getId_colab(),
-                "ano_orc" => $ocamentoObj->getAnoOrc(),
+                "ano_orc" => "",
                 "colaborador_orc" => $ocamentoObj->getColabOrc(),
                 "situacao_orc" => $ocamentoObj->getSituacaoOrc(),
                 "razao_social_contr" => $ocamentoObj->getRazaoSocialContrat(),
@@ -128,6 +130,11 @@ class OrcamentoCtrl {
             if ($this->OrcDao->update($ocamentoObj->getId(), $campoDados)) {
                 $arrayResultAtualizacao[0] = true;
                 $arrayResultAtualizacao["resultado"] = 'OK, atualizado!';
+                
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $log = new Log(null, date('Y-m-d H:i:s'), $ocamentoObj->getId_colab(), "Atualizado Orcamento {$ocamentoObj->getNOrc()}.{$ocamentoObj->getAnoOrc()}", "tec", "", $ip);
+                LogCtrl::inserirBD($log);
+                
             } else {
                 $arrayResultAtualizacao[0] = false;
                 $arrayResultAtualizacao["resultado"] = 'Erro ao tentar atualizar!!';
