@@ -14,8 +14,9 @@ class Log {
     private $setor;
     private $visualizado;
     private $ip;
+    private $mostrar;
 
-    public function __construct($id = NULL, $data = NULL, $id_colab = NULL, $atividade = NULL, $setor = NULL, $visualizado = NULL, $ip = NULL) {
+    public function __construct($id = NULL, $data = NULL, $id_colab = NULL, $atividade = NULL, $setor = NULL, $visualizado = NULL, $ip = NULL, $mostrar = NULL) {
         $this->id = $id;
         $this->data = $data;
         $this->id_colab = $id_colab;
@@ -23,8 +24,18 @@ class Log {
         $this->setor = $setor;
         $this->visualizado = $visualizado;
         $this->ip = $ip;
+        $this->mostrar = $mostrar;
     }
 
+    public function getMostrar() {
+        return $this->mostrar;
+    }
+
+    public function setMostrar($mostrar) {
+        $this->mostrar = $mostrar;
+    }
+
+        
     public function getId() {
         return $this->id;
     }
