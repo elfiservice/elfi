@@ -18,11 +18,12 @@ foreach ($orcamentos as $row) {
 
         if ($dias == 10 || $dias == 20 || $dias == 30 || $dias == 40 || $dias == 50 || $dias == 60 || $dias == 80 || $dias == 100 || $dias == 120 || $dias == 150 || $dias == 180 || $dias == 210 || $dias == 240) {
 
-            $emailTo = array(EMAIL_ADMIN);
-            //$emailTo = array($row['email_contr'], $row['email_obra']);
+            //$emailTo = array(EMAIL_ADMIN);
+            $emailTo = array($row['email_contr'], $row['email_obra']);
             $assunto = "Orçamento aguardando sua aprovação";
             $textoCorpo = "Olá, <b>{$row ['razao_social_contr']}</b> hoje faz <b>{$dias} dias</b> que nos foi solicitado um orçamento cujo o número é <b>{$row ['n_orc']}.{$row ['ano_orc']}</b>. ";
-            $emailCopiaOculta = array();
+            $emailCopiaOculta = array(EMAIL_ADMIN);
+			//$emailCopiaOculta = array();
             $email2 = new EmailGenerico($emailTo, $assunto, $textoCorpo, array(), $emailCopiaOculta);
 
             if ($email2->enviarEmailSMTP()) {

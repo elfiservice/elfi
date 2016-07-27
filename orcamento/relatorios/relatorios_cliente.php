@@ -125,7 +125,7 @@ $orcCrtl = new OrcamentoCtrl();
                 <TR>
                     <TH>Cliente</TH>
                     <TH>Nº Propostas Feitas</TH>
-                    <TH>Nº Propostas Aprovadas</TH>
+                    <TH>Nº Propostas Aprovadas/Concluidas</TH>
                     <TH>% de Aprovação</TH>
 
                 </TR>
@@ -139,7 +139,7 @@ $orcCrtl = new OrcamentoCtrl();
 
                     $orcPorCliente = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' ");
                     $total = count($orcPorCliente);
-                    $orcPorClienteAprovados = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND situacao_orc = 'Aprovado' ");
+                    $orcPorClienteAprovados = $orcCrtl->buscarOrcamentos("*", "WHERE (razao_social_contr = '$nome_cliente' AND situacao_orc = 'Aprovado') OR (razao_social_contr = '$nome_cliente' AND situacao_orc = 'concluido') ");
                     $totalAprovados = count($orcPorClienteAprovados);
 
                     if ($total == 0) {
