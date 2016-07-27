@@ -14,6 +14,8 @@ if (isset ( $_GET ['id_cliente'] )) {
 		
 		
 		mysql_query("UPDATE clientes SET mostrar = '0' WHERE id ='$id_cliente' AND razao_social='$razaoSocial'")  or die (mysql_error("Ocorreu um erro ao tentar salvar as alterações"));
+                
+                LogCtrl::inserirLog($_SESSION['id'], "Cliente Cod <b>{$id_cliente} excluido</b> ", "tec");
 ?>
 <script>
 	alert ("Cliente excluido com sucesso!");
@@ -23,5 +25,5 @@ if (isset ( $_GET ['id_cliente'] )) {
 		
 	}
 }else{
-	echo"<b> Cliente n�o identificado. </b>";
+	echo"<b> Cliente n�o identificado. </b>";
 }

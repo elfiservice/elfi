@@ -134,19 +134,19 @@ if (isset($_GET['id_cliente'])) {
 						estado = '$estado',
 						cidade = '$cidade'					
 					WHERE id ='$id_cliente'")) {
+                
+                LogCtrl::inserirLog($_SESSION['id'], "Cliente Codigo <b>{$id_cliente} atualizado</b>", "tec");
                 ?>
                 <script>
                     alert("Cliente atualizado com sucesso!");
                 </script>
-               <?php
-                if($email_tec_check > 1)  {
-                     echo "<b> <span style=\"color:red;\">Atenção: já existe este Email Tecnico cadastrado no sistema!  </span></b>";
-                  ?>
-<!--                    <a href="javascript:history.back(-1);" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a>-->
-                    <?php                      
-                   // exit();
-                    
-                    
+                <?php
+                if ($email_tec_check > 1) {
+                    echo "<b> <span style=\"color:red;\">Atenção: já existe este Email Tecnico cadastrado no sistema!  </span></b>";
+                    ?>
+                        <!--                    <a href="javascript:history.back(-1);" target="_self"><span STYLE="font-size: 16px; text-align: center; margin-top: 200px;">VOLTAR</span></a>-->
+                    <?php
+                    // exit();
                 }
                 ?>
                 <a href="tecnico.php?id_menu=cliente" target="_self">Voltar</a>

@@ -140,6 +140,7 @@ if (isset ($_POST['razao_social']))
      VALUES('$nome_usuario','$razao_social','$nome_fantasia','$classificacao', now(),'$ie', '$endereco', '$bairro', '$estado', '$cidade', '$cep', '$telefone', '$celular', '$fax', '$email_tec', '$email_admin', '$cnpj_cpf', '$tipo')")  
      or die (mysql_error());         
          
+LogCtrl::inserirLog($_SESSION['id'], "Adicionado novo Cliente {$razao_social}", "tec");
      
     echo "Novo cliente adicionado.";
      

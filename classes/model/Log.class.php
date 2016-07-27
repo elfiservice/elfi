@@ -16,7 +16,7 @@ class Log {
     private $ip;
     private $mostrar;
 
-    public function __construct($id = NULL, $data = NULL, $id_colab = NULL, $atividade = NULL, $setor = NULL, $visualizado = NULL, $ip = NULL, $mostrar = NULL) {
+    public function __construct($id = NULL, $data = NULL, $id_colab = NULL, $atividade = NULL, $setor = NULL, $visualizado = NULL, $ip = NULL, $mostrar = 1) {
         $this->id = $id;
         $this->data = $data;
         $this->id_colab = $id_colab;
