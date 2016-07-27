@@ -7,6 +7,10 @@
 $orcObjInicial = $_SESSION['orcObjInicial'];
 
 $arrOrcInicial = array_values($orcObjInicial[0]);
+//echo $orcObjInicial[0]['n_orc'] . '<br>';
+//echo $orcObjInicial[0]['ano_orc'] . '<br>';
+//var_dump($orcObjInicial);
+//die;
 
 
 if (filter_has_var(INPUT_POST, "razao_social")) {
@@ -69,7 +73,7 @@ if (filter_has_var(INPUT_POST, "razao_social")) {
 //}
 
     $orcamentoObj = new Orcamento(
-            $_POST['id_orc_editado'], $id_cliente, $id_colab, "", "", $_SESSION['Login'], "", $_POST['razao_social'], $cnpj_contrato, $_POST['endereco'], $_POST['bairro'], $_POST['city'], $_POST['estado'], $_POST['cep'], $_POST['tel'], $_POST['cel'], $_POST['email_orc'], $_POST['contato_clint'], $razao_social_obra, $cnpj_obra, $endereco_obra, $bairro_obra, $cidade_obra, $estado_obra, $cep_obra, $tel_obra, $cel_obra, $email_orc_obra, $_POST['atividade1'], $_POST['classificacao1'], $_POST['quantidade1'], $_POST['unidade1'], $descricao_servicos, $_POST['execucao_orc'], $_POST['validade_orc'], $_POST['pagamento_orc'], $observacoes_servico, $_POST['duvida_orc'], $valor_do_servico, $valo_do_material, "", $total_orc, "", "", $data_ultima_alteracao, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+            $_POST['id_orc_editado'], $id_cliente, $id_colab, $orcObjInicial[0]['n_orc'], $orcObjInicial[0]['ano_orc'], $_SESSION['Login'], "", $_POST['razao_social'], $cnpj_contrato, $_POST['endereco'], $_POST['bairro'], $_POST['city'], $_POST['estado'], $_POST['cep'], $_POST['tel'], $_POST['cel'], $_POST['email_orc'], $_POST['contato_clint'], $razao_social_obra, $cnpj_obra, $endereco_obra, $bairro_obra, $cidade_obra, $estado_obra, $cep_obra, $tel_obra, $cel_obra, $email_orc_obra, $_POST['atividade1'], $_POST['classificacao1'], $_POST['quantidade1'], $_POST['unidade1'], $descricao_servicos, $_POST['execucao_orc'], $_POST['validade_orc'], $_POST['pagamento_orc'], $observacoes_servico, $_POST['duvida_orc'], $valor_do_servico, $valo_do_material, "", $total_orc, "", "", $data_ultima_alteracao, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 
     $orcSaveCtrl = new OrcamentoCtrl();
     $result = $orcSaveCtrl->atualizarOrcamento($orcamentoObj);
@@ -153,7 +157,7 @@ if (filter_has_var(INPUT_POST, "razao_social")) {
         $histOrcNAproOb = new HistoricoOrcNaoAprovado("", $_POST['id_orc_editado'], $data_ultima_alteracao, $id_colab, $_SESSION['Login'], $_POST['contato_clint'], $_POST['tel'], $conversa);
 
         if ($historicoNAproCtrl->inserirBD($histOrcNAproOb)) {
-            echo "atualizado no gistorico";
+            echo "atualizado no historico";
         }
         ?>
         <p>

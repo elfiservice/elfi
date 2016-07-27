@@ -6,7 +6,8 @@ $ano_orc = date('Y');
 
 $OrcCtrl = new OrcamentoCtrl();
 $orcamentos = $OrcCtrl->buscarOrcamentos("*", "WHERE ano_orc = '$ano_orc' AND situacao_orc = 'concluido' AND serv_concluido = 's' AND feito_pos_entreg = 'n' ORDER BY id  DESC");
-
+$count = 0;
+$countErr = 0;
 foreach ($orcamentos as $row) {
 
     $data_inicial = $row ['data_conclusao'];
@@ -36,12 +37,14 @@ foreach ($orcamentos as $row) {
 
                 if ($email2->enviarEmailSMTP()) {
                     echo "OK<br>";
+                    $count++;
                     $f = fopen("registro_email_pos_venda.txt", "a+", 0);
                     $linha = "Email enviado em: " . date('d/m/Y H:i') . " para " . $row ['razao_social_contr'] . " Orc N. " . $row ['n_orc'] . "/" . $row ['ano_orc'] . " Email: " . $row ['email_contr'] . "\r\n";
                     fwrite($f, $linha, strlen($linha));
                     fclose($f);
                 } else {
                     echo "ERROr <br>";
+                    $countErr++;
                 }
             }
         }
@@ -53,3 +56,5 @@ foreach ($orcamentos as $row) {
         fclose($f);
     }
 }
+
+LogCtrl::inserirLog(0, "Enviado email(s) para {$count} Cliente(s) com Pesquisa de pos-venda(satisfação) não respondidas - ocorreram {$countErr} erros.", "tec");

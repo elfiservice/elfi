@@ -77,9 +77,9 @@ foreach ($clientes as $row) {
 
                 if ($email2->enviarEmailSMTP()) {
                         echo "OK => Envio Relatorio!<br>";
-                   
+                        LogCtrl::inserirLog(0, $textoCorpo, "ad");
                     $f = fopen("registro_email_pos_venda.txt", "a+", 0);
-                    $linha = "Email enviado em: " . date('d/m/Y H:i') . " para " . $row ['razao_social'] . " Email: " . $row ['email_tec'] . "\r\n";
+                    $linha = "Email enviado em: " . date('d/m/Y H:i') . " para todos clientes: " . $textoCorpo . "\r\n";
                     fwrite($f, $linha, strlen($linha));
                     fclose($f);
                 } else {
