@@ -1,116 +1,59 @@
 <style>
-   *{margin: 0; padding: 0; box-sizing: border-box;}
- /*    .timeline-both-side{
-        float: left; 
-        width: 96%; 
-        margin: 20px 2% 50px; 
-        position: relative; 
-        box-sizing: border-box;
+    *{margin: 0; padding: 0; box-sizing: border-box;}
+    .form_load{display: none; vertical-align: middle; margin-left: 15px; margin-top: -2px;}
+    .trigger{display: none; padding: 15px; background: #ccc; color: #000; margin-bottom: 20px; font-size: 0.8em; font-weight: bolder}
+    .trigger-error{background: #e4b4b4;}
+    .trigger-success{background: #b4e4b9;}
+    .loadmore{display: inline-block; margin-top: 25px; text-transform: uppercase; font-size: 0.7em; background: #555; color: #fff; padding: 10px; cursor: pointer;}
+    .centro{
+        text-align: center;
     }
-    .timeline-both-side:before{
-        background-color: #ccc; 
-        bottom: 0; 
-        content: " "; 
-        left: 50%; 
-        position: absolute; 
-        top: 0; 
-        width: 1px;
-    }
-    .timeline-both-side:after{
-        border-radius: 50%; 
-        bottom: -22px; 
-        content: ""; 
-        height: 18px; 
-        left: 50%; 
-        margin-left: -11px; 
-        position: absolute; 
-        width: 18px; 
-        border: 2px solid #ccc;
-    }
-    .timeline-both-side li {
-        position: relative; 
-        float: left; 
-        width: 100%;
-    }
-    .timeline-both-side li .border-line{
-        background-color: #ccc; 
-        font-size: 1.4em; 
-        height: 1px; 
-        left: 50%; 
-        margin-left: -8%; 
-        position: absolute; 
-        text-align: center; 
-        top: 50%; 
-        width: 8%; 
-        z-index: 100;
-    }
-    .timeline-both-side li.opposite-side .border-line{
-        left: auto; 
-        right: 50%; 
-        margin-left: 0; 
-        margin-right: -8%;
-    }
-    .timeline-both-side li .border-line:before {
-        background-color: #ccc; 
-        content: ""; 
-        height: 7px; 
-        position: absolute; 
-        right: -4px; 
-        top: -3px; 
-        width: 7px;
-    }
-    .timeline-both-side li.opposite-side .border-line:before{
-        left: -4px; 
-        right: auto;
-    }
-    .timeline-both-side li .timeline-description{
-        border-radius: 2px; 
-        background-color: #f1f1f1; 
-        border: 1px solid #ccc; 
-        float: left; 
-        font-size: 13px; 
-        padding: 10px; 
-        position: relative; 
-        width: 42%;
-    }
-    .timeline-both-side li.opposite-side .timeline-description{
-        float: right;
-    }
-
-    .timeline-both-side li{
-        list-style: none;
-    }*/
-
 </style>
-
-<ul class="timeline-both-side">
-
-    <?php
-
-    $logCtrl = new LogCtrl();
-    $logs = $logCtrl->buscarBD("*", "ORDER BY data DESC LIMIT 10");
-    $count = 1;
-    foreach ($logs as $key => $log) {
-        //var_dump($log);
-        if ($count % 2 == 0) {
-            $class = " class=\"opposite-side\" ";
-        } else {
-            $class = "  ";
-        }
-        $count++;
-        $colabCtrl = new ColaboradorCtrl();
-        $id_colab = $log->getId_colab();
-        $colab = $colabCtrl->buscarColaborador("*", "WHERE id_colaborador = '$id_colab' ");
-        //var_dump($colab[0]->getLogin());
-        ?>
-        <li <?= $class ?>>
-            <div class="border-line"></div>
-            <div class="timeline-description">
-                <p><?= $log->getAtividade() . ' - por <b>' . $colab[0]->getLogin() . '</b> - <i>' . Formatar::dataTimeLine($log->getData()) . '</i>' ?></p>
-            </div>
-        </li>
+<div class="j_list"> 
+    <ul class="timeline-both-side">
 
         <?php
-    }
-    ?>
-</ul>
+        $logCtrl = new LogCtrl();
+        $logs = $logCtrl->buscarBD("*", "ORDER BY data DESC LIMIT 6");
+        $count = 1;
+        foreach ($logs as $key => $log) {
+            //var_dump($log);
+            if ($count % 2 == 0) {
+                $class = " class=\"opposite-side\" ";
+            } else {
+                $class = "  ";
+            }
+            $count++;
+            $colabCtrl = new ColaboradorCtrl();
+            $id_colab = $log->getId_colab();
+            $colab = $colabCtrl->buscarColaborador("*", "WHERE id_colaborador = '$id_colab' ");
+            //var_dump($colab[0]->getLogin());
+
+
+            if ($colab == null) {
+                $colab = "Sistema";
+            } else {
+                $colab = $colab[0]->getLogin();
+            }
+            ?>
+            <li <?= $class ?>>
+                <div class="border-line"></div>
+                <div class="timeline-description">
+                    <p><?= $log->getAtividade() . ' - por <b>' . $colab . '</b> - <i>' . Formatar::dataTimeLine($log->getData()) . '</i>' ?></p>
+                </div>
+            </li>
+
+            <?php
+        }
+        ?>
+        <li class="j_insert">       </li>
+
+    </ul>
+    <!--    <div class="j_insert"></div>-->
+    <div class="centro">
+        <a rel="j_list" class="j_load loadmore">Carregar mais</a>
+        <img class="form_load" src="imagens/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
+    </div>
+</div>
+<script src="js/jquery.js"></script>     
+<script src="js/timeline.js"></script>    
