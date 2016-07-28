@@ -101,6 +101,12 @@ if (!isset($_SESSION ['idx'])) {
                 <div style="margin: 20px 0px 20px 0px;">
 
                     <?php
+                    
+                    if($menu == "timeline"){
+                        require_once 'timeline.php';
+                        exit();
+                    }
+                    
                     /* ------------ Manter Cliente --------------- */
 
                     if ($menu == "cliente") {

@@ -164,4 +164,55 @@ class Formatar {
         return $data->format('Y-m-d');
     }
 
+    
+        /**
+         * Formatar data para formato de <b>Periodo atrás</b>
+         * @param date $date = Formato 0000-00-00 00:00:00
+         * @return string = retorna data amigavel ex: xxminutos atrás, xx dias atrás, xx meses atras, etc..
+         */
+        public static function dataTimeLine($date) {
+        if ($date == "0000-00-00 00:00:00") {
+            return '<span style= "color: red;">Nunca Entrou</span>';
+        }
+
+        $periods = array("segundo", "minuto", "hora", "dia", "semana", "mes", "ano", "decada");
+        $lengths = array("60", "60", "24", "7", "4.35", "12", "10");
+
+        $now = time();
+        $unix_date = strtotime($date);
+
+        // check validity of date
+        if (empty($unix_date)) {
+            return "erro na data";
+        }
+
+        // is it future date or past date
+        if ($now > $unix_date) {
+            $difference = $now - $unix_date;
+            $tense = "atrás";
+        } else {
+            $difference = $unix_date - $now;
+            $tense = "agora mesmo";
+        }
+
+        for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths) - 1; $j++) {
+            $difference /= $lengths[$j];
+        }
+
+        $difference = round($difference);
+
+        if ($difference != 1) {
+
+            if ($periods[$j] <> "mes") {
+                $periods[$j].= "s";
+            } else {
+
+                $periods[$j].= "es";
+            }
+        }
+
+        return "$difference $periods[$j] {$tense}";
+    }
+
+    
 }

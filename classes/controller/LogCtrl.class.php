@@ -12,8 +12,7 @@ class LogCtrl {
     public function __construct() {
         $this->logDao = new LogDAO();
     }
-    
-    
+
     /**
      * Fazer o INSERT no BD na tabela = <b>logs</b>
      * @param int $id_colab = ID do colaborador Atuante
@@ -24,14 +23,41 @@ class LogCtrl {
     public static function inserirLog($id_colab, $atividade, $setor) {
         $log = new Log(NULL, date('Y-m-d H:i:s'), $id_colab, $atividade, $setor, NULL, filter_input(INPUT_SERVER, 'REMOTE_ADDR'));
         $logCtrl = new LogCtrl();
-        if($logCtrl->inserirBD($log)){
+        if ($logCtrl->inserirBD($log)) {
             return TRUE;
-        }else{
+        } else {
             return FALSE;
         }
     }
 
+    /**
+     * Fazer SELECT no BD na tabela = logs
+     * @param string $campos = Campos do BD a serem pesquisados
+     * @param string $termos = Termos para Filtrar a Busca no BD (WHERE, etc)
+     * @return Array de Objetos do tipo --><b>Log</b><-- se encontrar resultados, se não retorna NULL
+     */
+    public function buscarBD($campos, $termos) {
+        $select = $this->logDao->select($campos, $termos);
+        if (!empty($select)) {
 
+            return $this->montarObjeto($select);
+        } else {
+            return NULL;
+        }
+    }
+
+    //--------------------------------------------------
+    //----------------PRIVATES---------------------
+    //--------------------------------------------------
+    private function montarObjeto($arrayDados) {
+        $arrayObjColab = array();
+        foreach ($arrayDados as $dado) {
+            extract($dado);
+            $arrayObjColab[] = new Log($id, $data, $id_colab, $atividade, $setor, $visualizado, $ip, $mostrar);
+        }
+
+        return $arrayObjColab;
+    }
 
     /**
      * Fazer INSERT no BD na tabela = logs
@@ -53,8 +79,8 @@ class LogCtrl {
             $campoArr = implode(', ', array_keys($campoArr));
             $valores = " '" . implode("','", array_values($arrObj)) . "' ";
 
-                //$logDao = new LogDAO();
-            
+            //$logDao = new LogDAO();
+
             if ($this->logDao->insert($campoArr, $valores)) {
                 return TRUE;
             } else {

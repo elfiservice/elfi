@@ -76,14 +76,14 @@ if (!isset($_SESSION['idx'])) {
                     <thead>
                         <tr align="center">
                             <th><a href="financeiro.php?id_menu=#">Administrativo / Financeiro</a></th>
-                            <th><a href="tecnico.php">Técnico</a></th>
+                            <th><a href="tecnico.php?id_menu=timeline">Técnico</a></th>
                             <th><a href="rh.php">Pessoal / RH</a></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr align="center" >
                             <td><a href="financeiro.php?id_menu=#"> <img src="imagens/finance.jpg" > </a></td>
-                            <td><a href="tecnico.php"> <img src="imagens/tecnico.jpg" > </a></td>
+                            <td><a href="tecnico.php?id_menu=timeline"> <img src="imagens/tecnico.jpg" > </a></td>
                             <td><a href="rh.php"> <img src="imagens/rh.jpg" > </a></td>
                         </tr>
 
