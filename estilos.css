@@ -470,3 +470,88 @@ legend.scheduler-border {
     padding:0 10px; /* To give a bit of padding on the left and right */
     border-bottom:none;
 }
+
+/*TIMELINE ESTILO*/
+/*    *{margin: 0; padding: 0; box-sizing: border-box;}*/
+    .timeline-both-side{
+        float: left; 
+        width: 96%; 
+        margin: 20px 2% 50px; 
+        position: relative; 
+        box-sizing: border-box;
+    }
+    .timeline-both-side:before{
+        background-color: #8087ce; 
+        bottom: 0; 
+        content: " "; 
+        left: 50%; 
+        position: absolute; 
+        top: 0; 
+        width: 1px;
+    }
+    .timeline-both-side:after{
+        border-radius: 50%; 
+        bottom: -22px; 
+        content: ""; 
+        height: 18px; 
+        left: 50%; 
+        margin-left: -11px; 
+        position: absolute; 
+        width: 18px; 
+        border: 2px solid #8087ce;
+    }
+    .timeline-both-side li {
+        position: relative; 
+        float: left; 
+        width: 100%;
+    }
+    .timeline-both-side li .border-line{
+        background-color: #8087ce; 
+        font-size: 1.4em; 
+        height: 1px; 
+        left: 50%; 
+        margin-left: -8%; 
+        position: absolute; 
+        text-align: center; 
+        top: 50%; 
+        width: 8%; 
+        z-index: 100;
+    }
+    .timeline-both-side li.opposite-side .border-line{
+        left: auto; 
+        right: 50%; 
+        margin-left: 0; 
+        margin-right: -8%;
+    }
+    .timeline-both-side li .border-line:before {
+        background-color: #8087ce; 
+        content: ""; 
+        height: 7px; 
+        position: absolute; 
+        right: -4px; 
+        top: -3px; 
+        width: 7px;
+    }
+    .timeline-both-side li.opposite-side .border-line:before{
+        left: -4px; 
+        right: auto;
+    }
+    .timeline-both-side li .timeline-description{
+        border-radius: 2px; 
+        background-color: #012B8B; 
+        color: white;
+        border: 1px solid #012B8B; 
+        float: left; 
+        font-size: 13px; 
+        padding: 10px; 
+        position: relative; 
+        width: 42%;
+    }
+    .timeline-both-side li.opposite-side .timeline-description{
+        float: right;
+    }
+
+    .timeline-both-side li{
+        list-style: none;
+    }
+/*FINAL ESTIOLO TIMELINE*/

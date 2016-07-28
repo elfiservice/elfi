@@ -1,6 +1,6 @@
 <style>
-/*    *{margin: 0; padding: 0; box-sizing: border-box;}
-    .timeline-both-side{
+   *{margin: 0; padding: 0; box-sizing: border-box;}
+ /*    .timeline-both-side{
         float: left; 
         width: 96%; 
         margin: 20px 2% 50px; 
@@ -106,6 +106,7 @@
         <li <?= $class ?>>
             <div class="border-line"></div>
             <div class="timeline-description">
+                <p><?= $log->getAtividade() . ' - por <b>' . $colab[0]->getLogin() . '</b> - <i>' . Formatar::dataTimeLine($log->getData()) . '</i>' ?></p>
             </div>
         </li>
 
