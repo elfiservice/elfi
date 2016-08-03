@@ -51,14 +51,14 @@ switch ($Action) {
                 }
                 $data = Formatar::dataTimeLine($log->getData());
 
-                $jSon['result'] .= "<li {$class}><div class=\"border-line\"></div>"
+                $jSon['result'] .= "<li {$class} style=\"display: none;\"><div class=\"border-line\"></div>"
                         . "<div class=\"timeline-description\"> "
                         . "<p>{$log->getAtividade()} - por <b>{$colab}</b> - <i>{$data}</i> </p>"
                         . "    </div>"
                         . "</li>";
             }
         } else {
-            $jSon['result'] = "<li ><div class=\"border-line trigger-error\"></div>"
+            $jSon['result'] = "<li style=\"display: none;\"><div class=\"border-line trigger-error\"></div>"
                     . "<div class=\"timeline-description\"> "
                     . "<p><i>não há mais resultados</i> </p>"
                     . "    </div>"
