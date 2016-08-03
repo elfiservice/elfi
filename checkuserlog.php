@@ -2,11 +2,16 @@
 
 session_start();
 
-
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED);
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
 //-----------------------------------------------------------------------------------------------------------------------------------
 include_once "Config/config_sistema.php"; 
+
+//require './classes/Config.inc.php';
+
+
+
 $dyn_www = $_SERVER['HTTP_HOST'].'/site ELFI/colaboradores'; 
 //$dyn_www = $_SERVER['HTTP_HOST'].'/colaboradores'; 
 //------ CHECK IF THE USER IS LOGGED IN OR NOT AND GIVE APPROPRIATE OUTPUT -------

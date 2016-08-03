@@ -555,3 +555,7 @@ legend.scheduler-border {
         list-style: none;
     }
 /*FINAL ESTIOLO TIMELINE*/
+
+/*BOTAO NOTIFICACAO*/
+.bt-notificacao{position: fixed; cursor: pointer; bottom: 15px; right: 25px; color: #fff; font-size: 0.8em; color: #fff; padding: 10px; background: rgba(245,0,0,0.5);}
+.bt-notificacao:hover{background: #09f;}
