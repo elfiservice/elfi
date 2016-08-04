@@ -1,73 +1,58 @@
 <?php
 
-//include '../classes/dao/UsuarioDAO.class.php';
+/**
+ * Usuario.class [ MODEL ]
+ * Resp modelar os Usuarios do Sistema, fornecendo informações Basicas
+ * @copyright (c) 2016, Armando JR. ELFISERVICE
+ */
 
-class Usuario{
-	
-	private $id;
-	private $login;
-	private $senha;
+abstract  class Usuario {
 
-	private $ultima_data_logado;
-	private $email_ativado;
+    private $id_colaborador;
+    private $Login;
+    private $Senha;
+    private $email_activated;
+    private $last_log_date;
 
-	
+    public function getId_colaborador() {
+        return $this->id_colaborador;
+    }
 
-	
-        
-        
-        
-	public function getId(){
-		return $this->id;
-	}
-	
-	public function setId($pId){
-		return $this->id = $pId;
-	}
-	
-	public function getLogin(){
-		return $this->login;
-	}
-	
-	public function setLogin($pLogin){
-		return $this->login = $pLogin;
-	}
-	
-	public function getSenha(){
-		return $this->senha;
-	}
-	
-	public function setSenha($pSenha){
-		return $this->senha = $pSenha;
-	}
-	
+    public function getLogin() {
+        return $this->Login;
+    }
 
-	
-	public function getUltDataLogado(){
-		return $this->ultima_data_logado;
-	}
-	
-	public function setUltDataLogado($pUltDataLogado){
-		return $this->ultima_data_logado = $pUltDataLogado;
-	}
-	
+    public function getSenha() {
+        return $this->Senha;
+    }
 
-	
+    public function getEmail_activated() {
+        return $this->email_activated;
+    }
 
-	
-	public function getEmailAtivado(){
-		return $this->email_ativado;
-	}
-	
-	public function setEmailAtivado($pEmailAtivado){
-		return $this->email_ativado = $pEmailAtivado;
-	}	
-	
+    public function getLast_log_date() {
+        return $this->last_log_date;
+    }
+
+    public function setId_colaborador($id_colaborador) {
+        $this->id_colaborador = $id_colaborador;
+    }
+
+    public function setLogin($Login) {
+        $this->Login = $Login;
+    }
+
+    public function setSenha($Senha) {
+        $this->Senha = $Senha;
+    }
+
+    public function setEmail_activated($email_activated) {
+        $this->email_activated = $email_activated;
+    }
+
+    public function setLast_log_date($last_log_date) {
+        $this->last_log_date = $last_log_date;
+    }
 
 
-
-
-            
-        
-	
 }
