@@ -1,82 +1,71 @@
 <?php
-
 /**
- * Login.class [ MODEL ]
+ * Login.class [ utilitario ]
  * Resp por autenticar, validar, e checar usuario do sistema Login.
  * @copyright (c) 2016, Armando JR. ELFISERVICE
  */
-class Login {
-    private $level;
-    private $email;
-    private $senha;
-    private $error;
-    private $result;
-    
-    public function __construct($level) {
-        $this->level = (int)$level;
-    }
-    
-    public function exeLogin(array $userData) {
-        $this->email = (string) strip_tags(trim($userData['user']));
-        $this->senha = (string) strip_tags(trim($userData['pass']));
-        $this->setLogin();
-    }
+class Login extends Conexao{
+	
+	private $login;
+	private $senha;
+	
+		
+	public function getLogin(){
+		return $this->login;
+	}
+	
+	public function getSenha(){
+		return $this->senha;
+	}
+	
+	public function setLogin($pLogin){
+		$this->login = $pLogin;
+	}
+	
+	public function setSenha($pSenha){
+		$this->senha = $pSenha;
+	}
+	
+	public function logar(){
+		
+		parent::conectar();
+		
+		$email = $this->login;
+		$senha = $this->senha;
+		//$email = strip_tags($email);
+		//$senha = strip_tags($senha);
+		//$email = mysql_real_escape_string($email);
+		
+		//$senha = md5($senha);
+		$sql = mysql_query("SELECT * FROM usuarios WHERE Email='$email' AND Senha='$senha' ") or die (mysql_error());
+		$login_check = mysql_num_rows($sql);
+		
+		if($login_check > 0){
+			while($row = mysql_fetch_array($sql)){
 
-    public function getError() {
-        return $this->error;
-    }
-
-    public function getResult() {
-        return $this->result;
-    }
-    
-    public function checkLogin() {
-        if(empty($_SESSION['userlogin']) || $_SESSION['userlogin']['user_level'] < $this->level){
-            unset($_SESSION['userlogin']);
-            return FALSE;
-        }else{
-            return TRUE;
-        }
-    }
-
-
-
-    private function setLogin() {
-        if(!$this->email || !$this->senha || !Check::email($this->email)){
-            $this->error = array('Informe seu Email e senha para efetuar o login!', WS_INFOR);
-            $this->result = false;
-        }else if(!$this->getUser()){
-            $this->error = array('Os dados informados não são compativeis!', WS_ALERT);
-            $this->result = false;
-        }else if($this->result['user_level'] < $this->level){
-            $this->error = array("{$this->result['user_name']}, você nao tem permissao para acessar a esta area.", WS_ERROR);
-            $this->result = false;
-        }else{
-            
-            $this->execute();
-        }
-    }
-    
-    private function getUser() {
-        $this->senha = md5($this->senha);
-        
-        $read = new Read();
-        $read->exeRead("ws_users", "WHERE user_email = :email AND user_password = :pass", "email={$this->email}&pass={$this->senha}");
-        if($read->getResult()){
-            $this->result = $read->getResult()[0];
-            return true;
-             }else{
-                 return FALSE;
-             }
-    }
-            
-    private function execute() {
-        if(!session_id()){
-            session_start();
-        }
-        $_SESSION['userlogin'] = $this->result;
-        $this->error = array("Ola {$this->result['user_name']}, seja bem vindo(a). Aguarde redirecionamento. ", WS_ACCEPT);
-        $this->result = true;
-    }
-    
+				//$id = $row["id"];
+				//$_SESSION['id'] = $id;
+				//$_SESSION['idx'] = base64_encode("g4p3h9xfn8sq03hs2234$id");
+				//$username = $row["Login"];
+				//$_SESSION['Login'] = $username;
+		
+				//mysql_query("UPDATE colaboradores SET last_log_date=now() WHERE id_colaborador = '$id' LIMIT 1");
+		
+			} // close while
+		
+			$_SESSION['email'] = $email;
+			$_SESSION['pass'] = $senha;
+		
+			parent::desconectar();
+			
+			return true;
+				
+		} else { // Run this code if login_check is equal to 0 meaning they do not exist
+			return false;
+		
+		}
+	}
+	
+	
+	
 }

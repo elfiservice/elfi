@@ -1,49 +1,49 @@
 <?php
-
-/**
- * Colaborador.class [ MODEL ]
- * Resp modelar Colaborador herdando de Usuario.class na tabela colaboradores
- * @copyright (c) 2016, Armando JR. ELFISERVICE
- */
+//require 'Usuario.class.php';
 class Colaborador extends Usuario {
 
     private $cpf;
     private $tipo;
-    private $Email;
-
-    public function __construct($id_colaborador, $Login, $Senha, $cpf, $tipo, $last_log_date, $Email, $email_activated) {
-        $this->setId_colaborador($id_colaborador);
-        $this->setLogin($Login);
-        $this->setSenha($Senha);
+    private $email;
+    
+    function __construct($pId, $pLogin, $pSenha, $cpf, $tipo, $email, $pUltDataLogado, $pEmailAtivado) {
         $this->cpf = $cpf;
         $this->tipo = $tipo;
-        $this->setLast_log_date($last_log_date);
-        $this->Email = $Email;
-        $this->setEmail_activated($email_activated);
+        $this->email = $email;
+        $this->setId($pId);
+        $this->setLogin($pLogin);
+        $this->setSenha($pSenha);
+        $this->setUltDataLogado($pUltDataLogado);
+        $this->setEmailAtivado($pEmailAtivado);
+        
+        
     }
-
-    public function getCpf() {
+    
+    function getCpf() {
         return $this->cpf;
     }
 
-    public function getTipo() {
+    function getTipo() {
         return $this->tipo;
     }
 
-    public function getEmail() {
-        return $this->Email;
+    function getEmail() {
+        return $this->email;
     }
 
-    public function setCpf($cpf) {
+    function setCpf($cpf) {
         $this->cpf = $cpf;
     }
 
-    public function setTipo($tipo) {
+    function setTipo($tipo) {
         $this->tipo = $tipo;
     }
 
-    public function setEmail($Email) {
-        $this->Email = $Email;
+    function setEmail($email) {
+        $this->email = $email;
     }
+
+
+
 
 }
