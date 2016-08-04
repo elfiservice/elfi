@@ -23,7 +23,7 @@ if (isSet($_POST['ano'])) {
 //
 //        } 
 
-$usuario = new UsuarioCtrl();
+$colabCtrl = new ColaboradorCtrl();
 $orcCrtl = new OrcamentoCtrl();
 ?>
 
@@ -110,6 +110,8 @@ $orcCrtl = new OrcamentoCtrl();
                 //Buscar ID do CLIENTE
                 $clienteCtrl = new ClienteCtrl();
                 $clienteDao = $clienteCtrl->buscarClientePorRazaoSocial($row['razao_social_contr']);
+                //$clienteDao = $clienteCtrl->buscar("*", "WHERE razao_social = '".$row['razao_social_contr'] . "' ");
+               // var_dump($clienteDao);
                 ?>
                 <tr>
                     <td>
@@ -123,9 +125,9 @@ $orcCrtl = new OrcamentoCtrl();
                     <td>
                         <?php
                         //echo $row['colaborador_orc'];
-                        $user = $usuario->buscarUserPorLogin($row['colaborador_orc']);
+                        $user = $colabCtrl->buscarBD("*", "WHERE Login = '" . $row['colaborador_orc'] . "' ");
                         ?>                                                  
-                        <a  href="#" onclick="window.open('usuario/perfil.php?id_user=<?php echo $user->getId(); ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+                        <a  href="#" onclick="window.open('usuario/perfil.php?id_user=<?php echo $user[0]->getId_colaborador(); ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                             <?php echo $row['colaborador_orc']; ?>
                         </a>                                            
                     </td>                                        
