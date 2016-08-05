@@ -33,9 +33,9 @@ if (filter_has_var(INPUT_GET, 'tipo_cliente')) {
 //$usuario_logado = new Usuario($logOptions_id);
 
 $cliente = new ClienteCtrl();
-$clienteFinal = $cliente->buscar("*", "WHERE id = $id_cliente AND tipo = '$tipo_cliente'");
+$clienteFinal = $cliente->buscarBD("*", "WHERE id = $id_cliente AND tipo = '$tipo_cliente' LIMIT 1");
 //var_dump($clienteFinal);
-
+$clienteFinal = $clienteFinal[0];
 
 if (!$clienteFinal) {
     WSErro('Cliente não encontrado: Erro na URL', E_USER_WARNING);
@@ -85,7 +85,7 @@ if(!empty($cliente->mediaSatisfacao($clienteFinal->getId()))){
             </tr>
             <tr>
                 <td>Email Admin:</td>
-                <td><?php echo $clienteFinal->getEmailAdmFin(); ?></td>
+                <td><?php echo $clienteFinal->getEmail_adm_fin(); ?></td>
             </tr>
             <tr>
                 <td>Tel:</td>

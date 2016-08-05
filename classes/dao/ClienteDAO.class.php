@@ -1,25 +1,34 @@
 <?php
-class ClienteDAO {
-	
-	public function ClienteDAO() {
-		
-	}
-	
-	public function buscarCliente($id, $tipo){
-		$sql = mysql_query("SELECT * FROM clientes WHERE id='$id' AND tipo='$tipo'") or die (mysql_error());
-		$linha = mysql_fetch_object($sql);
-		return $linha;
-	}
-	
-	public function buscarClientePorRazaoSocial($razaoSocial){
-		$sql = mysql_query("SELECT * FROM clientes WHERE razao_social ='$razaoSocial'") or die (mysql_error());
-		$linha = mysql_fetch_object($sql);
-		return $linha;
-	}
-	
-	public function select($campo, $termos){
-		$read = new Read();
-		$read->ExecRead($campo, "clientes", $termos);
-		return $read->getResultado();
-	}
+
+/**
+ * ClienteDAO.class [ DAO ]
+ * Responsavel gerencia a PErsistencia para Tabela clientes
+ * @copyright (c) 2016, Armando JR. ELFISERVICE
+ */
+class ClienteDAO implements CRUD {
+
+    const Tabela = 'clientes';
+
+    public function delete($termos, $tabela = self::Tabela) {
+        
+    }
+
+    public function insert($camposBd, $valores, $tabela = self::Tabela) {
+        $insert = new Insert();
+        $insert->ExecInsert($tabela, $camposBd, $valores);
+        return $insert->getResultado();
+    }
+
+    public function select($campos, $termos, $tabela = self::Tabela) {
+        $read = new Read();
+        $read->ExecRead($campos, $tabela, $termos);
+        return $read->getResultado();
+    }
+
+    public function update($camposDados, $termos, $tabela = self::Tabela) {
+        $update = new Update();
+        $update->ExecUpdate($tabela, $camposDados, $termos);
+        return $update->getResultado();
+    }
+
 }
