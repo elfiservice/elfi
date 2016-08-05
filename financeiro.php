@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 include "checkuserlog.php";
+require 'classes/Config.inc.php';
 
 include_once "Config/config_sistema.php";
 
@@ -404,7 +405,7 @@ function TESTA()
   } 
  else 
   { 
-  alert("CNPJ não é válido!"); 
+  alert("CNPJ nï¿½o ï¿½ vï¿½lido!"); 
   
   } 
   
@@ -444,7 +445,9 @@ alert('AtenÃ§Ã£o, nÃºmero deve ser nesse formato: (##) ####-#### !');
 
 	<div style="">
 
-		<div id="colaborador_logado"></div>
+	                <div id="colaborador_logado">
+                    <?php require './includes/colaborador_logado.inc.php'; ?>
+                </div>
 
 		<div style="float: right">
                 <?php

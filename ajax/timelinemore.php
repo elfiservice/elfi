@@ -40,7 +40,7 @@ switch ($Action) {
                 $count++;
                 $colabCtrl = new ColaboradorCtrl();
                 $id_colab = $log->getId_colab();
-                $colab = $colabCtrl->buscarColaborador("*", "WHERE id_colaborador = '$id_colab' ");
+                $colab = $colabCtrl->buscarBD("*", "WHERE id_colaborador = '$id_colab' ");
                 //var_dump($colab[0]->getLogin());
 
 

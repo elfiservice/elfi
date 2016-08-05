@@ -7,7 +7,7 @@ $orc = $orcCtrl->buscarOrcamentos(" id, colaborador_orc", "");
 
 
 $colabCtrl = new ColaboradorCtrl();
-$colaboradores = $colabCtrl->buscarColaborador("*", "");
+$colaboradores = $colabCtrl->buscarBD("*", "");
 
 foreach ($colaboradores as $linha){
 
