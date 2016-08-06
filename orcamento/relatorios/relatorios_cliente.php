@@ -65,12 +65,13 @@ $orcCrtl = new OrcamentoCtrl();
             <tbody>
                 <?php
                 $clienteCtrl = new ClienteCtrl();
-                $clientes = $clienteCtrl->buscarCliente("*", "clientes");
+                $clientes = $clienteCtrl->buscarBD("*", "");
 
                 foreach ($clientes as $row) {
-                    $id_cliente = $row['id'];
-                    $tipo_cliente = $row['tipo'];
-                    $nome_cliente = $row['razao_social'];
+
+                    $id_cliente = $row->getId();
+                    $tipo_cliente = $row->getTipo();
+                    $nome_cliente = $row->getRazaoSocial();
 
                     $orcPorCliente = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' AND ano_orc='$ano_orc_selec' ");
                     $total = count($orcPorCliente);
@@ -133,9 +134,9 @@ $orcCrtl = new OrcamentoCtrl();
             <tbody>
                 <?php
                 foreach ($clientes as $row) {
-                    $id_cliente = $row['id'];
-                    $tipo_cliente = $row['tipo'];
-                    $nome_cliente = $row['razao_social'];
+                    $id_cliente = $row->getId();
+                    $tipo_cliente = $row->getTipo();
+                    $nome_cliente = $row->getRazaoSocial();
 
                     $orcPorCliente = $orcCrtl->buscarOrcamentos("*", "WHERE razao_social_contr = '$nome_cliente' ");
                     $total = count($orcPorCliente);

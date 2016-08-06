@@ -19,6 +19,7 @@ class ClienteCtrl {
      */
     public function buscarBD($campos, $termos) {
         $select = $this->clienteDao->select($campos, $termos);
+        //var_dump($select);
         if (!empty($select)) {
 
             return $this->montarObjeto($select);
@@ -27,17 +28,19 @@ class ClienteCtrl {
         }
     }
 
+    public function mediaSatisfacao($id_cliente) {
+        $pesquisaCtrl = new PesquisaPosVendaCtrl();
+        return $pesquisaCtrl->mediaSatisfacao($id_cliente);
+    }
+
     //--------------------------------------------------
     //----------------PRIVATES---------------------
     //--------------------------------------------------
     private function montarObjeto($arrayDados) {
         $arrayObjColab = array();
-
         foreach ($arrayDados as $dado) {
             extract($dado);
-
             if ($tipo == "PJ") {
-                // var_dump($clienteBD);
                 $arrayObjColab[] = new ClientePJ($id, $usuario, $razao_social, $nome_fantasia, $classificacao, $tipo, $data_inclusao, $cnpj_cpf, $ie, $endereco, $bairro, $estado, $cidade, $cep, $tel, $cel, $fax, $email_tec, $email_adm_fin, $mostrar);
             } else if ($tipo == "PF") {
                 $arrayObjColab[] = new ClientePF($id, $usuario, $razao_social, $nome_fantasia, $classificacao, $tipo, $data_inclusao, $cpf, $endereco, $bairro, $estado, $cidade, $cep, $tel, $cel, $fax, $email_tec, $email_adm_fin, $mostrar);
@@ -46,35 +49,6 @@ class ClienteCtrl {
 
         return $arrayObjColab;
     }
-
-//    public function buscarClientePorRazaoSocial($razao_social) {
-//        $linha_cliente = $this->clienteDao->buscarClientePorRazaoSocial($razao_social);
-//        if ($linha_cliente <> "" || $linha_cliente <> null) {
-//            if ($linha_cliente->tipo == "PJ") {
-//                $clientePJ = new ClientePJ($linha_cliente->id, $linha_cliente->usuario, $linha_cliente->razao_social, $linha_cliente->nome_fantasia, $linha_cliente->classificacao, $linha_cliente->tipo, $linha_cliente->data_inclusao, $linha_cliente->cnpj_cpf, $linha_cliente->ie, $linha_cliente->endereco, $linha_cliente->bairro, $linha_cliente->estado, $linha_cliente->cidade, $linha_cliente->cep, $linha_cliente->tel, $linha_cliente->cel, $linha_cliente->fax, $linha_cliente->email_tec, $linha_cliente->email_adm_fin);
-//                return $clientePJ;
-//            } else if ($linha_cliente->tipo == "PF") {
-//                $clientePF = new ClientePF($linha_cliente->id, $linha_cliente->usuario, $linha_cliente->razao_social, $linha_cliente->nome_fantasia, $linha_cliente->classificacao, $linha_cliente->tipo, $linha_cliente->data_inclusao, $linha_cliente->cpf, $linha_cliente->endereco, $linha_cliente->bairro, $linha_cliente->estado, $linha_cliente->cidade, $linha_cliente->cep, $linha_cliente->tel, $linha_cliente->cel, $linha_cliente->email_tec);
-//                return $clientePF;
-//            }
-//        }
-//        return null;
-//    }
-
-//    public function selecionarCliente($id, $tipo) {
-//
-//        $linha_cliente = $this->clienteDao->buscarCliente($id, $tipo);
-//        if ($linha_cliente <> "") {
-//            if ($linha_cliente->tipo == "PJ") {
-//                $clientePJ = new ClientePJ($linha_cliente->id, $linha_cliente->usuario, $linha_cliente->razao_social, $linha_cliente->nome_fantasia, $linha_cliente->classificacao, $linha_cliente->tipo, $linha_cliente->data_inclusao, $linha_cliente->cnpj_cpf, $linha_cliente->ie, $linha_cliente->endereco, $linha_cliente->bairro, $linha_cliente->estado, $linha_cliente->cidade, $linha_cliente->cep, $linha_cliente->tel, $linha_cliente->cel, $linha_cliente->fax, $linha_cliente->email_tec, $linha_cliente->email_adm_fin);
-//                return $clientePJ;
-//            } else if ($linha_cliente->tipo == "PF") {
-//                $clientePF = new ClientePF($linha_cliente->id, $linha_cliente->usuario, $linha_cliente->razao_social, $linha_cliente->nome_fantasia, $linha_cliente->classificacao, $linha_cliente->tipo, $linha_cliente->data_inclusao, $linha_cliente->cpf, $linha_cliente->endereco, $linha_cliente->bairro, $linha_cliente->estado, $linha_cliente->cidade, $linha_cliente->cep, $linha_cliente->tel, $linha_cliente->cel, $linha_cliente->email_tec);
-//                return $clientePF;
-//            }
-//        }
-//        return null;
-//    }
 
     /**
      * Buscar Lista de Clientes 
@@ -102,26 +76,5 @@ class ClienteCtrl {
 //        } else {
 //            return null;
 //        }
-//    }
-
-    public function mediaSatisfacao($id_cliente) {
-        $pesquisaCtrl = new PesquisaPosVendaCtrl();
-        return $pesquisaCtrl->mediaSatisfacao($id_cliente);
-    }
-
-//    private function montarCliente($clienteBD) {
-//
-//        if ($clienteBD <> "" || $clienteBD <> null) {
-//
-//            if ($clienteBD['tipo'] == "PJ") {
-//                // var_dump($clienteBD);
-//                $clientePJ = new ClientePJ($clienteBD['id'], $clienteBD['usuario'], $clienteBD['razao_social'], $clienteBD['nome_fantasia'], $clienteBD['classificacao'], $clienteBD['tipo'], $clienteBD['data_inclusao'], $clienteBD['cnpj_cpf'], $clienteBD['ie'], $clienteBD['endereco'], $clienteBD['bairro'], $clienteBD['estado'], $clienteBD['cidade'], $clienteBD['cep'], $clienteBD['tel'], $clienteBD['cel'], $clienteBD['fax'], $clienteBD['email_tec'], $clienteBD['email_adm_fin']);
-//                return $clientePJ;
-//            } else if ($clienteBD['tipo'] == "PF") {
-//                $clientePF = new ClientePF($clienteBD['id'], $clienteBD['usuario'], $clienteBD['razao_social'], $clienteBD['nome_fantasia'], $clienteBD['classificacao'], $clienteBD['tipo'], $clienteBD['data_inclusao'], $clienteBD['cpf'], $clienteBD['endereco'], $clienteBD['bairro'], $clienteBD['estado'], $clienteBD['cidade'], $clienteBD['cep'], $clienteBD['tel'], $clienteBD['cel'], $clienteBD['email_tec']);
-//                return $clientePF;
-//            }
-//        }
-//        return null;
 //    }
 }

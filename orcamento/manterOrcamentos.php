@@ -83,7 +83,7 @@ $orcCrtl = new OrcamentoCtrl();
                 <th>Editar</th>
                 <th>Razao Social / Nome</th>
                 <th>Classificacao</th>
-                                <th>Data do ORC</th>
+                <th>Data do ORC</th>
                 <th>CNPJ</th>
                 <th>Endereco</th>
                 <th>Bairro</th>
@@ -98,24 +98,21 @@ $orcCrtl = new OrcamentoCtrl();
             </tr>
         </thead>
         <tbody>
-
-
-
             <?php
             $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = '$ano_orc_selec' ORDER BY id DESC");
-            
             foreach ($orcamentosArray as $orc => $row) {
-                        $id_orc = $row['id'];
-                        $id_cliente = $row['id_cliente'];
+                $id_orc = $row['id'];
+                $id_cliente = $row['id_cliente'];
                 //Buscar ID do CLIENTE
                 $clienteCtrl = new ClienteCtrl();
-                $clienteDao = $clienteCtrl->buscarClientePorRazaoSocial($row['razao_social_contr']);
+                $arrayClienteDao = $clienteCtrl->buscarBD("*", "WHERE razao_social = '" . $row['razao_social_contr'] . "' ");
+                $clienteDao = $arrayClienteDao[0];
                 //$clienteDao = $clienteCtrl->buscar("*", "WHERE razao_social = '".$row['razao_social_contr'] . "' ");
-               // var_dump($clienteDao);
+                // var_dump($clienteDao);
                 ?>
                 <tr>
                     <td>
-                         <span style="display: none;"><?=$row['id']?></span>
+                        <span style="display: none;"><?= $row['id'] ?></span>
                         <a href="#" class="" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?php echo $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
                             <?php
                             echo $row['n_orc'] . '.' . $row['ano_orc'];
@@ -177,13 +174,10 @@ $orcCrtl = new OrcamentoCtrl();
                             </form>
                         <?php } ?>
                     </td>
-
-
                     <td>
                         <?php
                         if ($clienteDao && !empty($clienteDao)) {
                             ?>
-
                             <a href="tecnico.php?id_menu=perfil_cliente&id_cliente=<?= $clienteDao->getId(); ?>&tipo_cliente=<?= $clienteDao->getTipo(); ?>">
                                 <?php
                                 echo $row['razao_social_contr'];
@@ -196,46 +190,18 @@ $orcCrtl = new OrcamentoCtrl();
                         }
                         ?>
                     </td>
-
-                    <td>
-                        <?php echo $row['atividade'] . '-' . $row['classificacao']; ?>
-                    </td>
-                                        <td>
-
-                        <?php echo date('d/m/Y, H:i', strtotime($row['data_adicionado_orc'])); ?>
-
-                    </td> 
-                    <td>
-                        <?php echo $row['cnpj_contr']; ?>
-                    </td> 
-
-                    <td>
-                        <?php echo $row['endereco_contr']; ?>
-                    </td> 
-                    <td>
-                        <?php echo $row['bairro_contr']; ?>
-                    </td> 
-                    <td>
-                        <?php echo utf8_encode($row['estado_contr']); ?>
-                    </td> 
-                    <td>
-                        <?php echo utf8_encode($row['cidade_contr']); ?>
-                    </td>
-                    <td>
-                        <?php echo $row['cep_contr']; ?>
-                    </td> 
-                    <td>
-                        <?php echo $row['contato_clint']; ?>
-                    </td>                                         
-                    <td>
-                        <?php echo $row['telefone_contr']; ?>
-                    </td> 
-                    <td>
-                        <?php echo $row['celular_contr']; ?>
-                    </td> 
-                    <td>
-                        <?php echo $row['email_contr']; ?>
-                    </td>                                         
+                    <td><?php echo $row['atividade'] . '-' . $row['classificacao']; ?>                    </td>
+                    <td><?php echo date('d/m/Y, H:i', strtotime($row['data_adicionado_orc'])); ?>                    </td> 
+                    <td><?php echo $row['cnpj_contr']; ?>                    </td> 
+                    <td> <?php echo $row['endereco_contr']; ?>                    </td> 
+                    <td>                        <?php echo $row['bairro_contr']; ?>                    </td> 
+                    <td>                        <?php echo utf8_encode($row['estado_contr']); ?>                    </td> 
+                    <td>                        <?php echo utf8_encode($row['cidade_contr']); ?>                    </td>
+                    <td>                        <?php echo $row['cep_contr']; ?>                    </td> 
+                    <td>                        <?php echo $row['contato_clint']; ?>                    </td>                                         
+                    <td>                        <?php echo $row['telefone_contr']; ?>                    </td> 
+                    <td>                        <?php echo $row['celular_contr']; ?>                    </td> 
+                    <td>                        <?php echo $row['email_contr']; ?>                    </td>                                         
 
                 </tr>
 
