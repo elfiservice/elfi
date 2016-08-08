@@ -5,8 +5,9 @@ require '../classes/Config.inc.php';
 
 if (isset($_GET['getClientId'])) {
     $clienteCtrl = new ClienteCtrl();
-    $cliente = $clienteCtrl->buscar("*", "WHERE razao_social='" . $_GET['getClientId'] . "' ");
-
+    $clienteBd = $clienteCtrl->buscarBD("*", "WHERE id = '" . $_GET['getClientId'] . "' ");
+    $cliente = $clienteBd[0];
+    
     if ($cliente != null) {
 
         echo "formObj.id_cliente.value = '" . $cliente->getId() . "';\n";

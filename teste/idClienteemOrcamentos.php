@@ -7,7 +7,7 @@ $orc = $orcCtrl->buscarOrcamentos(" id, razao_social_contr", "");
 
 
 $clienteCtrl = new ClienteCtrl();
-$clientes = $clienteCtrl->buscarCliente("*", "");
+$clientes = $clienteCtrl->buscarBD("*", "");
 //var_dump($clientes);
 
 foreach ($clientes as $linha){
@@ -21,10 +21,10 @@ foreach ($clientes as $linha){
 
         
         
-        if($linha['razao_social'] == $linhaORC['razao_social_contr'] ){
+        if($linha->getRazaoSocial() == $linhaORC['razao_social_contr'] ){
           //  echo "- ".$linhaORC['razao_social_contr']."<br>";
             $count++;
-            $orcmento = new Orcamento($linhaORC['id'], $linha['id'] , "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+            $orcmento = new Orcamento($linhaORC['id'], $linha->getId() , "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
             
 //$orcCtrl = new OrcamentoCtrl();
             $orcAtualizado = $orcCtrl->atualizarOrcamento($orcmento);
@@ -33,7 +33,7 @@ foreach ($clientes as $linha){
             if($orcAtualizado[0]){
                 $countCheck++;
             }
-            echo "{$linha['razao_social'] } ID {$linha['id']} =  ORC {$linhaORC['razao_social_contr']} ID {$linhaORC['id']} -> tem {$count} orcamentos e foram Atualizados {$countCheck} <br>";
+            echo "{$linha->getRazaoSocial() } ID {$linha->getId()} =  ORC {$linhaORC['razao_social_contr']} ID {$linhaORC['id']} -> tem {$count} orcamentos e foram Atualizados {$countCheck} <br>";
         }
        
     }

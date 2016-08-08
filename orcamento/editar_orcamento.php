@@ -37,6 +37,7 @@ $_SESSION['orcObjInicial'] = array($OrcBd); //envia objeto para pagina de Salvar
 
 extract($OrcBd);
 
+//echo $id;
 //ALTERAR SITUAÇÃO ORC
 if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 
@@ -150,70 +151,70 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 <?php
 if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc != "Perdido" && $situacao_orc != "concluido") {
     ?>
-<script language="JavaScript">
+    <script language="JavaScript">
 
 
-    /***********************************************
-     * Required field(s) validation v1.10- By NavSurf
-     * Visit Nav Surf at http://navsurf.com
-     * Visit http://www.dynamicdrive.com/ for full source code
-     ***********************************************/
+        /***********************************************
+         * Required field(s) validation v1.10- By NavSurf
+         * Visit Nav Surf at http://navsurf.com
+         * Visit http://www.dynamicdrive.com/ for full source code
+         ***********************************************/
 
-    function formCheck(formobj) {
-        // Enter name of mandatory fields
-        var fieldRequired = Array("razao_social", "endereco", "city", "tel", "razao_social2", "endereco2", "city2", "tel2", "descricao_servicos", "execucao_orc", "validade_orc", "pagamento_orc", "duvida_orc", "sum_vr_servico_orc", "atividade1", "classificacao1", "unidade1", "quantidade1", "contato_clint");
-        // Enter field description to appear in the dialog box
-        var fieldDescription = Array("Razão Social  do Contratante", "Endereço do Contratante", "Cidade do Contratante", "Telefone ou Celular do contratante", "Razão Social  da obra", "Endereço da obra", "Cidade da obra", "Telefone ou Celular da obra", "Descrição dos serviços", "Prazo de execução", "Validade do orçamento", "Condições de pagamento", "Dúvidas", "Valor do serviço", "Atividade do serviço", "Classificação", "Unidade", "quantidade", "Nome de contato do cliente");
-        // dialog message
-        var alertMsg = "Por favor completar os campos:\n";
+        function formCheck(formobj) {
+            // Enter name of mandatory fields
+            var fieldRequired = Array("razao_social", "endereco", "city", "tel", "razao_social2", "endereco2", "city2", "tel2", "descricao_servicos", "execucao_orc", "validade_orc", "pagamento_orc", "duvida_orc", "sum_vr_servico_orc", "atividade1", "classificacao1", "unidade1", "quantidade1", "contato_clint");
+            // Enter field description to appear in the dialog box
+            var fieldDescription = Array("Razão Social  do Contratante", "Endereço do Contratante", "Cidade do Contratante", "Telefone ou Celular do contratante", "Razão Social  da obra", "Endereço da obra", "Cidade da obra", "Telefone ou Celular da obra", "Descrição dos serviços", "Prazo de execução", "Validade do orçamento", "Condições de pagamento", "Dúvidas", "Valor do serviço", "Atividade do serviço", "Classificação", "Unidade", "quantidade", "Nome de contato do cliente");
+            // dialog message
+            var alertMsg = "Por favor completar os campos:\n";
 
-        var l_Msg = alertMsg.length;
+            var l_Msg = alertMsg.length;
 
-        for (var i = 0; i < fieldRequired.length; i++) {
-            var obj = formobj.elements[fieldRequired[i]];
-            if (obj) {
-                switch (obj.type) {
-                    case "select-one":
-                        if (obj.selectedIndex == -1 || obj.options[obj.selectedIndex].text == "") {
-                            alertMsg += " - " + fieldDescription[i] + "\n";
-                        }
-                        break;
-                    case "select-multiple":
-                        if (obj.selectedIndex == -1) {
-                            alertMsg += " - " + fieldDescription[i] + "\n";
-                        }
-                        break;
-                    case "text":
-                    case "textarea":
-                        if (obj.value == "" || obj.value == null || obj.value == "0,00") {
-                            alertMsg += " - " + fieldDescription[i] + "\n";
-                        }
-                        break;
-                    default:
-                }
-                if (obj.type == undefined) {
-                    var blnchecked = false;
-                    for (var j = 0; j < obj.length; j++) {
-                        if (obj[j].checked) {
-                            blnchecked = true;
-                        }
+            for (var i = 0; i < fieldRequired.length; i++) {
+                var obj = formobj.elements[fieldRequired[i]];
+                if (obj) {
+                    switch (obj.type) {
+                        case "select-one":
+                            if (obj.selectedIndex == -1 || obj.options[obj.selectedIndex].text == "") {
+                                alertMsg += " - " + fieldDescription[i] + "\n";
+                            }
+                            break;
+                        case "select-multiple":
+                            if (obj.selectedIndex == -1) {
+                                alertMsg += " - " + fieldDescription[i] + "\n";
+                            }
+                            break;
+                        case "text":
+                        case "textarea":
+                            if (obj.value == "" || obj.value == null || obj.value == "0,00") {
+                                alertMsg += " - " + fieldDescription[i] + "\n";
+                            }
+                            break;
+                        default:
                     }
-                    if (!blnchecked) {
-                        alertMsg += " - " + fieldDescription[i] + "\n";
+                    if (obj.type == undefined) {
+                        var blnchecked = false;
+                        for (var j = 0; j < obj.length; j++) {
+                            if (obj[j].checked) {
+                                blnchecked = true;
+                            }
+                        }
+                        if (!blnchecked) {
+                            alertMsg += " - " + fieldDescription[i] + "\n";
+                        }
                     }
                 }
             }
+
+            if (alertMsg.length == l_Msg) {
+                return true;
+            } else {
+                alert(alertMsg);
+                return false;
+            }
         }
 
-        if (alertMsg.length == l_Msg) {
-            return true;
-        } else {
-            alert(alertMsg);
-            return false;
-        }
-    }
-
-</script>
+    </script>
     <div  class="" style="margin-top: 20px;">
 
         <form name="clientForm" method="post" action="tecnico.php?id_menu=salvar_editar_orcamento" onsubmit="return formCheck(this);">       
@@ -226,13 +227,12 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
                         <tr align="left">
                             <td><label for="clientID">Cliente:</label></br>
                                 <select id="clientID" name="clientID">
-                                    <option value="<?php echo $razao_social_contr; ?>"><?php echo $razao_social_contr; ?></option>
+                                    <option value="<?php echo $id_cliente; ?>"><?php echo $razao_social_contr; ?></option>
                                     <?php
                                     $clienteCtrl = new ClienteCtrl();
-                                    $clienteBd = $clienteCtrl->buscarCliente("razao_social", "ORDER BY razao_social");
-
+                                    $clienteBd = $clienteCtrl->buscarBD("*", "WHERE mostrar = '1' ORDER BY razao_social");
                                     foreach ($clienteBd as $cliente => $row) {
-                                        echo '<option id="clientID" value="' . $row['razao_social'] . '">' . $row['razao_social'] . '</option>';
+                                        echo '<option id="clientID" value="' . $row->getId() . '">' . $row->getRazaoSocial() . '</option>';
                                     }
                                     ?>
 
@@ -609,7 +609,7 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
 
     <?php
 } else {
-    
+
     echo "<div style=\"margin-top: 100px;\">";
     WSErro("Esse orçamento foi <b>{$situacao_orc}</b> pelo colaborador <b>{$colaborador_orc}</b>, não pode ser Editado.", WS_ALERT);
     echo "</div>";

@@ -107,8 +107,7 @@ $orcCrtl = new OrcamentoCtrl();
                 $clienteCtrl = new ClienteCtrl();
                 $arrayClienteDao = $clienteCtrl->buscarBD("*", "WHERE razao_social = '" . $row['razao_social_contr'] . "' ");
                 $clienteDao = $arrayClienteDao[0];
-                //$clienteDao = $clienteCtrl->buscar("*", "WHERE razao_social = '".$row['razao_social_contr'] . "' ");
-                // var_dump($clienteDao);
+
                 ?>
                 <tr>
                     <td>

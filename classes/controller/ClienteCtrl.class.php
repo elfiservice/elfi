@@ -1,8 +1,5 @@
 <?php
 
-// include '../classes/dao/ClienteDAO.class.php';
-// include '../classes/model/Cliente_PF.class.php';
-// include '../classes/model/Cliente_PJ.class.php';
 class ClienteCtrl {
 
     private $clienteDao;
@@ -50,31 +47,5 @@ class ClienteCtrl {
         return $arrayObjColab;
     }
 
-    /**
-     * Buscar Lista de Clientes 
-     * @param string $campos
-     * @param string $termos
-     * @return ARRAY de Clientes
-     */
-//    public function buscarCliente($campo, $termos) {
-//        return $this->clienteDao->select($campo, $termos);
-//    }
 
-    /**
-     * BUSCA CLIENTE POR ID
-     * @param string $campo
-     * @param string $termos = sempre por pelo ID
-     * @return Objeto Cliente Único
-     */
-//    public function buscar($campo, $termos) {
-//        $clienteBD = $this->clienteDao->select($campo, $termos);
-//        $clienteBD = $clienteBD[0];
-//        $clienteMontado = $this->montarCliente($clienteBD);
-//        if ($clienteMontado) {
-//
-//            return $clienteMontado;
-//        } else {
-//            return null;
-//        }
-//    }
 }
