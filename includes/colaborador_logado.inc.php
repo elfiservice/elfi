@@ -1,12 +1,14 @@
 <?php
 
-if (isset($_SESSION['id'])) {
 
-    $id_colab = $_SESSION['id'];
+if ($userlogin) {
+
+    //$colabObjt = $_SESSION['userlogin'];
+    //var_dump($userlogin);
     $colab = new ColaboradorCtrl();
-    $colabObj = $colab->buscarBD("*", "WHERE id_colaborador = '$id_colab'");
+    $colabObj = $colab->buscarBD("*", "WHERE id_colaborador = '". $userlogin->getId_colaborador() ."' ");
 foreach ($colabObj as $colaborador){
-    echo 'Colaborador: <b>' . $_SESSION['Login'] . '</b> em ' . date(' j \d\e F \d\e Y, \à\s H:i', strtotime($colaborador->getLast_log_date()));
+    echo 'Colaborador: <b>' . $userlogin->getLogin() . '</b> em ' . date(' j \d\e F \d\e Y, \a\s H:i', strtotime($colaborador->getLast_log_date()));
 }
 } else {
 

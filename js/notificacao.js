@@ -27,7 +27,7 @@ $(function () {
 //         console.log(valor.data(v));
 
         jQuery("#j_notificacao").load(url);
-    }, 1000);
+    }, 3600);
 
 
 

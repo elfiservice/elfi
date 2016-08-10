@@ -27,6 +27,37 @@ class ColaboradorCtrl {
             return NULL;
         }
     }
+    
+        /**
+     * Fazer UPDATE no BD na tabela = colaborador
+     * @param Colaborador $obj =  passar uma Instancia deste tipo para inserir no BD
+     * @return boolean = TRUE se Sucesso ao ATUALIZAR dados no BD e FALSE se houver algum problema na ATUALIZAÇÃO ou se o OBJETO não foi passado DO TIPO CORRETO
+     */
+    public function atualizarBD(Colaborador $obj) {
+        if ($obj instanceof Colaborador) {
+            $id = $obj->getId_colaborador();
+            
+            foreach ((array) $obj as $campo => $valor) {
+                if (!$valor == NULL || !$valor == "" || $valor == "0") {
+                    $campo = str_replace("\0Colaborador\0", "", $campo);
+                    $campo = str_replace("\0Usuario\0", "", $campo);
+                    $camposDados[] = $campo . " = '" . $valor . "'";
+                }
+            }
+
+            unset($camposDados[0]);
+            $camposDados = implode(', ', $camposDados);
+            
+            if ($this->ColaboradorDao->update($camposDados, "WHERE id_colaborador = '$id' ")) {
+                
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
 
     //--------------------------------------------------
     //----------------PRIVATES---------------------

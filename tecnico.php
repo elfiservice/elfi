@@ -1,15 +1,17 @@
 <?php
-include "checkuserlog.php";
+//include "checkuserlog.php";
 require 'classes/Config.inc.php';
 
+session_start();
 
-if (!isset($_SESSION ['idx'])) {
-    if (!isset($_COOKIE ['idCookie'])) {
-        include_once 'conectar.php';
-    }
+$login = new Login();
+
+if (!$login->checkLogin()) {
+    unset($_SESSION['userlogin']);
+    header("Location: conectar.php");
 } else {
-
-    $dyn_www = $_SERVER ['HTTP_HOST'];
+    $userlogin = $_SESSION['userlogin'];
+}
 
     $menu = filter_input(INPUT_GET, 'id_menu', FILTER_DEFAULT);
 //    if (isSet($_GET ['id_menu'])) {
@@ -59,7 +61,7 @@ if (!isset($_SESSION ['idx'])) {
 
             <h2 style="text-align: center;">Setor Técnico</h2> 
             
-            <a class=" j_notifica" ><div id="j_notificacao" class=""> </div></a>
+            <a class="  " ><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
              
 
             <div style="">
@@ -69,22 +71,22 @@ if (!isset($_SESSION ['idx'])) {
                 </div>
 
                 <div style="float: right">
-                    <?php echo $logOptions; ?>
+                    <?php require './includes/menu_geral.inc.php'; ?>
                 </div>
             </div>
 
             <?php
-            $tipo_conta = $_SESSION['tipo_user'];
+            $tipo_conta = $userlogin->getTipo();
 
             if ($tipo_conta == "ad" || $tipo_conta == "tec" || $tipo_conta == "fi_tec" || $tipo_conta == "tec_rh" || $tipo_conta == "fi_tec_rh") {
                 ?>
 
                 <div style="margin: 20px 0px 20px 0px;">
-                    <div class="barra_menu"
+                    <div class="barra_menu "
                          style="background: #012B8B; text-align: center; padding: 5px 0px 0px 0px;">
                     </div>
 
-                    <div id="menu_paginas">
+                    <div id="menu_paginas" >
                         <ul>
                             <!-- 				<li><a href="#" class="menuanchorclass myownclass" -->
                             <!-- 					rel="tecnico_cliente">Cliente</a></li> -->
@@ -92,8 +94,10 @@ if (!isset($_SESSION ['idx'])) {
                             <li><a href="tecnico.php?id_menu=orcamento" class="" rel="">Orcamentos</a></li>
                             <!-- 				<li><a href="#" class="menuanchorclass myownclass" -->
                             <!-- 					rel="tecnico_orcamento">Orçamento</a></li> -->
+<!--                            <li class="w3-right"><a class=" j_notifica" ><div id="j_notificacao" > </div></a></li>-->
                         </ul>
                     </div>
+   
 
                     <div class="barra_menu"
                          style="background: #012B8B; text-align: center; padding: 5px 0px 0px 0px;">
@@ -261,5 +265,3 @@ if (!isset($_SESSION ['idx'])) {
 <script src="js/notificacao.js"></script>    
         </body>
     </html>
-<?php }
-?>
