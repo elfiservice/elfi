@@ -198,6 +198,15 @@
                 <h4>Estamos em constante desenvolvimento e gostariamos que fosse com você.</h4>
             </fieldset>
         </header>
+        <article>
+            <fieldset class="container-fluid">
+                <legend><span class="bt_vermelho">Dados da Proposta </span></legend>
+                <p>Nº: <b><?= $orcObj->getNOrc() . "." . $orcObj->getAnoOrc() ?></b></p>
+                <p>Descrição do serviço:</p>
+                <p><b><?= Formatar::limita_texto($orcObj->getDesciServicoObra(), 400)?></b></p>
+                
+            </fieldset>
+        </article>
         <section>
             <form name="clientForm" method="post" action="pesquisa_pos_venda.php?ido=<?= $id_orc ?>&idc=<?= $id_cliente ?>" onsubmit="return formCheck(this);">       
                 <article>
