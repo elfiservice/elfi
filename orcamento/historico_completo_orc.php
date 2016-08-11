@@ -97,7 +97,7 @@ if ($id_orc) {
                     <div>
                         <h4>5. Em geral, ficou satisfeito?</h4>
                         <p>
-                            <b><?= ($itemPesquisa->getOrcamento() == 0 ? "<span class=\"bt_vermelho\">Não</span>" : "Sim") ?></b>
+                            <b><?= ($itemPesquisa->getSatisfeito() == 0 ? "<span class=\"bt_vermelho\">Não</span>" : "Sim") ?></b>
 
                         </p>
                     </div>           
