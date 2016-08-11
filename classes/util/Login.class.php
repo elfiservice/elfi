@@ -95,6 +95,10 @@ var_dump($this->result);
         $_SESSION['userlogin'] = $this->result;
         //var_dump($_SESSION['userlogin']);
         //die;
+        //DEVIDO ao SISTEMA de LOGIN ANTERIOR - Mantive essas variaveis na Sessao
+        $_SESSION['id'] = $this->result->getId_colaborador();
+        $_SESSION['Login'] = $this->result->getLogin();
+        
         $colab = new Colaborador($this->result->getId_colaborador(), null, null, null, null, date('Y-m-d H:i:s'), null, null);
         $colabCtrl = new ColaboradorCtrl();
          if($colabCtrl->atualizarBD($colab)){

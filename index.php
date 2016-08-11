@@ -11,7 +11,7 @@ if (!$login->checkLogin()) {
     $userlogin = $_SESSION['userlogin'];
 }
 
-//var_dump($_SESSION['userlogin']);
+//var_dump($_SESSION);
 ?>
 
 <!doctype html>
