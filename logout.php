@@ -29,4 +29,3 @@ include './classes/Config.inc.php';
 //print "<h2>Could not log you out, sorry the system encountered an error.</h2>";
 //exit();
 //} 
-?> 
