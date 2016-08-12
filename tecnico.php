@@ -61,7 +61,7 @@ if (!$login->checkLogin()) {
 
             <h2 style="text-align: center;">Setor Técnico</h2> 
             
-            <a class="  " ><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
+            <a class="  " href="tecnico.php?id_menu=notificacoes&idc=<?=$userlogin->getId_colaborador()?>&setor=tec"><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
              
 
             <div style="">
@@ -110,6 +110,11 @@ if (!$login->checkLogin()) {
                     
                     if($menu == "timeline"){
                         require_once 'timeline.php';
+                      
+                    }
+                    
+                                        if($menu == "notificacoes"){
+                        require_once 'notificacoes.php';
                       
                     }
                     

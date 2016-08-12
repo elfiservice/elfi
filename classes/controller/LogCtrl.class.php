@@ -46,6 +46,37 @@ class LogCtrl {
         }
     }
 
+    /**
+     * Fazer UPDATE no BD na tabela = logs
+     * @param HistoricoOrcNaoAprovado $obj =  passar uma Instancia deste tipo para inserir no BD
+     * @return boolean = TRUE se Sucesso ao ATUALIZAR dados no BD e FALSE se houver algum problema na ATUALIZAÇÃO ou se o OBJETO não foi passado DO TIPO CORRETO
+     */
+    public function atualizarBD(Log $obj) {
+        if ($obj instanceof Log) {
+            $id = $obj->getId();
+     
+            foreach ((array) $obj as $campo => $valor) {
+                if (!$valor == NULL || !$valor == "" || $valor == "0") {
+                    $campo = str_replace("\0Log\0", "", $campo);
+                    $camposDados[] = $campo . " = '" . $valor . "'";
+                }
+            }
+
+            unset($camposDados[0]);
+
+            $camposDados = implode(', ', $camposDados);
+
+            if ($this->logDao->update($camposDados, "WHERE id = '$id' ")) {
+
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
     //--------------------------------------------------
     //----------------PRIVATES---------------------
     //--------------------------------------------------
