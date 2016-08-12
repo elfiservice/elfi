@@ -121,7 +121,7 @@ class HistoricoOrcNaoAprovadoCtrl {
         }elseif($orcOb->getSituacaoOrc() == "Perdido"){
              $situacao = "- situacao <b>Perdido</b>";
         }
-        LogCtrl::inserirLog($id_colab, "Adicionado <b>Historico</b> no orçamento <b>não aprovado</b> <b>{$orcOb->getNOrc()}.{$orcOb->getAnoOrc()}</b> {$situacao}", "tec");
+        LogCtrl::inserirLog($id_colab, "Adicionado <b>Historico</b> no orçamento <b>não aprovado</b> <a  href=\"#\" onclick=\"window.open(\'orcamento/nao_aprovados/historico_acompanhamento.php?id_orc={$idOrc}\', \'Pagina\', \'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10\');\"><b>{$orcOb->getNOrc()}.{$orcOb->getAnoOrc()}</b></a> {$situacao}", "tec");
     }
 
 }
