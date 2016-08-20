@@ -49,7 +49,7 @@ if (!$login->checkLogin()) {
             <?php require 'includes/javascripts/menu_vertical_escoder_mostrar.php'; ?>
             <?php require 'includes/javascripts/mascaras_campos_valores_monetario.php'; ?>
 
-
+            <?php include_once 'includes/javascripts/tabela_no_head.php'; ?> 
 
         </head>
         <body>
@@ -264,9 +264,9 @@ if (!$login->checkLogin()) {
 
 
                 <footer> </footer>
- <script src="js/jquery.js"></script>   
-             <!-- Tabela  -->
-            <?php include_once 'includes/javascripts/tabela_no_head.php'; ?> 
+<!-- <script src="js/jquery.js"></script>   -->
+             
+
 <script src="js/notificacao.js"></script>    
         </body>
     </html>
