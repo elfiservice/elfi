@@ -150,6 +150,12 @@ class OrcamentoCtrl {
         return $orcamentosDao;
     }
 
+    /**
+     * 
+     * @param type $campos
+     * @param type $termos
+     * @return \Orcamento|boolean => Objeto Orcamento ou False se nao foi encontrado nada
+     */
     public function buscarOrcamentoPorId($campos, $termos) {
 
 

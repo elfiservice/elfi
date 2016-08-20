@@ -4,6 +4,8 @@ session_start();
 
 $login = new Login();
 
+//var_dump($_SESSION);
+
 if (!$login->checkLogin()) {
     unset($_SESSION['userlogin']);
     header("Location: conectar.php");
