@@ -27,6 +27,10 @@ class Login extends Conexao {
             return TRUE;
         }
     }
+    
+    public function getSession() {
+        return $_SESSION['userlogin'];
+    }
 
     public function getError() {
         return $this->error;

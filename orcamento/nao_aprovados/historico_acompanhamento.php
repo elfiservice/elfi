@@ -32,8 +32,7 @@ session_start();
         $login = new Login();
 
         if (!$login->checkLogin()) {
-            unset($_SESSION['userlogin']);
-            WSErro("Você não esta Logado!", WS_ALERT);
+                 WSErro("Você não esta Logado!", WS_ALERT);
             die();
         } else {
             $id_orc = filter_input(INPUT_GET, 'id_orc', FILTER_VALIDATE_INT);
@@ -42,7 +41,7 @@ session_start();
                 die();
             }
 
-            $userlogin = $_SESSION['userlogin'];
+            $userlogin = $login->getSession();
         }
 
 

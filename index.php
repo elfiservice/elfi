@@ -3,14 +3,10 @@ require ('./classes/Config.inc.php');
 session_start();
 
 $login = new Login();
-
-//var_dump($_SESSION);
-
 if (!$login->checkLogin()) {
-    unset($_SESSION['userlogin']);
     header("Location: conectar.php");
 } else {
-    $userlogin = $_SESSION['userlogin'];
+    $userlogin = $login->getSession();
 }
 
 //var_dump($_SESSION);

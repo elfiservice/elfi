@@ -3,6 +3,14 @@
 </div>
 <hr>
 <?php
+$login = (!empty($login) ? $login : $login = new Login());
+if (!$login->checkLogin()) {
+    WSErro("VocÊ não esta Logado!", WS_ALERT);
+    die();
+} else {
+    $userlogin = $login->getSession();
+}
+
 
 //VERIFICA A URL E PARAMETRO PASSADO
 $id_orc = filter_input(INPUT_GET, 'id_orc', FILTER_VALIDATE_INT);
@@ -55,131 +63,119 @@ if (filter_has_var(INPUT_POST, 'salvar_historico_orc_aprov')) {
 }
 
 $data_hj = date('Y-m-d');
+?>	
 
 
-//------ CHECK IF THE USER IS LOGGED IN OR NOT AND GIVE APPROPRIATE OUTPUT -------
-if (!isset($_SESSION['idx'])) {
-    if (!isset($_COOKIE['idCookie'])) {
 
-        echo"Voce não esta logado!";
-    }
-} else {
-    ?>	
+<div>
+    <h3> Histórico Orçamento Nº <?= $orcObj->getNOrc() . "." . $orcObj->getAnoOrc() ?> - Cliente: <?= $orcObj->getRazaoSocialContrat() ?></h3>
 
-    <div>
-        <h3> Histórico Orçamento Nº <?= $orcObj->getNOrc() . "." . $orcObj->getAnoOrc() ?> - Cliente: <?= $orcObj->getRazaoSocialContrat() ?></h3>
+</div>
 
-    </div>
+<fieldset>
+    <legend><b>Dados</b></legend>
+    <form action="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?= $orcObj->getId() ?>" method="post" enctype="multipart/form-data" name="formAgenda">
+        Data deste Historico: 	<b><?= Formatar::formatarDataSemHora($data_hj); ?></b>
+        </br></br>
+        <label for="email_orc">Descrição:</label></br>
+        <textarea  rows="3" cols="100" id="text" name="descricao_historico"></textarea>
+        </br></br>
+        <input  type="submit" name="salvar_historico_orc_aprov" value="Salvar" id="logar"  />
+        <input type="hidden" value="<?= $data_hj; ?>" name="dia_hoje"  />
+        <input type="hidden" name="id_orc" value="<?= $orcObj->getId() ?>" />				
+    </form>
 
-    <fieldset>
-        <legend><b>Dados</b></legend>
-        <form action="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?= $orcObj->getId() ?>" method="post" enctype="multipart/form-data" name="formAgenda">
-            Data deste Historico: 	<b><?= Formatar::formatarDataSemHora($data_hj); ?></b>
-            </br></br>
-            <label for="email_orc">Descrição:</label></br>
-            <textarea  rows="3" cols="100" id="text" name="descricao_historico"></textarea>
-            </br></br>
-            <input  type="submit" name="salvar_historico_orc_aprov" value="Salvar" id="logar"  />
-            <input type="hidden" value="<?= $data_hj; ?>" name="dia_hoje"  />
-            <input type="hidden" name="id_orc" value="<?= $orcObj->getId() ?>" />				
-        </form>
-
-    </fieldset>
+</fieldset>
 
 
-    <fieldset>
-        <legend><b>Histórico</b></legend>
+<fieldset>
+    <legend><b>Histórico</b></legend>
 
-        <TABLE  class="display" id="example2">
-            <thead>
-                <TR>
-                    <TH></TH>
-                    <TH>Data</TH>
-                    <TH>Descrição</TH>
-                    <TH>Colaborador</TH>
+    <TABLE  class="display" id="example2">
+        <thead>
+            <TR>
+                <TH></TH>
+                <TH>Data</TH>
+                <TH>Descrição</TH>
+                <TH>Colaborador</TH>
 
-                </TR>
-            </thead>
-            <tbody>
+            </TR>
+        </thead>
+        <tbody>
 
-                <?php
-                $histoORc = $orcamentoCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc' AND mostrar= '0' ORDER BY id DESC", "historico_orc_aprovado");
-                if ($histoORc) {
-                    foreach ($histoORc as $row) {
-                        ?>
-                        <tr>
-                            <td class="center">
-                                <a class="bt_link bt_verde" href="tecnico.php?id_menu=editar_historico_orc_aprovado&id_historico=<?= $row['id'] ?>" >editar</a>
-                                <hr>
-                                <a class="bt_link bt_vermelho" href="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $row['id'] ?>">excluir</a>
-                            </td>
+            <?php
+            $histoORc = $orcamentoCtrl->buscarHistoricoOrcamento("*", "WHERE id_acompanhamento = '$id_orc' AND mostrar= '0' ORDER BY id DESC", "historico_orc_aprovado");
+            if ($histoORc) {
+                foreach ($histoORc as $row) {
+                    ?>
+                    <tr>
+                        <td class="center">
+                            <a class="bt_link bt_verde" href="tecnico.php?id_menu=editar_historico_orc_aprovado&id_historico=<?= $row['id'] ?>" >editar</a>
+                            <hr>
+                            <a class="bt_link bt_vermelho" href="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $row['id'] ?>">excluir</a>
+                        </td>
 
-                            <td><?= Formatar::formatarDataSemHora($row['data']) ?></td>
-                            <td><?php echo $row['descricao']; ?></td>
-                            <td><?php echo $row['colaborador']; ?></td>
-
-
-                        </tr>
+                        <td><?= Formatar::formatarDataSemHora($row['data']) ?></td>
+                        <td><?php echo $row['descricao']; ?></td>
+                        <td><?php echo $row['colaborador']; ?></td>
 
 
-                        <?php
-                    }
+                    </tr>
+
+
+                    <?php
                 }
-                ?>
+            }
+            ?>
 
-            </tbody>
-        </TABLE>
-    </fieldset>	
+        </tbody>
+    </TABLE>
+</fieldset>	
 
-          <fieldset>
-                <legend><b>Historico de Antes da Aprovação</b></legend>
-                <TABLE  class="display" id="example3">
-                    <thead>
-                        <TR>
-                            <TH></TH>
-                            <TH>Data</TH>
-                            <TH>Colaborador ELFI</TH>
-                            <TH>Contato Cliente</TH>
-                            <TH>Telefone Cliente</TH>
-                            <TH>Conversa</TH>
-                        </TR>
-                    </thead>
-                    <tbody>
+<fieldset>
+    <legend><b>Historico de Antes da Aprovação</b></legend>
+    <TABLE  class="display" id="example3">
+        <thead>
+            <TR>
+                <TH></TH>
+                <TH>Data</TH>
+                <TH>Colaborador ELFI</TH>
+                <TH>Contato Cliente</TH>
+                <TH>Telefone Cliente</TH>
+                <TH>Conversa</TH>
+            </TR>
+        </thead>
+        <tbody>
 
-                        <?php
-                        $histoNACtrl = new HistoricoOrcNaoAprovadoCtrl();
-                        $selectHistorico = $histoNACtrl->buscarBD("*", "WHERE id_orc = '$id_orc' AND mostrar = '1' ORDER BY dia_do_contato DESC");
+            <?php
+            $histoNACtrl = new HistoricoOrcNaoAprovadoCtrl();
+            $selectHistorico = $histoNACtrl->buscarBD("*", "WHERE id_orc = '$id_orc' AND mostrar = '1' ORDER BY dia_do_contato DESC");
 
-                        if ($selectHistorico) {
-                            foreach ($selectHistorico as $obj) {
+            if ($selectHistorico) {
+                foreach ($selectHistorico as $obj) {
+                    ?>
+                    <TR>
+                        <td><?php
+                            if ($obj->getId_colab() == $_SESSION['id']) {
                                 ?>
-                                <TR>
-                                    <td><?php
-                                        if ($obj->getId_colab() == $_SESSION['id']) {
-                                            ?>
-                                            <a class="bt_link bt_verde" href="editar_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>" >editar</a>
-                                            <hr>
-                                            <a class="bt_link bt_vermelho" href="excluir_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>">excluir</a>
-                                        <?php } ?>
-                                    </td>
-                                    <Td><?= Formatar::formatarDataComHora($obj->getDia_do_contato()); ?></Td>
-                                    <TD><?= $obj->getColab_elfi() ?></TD>
-                                    <TD><?= $obj->getContato_cliente() ?></TD>
-                                    <TD><?= $obj->getTel_cliente() ?></TD>
-                                    <TD><?= $obj->getConversa() ?></TD>
-                                </tr>
-                                <?php
-                            }
-                        }
-                        ?>
-                    </tbody>
-                </TABLE>
-            </fieldset>
-
-
-    <?php
-}
-?>
+                                <a class="bt_link bt_verde" href="editar_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>" >editar</a>
+                                <hr>
+                                <a class="bt_link bt_vermelho" href="excluir_historico_n_aprovado.php?id_historico=<?= $obj->getId() ?>">excluir</a>
+                            <?php } ?>
+                        </td>
+                        <Td><?= Formatar::formatarDataComHora($obj->getDia_do_contato()); ?></Td>
+                        <TD><?= $obj->getColab_elfi() ?></TD>
+                        <TD><?= $obj->getContato_cliente() ?></TD>
+                        <TD><?= $obj->getTel_cliente() ?></TD>
+                        <TD><?= $obj->getConversa() ?></TD>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+        </tbody>
+    </TABLE>
+</fieldset>
 
 </body>
 </html>

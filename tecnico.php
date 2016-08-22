@@ -7,10 +7,9 @@ session_start();
 $login = new Login();
 
 if (!$login->checkLogin()) {
-    unset($_SESSION['userlogin']);
     header("Location: conectar.php");
 } else {
-    $userlogin = $_SESSION['userlogin'];
+    $userlogin = $login->getSession();
 }
 
     $menu = filter_input(INPUT_GET, 'id_menu', FILTER_DEFAULT);

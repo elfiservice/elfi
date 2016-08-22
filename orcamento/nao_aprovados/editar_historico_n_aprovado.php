@@ -1,5 +1,4 @@
 <?php
-include "./../../checkuserlog.php";
 require './../../classes/Config.inc.php';
 ?>
 
@@ -26,12 +25,15 @@ require './../../classes/Config.inc.php';
         </div>
 
         <?php
-        if (!isset($_SESSION['idx'])) { //testa se a sess�o existe
-            if (!isset($_COOKIE['idCookie'])) {
-
-                echo "Você não esta logado!";
-            }
+        session_start();
+        $login = (!empty($login) ? $login : $login = new Login());
+        
+        if (!$login->checkLogin()) {
+            WSErro("VocÊ não esta Logado!", WS_ALERT);
+            die();
         } else {
+            $userlogin = $login->getSession();
+        }
 
             $id_historico = filter_input(INPUT_GET, 'id_historico', FILTER_VALIDATE_INT);
 
@@ -125,7 +127,3 @@ require './../../classes/Config.inc.php';
             ?>
         </body>
     </html>
-
-
-
-<?php } ?>
