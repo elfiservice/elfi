@@ -27,7 +27,7 @@ class Login extends Conexao {
             return TRUE;
         }
     }
-    
+
     public function getSession() {
         return $_SESSION['userlogin'];
     }
@@ -38,6 +38,11 @@ class Login extends Conexao {
 
     public function getResult() {
         return $this->result;
+    }
+
+    public function destroySession() {
+        session_destroy();
+        unset($_SESSION['userlogin']);
     }
 
     //PRIVATESZ
@@ -94,7 +99,7 @@ class Login extends Conexao {
         if (!session_id()) {
             session_start();
         }
-var_dump($this->result);
+        var_dump($this->result);
 
         $_SESSION['userlogin'] = $this->result;
         //var_dump($_SESSION['userlogin']);
@@ -102,19 +107,19 @@ var_dump($this->result);
         //DEVIDO ao SISTEMA de LOGIN ANTERIOR - Mantive essas variaveis na Sessao
         $_SESSION['id'] = $this->result->getId_colaborador();
         $_SESSION['Login'] = $this->result->getLogin();
-        
+
         $colab = new Colaborador($this->result->getId_colaborador(), null, null, null, null, date('Y-m-d H:i:s'), null, null);
         $colabCtrl = new ColaboradorCtrl();
-         if($colabCtrl->atualizarBD($colab)){
+        if ($colabCtrl->atualizarBD($colab)) {
             $this->result->setLast_log_date(date('Y-m-d H:i:s'));
-         }
-        LogCtrl::inserirLog($this->result->getId_colaborador(), "Colaborador logado", $this->result->getTipo());        
+        }
+        LogCtrl::inserirLog($this->result->getId_colaborador(), "Colaborador logado", $this->result->getTipo());
 
         //var_dump($this->result);
         $this->error = array("Ola {$this->result->getLogin()}, seja bem vindo(a). Aguarde redirecionamento. ", WS_ACCEPT);
         $this->result = true;
-       // var_dump($_SESSION['userlogin']);
-       // die;
+        // var_dump($_SESSION['userlogin']);
+        // die;
     }
 
 }

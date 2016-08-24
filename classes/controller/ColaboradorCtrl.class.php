@@ -37,6 +37,7 @@ class ColaboradorCtrl {
     public function atualizarBD(Colaborador $obj) {
         if ($obj instanceof Colaborador) {
             $id = $obj->getId_colaborador();
+            $obj->setId_colaborador("");
 
             foreach ((array) $obj as $campo => $valor) {
                 if (!$valor == NULL || !$valor == "" || $valor == "0") {
@@ -45,8 +46,8 @@ class ColaboradorCtrl {
                     $camposDados[] = $campo . " = '" . $valor . "'";
                 }
             }
-
-            unset($camposDados[0]);
+    
+            //unset($camposDados[0]);
             $camposDados = implode(', ', $camposDados);
 
             if ($this->ColaboradorDao->update($camposDados, "WHERE id_colaborador = '$id' ")) {
@@ -60,11 +61,11 @@ class ColaboradorCtrl {
         }
     }
 
-  /*
-   * Logica para Alteração de Senha do Usuario
-   * @param $dados = array com os dados do campo das senhas
-   * @return Mensagem de Erro ou Sucesso
-   */
+    /**
+     * Logica para Alteração de Senha do Usuario
+     * @param $dados = array com os dados do campo das senhas
+     * @return Mensagem de Erro ou Sucesso
+     */
     public function alterarSenha($dados, $userlogin) {
 
         $senha_atual = md5($dados['passatual']);
@@ -84,11 +85,33 @@ class ColaboradorCtrl {
             $senha_nova_md5 = md5($senha_nova);
             $obj = new Colaborador($id_user, "", $senha_nova_md5, "", "", "", "", "");
             if ($this->atualizarBD($obj)) {
-
+                
                 return WSErro("Atualizada a senha com sucesso!.", WS_ACCEPT);
             } else {
                 return WSErro("Ocorreu algum erro ao tentar Atualizar, favor tentar novamente!.", WS_ERROR);
             }
+        }
+    }
+
+    /**
+     * Alterar o Tipo da Conta do Colaborador
+     * @param type $dados = Array com os dados para Alteração, Tipo e ID
+     * @return String = com Mensagem de Sucesso ou Erro
+     */
+    public function alterarTipoConta($dados) {
+        $id_user = $dados['id_user'];
+        $tipo_conta_user = $dados['tipo'];
+
+
+        if (!empty($id_user) && !empty($tipo_conta_user)) {
+            $obj = new Colaborador($id_user, "", "", "", $tipo_conta_user, "", "", "");
+            if ($this->atualizarBD($obj)) {
+                return WSErro("Atualizado tipo de conta com sucesso!.", WS_ACCEPT);
+            } else {
+                return WSErro("Ocorreu algum erro ao tentar Atualizar, favor tentar novamente!.", WS_ERROR);
+            }
+        }else{
+            return WSErro("Campo vazio, Não atualizado!", WS_ALERT);
         }
     }
 

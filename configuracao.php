@@ -21,9 +21,6 @@ $menu = filter_input(INPUT_GET, 'id_menu', FILTER_DEFAULT);
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="estilos.css">    
 
-<!--        <script src="js/jquery.min.js" type="text/javascript"></script>-->
-
-
         <!-- Menus dorp down  -->
         <?php require_once './includes/javascripts/menu_dropdown.php'; ?>
 
