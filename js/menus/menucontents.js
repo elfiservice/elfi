@@ -1,22 +1,3 @@
-var anylinkmenu1={divclass:'anylinkmenu', inlinestyle:'', linktarget:''} //First menu variable. Make sure "anylinkmenu1" is a unique name!
-anylinkmenu1.items=[
-	["Dynamic Drive", "http://www.dynamicdrive.com/"],
-	["CSS Drive", "http://www.cssdrive.com/"],
-	["JavaScript Kit", "http://www.javascriptkit.com/"],
-	["Coding Forums", "http://www.codingforums.com/"],
-	["JavaScript Reference", "http://www.javascriptkit.com/jsref/"] //no comma following last entry!
-]
-
-
-
-var anylinkmenu2={divclass:'anylinkmenu', inlinestyle:'width:150px; background:#FDD271', linktarget:'_new'} //Second menu variable. Same precaution.
-anylinkmenu2.items=[
-	["CNN", "http://www.cnn.com/"],
-	["MSNBC", "http://www.msnbc.com/"],
-	["Google", "http://www.google.com/"],
-	["BBC News", "http://news.bbc.co.uk"] //no comma following last entry!
-]
-
 
 
 var anylinkmenu3={divclass:'anylinkmenucols', inlinestyle:'', linktarget:''} //Third menu variable. Same precaution.
@@ -50,7 +31,7 @@ anylinkmenu_relatorio.items=[
 ]
 
 
-
+/*Pagina CONFIGURAÇÃO*/
 
 var cadastro_configuracao={divclass:'anylinkmenucols', inlinestyle:'', linktarget:''} //Third menu variable. Same precaution.
 cadastro_configuracao.cols={divclass:'column', inlinestyle:''} //menu.cols if defined creates columns of menu links segmented by keyword "efc"
@@ -59,8 +40,6 @@ cadastro_configuracao.items=[
         ["Alterar Senha", "configuracao.php?id_menu=trocar_senha"]
 	
 ]
-
-
 
 var usuarios_nao_admin={divclass:'anylinkmenucols', inlinestyle:'', linktarget:''} //Third menu variable. Same precaution.
 usuarios_nao_admin.cols={divclass:'column', inlinestyle:''} //menu.cols if defined creates columns of menu links segmented by keyword "efc"
