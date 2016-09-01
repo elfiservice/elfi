@@ -86,44 +86,28 @@ DESABILITAR CAMPOS COM CHECKBOX
 <hr>
 
 <div class="" >
-
-
-
-    <form method="post" action="tecnico.php?id_menu=salvar_novo_cliente"
-          onsubmit="return formCheck(this);">
-
-
-        <table border="0">
+    <form method="post" action="tecnico.php?id_menu=salvar_novo_cliente" onsubmit="return formCheck(this);">
+        <table>
             <thead>
                 <tr>
                     <th>
-                        <p>
-                            Pessoa física <input id="toggleElement" type="checkbox"
-                                                 name="tipo" onchange="toggleStatus()" />
-                        </p>
+                        <p>Pessoa física <input id="toggleElement" type="checkbox" name="tipo" onchange="toggleStatus()" />         </p>
                     </th>
                     <th COLSPAN="3">Classificação <select name="classificacao">
                             <option value="padrao">Padrão</option>
                             <option value="contrato">Contrato</option>
                         </select>
                     </th>
-
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td class="label">Razão Social / Nome</td>
-                    <td class="input" COLSPAN="3"><input type="text"
-                                                         name="razao_social" value="" size="50px" maxlength="90"
-                                                         onkeyup="this.value = this.value.toUpperCase();" /></td>
-
+                    <td class="input" COLSPAN="3"><input type="text" name="razao_social" value="" size="50px" maxlength="90" onkeyup="this.value = this.value.toUpperCase();" /></td>
                 </tr>
                 <tr>
                     <td class="label">Nome Fantasia</td>
-                    <td class="input" COLSPAN="3"><input type="text"
-                                                         name="nome_fantasia" value="" size="50px"
-                                                         onkeyup="this.value = this.value.toUpperCase();" /></td>
-
+                    <td class="input" COLSPAN="3"><input type="text" name="nome_fantasia" value="" size="50px" onkeyup="this.value = this.value.toUpperCase();" /></td>
                 </tr>
                 <tr>
                     <td class="label">CNPJ</td>
@@ -132,7 +116,6 @@ DESABILITAR CAMPOS COM CHECKBOX
                             <input type="text" id="cnpj" name="cnpj" alt="cnpj"
                                    onBlur="TESTA();" />
                         </div>
-
                     </td>
                     <td class="label2">CPF</td>
                     <td class="input2">
@@ -141,7 +124,6 @@ DESABILITAR CAMPOS COM CHECKBOX
                         </div>
                     </td>
                 </tr>
-
                 <tr>
                     <td class="label">Inscrição Estadual</td>
                     <td class="input"><input type="text" name="ie" alt="ie" id="ie"
@@ -154,7 +136,6 @@ DESABILITAR CAMPOS COM CHECKBOX
                     <td class="input" COLSPAN="3"><input type="text" name="endereco"
                                                          value="" size="50px" maxlength="180"
                                                          onkeyup="this.value = this.value.toUpperCase();" /></td>
-
                 </tr>
                 <tr>
                     <td class="label">Bairro</td>
@@ -163,19 +144,21 @@ DESABILITAR CAMPOS COM CHECKBOX
                                              onkeyup="this.value = this.value.toUpperCase();" /></td>
                     <td class="label2">CEP</td>
                     <td class="input2"><input type="text" id="cep" name="cep" alt="cep" /></td>
-
                 </tr>
                 <tr>
                     <td class="label">Estado</td>
                     <td class="input"><select name="cod_estados" id="cod_estados">
                             <option value=""></option>
-<?php
-$sql = "SELECT cod_estados, sigla FROM estados ORDER BY sigla";
-$res = mysql_query($sql);
-while ($row = mysql_fetch_assoc($res)) {
-    echo '<option value="' . $row ['cod_estados'] . '">' . $row ['sigla'] . '</option>';
-}
-?>
+                            <?php
+                            $sql = "SELECT cod_estados, sigla FROM estados ORDER BY sigla";
+                            $res = mysql_query($sql);
+
+
+
+                            while ($row = mysql_fetch_assoc($res)) {
+                                echo '<option value="' . $row ['cod_estados'] . '">' . $row ['sigla'] . '</option>';
+                            }
+                            ?>
                         </select></td>
                     <td class="label2">Cidade</td>
                     <td class="input2"><span class="carregando">Aguarde,
@@ -184,27 +167,27 @@ while ($row = mysql_fetch_assoc($res)) {
                             <option value="">-- Escolha um estado --</option>
                         </select> <script src="http://www.google.com/jsapi"></script> <script
                             type="text/javascript">
-                                                    google.load('jquery', '1.3');
+                                                 google.load('jquery', '1.3');
                         </script> <script
                             type="text/javascript">
-                                                                            $(function () {
-                                                                                $('#cod_estados').change(function () {
-                                                                                    if ($(this).val()) {
-                                                                                        $('#cod_cidades').hide();
-                                                                                        $('.carregando').show();
-                                                                                        $.getJSON('./cidades.ajax.php?search=', {cod_estados: $(this).val(), ajax: 'true'}, function (j) {
-                                                                                            var options = '<option value=""></option>';
-                                                                                            for (var i = 0; i < j.length; i++) {
-                                                                                                options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';
-                                                                                            }
-                                                                                            $('#cod_cidades').html(options).show();
-                                                                                            $('.carregando').hide();
-                                                                                        });
-                                                                                    } else {
-                                                                                        $('#cod_cidades').html('<option value="">â€“ Escolha um estado â€“</option>');
-                                                                                    }
-                                                                                });
-                                                                            });
+                                $(function () {
+                                    $('#cod_estados').change(function () {
+                                        if ($(this).val()) {
+                                            $('#cod_cidades').hide();
+                                            $('.carregando').show();
+                                            $.getJSON('./cidades.ajax.php?search=', {cod_estados: $(this).val(), ajax: 'true'}, function (j) {
+                                                var options = '<option value=""></option>';
+                                                for (var i = 0; i < j.length; i++) {
+                                                    options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';
+                                                }
+                                                $('#cod_cidades').html(options).show();
+                                                $('.carregando').hide();
+                                            });
+                                        } else {
+                                            $('#cod_cidades').html('<option value="">â€“ Escolha um estado â€“</option>');
+                                        }
+                                    });
+                                });
                         </script></td>
                 </tr>
                 <tr>
@@ -247,8 +230,7 @@ while ($row = mysql_fetch_assoc($res)) {
         <hr>
         <input type="submit" value="Salvar"
                name="salvar_novo_cliente" /> 
-        <input type="hidden" name="usuario"
-               value="<?php echo $logOptions_id; ?>" readonly="readonly" />
+        <input type="hidden" name="usuario" value="<?= $userlogin->getId_colaborador(); ?>" />
 
     </form>
 

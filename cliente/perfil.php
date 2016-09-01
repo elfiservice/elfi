@@ -30,7 +30,6 @@ if (filter_has_var(INPUT_GET, 'tipo_cliente')) {
     exit();
 }
 
-//$usuario_logado = new Usuario($logOptions_id);
 
 $cliente = new ClienteCtrl();
 $clienteFinal = $cliente->buscarBD("*", "WHERE id = $id_cliente AND tipo = '$tipo_cliente' LIMIT 1");

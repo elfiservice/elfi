@@ -36,7 +36,7 @@ $orcExcluirObj = $orcCtrlExcluir->buscarOrcamentoPorId("*", "where id = $orc");
         2- ou, <b>Edite</b> ele e faça um <b>novo Orçamento</b><br> 
     </p>
 </div>
-<div id="" style="margin: 10px;">
+<div style="margin: 10px;">
 	<form method="post"
 		action=""
 		onsubmit="">
@@ -62,13 +62,9 @@ $orcExcluirObj = $orcCtrlExcluir->buscarOrcamentoPorId("*", "where id = $orc");
 			</tbody>
 		</table>
 		<hr>
-<!--								<input class="bt_vermelho" type="submit" value="Exluir"
-						name="excluir_cliente" /> 
-						<input type="hidden" name="usuario"
-						value="<?php echo $logOptions_id; ?>" readonly="readonly" />
-						<input type="hidden" name="razao_social"
-						value="<?php echo $linha_cliente->razao_social; ?>" readonly="readonly" /></td>-->
-
+<!--								<input class="bt_vermelho" type="submit" value="Exluir"	name="excluir_cliente" /> 
+												
+-->
 	</form>
 
 

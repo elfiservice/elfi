@@ -6,22 +6,7 @@ if (isSet($_POST['ano'])) {
     $ano_orc_selec = $_POST['ano'];
 }
 
-//$ident_orc="";
-//if(filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
-//
-//	$ident_orc = filter_input(INPUT_GET, 'id_orc',FILTER_VALIDATE_INT);
-//	$situcao_orc = $_POST['itens_situcao_orc'];
-//
-//	$usuarioObj = new UsuarioCtrl();
-//	$usuario = $usuarioObj->buscarUserPorId($logOptions_id);
-//	$nome_usuario = $usuario->getLogin();
-//
-//	$orcObj = new Orcamento($ident_orc, "", "", $nome_usuario, $situcao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); 
-//	$orcCrtlObj = new OrcamentoCtrl();
-//	$resultAtualizOrcamento = $orcCrtlObj->atualizarOrcamento($orcObj);
-//
-//
-//        } 
+
 
 $colabCtrl = new ColaboradorCtrl();
 $orcCrtl = new OrcamentoCtrl();
