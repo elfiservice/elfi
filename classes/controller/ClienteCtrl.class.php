@@ -8,6 +8,7 @@ class ClienteCtrl {
         $this->clienteDao = new ClienteDAO();
     }
 
+
     /**
      * Fazer SELECT no BD na tabela = <b>clientes<b/>
      * @param string $campos = Campos do BD a serem pesquisados
@@ -22,6 +23,33 @@ class ClienteCtrl {
             return $this->montarObjeto($select);
         } else {
             return NULL;
+        }
+    }
+
+    public function atualizarBD(Cliente $obj) {
+        $filha = get_class($obj);
+        if ($obj instanceof $filha) {
+            $id = $obj->getId();
+ 
+            foreach ((array) $obj as $campo => $valor) {
+                if (!$valor == NULL || !$valor == "" || $valor == "0") {
+                    $campo = str_replace("\0Cliente\0", "", $campo);
+                    $campo = str_replace("\0{$filha}\0", "", $campo);
+                    $camposDados[] = $campo . " = '" . $valor . "'";
+                }
+            }
+    
+            unset($camposDados[0]);
+
+            $camposDados = implode(', ', $camposDados);
+           
+            if ($this->clienteDao->update($camposDados, "WHERE id = '$id' ")) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
         }
     }
 
@@ -46,6 +74,16 @@ class ClienteCtrl {
 
         return $arrayObjColab;
     }
-
+//
+//    private function identificaFilha($obj) {
+//
+//        if ($obj instanceof ClientePJ) {
+//            return ClientePJ::class;
+//        } else if ($obj instanceof ClientePF) {
+//            return ClientePF::class;
+//        } else {
+//            return null;
+//        }
+//    }
 
 }
