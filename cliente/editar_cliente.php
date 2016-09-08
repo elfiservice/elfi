@@ -1,4 +1,7 @@
-<?php ?>
+<div>
+    <h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Editar</h2>
+</div>
+<hr>
 
 
 <!-- MAscaras em campos -->
@@ -92,75 +95,49 @@ if (!empty($id_cliente)) {
     WSErro("Erro na URL !", WS_ALERT, "die");
 }
 
+if (filter_has_var(INPUT_POST, "salvar_editar_cliente")) {
+    $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+    $dados['id_cliente'] = $id_cliente;
+    $dados['Login'] = $userlogin->getLogin();
+    $dados['id_colab_logado'] = $userlogin->getId_colaborador();
+
+    if ($clienteCtrl->atualizarCliente($dados)) {
+        WSErro("OK! Cliente Alterado no Sistema.", WS_ACCEPT, "die");
+    }
+}
+
+
+
 
 if ($cli instanceof ClientePJ) {
-$cnpj_cpf = '<td class="label">CNPJ</td>
-                        <td class="input">             
-                            <div id=""><input value="'.$cli->getCnpj().'" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" /></div>
-                        </td>';
-$ie_rg = '<td class="label">Inscrição Estadual</td>
-                    <td class="input">
-                        <input type="text" name="ie" value="'.$cli->getIe().'" alt="ie" id="ie" size="10" />
-                    </td>';
-
-    
-    
+    $cnpj_cpf_label = 'CNPJ';
+    $cnpj_cpf_input = '<input class="j_tipo_c_valor" value="' . $cli->getCnpj() . '" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />';
+    $ie_rg_label = 'Inscrição Estadual';
+    $ie_rg_input = '<input class="j_ie_c_valor" type="text" name="ie" value="' . $cli->getIe() . '" alt="ie" id="ie" size="10" />';
+    $tipo = "";
 } else if ($cli instanceof ClientePF) {
-  $cnpj_cpf = '<td class="label2">CPF</td>
-                        <td class="input2">
-                            <div id=""><input value="'.$cli->getCpf().'" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" /><br /></div>
-                        </td>';
-$ie_rg = '<td class="label">RG</td>
-                    <td class="input">
-                        <input type="text" name="ie" value="'.$cli->getIe().'" alt="ie" id="ie" size="10" />
-                    </td>';
+    $cnpj_cpf_label = 'CPF';
+    $cnpj_cpf_input = '<input class="j_tipo_c_valor" value="' . $cli->getCpf() . '" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />';
+    $ie_rg_label = '';
+    $ie_rg_input = '';
+    $tipo = "checked";
 } else {
     WSErro("Ops! Erro no Objeto do Sistema!", WS_ERROR, "die");
 }
 ?>
 
-<div>
-    <h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Editar</h2>
-</div>
-<hr>
+
 
 <div id="demo">
-    <form method="post" action="tecnico.php?id_menu=salvar_editar_cliente&id_cliente=<?= $id_cliente ?>" onsubmit="return formCheck(this);">       
-
-
+    <form method="post" action="tecnico.php?id_menu=editar_cliente&id_cliente=<?= $id_cliente ?>" onsubmit="return formCheck(this);">       
         <table>
-            <thead>
+            <tbody>
                 <tr>
+                    <td class="label ">Pessoa Física </td>
+                    <td><input type="checkbox" value="PF" name="tipo" id="tipo" <?= $tipo ?>  />               </td>
 
-                    <th COLSPAN="3">Classificação 
-                        <select name="classificacao">
-                            <?php
-                            if ($cli->getClassificacao() == "padrao") {
-                                ?>
-                                <option selected value="padrao">Padrão</option>
-                                <option value="contrato">Contrato</option>                                            
-                                <?php
-                            } else if ($cli->getClassificacao() == "contrato") {
-                                ?>
-
-                                <option value="padrao">Padrão</option>
-                                <option selected value="contrato">Contrato</option>                                                
-
-                                <?php
-                            } else {
-                                ?>
-                                <option selected value="padrao">Padrão</option>
-                                <option value="contrato">Contrato</option>                                            
-                                <?php
-                            }
-                            ?>    
-
-                        </select>
-                    </th>
 
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
                     <td class="label">Razão Social / Nome </td>
                     <td class="input" COLSPAN="3"><input type="text" name="razao_social" value="<?= $cli->getRazaoSocial(); ?>" size="50" maxlength="90" onkeyup="this.value = this.value.toUpperCase();" /> </td>
@@ -170,179 +147,157 @@ $ie_rg = '<td class="label">RG</td>
                     <td class="input" COLSPAN="3"><input type="text" name="nome_fantasia" value="<?= $cli->getNomeFantasia() ?>" size="50" onkeyup="this.value = this.value.toUpperCase();"/></td>
                 </tr>
                 <tr>
-                      <?= $cnpj_cpf ?>
+                    <td class="label j_label_tipo"><?= $cnpj_cpf_label ?></td>
+                    <td><div class="j_tipo"></div><?= $cnpj_cpf_input ?></td>
                 </tr>
                 <tr>
-                       <?= $ie_rg; ?>
-                    <td>  </td>
-                    <td>  </td>                                        
+                    <td class="label j_label_ie"><?= $ie_rg_label ?></td>
+                    <td><div class="j_ie"></div><?= $ie_rg_input ?></td>                                     
                 </tr>
-                <tr>
-                    <td class="label">Endereço</td>
-                    <td class="input" COLSPAN="3">
-                        <input type="text" name="endereco" value="<?= $cli->getEndereco() ?>" size="50" maxlength="180" onkeyup="this.value = this.value.toUpperCase();" />
-                    </td>
+            <script>
+                var verificaTipo = function () {
+                    if ($("#tipo").attr("checked")) {
+                        $(".j_label_tipo").html('CPF');
+                        $(".j_tipo_c_valor").remove();
+                        $(".j_ie_c_valor").remove();
+                        $(".j_tipo").html('<input value="" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />');
 
-                </tr>
-                <tr>
-                    <td class="label">Bairro</td>
-                    <td class="input" >
-                        <input type="text" name="bairro" value="<?= $cli->getBairro() ?>" size="30" maxlength="90" onkeyup="this.value = this.value.toUpperCase();" />
-                    </td>
-                    <td class="label2">CEP</td>
-                    <td class="input2">
-                        <input type="text" id="cep" name="cep" alt="cep" value="<?= $cli->getCep() ?>" />
-                    </td>                                        
+                        $(".j_label_ie").html('');
+                        $(".j_ie").html('');
+                    } else {
+                        $(".j_label_tipo").html('CNPJ');
+                        $(".j_tipo_c_valor").remove();
+                        $(".j_ie_c_valor").remove();
+                        $(".j_tipo").html('<input value="" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />');
 
-                </tr>
-                <tr>
-                    <td class="label">Estado</td>
-                    <td class="input">
+                        $(".j_label_ie").html('Inscrição Estadual');
+                        $(".j_ie").html('<input type="text" name="ie" value="" alt="ie" id="ie" size="10" />');
+                    }
+                };
+                //verificaTipo();
 
+                $("#tipo").on("click", verificaTipo);
+
+            </script>
+            <tr>
+                <td class="label">Endereço</td>
+                <td class="input" COLSPAN="3">
+                    <input type="text" name="endereco" value="<?= $cli->getEndereco() ?>" size="50" maxlength="180" onkeyup="this.value = this.value.toUpperCase();" />
+                </td>
+
+            </tr>
+            <tr>
+                <td class="label">Bairro</td>
+                <td class="input" >
+                    <input type="text" name="bairro" value="<?= $cli->getBairro() ?>" size="30" maxlength="90" onkeyup="this.value = this.value.toUpperCase();" />
+                </td>
+                <td class="label2">CEP</td>
+                <td class="input2">
+                    <input type="text" id="cep" name="cep" alt="cep" value="<?= $cli->getCep() ?>" />
+                </td>                                        
+
+            </tr>
+            <tr>
+                <td class="label">Estado</td>
+                <td class="input">
+                    <?php
+                    $estad = $clienteCtrl->buscarEstado("*", "where nome = '" . $cli->getEstado() . "'");
+                    $linha_estado = $estad[0];
+                    $cod_estado_clientes = $linha_estado['cod_estados'];
+                    ?>
+                    <select name="cod_estados" id="cod_estados">
+                        <option value=" "> </option>
                         <?php
-                        $estado_cliente = $linha_cliente->estado;
-
-                        $consulta_estado = mysql_query("select * from estados where nome = '$estado_cliente'");
-                        $linha_estado = mysql_fetch_object($consulta_estado);
-
-                        $cod_estado_clientes = @$linha_estado->cod_estados;
-                        ?>
-
-
-
-                        <select name="cod_estados" id="cod_estados">
-                            <option value=" "> </option>
-                            <?php
-                            $sql = "SELECT cod_estados, sigla
-                                                                            FROM estados
-                                                                            ORDER BY sigla";
-                            $res = mysql_query($sql);
-                            while ($row = mysql_fetch_assoc($res)) {
-
-                                if ($cod_estado_clientes == $row['cod_estados']) {
-
-                                    echo '<option selected value="' . $row['cod_estados'] . '">' . $row['sigla'] . '</option>';
-                                } else {
-
-
-                                    echo '<option value="' . $row['cod_estados'] . '">' . $row['sigla'] . '</option>';
-                                }
+                        $estados = $clienteCtrl->buscarEstado("cod_estados, sigla", "ORDER BY sigla");
+                        foreach ($estados as $row) {
+                            if ($cod_estado_clientes == $row['cod_estados']) {
+                                echo '<option selected value="' . $row['cod_estados'] . '">' . $row['sigla'] . '</option>';
+                            } else {
+                                echo '<option value="' . $row['cod_estados'] . '">' . $row['sigla'] . '</option>';
                             }
-                            ?>
-                        </select>
-                    </td>
-                    <td class="label2">Cidade</td>
-                    <td class="input2">
-
-                        <?php
-                        $cidade_cliente = $linha_cliente->cidade;
-
-                        $consulta_estado = mysql_query("select * from cidades where nome = '$cidade_cliente'");
-                        $linha_cidade = mysql_fetch_object($consulta_estado);
-
-                        @$cod_cidade_clientes = $linha_cidade->cod_cidades;
-// echo $cod_cidade_clientes;
+                        }
                         ?>
+                    </select>
+                </td>
+                <td class="label2">Cidade</td>
+                <td class="input2">
+                    <?php
+                    $cidad = $clienteCtrl->buscarCidade("*", "where nome = '" . $cli->getCidade() . "'");
+                    $linha_cidade = $cidad[0];
+                    $cod_cidade_clientes = $linha_cidade['cod_cidades'];
+                    ?>
+                    <span class="carregando"></span>
+                    <select name="cod_cidades" id="cod_cidades">
+                        <option value="<?= $cod_cidade_clientes; ?>"><?= utf8_encode($cli->getCidade()); ?></option>
+                    </select>
 
+                    <script src="http://www.google.com/jsapi"></script>
+                    <script type="text/javascript">
+                        google.load('jquery', '1.3');
+                    </script>		
 
-                        <span class="carregando"></span>
-                        <select name="cod_cidades" id="cod_cidades">
-                            <option value="<?php echo $cod_cidade_clientes; ?>"><?php echo utf8_encode($linha_cliente->cidade); ?></option>
-                        </select>
-
-                        <script src="http://www.google.com/jsapi"></script>
-                        <script type="text/javascript">
-                            google.load('jquery', '1.3');
-                        </script>		
-
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#cod_estados').change(function () {
-                                    if ($(this).val()) {
-                                        $('#cod_cidades').hide();
-                                        $('.carregando').show();
-                                        $.getJSON('cidades.ajax.php?search=', {cod_estados: $(this).val(), ajax: 'true'}, function (j) {
-                                            var options = '<option value=""></option>';
-                                            for (var i = 0; i < j.length; i++) {
-                                                options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';
-                                            }
-                                            $('#cod_cidades').html(options).show();
-                                            $('.carregando').hide();
-                                        });
-                                    } else {
-                                        $('#cod_cidades').html('<option value="">– Escolha um estado –</option>');
-                                    }
-                                });
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#cod_estados').change(function () {
+                                if ($(this).val()) {
+                                    $('#cod_cidades').hide();
+                                    $('.carregando').show();
+                                    $.getJSON('ajax/cidades.ajax.php?search=', {cod_estados: $(this).val(), ajax: 'true'}, function (j) {
+                                        var options = '<option value=""></option>';
+                                        for (var i = 0; i < j.length; i++) {
+                                            options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';
+                                        }
+                                        $('#cod_cidades').html(options).show();
+                                        $('.carregando').hide();
+                                    });
+                                } else {
+                                    $('#cod_cidades').html('<option value="">– Escolha um estado –</option>');
+                                }
                             });
-                        </script>
-                    </td>                                      
-                </tr>
-                <tr>
-                    <td class="label">TEL</td>
-                    <td class="input">
-                        <input type="text" onchange="Contar(this)" id="phone" name="phone" alt="phone" value="<?php echo $linha_cliente->tel; ?>"/>
-                    </td>
-                    <td class="label2">CEL</td>
-                    <td class="input2">
-                        <input type="text" onchange="Contar(this)" id="cel" name="cel" alt="cel" value="<?php echo $linha_cliente->cel; ?>" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label">FAX</td>
-                    <td class="input">
-                        <input type="text" onchange="Contar(this)" id="fax" name="fax" alt="fax" value="<?php echo $linha_cliente->fax; ?>" />
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>                                        
-                </tr>
-
-                <tr>
-                    <td class="label">Email Técnico</td>
-                    <td class="input">
-                        <input type="email" id="email_tec" name="email_tec" value="<?php echo $linha_cliente->email_tec; ?>" />
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>                                        
-
-                </tr>
-                <tr>
-                    <td class="label">Email Financ./Admin.</td>
-                    <td class="input">
-                        <input type="email" id="email_admin" name="email_admin" value="<?php echo $linha_cliente->email_adm_fin; ?>" />
-                    </td>  
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>                                        
-                </tr>
-
-                <tr>
-
-                    <td colspan="4">
-
-                    </td>
-
-
-
-                </tr>                                    
+                        });
+                    </script>
+                </td>                                      
+            </tr>
+            <tr>
+                <td class="label">TEL</td>
+                <td class="input">
+                    <input type="text" onchange="Contar(this)" id="phone" name="phone" alt="phone" value="<?= $cli->getTel() ?>"/>
+                </td>
+                <td class="label2">CEL</td>
+                <td class="input2">
+                    <input type="text" onchange="Contar(this)" id="cel" name="cel" alt="cel" value="<?= $cli->getCel() ?>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">FAX</td>
+                <td class="input">
+                    <input type="text" onchange="Contar(this)" id="fax" name="fax" alt="fax" value="<?= $cli->getFax() ?>" />
+                </td>
+                <td></td>
+                <td></td>                                        
+            </tr>
+            <tr>
+                <td class="label">Email Técnico</td>
+                <td class="input">
+                    <input type="email" id="email_tec" name="email_tec" value="<?= $cli->getEmailTec() ?>" />
+                </td>
+                <td></td>
+                <td></td>                                        
+            </tr>
+            <tr>
+                <td class="label">Email Financ./Admin.</td>
+                <td class="input">
+                    <input type="email" id="email_admin" name="email_admin" value="<?= $cli->getEmail_adm_fin() ?>" />
+                </td>  
+                <td> </td>
+                <td> </td>                                        
+            </tr>
+            <tr>
+                <td colspan="4">  </td>
+            </tr>                                    
             </tbody>
         </table>
         <hr>
-        <input class="bt_verde" type="submit" value="Salvar" name="salvar_novo_cliente" />
-        <input type="hidden" name="usuario" value="<?php echo $logOptions_id; ?>" readonly="readonly" />
-
+        <input class="bt_verde" type="submit" value="Salvar" name="salvar_editar_cliente" />
     </form>
-
-
-
 </div>

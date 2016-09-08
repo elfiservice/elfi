@@ -8,7 +8,6 @@ class ClienteCtrl {
         $this->clienteDao = new ClienteDAO();
     }
 
-
     /**
      * Fazer SELECT no BD na tabela = <b>clientes<b/>
      * @param string $campos = Campos do BD a serem pesquisados
@@ -30,7 +29,7 @@ class ClienteCtrl {
         $filha = get_class($obj);
         if ($obj instanceof $filha) {
             $id = $obj->getId();
- 
+
             foreach ((array) $obj as $campo => $valor) {
                 if (!$valor == NULL || !$valor == "" || $valor == "0") {
                     $campo = str_replace("\0Cliente\0", "", $campo);
@@ -38,11 +37,11 @@ class ClienteCtrl {
                     $camposDados[] = $campo . " = '" . $valor . "'";
                 }
             }
-    
-            unset($camposDados[0]);
+
+            // unset($camposDados[0]);
 
             $camposDados = implode(', ', $camposDados);
-           
+
             if ($this->clienteDao->update($camposDados, "WHERE id = '$id' ")) {
                 return TRUE;
             } else {
@@ -56,6 +55,36 @@ class ClienteCtrl {
     public function mediaSatisfacao($id_cliente) {
         $pesquisaCtrl = new PesquisaPosVendaCtrl();
         return $pesquisaCtrl->mediaSatisfacao($id_cliente);
+    }
+
+    public function buscarEstado($campos, $termos) {
+        return $this->clienteDao->select($campos, $termos, "estados");
+    }
+
+    public function buscarCidade($campos, $termos) {
+        return $this->clienteDao->select($campos, $termos, "cidades");
+    }
+
+    public function atualizarCliente(Array $dados) {
+        $estad = $this->buscarEstado("*", "where cod_estados = '" . $dados['cod_estados'] . "'");
+        $estado = $estad[0]['nome'];
+        $cidad = $this->buscarCidade("*", "where cod_cidades = '" . $dados['cod_cidades'] . "'");
+        $cidade = $cidad[0]['nome'];
+
+        if ($dados["salvar_editar_cliente"]) {
+            unset($dados["salvar_editar_cliente"]);
+            if (empty($dados['tipo'])) { //se tipo esta embranco é PJ se existe é PF
+                $obj = new ClientePJ($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $estado, $cidade, $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            } else {
+                $obj = new ClientePF($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $estado, $cidade, $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            }
+
+            if ($this->atualizarBD($obj)) {
+                LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id_cliente']}</b> <b><span>Alterado</span></b> no Sistema", "tec");
+                return TRUE;
+                
+            }
+        }
     }
 
     //--------------------------------------------------
@@ -74,16 +103,5 @@ class ClienteCtrl {
 
         return $arrayObjColab;
     }
-//
-//    private function identificaFilha($obj) {
-//
-//        if ($obj instanceof ClientePJ) {
-//            return ClientePJ::class;
-//        } else if ($obj instanceof ClientePF) {
-//            return ClientePF::class;
-//        } else {
-//            return null;
-//        }
-//    }
 
 }
