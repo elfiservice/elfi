@@ -3,9 +3,14 @@
 class ClienteCtrl {
 
     private $clienteDao;
+    private $result;
 
     public function ClienteCtrl() {
         $this->clienteDao = new ClienteDAO();
+    }
+
+    public function getResult() {
+        return $this->result;
     }
 
     /**
@@ -70,19 +75,26 @@ class ClienteCtrl {
         $estado = $estad[0]['nome'];
         $cidad = $this->buscarCidade("*", "where cod_cidades = '" . $dados['cod_cidades'] . "'");
         $cidade = $cidad[0]['nome'];
-
         if ($dados["salvar_editar_cliente"]) {
             unset($dados["salvar_editar_cliente"]);
             if (empty($dados['tipo'])) { //se tipo esta embranco é PJ se existe é PF
                 $obj = new ClientePJ($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $estado, $cidade, $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+                $flag_teste = $this->checkCNPJ($dados);
             } else {
                 $obj = new ClientePF($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $estado, $cidade, $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+                $flag_teste = $this->checkCPF($dados);
             }
-
-            if ($this->atualizarBD($obj)) {
-                LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id_cliente']}</b> <b><span>Alterado</span></b> no Sistema", "tec");
-                return TRUE;
-                
+            if ($flag_teste == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
+                if ($this->atualizarBD($obj)) {
+                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id_cliente']}</b> <b><span>Alterado</span></b> no Sistema", "tec");
+                    $this->result = array("<b>OK!</b> Cliente <b>Atualizado</b> com sucesso.", WS_ACCEPT);
+                    return TRUE;
+                }else{
+                    $this->result = array("<b>Erro!</b> Ocorreu um erro interno ao tentar Atualizar o Cliente no sistema.", WS_ERROR);
+                    return FALSE;
+                }
+            } else {
+                return FALSE;
             }
         }
     }
@@ -102,6 +114,55 @@ class ClienteCtrl {
         }
 
         return $arrayObjColab;
+    }
+
+    private function checkCNPJ(Array $dados) {
+        $cnpj = $this->buscarBD("*", "WHERE cnpj_cpf = '" . Formatar::limpaCPF_CNPJ($dados['cnpj']) . "' AND mostrar = '1'");
+        if (!empty($cnpj)) {
+            if (count($cnpj) > 0 && $dados['id_cliente'] <> (int) $cnpj[0]->getId()) {
+                $this->result = array("<b>Ops!!</b> CNPJ <b>{$dados['cnpj']}</b> já cadastrado no Sistema.", WS_ERROR);
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    private function checkCPF(Array $dados) {
+        $consulta = $this->buscarBD("*", "WHERE cpf = '" . Formatar::limpaCPF_CNPJ($dados['cpf']) . "' AND mostrar = '1'");
+        if (!empty($consulta)) {
+            if (count($consulta) > 0 && $dados['id_cliente'] <> (int) $consulta[0]->getId()) {
+                $this->result = array("<b>Ops!!</b> CPF <b>{$dados['cpf']}</b> já cadastrado no Sistema.", WS_ERROR);
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    private function checkRazaoFantasia(Array $dados) {
+        $razao_social = $this->buscarBD("*", "WHERE razao_social = '" . $dados['razao_social'] . "' AND mostrar = '1'");
+        $nome_fantasia = $this->buscarBD("*", "WHERE nome_fantasia = '" . $dados['nome_fantasia'] . "' AND mostrar = '1'");
+
+        if (!empty($razao_social)) {
+            if (count($razao_social) > 0 && $dados['id_cliente'] <> (int) $razao_social[0]->getId()) {
+                $this->result = array("<b>Ops!!</b> Razão Social <b>{$dados['razao_social']}</b> já cadastrado no Sistema.", WS_ERROR);
+                return TRUE;
+            }
+        }
+
+        if (!empty($nome_fantasia)) {
+            if (count($nome_fantasia) > 0 && $dados['id_cliente'] <> (int) $nome_fantasia[0]->getId()) {
+                $this->result = array("<b>Ops!!</b> Nome Fantasia <b>{$dados['nome_fantasia']}</b> já cadastrado no Sistema.", WS_ERROR);
+                return TRUE;
+            }
+        } else {
+            return FALSE;
+        }
     }
 
 }

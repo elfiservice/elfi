@@ -102,11 +102,11 @@ if (filter_has_var(INPUT_POST, "salvar_editar_cliente")) {
     $dados['id_colab_logado'] = $userlogin->getId_colaborador();
 
     if ($clienteCtrl->atualizarCliente($dados)) {
-        WSErro("OK! Cliente Alterado no Sistema.", WS_ACCEPT, "die");
+         WSErro($clienteCtrl->getResult()[0], $clienteCtrl->getResult()[1], "die");
+    }else{
+        WSErro($clienteCtrl->getResult()[0], $clienteCtrl->getResult()[1]);
     }
 }
-
-
 
 
 if ($cli instanceof ClientePJ) {
@@ -126,8 +126,6 @@ if ($cli instanceof ClientePJ) {
 }
 ?>
 
-
-
 <div id="demo">
     <form method="post" action="tecnico.php?id_menu=editar_cliente&id_cliente=<?= $id_cliente ?>" onsubmit="return formCheck(this);">       
         <table>
@@ -135,8 +133,6 @@ if ($cli instanceof ClientePJ) {
                 <tr>
                     <td class="label ">Pessoa Física </td>
                     <td><input type="checkbox" value="PF" name="tipo" id="tipo" <?= $tipo ?>  />               </td>
-
-
                 </tr>
                 <tr>
                     <td class="label">Razão Social / Nome </td>
