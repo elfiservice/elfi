@@ -70,27 +70,59 @@ class ClienteCtrl {
         return $this->clienteDao->select($campos, $termos, "cidades");
     }
 
+    /**
+     * Atualizar no BD os Dados do Cliente
+     * @param array $dados = Dados do cliente
+     * @return boolean = Retorna True ou False
+     */
     public function atualizarCliente(Array $dados) {
-        $estad = $this->buscarEstado("*", "where cod_estados = '" . $dados['cod_estados'] . "'");
-        $estado = $estad[0]['nome'];
-        $cidad = $this->buscarCidade("*", "where cod_cidades = '" . $dados['cod_cidades'] . "'");
-        $cidade = $cidad[0]['nome'];
+        $estado = $this->buscarEstado("*", "where cod_estados = '" . $dados['cod_estados'] . "'");
+        $cidade = $this->buscarCidade("*", "where cod_cidades = '" . $dados['cod_cidades'] . "'");
+        $dados['estado'] = $estado[0]['nome'];
+        $dados['cidade'] = $cidade[0]['nome'];
+
         if ($dados["salvar_editar_cliente"]) {
             unset($dados["salvar_editar_cliente"]);
-            if (empty($dados['tipo'])) { //se tipo esta embranco é PJ se existe é PF
-                $obj = new ClientePJ($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $estado, $cidade, $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
-                $flag_teste = $this->checkCNPJ($dados);
-            } else {
-                $obj = new ClientePF($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $estado, $cidade, $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
-                $flag_teste = $this->checkCPF($dados);
-            }
-            if ($flag_teste == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
-                if ($this->atualizarBD($obj)) {
+            $arrayFilha[] = $this->selecionaFilha($dados);
+
+            if ($arrayFilha[0][1] == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
+                if ($this->atualizarBD($arrayFilha[0][0])) {
                     LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id_cliente']}</b> <b><span>Alterado</span></b> no Sistema", "tec");
                     $this->result = array("<b>OK!</b> Cliente <b>Atualizado</b> com sucesso.", WS_ACCEPT);
                     return TRUE;
-                }else{
+                } else {
                     $this->result = array("<b>Erro!</b> Ocorreu um erro interno ao tentar Atualizar o Cliente no sistema.", WS_ERROR);
+                    return FALSE;
+                }
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    /**
+     * Inserir no BD os Dados de um Novo Cliente
+     * @param array $dados = Array de Dados do Cliente
+     * @return boolean = Retorna True ou False
+     */
+    public function inserirCliente(Array $dados) {
+        $estado = $this->buscarEstado("*", "where cod_estados = '" . $dados['cod_estados'] . "'");
+        $cidade = $this->buscarCidade("*", "where cod_cidades = '" . $dados['cod_cidades'] . "'");
+        $dados['estado'] = $estado[0]['nome'];
+        $dados['cidade'] = $cidade[0]['nome'];
+        $dados['id_cliente'] = 0; //apenas para fazer o TESTE no metodo checkRazaoFantasia() 
+        if ($dados["salvar_novo_cliente"]) {
+            unset($dados["salvar_novo_cliente"]);
+            $arrayFilha[] = $this->selecionaFilha($dados);
+            if ($arrayFilha[0][1] == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
+                $arrayFilha[0][0]->setDataAdd(date('Y-m-d H:i:s'));
+                $arrayFilha[0][0]->setMostrar('1');
+                if ($this->inserirBD($arrayFilha[0][0])) {
+                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente <b>{$dados['razao_social']}</b> <b><span>Adicionado</span></b> no Sistema", "tec");
+                    $this->result = array("<b>OK!</b> Cliente <b>Adicionado</b> com sucesso.", WS_ACCEPT);
+                    return TRUE;
+                } else {
+                    $this->result = array("<b>Erro!</b> Ocorreu um erro interno ao tentar Adicionar o Cliente no sistema.", WS_ERROR);
                     return FALSE;
                 }
             } else {
@@ -159,6 +191,56 @@ class ClienteCtrl {
             if (count($nome_fantasia) > 0 && $dados['id_cliente'] <> (int) $nome_fantasia[0]->getId()) {
                 $this->result = array("<b>Ops!!</b> Nome Fantasia <b>{$dados['nome_fantasia']}</b> já cadastrado no Sistema.", WS_ERROR);
                 return TRUE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    private function selecionaFilha(Array $dados) {
+        if (empty($dados['tipo'])) { //se tipo esta embranco é PJ se existe é PF
+            $obj = new ClientePJ("", $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $flag_teste = $this->checkCNPJ($dados);
+            //$array[] = array($obj, $flag_teste);
+            return array($obj, $flag_teste);
+        } else {
+            $obj = new ClientePF("", $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $flag_teste = $this->checkCPF($dados);
+            return array($obj, $flag_teste);
+        }
+    }
+
+    /**
+     * Fazer INSERT no BD na tabela = logs
+     * @param Log $obj = passar uma Instancia deste tipo para inserir no BD
+     * @return boolean = TRUE se Sucesso ao inserir dados no BD e FALSE se houver algum problema na INSERÇÃO ou se o OBJETO não foi passado corretamente
+     */
+    private function inserirBD(Cliente $obj) {
+        $filha = get_class($obj);
+        if ($obj instanceof $filha) {
+
+            foreach ((array) $obj as $campo => $valor) {
+                $campo = str_replace("\0Cliente\0", "", $campo);
+                $campo = str_replace("\0{$filha}\0", "", $campo);
+                $campoArr[$campo] = $campo;
+            }
+                                  //  var_dump($campoArr);
+     
+            //unset($campoArr['id']);
+            $arrObj = array_values((array) $obj);
+
+            //unset($arrObj[0]);
+
+            $campoArr = implode(', ', array_keys($campoArr));
+            $valores = " '" . implode("','", array_values($arrObj)) . "' ";
+                                    //var_dump($campoArr,$valores);
+            
+            //$logDao = new LogDAO();
+
+            if ($this->clienteDao->insert($campoArr, $valores)) {
+                return TRUE;
+            } else {
+                return FALSE;
             }
         } else {
             return FALSE;
