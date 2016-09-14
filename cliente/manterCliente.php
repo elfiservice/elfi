@@ -15,6 +15,7 @@
             <tr>
                 <th>Cod.</th>
                 <th>Colaborador</th>
+                <th>Satisfação</th>
                 <th>Alterar/Excluir</th>
                 <th>Razao Social / Nome</th>
                 <th>Nome Fantasia</th>
@@ -38,16 +39,22 @@
             <?php
             $clienteCtrl = new ClienteCtrl();
             $clientes = $clienteCtrl->buscarBD("*", "Where mostrar='1'");
-           foreach ($clientes as $cliente){
+            foreach ($clientes as $cliente) {
+                if (!empty($clienteCtrl->mediaSatisfacao($cliente->getId()))) {
+                    $mostrarSatisfacao = Formatar::moedaBR($clienteCtrl->mediaSatisfacao($cliente->getId())) . '%';
+                } else {
+                    $mostrarSatisfacao = "<small><i>Não respondeu à nenhuma pesquisa até o momento</i></small>";
+                }
                 ?>
-            <tr>
-                <td><?= $cliente->getId(); ?></td>
-                <td><?= $cliente->getUsuario(); ?></td>
-                <td>                                            
-                    <form name="editar_cliente" action="tecnico.php?id_menu=editar_cliente&id_cliente=<?= $cliente->getId(); ?>&msg_erro=" method="POST" enctype="multipart/form-data">
+                <tr>
+                    <td><?= $cliente->getId(); ?></td>
+                    <td><?= $cliente->getUsuario(); ?></td>
+                    <td><?= $mostrarSatisfacao ?></td>
+                    <td>                                            
+                        <form name="editar_cliente" action="tecnico.php?id_menu=editar_cliente&id_cliente=<?= $cliente->getId(); ?>&msg_erro=" method="POST" enctype="multipart/form-data">
                             <input style="color: green; margin-bottom: 5px;" type="submit" value="Editar" name="editarClienteBtn" />
                         </form>
-                    <form name="excluir_cliente" action="tecnico.php?id_menu=excluir_cliente&id_cliente=<?= $cliente->getId(); ?>&msg_erro=" method="POST" enctype="multipart/form-data">
+                        <form name="excluir_cliente" action="tecnico.php?id_menu=excluir_cliente&id_cliente=<?= $cliente->getId(); ?>&msg_erro=" method="POST" enctype="multipart/form-data">
                             <input style="color: red;" type="submit" value="Exluir" name="excluirClienteBtn" />
                         </form>
                     </td>

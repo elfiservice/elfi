@@ -16,12 +16,8 @@ if (filter_has_var(INPUT_GET, 'id_cliente')) {
 }
 
 if (filter_has_var(INPUT_GET, 'tipo_cliente')) {
-
     $tipo_cliente = filter_input(INPUT_GET, 'tipo_cliente');
-    //var_dump($tipo_cliente);
-
     if ($tipo_cliente <> 'PJ' && $tipo_cliente <> 'PF') {
-
         WSErro('Erro na URL', E_USER_WARNING);
         exit();
     }
@@ -32,7 +28,7 @@ if (filter_has_var(INPUT_GET, 'tipo_cliente')) {
 
 
 $cliente = new ClienteCtrl();
-$clienteFinal = $cliente->buscarBD("*", "WHERE id = $id_cliente AND tipo = '$tipo_cliente' LIMIT 1");
+$clienteFinal = $cliente->buscarBD("*", "WHERE id = '$id_cliente' AND tipo = '$tipo_cliente' LIMIT 1");
 //var_dump($clienteFinal);
 $clienteFinal = $clienteFinal[0];
 
@@ -41,9 +37,9 @@ if (!$clienteFinal) {
     exit();
 }
 
-if(!empty($cliente->mediaSatisfacao($clienteFinal->getId()))){
+if (!empty($cliente->mediaSatisfacao($clienteFinal->getId()))) {
     $mostrarSatisfacao = Formatar::moedaBR($cliente->mediaSatisfacao($clienteFinal->getId())) . '% de satisfação';
-}else{
+} else {
     $mostrarSatisfacao = "<small><i>Não respondeu à nenhuma pesquisa até o momento</i></small>";
 }
 ?>
@@ -60,18 +56,22 @@ if(!empty($cliente->mediaSatisfacao($clienteFinal->getId()))){
                 <td><?php echo $clienteFinal->getRazaoSocial(); ?></td>
             </tr>
             <tr>
-                <td>CNPJ/CPF:</td>
-                <td><?php
-                    if ($tipo_cliente == "PJ") {
-                        echo $clienteFinal->getCnpj();
-                    } else {
-                        echo $clienteFinal->getCpf();
-                    }
-                    ?></td>
+
+                <?php
+                if ($tipo_cliente == "PJ") {
+                    echo "<td>CNPJ:</td><td>" . $clienteFinal->getCnpj() . "</td>";
+                } else {
+                    echo "<td>CPF:</td><td>" . $clienteFinal->getCpf() . "</td>";
+                }
+                ?>
             </tr>     
             <tr>
-                <td>IE:</td>
-                <td><?php echo $clienteFinal->getIe(); ?></td>
+                <?php
+                if ($tipo_cliente == "PJ") {
+                    echo "<td>IE:</td><td>" . $clienteFinal->getIe() . "</td>";
+                } 
+                ?>                
+ 
             </tr>                    
             <tr>
                 <td>Endereço:</td>
@@ -163,7 +163,6 @@ if(!empty($cliente->mediaSatisfacao($clienteFinal->getId()))){
             </thead>
             <tbody>
                 <?php
-
                 $valor_total = 0;
                 $nome_cliente = $clienteFinal->getRazaoSocial();
 
@@ -178,8 +177,6 @@ if(!empty($cliente->mediaSatisfacao($clienteFinal->getId()))){
                         $valor_orc = $row['vr_total_orc'];
 
                         $valor_total = $valor_total + $valor_orc;
-                        
-                                              
                         ?>
                         <TR>
                             <TD align="center"> <?= $n_orc . '.' . $ano_orc ?> </TD>
@@ -207,7 +204,7 @@ if(!empty($cliente->mediaSatisfacao($clienteFinal->getId()))){
                                     <?php
                                     if ($row['feito_pos_entreg'] == 'n') {
                                         echo"<small>Pos-venda ainda não respondida</small>";
-                                    }else{
+                                    } else {
                                         echo"<small>Pos-venda " . Formatar::moedaBR($orcCtrl->satisfacaoOrc($id_orc, $id_cliente)) . "%</small>";
                                     }
                                 } else {
