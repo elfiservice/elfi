@@ -162,6 +162,10 @@ if (!$login->checkLogin()) {
                         require './cliente/perfil.php';
                   
                     }
+                    
+                    if($menu == "enviar_email_clientes"){
+                        require './cliente/enviar_email_clientes.php';
+                    }
                     /* ------------ FIM Manter Cliente --------------- */
 
                     /* ------------- Manter Orçamentos ----------------- */

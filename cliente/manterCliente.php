@@ -3,10 +3,23 @@
     <h2>Clientes</h2>
 </div>
 <hr>
-<div style="padding-bottom: 0px;">
-    <form name="novo_cliente" action="tecnico.php?id_menu=novo_cliente" method="POST" enctype="multipart/form-data">
-        <input class="bt_incluir" type="submit" value="Novo" name="novo_cliente_btn" />
-    </form>
+<div style="padding-bottom: 0px;" class="alinhamentoHorizontal">
+    <ul>
+        <li>
+            <form name="novo_cliente" action="tecnico.php?id_menu=novo_cliente" method="POST" enctype="multipart/form-data">
+                <input class="bt_incluir" type="submit" value="Novo" name="novo_cliente_btn" />
+            </form>
+        </li>
+        <?php
+        if ($userlogin->getId_colaborador() == 1) {
+            ?>
+            <li>
+                <form name="enviar_email_clientes" action="tecnico.php?id_menu=enviar_email_clientes" method="POST" enctype="multipart/form-data">
+                    <input class="bt_incluir" type="submit" value="Enviar Email Clientes" name="enviar_email_clientes_btn" />
+                </form>
+            </li>   
+        <?php } ?>
+    </ul>
 </div>
 <hr>
 <div id="demo">
