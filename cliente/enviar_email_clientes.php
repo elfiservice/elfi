@@ -3,11 +3,18 @@
 </div>
 <hr>
 
-<?php require 'includes/javascripts/editor_texto.php'; 
+<?php
+require 'includes/javascripts/editor_texto.php';
+if (filter_has_var(INPUT_POST, "enviar_emails_submit")) {
+    $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-$dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-var_dump($dados);
-
+        unset($dados['enviar_emails_submit']);
+        var_dump($dados);
+        
+        $emal = new EmailGenerico(array("elfiservice@hotmail.com"), "Enviando Email todos Clientes", $dados['editorEnviaEmailTodosClientes'], array(), array(), NULL);
+        $emal->enviarEmailSMTP();
+ 
+}
 ?>
 
 <form action="" method="post" enctype="multipart/form-data" name="formEnviaEmailClientes">
