@@ -131,6 +131,65 @@ class ClienteCtrl {
         }
     }
 
+    public function enviarEmailTodosClientes(Array $dados) {
+        //$ano_orc = date('Y');
+        $clientes = $this->buscarBD("*", "WHERE mostrar = '1' ");
+
+        $count = 0;
+        $count2 = 0;
+        $countErro = 0;
+        $textoCorpoErro = "";
+        foreach ($clientes as $row) {
+
+            if (!$row->getEmailTec() == null) {
+                $count2++;
+                echo $count2."<br>";
+                if ($count2 == 5) {
+                    sleep(2);
+                    $count2 = 0;
+                }
+                //$emailTo = array($listaEmails);
+                $emailTo = array($row->getEmailTec(), $row->getEmail_adm_fin());
+                $assunto = $dados['assunto'];
+                $mensagem = $dados['mensagem'];
+                $textoCorpo = "<div>Olá, <b>{$row->getRazaoSocial()}</b>, lembramos de você. </div><br> <div>{$mensagem}</div>";
+
+                $emailCopiaOculta = array();
+                //$emailCopiaOculta = array(EMAIL_ADMIN);
+                $email2 = new EmailGenerico($emailTo, $assunto, $textoCorpo, array(), $emailCopiaOculta);
+
+                if ($email2->enviarEmailSMTP()) {
+                    $count++;
+                    echo "OK => {$count}<br>";
+                } else {
+                    $countErro++;
+                    $textoCorpoErro .= "- {$row->getId()} == {$row->getRazaoSocial()} == {$row->getEmailTec()}<br>";
+                    echo "ERROr => {$row->getId()} - {$row->getRazaoSocial()}<br>";
+                }
+            }
+        }
+
+
+        $emailTo = array(EMAIL_ADMIN);
+        $assunto = "Relatorio Envio Email Todos Clientes";
+
+        $textoCorpo = "Enviado Email para <b>{$count}</b> clientes, com a seguinte mensagem: <br> <b>{$mensagem}</b> <br>";
+        if ($countErro > 0) {
+            $textoCorpo .= "Houve(ram) {$countErro} erro(s) ao tentar Enviar: <br> {$textoCorpoErro} <br>";
+        }
+
+        $emailCopiaOculta = array($listaEmails);
+        //$emailCopiaOculta = array(EMAIL_ADMIN);
+        $email2 = new EmailGenerico($emailTo, $assunto, $textoCorpo, array(), $emailCopiaOculta, 1);
+
+        if ($email2->enviarEmailSMTP()) {
+            echo "OK => Envio Relatorio!<br>";
+            LogCtrl::inserirLog(0, $textoCorpo, "ad");
+        } else {
+            echo "ERROr => No Envio do Relatorio !<br>";
+        }
+    }
+
     //--------------------------------------------------
     //----------------PRIVATES---------------------
     //--------------------------------------------------
@@ -224,8 +283,7 @@ class ClienteCtrl {
                 $campo = str_replace("\0{$filha}\0", "", $campo);
                 $campoArr[$campo] = $campo;
             }
-                                  //  var_dump($campoArr);
-     
+            //  var_dump($campoArr);
             //unset($campoArr['id']);
             $arrObj = array_values((array) $obj);
 
@@ -233,8 +291,7 @@ class ClienteCtrl {
 
             $campoArr = implode(', ', array_keys($campoArr));
             $valores = " '" . implode("','", array_values($arrObj)) . "' ";
-                                    //var_dump($campoArr,$valores);
-            
+            //var_dump($campoArr,$valores);
             //$logDao = new LogDAO();
 
             if ($this->clienteDao->insert($campoArr, $valores)) {
