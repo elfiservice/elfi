@@ -99,7 +99,6 @@ class Login extends Conexao {
         if (!session_id()) {
             session_start();
         }
-        var_dump($this->result);
 
         $_SESSION['userlogin'] = $this->result;
         //var_dump($_SESSION['userlogin']);

@@ -1,6 +1,8 @@
 <?php
 require ('./classes/Config.inc.php');
-session_start();
+if (!session_id()) {
+    session_start();
+}
 
 $login = new Login();
 if (!$login->checkLogin()) {
@@ -40,7 +42,7 @@ if (!$login->checkLogin()) {
                 <?php require './includes/colaborador_logado.inc.php'; ?>
             </div>
             <div style="float: right">
-                    <?php require './includes/menu_geral.inc.php'; ?>
+                <?php require './includes/menu_geral.inc.php'; ?>
             </div>
         </div>
         <div style="margin:60px 0px 0px 0px;">
@@ -63,6 +65,6 @@ if (!$login->checkLogin()) {
 
                 </tbody>
             </table>
- </div>
+        </div>
     </body>
 </html>

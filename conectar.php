@@ -1,7 +1,26 @@
 <?php
-
 include './classes/Config.inc.php';
+if (!session_id()) {
+    session_start();
+}
+$login = new Login();
 
+
+
+$dataLogin = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+if (!empty($dataLogin['logar'])) {
+    $login->exeLogin($dataLogin);
+
+    if (!$login->getResult()) {
+        WSErro($login->getError()[0], $login->getError()[1]);
+    } else {
+        header('Location: index.php');
+    }
+}
+
+if ($login->checkLogin()) {
+    header('Location: index.php');
+}
 ?>
 
 <!doctype html>
@@ -28,27 +47,6 @@ include './classes/Config.inc.php';
         <div >
             <h2 style="text-align: center;" >Acesso ao Sistema Integrado da ELFI SERVICE para os Colaboradores  </h2>
         </div>
-        <?php
-        session_start();
-        $login = new Login();
-
-        if ($login->checkLogin()) {
-            header('Location: index.php');
-        }
-
-        $dataLogin = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        if (!empty($dataLogin['logar'])) {
-            $login->exeLogin($dataLogin);
-
-            if (!$login->getResult()) {
-                WSErro($login->getError()[0], $login->getError()[1]);
-            } else {
-                header('Location: index.php');
-            }
-        }
-
-        ?>
-
         <form name="AdminLoginForm" action="" method="post">
             <table align="center">
                 <tr>

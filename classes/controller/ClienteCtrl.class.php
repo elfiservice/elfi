@@ -113,6 +113,7 @@ class ClienteCtrl {
         $dados['id_cliente'] = 0; //apenas para fazer o TESTE no metodo checkRazaoFantasia() 
         if ($dados["salvar_novo_cliente"]) {
             unset($dados["salvar_novo_cliente"]);
+            
             $arrayFilha[] = $this->selecionaFilha($dados);
             if ($arrayFilha[0][1] == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
                 $arrayFilha[0][0]->setDataAdd(date('Y-m-d H:i:s'));
@@ -258,12 +259,12 @@ class ClienteCtrl {
 
     private function selecionaFilha(Array $dados) {
         if (empty($dados['tipo'])) { //se tipo esta embranco é PJ se existe é PF
-            $obj = new ClientePJ("", $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $obj = new ClientePJ($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
             $flag_teste = $this->checkCNPJ($dados);
             //$array[] = array($obj, $flag_teste);
             return array($obj, $flag_teste);
         } else {
-            $obj = new ClientePF("", $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $obj = new ClientePF($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
             $flag_teste = $this->checkCPF($dados);
             return array($obj, $flag_teste);
         }
