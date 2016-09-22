@@ -229,7 +229,7 @@ class OrcamentoCtrl {
 
             if ($this->OrcDao->insert($camposBd, $valores)) {
 
-                LogCtrl::inserirLog($orcamentoObj->getId_colab(), "Adicionado <b>novo</b> Orcamento <b>{$orcamentoObj->getNOrc()}.{$orcamentoObj->getAnoOrc()}</b>", "tec");
+                LogCtrl::inserirLog($orcamentoObj->getId_colab(), "Adicionado <b>novo</b> Orcamento <a href=\"#\" onclick=\"window.open(\'orcamento/imprimir_orc.php?id_orc={$this->OrcDao->lastID()}\', \'Pagina\', \'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10\');\"><b>{$orcamentoObj->getNOrc()}.{$orcamentoObj->getAnoOrc()}</b></a>", "tec");
 
                 $this->result = true;
             } else {

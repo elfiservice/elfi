@@ -211,14 +211,14 @@ alert ("Orçamento adicionado com Sucesso!");
 </script>
     
 
-<a href="imprimir_orc.php?id_orc=//<?php echo $id_orc; ?>" target="_blank">Imprimir</a><br>
+<a href="imprimir_orc.php?id_orc=//<?php //echo $id_orc; ?>" target="_blank">Imprimir</a><br>
 <a href="tecnico.php" target="_self">Voltar</a-->
 
 <!--meta http-equiv="refresh" content="1;url=javascript:history.back()" -->
 
 <!--script language= "JavaScript">
 
-location.href="imprimir_orc.php?id_orc=//<?php echo $id_orc; ?>"
+location.href="imprimir_orc.php?id_orc=//<?php //echo $id_orc; ?>"
 
 </script-->
 <?php

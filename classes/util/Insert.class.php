@@ -11,6 +11,7 @@ class Insert extends Conexao {
     private $sql;
     private $resultado;
     private $conexao;
+    private $last_id;
 
     /**
      * Executa o INSERT
@@ -31,6 +32,10 @@ class Insert extends Conexao {
     public function getResultado() {
         return $this->resultado;
     }
+    
+    public function getInsertID() {
+        return $this->last_id;
+    }
 
     private function conectarBD() {
         $this->conexao = parent::getConn();
@@ -39,6 +44,7 @@ class Insert extends Conexao {
     private function executar() {
         $this->conectarBD();
         $this->sql = $this->conexao->query($this->select);
+        $this->last_id = mysqli_insert_id($this->conexao);
         //var_dump($this);
         if ($this->sql) {
             $this->resultado = true;
