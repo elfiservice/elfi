@@ -22,7 +22,7 @@
 
         $count = 1;
         foreach ($notificacoes as $key => $log) {
-           // echo $log->getId();
+            // echo $log->getId();
             if ($count % 2 == 0) {
                 $class = " class=\"opposite-side\" ";
             } else {
@@ -49,18 +49,22 @@
             </li>
 
             <?php
-            
             $notiCtrl->setarVisualizacao($log, $id_colab_logado);
         }
+
+
+        if (!empty($notificacoes)) {
+            $notiCtrl->setDataAtual($id_colab_logado);
+        }
         ?>
-<!--        <li class="j_insert">       </li>-->
+        <!--        <li class="j_insert">       </li>-->
 
     </ul>
     <!--    <div class="j_insert"></div>-->
-<!--    <div class="centro">
-        <a rel="j_list" class="j_load loadmore">Carregar mais</a>
-        <img class="form_load" src="imagens/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
-    </div>-->
+    <!--    <div class="centro">
+            <a rel="j_list" class="j_load loadmore">Carregar mais</a>
+            <img class="form_load" src="imagens/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
+        </div>-->
 </div>
 <script src="js/jquery.js"></script>     
 <script src="js/timeline.js"></script>    
