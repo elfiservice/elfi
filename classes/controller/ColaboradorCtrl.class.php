@@ -72,7 +72,6 @@ class ColaboradorCtrl {
         $senha_nova = $dados['passnova'];
         $senha_nova2 = $dados['passnova2'];
         $id_user = $dados['id_user'];
-
         if ((!$senha_atual) || (!$senha_nova) || (!$senha_nova2)) {
 
             return WSErro("Favor preencher todos os campos!", WS_ERROR);
@@ -80,13 +79,20 @@ class ColaboradorCtrl {
             return WSErro("Senha atual incorreta!", WS_ERROR);
         } else if ($senha_nova <> $senha_nova2) {
             return WSErro("Senha nova 1 e 2 são diferentes! Favor digitar novamente.", WS_ERROR);
-            //mysql_query("UPDATE colaboradores SET tipo = '$tipo_conta_user' WHERE id_colaborador ='$id_user'");
         } else {
             $senha_nova_md5 = md5($senha_nova);
             $obj = new Colaborador($id_user, "", $senha_nova_md5, "", "", "", "", "");
             if ($this->atualizarBD($obj)) {
-                
-                return WSErro("Atualizada a senha com sucesso!.", WS_ACCEPT);
+                //$userlogin->getEmail()
+                $textoCorpo = "<div> <p>Senha alterada com sucesso, segue abaixo:</p></div> <div> <p>Login: {$userlogin->getEmail()} <br> Nova Senha: <b>{$senha_nova}</b> </p></div>";
+                $email = new EmailGenerico(array($userlogin->getEmail()), "Senha Alterada no Sistema", $textoCorpo, array(), array(), 1);
+                if($email->enviarEmailSMTP()){
+                    $textoWSerro = "Atualizada a senha com sucesso!<br>Foi enviado um Email com seus novos dados.";
+                }else{
+                    $textoWSerro = "Atualizada a senha com sucesso!<br>Ops! Ocorreu um Erro ao tentar enviar um Email com seus novos dados.";
+                }
+              
+                return WSErro($textoWSerro, WS_ACCEPT);
             } else {
                 return WSErro("Ocorreu algum erro ao tentar Atualizar, favor tentar novamente!.", WS_ERROR);
             }
