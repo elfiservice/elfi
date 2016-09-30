@@ -90,15 +90,14 @@ $data_hj = date('Y-m-d');
 
 <fieldset>
     <legend><b>Histórico</b></legend>
-
     <TABLE  class="display" id="example2">
         <thead>
             <TR>
-                <TH></TH>
+                <th>Cod.</th>
                 <TH>Data</TH>
+                <TH>Manter</TH>
                 <TH>Descrição</TH>
                 <TH>Colaborador</TH>
-
             </TR>
         </thead>
         <tbody>
@@ -108,26 +107,25 @@ $data_hj = date('Y-m-d');
             if ($histoORc) {
                 foreach ($histoORc as $row) {
                     ?>
-                    <tr>
-                        <td class="center">
-                            <a class="bt_link bt_verde" href="tecnico.php?id_menu=editar_historico_orc_aprovado&id_historico=<?= $row['id'] ?>" >editar</a>
-                            <hr>
-                            <a class="bt_link bt_vermelho" href="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $row['id'] ?>">excluir</a>
-                        </td>
-
+            <tr >
+                        <td><?php echo $row['id']; ?></td>
                         <td><?= Formatar::formatarDataSemHora($row['data']) ?></td>
+                        <td class="center">
+                            <?php
+                            if ($row['id_colab'] == $_SESSION['id']) {
+                                ?>
+                                <a class="bt_link bt_verde" href="tecnico.php?id_menu=editar_historico_orc_aprovado&id_historico=<?= $row['id'] ?>" >editar</a>
+                                <hr>
+                                <a class="bt_link bt_vermelho" href="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $row['id'] ?>">excluir</a>
+                            <?php } ?>
+                        </td>
                         <td><?php echo $row['descricao']; ?></td>
                         <td><?php echo $row['colaborador']; ?></td>
-
-
                     </tr>
-
-
                     <?php
                 }
             }
             ?>
-
         </tbody>
     </TABLE>
 </fieldset>	
