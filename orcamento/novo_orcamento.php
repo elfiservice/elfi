@@ -33,9 +33,9 @@
 
     function formCheck(formobj) {
         // Enter name of mandatory fields
-        var fieldRequired = Array("razao_social", "endereco", "city", "tel", "razao_social2", "endereco2", "city2", "tel2", "descricao_servicos", "execucao_orc", "validade_orc", "pagamento_orc", "duvida_orc", "sum_vr_servico_orc", "atividade1", "classificacao1", "unidade1", "quantidade1", "contato_clint");
+        var fieldRequired = Array("razao_social", "endereco", "city", "tel", "email_orc2", "descricao_servicos", "execucao_orc", "validade_orc", "pagamento_orc", "duvida_orc", "sum_vr_servico_orc", "atividade1", "classificacao1", "unidade1", "quantidade1", "contato_clint");
         // Enter field description to appear in the dialog box
-        var fieldDescription = Array("Razão Social  do Contratante", "Endereço do Contratante", "Cidade do Contratante", "Telefone ou Celular do contratante", "Razão Social  da obra", "Endereço da obra", "Cidade da obra", "Telefone ou Celular da obra", "Descrição dos serviços", "Prazo de execução", "Validade do orçamento", "Condições de pagamento", "Dúvidas", "Valor do serviço", "Atividade do serviço", "Classificação", "Unidade", "quantidade", "Nome de contato do cliente");
+        var fieldDescription = Array("Razão Social  do Contratante", "Endereço do Contratante", "Cidade do Contratante", "Telefone ou Celular do contratante", "Email da obra", "Descrição dos serviços", "Prazo de execução", "Validade do orçamento", "Condições de pagamento", "Dúvidas", "Valor do serviço", "Atividade do serviço", "Classificação", "Unidade", "quantidade", "Nome de contato do cliente");
         // dialog message
         var alertMsg = "Por favor completar os campos:\n";
 

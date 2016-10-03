@@ -232,7 +232,7 @@ $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 1");
                     </td>
            </tr> 
                 <?php
-                if ($razao_obra == "") {
+                if ($email_obra == "" && $razao_obra == "") {
                     ?>
 
                     <tr  style = "border-style: solid; border-width: 1px;" >
@@ -259,7 +259,7 @@ $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 1");
                             </div>
                         </td>
                         <Td colspan="4" width="1000">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                <?php echo $razao_obra; ?>
+                                <?=  $razao_obra; ?>
                             </div>
                         </td>
                         <td width="50"> <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
