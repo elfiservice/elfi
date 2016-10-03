@@ -252,9 +252,9 @@ class OrcamentoCtrl {
 
 
         if ($this->OrcDao->insert($camposBd, $valoresUser, $tabela)) {
-
+            
             $orc = $this->buscarOrcamentoPorId("*", "WHERE id = '$valores[0]' ");
-            LogCtrl::inserirLog($valores[3], "Adicionado <b>Historico</b> no orcamento <b>aprovado</b> <b>{$orc->getNOrc()}.{$orc->getAnoOrc()}</b>", "tec");
+            LogCtrl::inserirLog($valores[3], "Adicionado <b>Historico</b> no orcamento <b>aprovado</b> <a href=\"?id_menu=hitorico_orc_aprovado&id_orc={$orc->getId()}#{$this->OrcDao->lastID()}\"<b>{$orc->getNOrc()}.{$orc->getAnoOrc()}</b></a>", "tec");
             return TRUE;
         } else {
             return FALSE;

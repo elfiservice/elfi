@@ -108,7 +108,7 @@ $data_hj = date('Y-m-d');
                 foreach ($histoORc as $row) {
                     ?>
             <tr >
-                        <td><?php echo $row['id']; ?></td>
+                <td><div id="<?= $row['id']; ?>"></div><?php echo $row['id']; ?></td>
                         <td><?= Formatar::formatarDataSemHora($row['data']) ?></td>
                         <td class="center">
                             <?php
