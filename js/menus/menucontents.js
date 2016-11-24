@@ -37,6 +37,7 @@ var cadastro_configuracao={divclass:'anylinkmenucols', inlinestyle:'', linktarge
 cadastro_configuracao.cols={divclass:'column', inlinestyle:''} //menu.cols if defined creates columns of menu links segmented by keyword "efc"
 cadastro_configuracao.items=[
 	["Controle Tipo de Conta", "configuracao.php?id_menu=controle_tipo_conta"],
+        ["Cadastrar Novo", "configuracao.php?id_menu=cadastro_usuario"],
         ["Alterar Senha", "configuracao.php?id_menu=trocar_senha"]
 	
 ]

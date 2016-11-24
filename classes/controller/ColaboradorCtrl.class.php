@@ -13,6 +13,41 @@ class ColaboradorCtrl {
         $this->ColaboradorDao = new ColaboradorDAO();
     }
 
+        /**
+     * Fazer INSERT no BD na tabela = colaboradores
+     * @param Colaborador $Obj = passar uma Instancia deste tipo para inserir no BD
+     * @return boolean = TRUE se Sucesso ao inserir dados no BD e FALSE se houver algum problema na INSERÇÃO ou se o OBJETO não foi passado corretamente
+     */
+    public function inserirBD(Colaborador $Obj) {
+        if ($Obj instanceof Colaborador) {
+
+            foreach ((array) $Obj as $campo => $valor) {
+
+                $campo = str_replace("\0Colaborador\0", "", $campo);
+                $campo = str_replace("\0Usuario\0", "", $campo);
+                $campoArr[$campo] = $campo;
+            }
+
+//            unset($campoArr['id']);
+            $arrObj = array_values((array) $Obj);
+//            unset($arrObj[0]);
+            
+
+            $campoArr = implode(', ', array_keys($campoArr));
+            $valores = " '" . implode("','", array_values($arrObj)) . "' ";
+//            var_dump($valores);
+//die;
+            if ($this->ColaboradorDao->insert($campoArr, $valores)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    
     /**
      * Fazer SELECT no BD na tabela = <b>colaboradores</b>
      * @param string $campos = Campos do BD a serem pesquisados
