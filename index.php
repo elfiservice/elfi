@@ -31,13 +31,14 @@ if (!$login->checkLogin()) {
         <link rel="stylesheet" href="estilos.css">    
 
         <script src="js/jquery.min.js" type="text/javascript"></script>
-
+        <!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+        <link rel="stylesheet" href="css/w3.css">
     </head>
     <body>
         <div  style="background: url(imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;">
         </div>
         <h2 style="text-align: center;" >   Painel Central  </h2>
-        <div style="">
+        <div class="w3-container" style="">
             <div id="colaborador_logado">
                 <?php require './includes/colaborador_logado.inc.php'; ?>
             </div>
@@ -45,26 +46,40 @@ if (!$login->checkLogin()) {
                 <?php require './includes/menu_geral.inc.php'; ?>
             </div>
         </div>
-        <div style="margin:60px 0px 0px 0px;">
-            <h3 style="text-align: center;"> Escolha o Setor </h3>
-            <br></br>
-            <table border="0" cellspacing="2"  align="center" CELLPADDING="5">
-                <thead>
-                    <tr align="center">
-<!--                        <th><a href="financeiro.php?id_menu=#">Administrativo / Financeiro</a></th>-->
-                        <th><a href="tecnico.php?id_menu=timeline">Técnico</a></th>
-<!--                        <th><a href="rh.php">Pessoal / RH</a></th>-->
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr align="center" >
-<!--                        <td><a href="financeiro.php?id_menu=#"> <img src="imagens/finance.jpg" > </a></td>-->
-                        <td><a href="tecnico.php?id_menu=timeline"> <img src="imagens/tecnico.jpg" > </a></td>
-<!--                        <td><a href="rh.php"> <img src="imagens/rh.jpg" > </a></td>-->
-                    </tr>
 
-                </tbody>
-            </table>
-        </div>
+
+
+        <section class="w3-container">
+            <div class="w3-content">
+            <h3 style="text-align: center;"> Escolha o Setor </h3>
+            <div class="w3-row">
+                <div class="w3-col w3-margin-right  m4 l3 w3-card-2 w3-white">
+                    <a href="tecnico.php?id_menu=timeline"> 
+                        <img width="100%" src="imagens/tecnico.jpg" > 
+                        <div class="w3-container w3-center">
+                            <p>
+                                Técnico
+                            </p>
+                        </div>      
+
+                    </a>
+                </div>
+
+                <div class="w3-col m4 l3 w3-card-2 w3-margin-right w3-white">
+                    <a href="rh.php?id_menu=timeline"> 
+                        <img width="100%" src="imagens/tecnico.jpg" > 
+                        <div class="w3-container w3-center">
+                            <p>
+                                RH
+                            </p>
+                        </div>      
+                    </a>
+                </div>
+
+            </div>
+            </div>
+        </section>
+
+
     </body>
 </html>
