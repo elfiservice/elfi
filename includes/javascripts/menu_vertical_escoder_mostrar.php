@@ -6,7 +6,7 @@ Inicio menu colaps (esconder ou mostrar) Vertical
 -->
 <script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-		<script type="text/javascript" src="<?=$www?>/js/esconder_mostrar/ddaccordion.js">
+		<script type="text/javascript" src="<?= $www ?>/js/esconder_mostrar/ddaccordion.js">
 
 		/***********************************************
 		 * Accordion Content script- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
@@ -55,7 +55,7 @@ ddaccordion.init({
 	onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
 		//do nothing
 	}
-})
+});
 
 </script>
 <!--

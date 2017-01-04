@@ -28,8 +28,8 @@ $orcCtrl = new OrcamentoCtrl();
 
 
     <fieldset  >
-        <legend class="mypets">Programados</legend>
-        <div class="thepet" >
+        <legend class="mypetsx">Programados</legend>
+        <div class="thepetx" >
             <TABLE  class="display" id="example2">
                 <thead>
                     <TR>
@@ -99,8 +99,8 @@ $orcCtrl = new OrcamentoCtrl();
 
 
     <fieldset>
-        <legend class="mypets">Em Execução</legend>
-        <div class="thepet" >
+        <legend class="mypetsx">Em Execução</legend>
+        <div class="thepetx" >
             <TABLE  class="display" id="example">
                 <thead>
                     <TR>
@@ -177,9 +177,9 @@ $orcCtrl = new OrcamentoCtrl();
 
 
     <fieldset>
-        <legend class="mypets">Aguardando Programação</legend>
-        <div class="thepet" >
-            <TABLE  class="display" id="example3">
+        <legend class="mypetsx">Aguardando Programação</legend>
+        <div class="thepetx" >
+            <TABLE  class="displayx" id="example3">
 
                 <thead>
                     <TR>

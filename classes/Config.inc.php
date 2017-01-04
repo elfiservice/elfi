@@ -1,8 +1,8 @@
 <?php
 //DEFINE A BASE DO SITE ###################
-$www = "http://localhost/elfi";
+$www = "https://localhost/elfi";
 //$www = "http://elfiservice.eco.br/colaboradores";
-define('WWW', 'http://localhost/elfi');
+define('WWW', 'https://localhost/elfi');
 //define('WWW', 'http://elfiservice.eco.br/colaboradores');
 
 
