@@ -1,8 +1,8 @@
 <?php
 //DEFINE A BASE DO SITE ###################
-$www = "http://localhost/site%20ELFI/colaboradores";
+$www = "http://localhost/elfi";
 //$www = "http://elfiservice.eco.br/colaboradores";
-define('WWW', 'http://localhost/site%20ELFI/colaboradores');
+define('WWW', 'http://localhost/elfi');
 //define('WWW', 'http://elfiservice.eco.br/colaboradores');
 
 
@@ -11,7 +11,7 @@ define('WWW', 'http://localhost/site%20ELFI/colaboradores');
 define('HOST', 'localhost');  //via RunTime = em tempo de execução
 define('USER', 'root');
 define('PASS', '');
-define('DBSA', 'elfiserv_sistema_elfi');
+define('DBSA', 'sistema_elfi');
 //Dados do ADMIN
 define('NOME_ADMIN', 'Armando Jr.');
 define('EMAIL_ADMIN', 'junior@elfiservice.com.br');
