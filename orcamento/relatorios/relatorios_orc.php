@@ -112,7 +112,10 @@ $orcCrtl = new OrcamentoCtrl();
 
                     $mes_atual = date('m');
 
-                    if ($i > $mes_atual) {
+                    if ($ano_orc_selec < date('Y')) {
+                        $orc_por_mes = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_adicionado_orc)  = '$i' AND YEAR(data_adicionado_orc) = '$ano_orc_selec' ");
+                        $n_orc_feitos_no_mes = count($orc_por_mes);
+                    } else if ($i > $mes_atual) {
 
                         $n_orc_feitos_no_mes = 0;
                     } else {
@@ -153,7 +156,7 @@ $orcCrtl = new OrcamentoCtrl();
             </tbody>
         </TABLE>	
     </fieldset>
-    
+
     <fieldset>
         <legend>Orçamentos Totais Por Ano: <span style="color: red;"><?= $ano_orc_selec ?></span></legend>
         <div class="col-md-3" >
