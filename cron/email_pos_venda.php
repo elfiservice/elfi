@@ -3,24 +3,25 @@
 include '../classes/Config.inc.php';
 
 $ano_orc = date('Y');
-$orcCrtl = new OrcamentoCtrl();
+   $OrcCtrl = new OrcamentoCtrl();
 
-$anosOrcamentosArr = $orcCrtl->buscarOrcamentos("DISTINCT ano_orc", "ORDER BY ano_orc DESC");
+$anosOrcamentosArr = $OrcCtrl->buscarOrcamentos("DISTINCT ano_orc", "ORDER BY ano_orc DESC");
 foreach ($anosOrcamentosArr as $orc => $l) {
 
     $ano_orc = $l['ano_orc'];
 
 
 
-    $OrcCtrl = new OrcamentoCtrl();
+ 
     $orcamentos = $OrcCtrl->buscarOrcamentos("*", "WHERE ano_orc = '$ano_orc' AND situacao_orc = 'concluido' AND serv_concluido = 's' AND feito_pos_entreg = 'n' ORDER BY id  DESC");
     $count = 0;
     $countErr = 0;
     if(empty($orcamentos)){
         echo"Não tem Orçamentos para o Ano de {$ano_orc}<br>";
     }else{
+        echo"Orçamentos para o Ano de {$ano_orc}<br>";
     foreach ($orcamentos as $row) {
-echo"Orçamentos para o Ano de {$ano_orc}<br>";
+
         $data_inicial = $row ['data_conclusao'];
         $data_final = date('y-m-d');
         $dias = Formatar::diffDuasDatas($data_inicial, $data_final);
