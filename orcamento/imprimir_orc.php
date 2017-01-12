@@ -19,7 +19,7 @@ if (empty($id_orcamento)) {
 }
 
 $empresaCtrl = new EmpresaCtrl();
-$empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 1");
+$empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
 ?>
 
 <!doctype html>
