@@ -89,25 +89,50 @@ $orcCrtl = new OrcamentoCtrl();
                 for ($i = 1; $i <= 12; $i++) {
 
 
-//consulta Nºde ORC aprovados no mes 
+//consulta Nºde ORC Feitos no mes 
                     $orcs_aguardando = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_adicionado_orc) = '$i' AND YEAR(data_adicionado_orc) = '$ano_orc_selec' AND situacao_orc LIKE 'Aguardando aprovação'  ");
                     $n_linhas_orc_aguardando = count($orcs_aguardando);
 
 //consulta Nºde ORC aprovados no mes 
                     $orcs_aprovados = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_aprovada) = '$i' AND YEAR(data_aprovada) = '$ano_orc_selec' ");
                     $n_linhas_orc_aprovados = count($orcs_aprovados);
+                    $vr_acumulado_orc_aprovado = 0;
+                    if (!empty($orcs_aprovados)) {
+                        foreach ($orcs_aprovados as $orcs) {
+                            $vr_acumulado_orc_aprovado += (int) $orcs["vr_total_orc"];
+//                            echo (int) $orcs["vr_total_orc"] . " <br>";
+                        }
+                    }
 
 //consulta Nºde ORC cancelados no mes 
                     $orcs_cancelados = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_ultima_alteracao) = '$i' AND YEAR(data_ultima_alteracao) = '$ano_orc_selec' AND situacao_orc LIKE 'Cancelado' ");
                     $n_linhas_orc_cancelados = count($orcs_cancelados);
+                    $vr_acumulado_orc_cancelados = 0;
+                    if (!empty($orcs_cancelados)) {
+                        foreach ($orcs_cancelados as $orcs) {
+                            $vr_acumulado_orc_cancelados += (int) $orcs["vr_total_orc"];
+                        }
+                    }
 
 //consulta Nºde ORC Perdidas no mes 
                     $orcs_Perdidas = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_ultima_alteracao) = '$i' AND YEAR(data_ultima_alteracao) = '$ano_orc_selec' AND situacao_orc LIKE 'Perdido' ");
                     $n_linhas_orc_Perdidas = count($orcs_Perdidas);
+                    $vr_acumulado_orc_perdidos = 0;
+                    if (!empty($orcs_Perdidas)) {
+                        foreach ($orcs_Perdidas as $orcs) {
+                            $vr_acumulado_orc_perdidos += (int) $orcs["vr_total_orc"];
+                        }
+                    }                    
 
 //consulta Nºde ORC CONCLUIDOS no mes 
                     $orcs_concluidos = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_conclusao) = '$i' AND YEAR(data_conclusao) = '$ano_orc_selec' AND situacao_orc LIKE 'concluido' ");
                     $n_linhas_orc_concluidos = count($orcs_concluidos);
+                    $vr_acumulado_orc_concluidos = 0;
+                    if (!empty($orcs_concluidos)) {
+                        foreach ($orcs_concluidos as $orcs) {
+                            $vr_acumulado_orc_concluidos += (int) $orcs["vr_total_orc"];
+                        }
+                    }                     
 
 
                     $mes_atual = date('m');
@@ -140,10 +165,10 @@ $orcCrtl = new OrcamentoCtrl();
                     <tr align="center">
                         <td  class="indiceTabelaComum"><?= $i ?></td>
                         <td> <?= $n_orc_feitos_no_mes ?></td>
-                        <td> <?= $n_linhas_orc_aprovados . " - (" . number_format($em_porcentagem, 2, '.', '') . "%)" ?></td>
-                        <td> <?= $n_linhas_orc_cancelados . " - (" . number_format($em_porcentagem_Can, 2, '.', '') . "%)" ?></td>
-                        <td> <?= $n_linhas_orc_Perdidas . " - (" . number_format($em_porcentagem_perd, 2, '.', '') . "%)" ?></td>
-                        <td> <?= $n_linhas_orc_concluidos . " - (" . number_format($em_porcentagem_conc, 2, '.', '') . "%)" ?></td>
+                        <td> <?= $n_linhas_orc_aprovados . " - (" . number_format($em_porcentagem, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_aprovado, '2','.',',') ?></td>
+                        <td> <?= $n_linhas_orc_cancelados . " - (" . number_format($em_porcentagem_Can, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_cancelados, '2','.',',')  ?></td>
+                        <td> <?= $n_linhas_orc_Perdidas . " - (" . number_format($em_porcentagem_perd, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_perdidos, '2','.',',')  ?></td>
+                        <td> <?= $n_linhas_orc_concluidos . " - (" . number_format($em_porcentagem_conc, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_concluidos, '2','.',',')  ?></td>
                     </tr>
                     <?php
                     $total = $total + $n_linhas_orc_aprovados;

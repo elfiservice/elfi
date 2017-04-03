@@ -82,6 +82,8 @@ $nome_arquivo = "rh";
 
                     if (file_exists($includepatch)):
                         require_once($includepatch);
+                    elseif($menu == "timeline"):
+                        require_once (__DIR__ . DIRECTORY_SEPARATOR . 'timeline.php');
                     else:
                         echo "<div class=\"content notfound\">";
                         WSErro("<b>Erro ao incluir tela:</b> Erro ao incluir o controller /{$menu}.php!", WS_ERROR);
