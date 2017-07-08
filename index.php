@@ -12,6 +12,9 @@ if (!$login->checkLogin()) {
 }
 
 //var_dump($_SESSION);
+$menu = filter_input(INPUT_GET, 'modulo', FILTER_DEFAULT);
+
+$nome_arquivo = basename($_SERVER['PHP_SELF'], '.php');
 ?>
 
 <!doctype html>
@@ -47,38 +50,62 @@ if (!$login->checkLogin()) {
             </div>
         </div>
 
+        <?php
+        //QUERY STRING
+        if (!empty($menu)):
+            //$includepatch = __DIR__ . DIRECTORY_SEPARATOR . 'modulos' . DIRECTORY_SEPARATOR . strip_tags(trim($menu)) . '/index.php';
+        header('Location: ' . DIRECTORY_SEPARATOR . 'modulos' . DIRECTORY_SEPARATOR . strip_tags(trim($menu)));
+        else:
+            //$includepatch = __DIR__ . DIRECTORY_SEPARATOR . $nome_arquivo . '.php';
+            //$includepatch = "";
+            ?>
+            <section class="w3-container">
+                <div class="w3-content">
+                    <h3 style="text-align: center;"> Escolha o Setor </h3>
+                    <div class="w3-row">
+                        <div class="w3-col w3-margin-right  m4 l3 w3-card-2 w3-white">
+                            <a href="modulos/tecnico/?id_menu=timeline"> 
+                                <img width="100%" src="imagens/tecnico.jpg" > 
+                                <div class="w3-container w3-center">
+                                    <p>
+                                        Técnico
+                                    </p>
+                                </div>      
 
+                            </a>
+                        </div>
 
-        <section class="w3-container">
-            <div class="w3-content">
-            <h3 style="text-align: center;"> Escolha o Setor </h3>
-            <div class="w3-row">
-                <div class="w3-col w3-margin-right  m4 l3 w3-card-2 w3-white">
-                    <a href="tecnico.php?id_menu=timeline"> 
-                        <img width="100%" src="imagens/tecnico.jpg" > 
-                        <div class="w3-container w3-center">
-                            <p>
-                                Técnico
-                            </p>
-                        </div>      
+                        <div class="w3-col m4 l3 w3-card-2 w3-margin-right w3-white">
+                            <a href="modulos/rh/?id_menu=timeline"> 
+                                <img width="100%" src="imagens/tecnico.jpg" > 
+                                <div class="w3-container w3-center">
+                                    <p>
+                                        RH
+                                    </p>
+                                </div>      
+                            </a>
+                        </div>
 
-                    </a>
+                    </div>
                 </div>
+            </section>
+        <?php
+        endif;
+        
+//                            if (file_exists($includepatch)):
+//                        require_once($includepatch);
+//                    elseif($menu == "timeline"):
+//                        require_once (__DIR__ . DIRECTORY_SEPARATOR . 'timeline.php');
+//                    else:
+//                        echo "<div class=\"content notfound\">";
+//                        WSErro("<b>Erro ao incluir tela:</b> Erro ao incluir o controller /{$menu}.php!", WS_ERROR);
+//                        echo "</div>";
+//                    endif;
 
-                <div class="w3-col m4 l3 w3-card-2 w3-margin-right w3-white">
-                    <a href="rh.php?id_menu=timeline"> 
-                        <img width="100%" src="imagens/tecnico.jpg" > 
-                        <div class="w3-container w3-center">
-                            <p>
-                                RH
-                            </p>
-                        </div>      
-                    </a>
-                </div>
+       //var_dump($includepatch);
+        ?>
 
-            </div>
-            </div>
-        </section>
+
 
 
     </body>

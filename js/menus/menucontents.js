@@ -36,9 +36,9 @@ anylinkmenu_relatorio.items=[
 var cadastro_configuracao={divclass:'anylinkmenucols', inlinestyle:'', linktarget:''} //Third menu variable. Same precaution.
 cadastro_configuracao.cols={divclass:'column', inlinestyle:''} //menu.cols if defined creates columns of menu links segmented by keyword "efc"
 cadastro_configuracao.items=[
-	["Controle Tipo de Conta", "configuracao.php?id_menu=controle_tipo_conta"],
-        ["Cadastrar Novo", "configuracao.php?id_menu=cadastro_usuario"],
-        ["Alterar Senha", "configuracao.php?id_menu=trocar_senha"]
+	["Controle Tipo de Conta", "../../configuracao.php?id_menu=controle_tipo_conta"],
+        ["Cadastrar Novo", "../../configuracao.php?id_menu=cadastro_usuario"],
+        ["Alterar Senha", "../../configuracao.php?id_menu=trocar_senha"]
 	
 ]
 
