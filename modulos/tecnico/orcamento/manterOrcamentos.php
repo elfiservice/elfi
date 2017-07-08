@@ -21,7 +21,7 @@ $orcCrtl = new OrcamentoCtrl();
 <div class="alinhamentoHorizontal">
     <ul>
         <li>
-            <form name="novo_orc" action="tecnico.php?id_menu=novo_orcamento" method="POST" enctype="multipart/form-data">
+            <form name="novo_orc" action="?id_menu=orcamento/novo_orcamento" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Novo" name="novo_orc_btn" />
             </form>
         </li>

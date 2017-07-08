@@ -1,10 +1,10 @@
 <?php ?>
 <!-- Troca Local da Obra no OR�amento  -->
-<?php require 'includes/javascripts/trocar_local_obra_orc.php'; ?>
+<?php require '../../includes/javascripts/trocar_local_obra_orc.php'; ?>
 <!-- FIM  Troca Local da Obra no OR�amento  -->
 
 <!-- Busca cliente para Auto Preenchimento  -->
-<?php require 'includes/javascripts/busca_cliente_auto_preenchimento.php'; ?>
+<?php require '../../includes/javascripts/busca_cliente_auto_preenchimento.php'; ?>
 <!-- FIM Busca cliente para Auto Preenchimento  -->
 
 
@@ -18,7 +18,7 @@
 
 
 <!--  SOMA campos  valores -->
-<?php require 'includes/javascripts/somar_valores_monetarios.php'; ?>
+<?php require '../../includes/javascripts/somar_valores_monetarios.php'; ?>
 <!-- fim SOMA CAMPOS em campos -->
 
 <!-- Teste Campos obrigatorios -->
@@ -95,7 +95,7 @@
 <hr>
 <div class="" style="       ">
 
-    <form name="clientForm" method="post" action="tecnico.php?id_menu=salvar_novo_orc"
+    <form name="clientForm" method="post" action="?id_menu=orcamento/incluir/salvar_novo_orc"
           onsubmit="return formCheck(this);">
 
         <fieldset>
