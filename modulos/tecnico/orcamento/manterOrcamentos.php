@@ -26,12 +26,12 @@ $orcCrtl = new OrcamentoCtrl();
             </form>
         </li>
         <li>
-            <form name="acomp_aprovados" action="tecnico.php?id_menu=acompanhar_orcamentos" method="POST" enctype="multipart/form-data">
+            <form name="acomp_aprovados" action="?id_menu=orcamento/aprovados/acompanhar_orcamentos" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Aprovados" name="acomp_aprovados_btn" />
             </form>
         </li>    
         <li>
-            <form name="relatorios_orc" action="tecnico.php?id_menu=relatorios_orc" method="POST" enctype="multipart/form-data">
+            <form name="relatorios_orc" action="?id_menu=orcamento/relatorios/relatorios_orc" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Relatorios" name="arelatorios_orc_btn" />
             </form>
         </li>    
@@ -40,7 +40,7 @@ $orcCrtl = new OrcamentoCtrl();
 </div>
 <hr>
 <div>
-    <form action="tecnico.php?id_menu=orcamento" method="post" enctype="multipart/form-data" name="formAgenda">
+    <form action="?id_menu=orcamento/manterOrcamentos" method="post" enctype="multipart/form-data" name="formAgenda">
         Selecione o ANO:	
         <select name="ano" id="ano" class="formFieldsAno">
             <option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>
@@ -108,7 +108,7 @@ $orcCrtl = new OrcamentoCtrl();
                         //echo $row['colaborador_orc'];
                         $user = $colabCtrl->buscarBD("*", "WHERE Login = '" . $row['colaborador_orc'] . "' ");
                         ?>                                                  
-                        <a  href="#" onclick="window.open('usuario/perfil.php?id_user=<?php echo $user[0]->getId_colaborador(); ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+                        <a  href="#" onclick="window.open('../../usuario/perfil.php?id_user=<?php echo $user[0]->getId_colaborador(); ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                             <?php echo $row['colaborador_orc']; ?>
                         </a>                                            
                     </td>                                        
@@ -123,14 +123,14 @@ $orcCrtl = new OrcamentoCtrl();
                         } else if ($row['situacao_orc'] == "Aprovado") {
                             ?>
 
-                            <a class="bt_link bt_azul" href="tecnico.php?id_menu=acompanhar_orcamentos" >
+                            <a class="bt_link bt_azul" href="?id_menu=orcamento/aprovados/acompanhar_orcamentos" >
                                 <?= $row['situacao_orc'] ?>
                             </a>
                             <?php
                         } else if ($row['situacao_orc'] == "concluido") {
                             ?>
 
-                            <a class="bt_link bt_azul" href="tecnico.php?id_menu=historico_completo_orc&id_orc=<?= $row['id'] ?>" >
+                            <a class="bt_link bt_azul" href="?id_menu=orcamento/historico_completo_orc&id_orc=<?= $row['id'] ?>" >
                                 <?= $row['situacao_orc'] ?>
                             </a>
                             <?php
@@ -142,7 +142,7 @@ $orcCrtl = new OrcamentoCtrl();
                         } else {
                             ?>
 
-                            <a class="bt_link bt_azul" href="tecnico.php?id_menu=historico_completo_orc&id_orc=<?= $row['id'] ?>" >
+                            <a class="bt_link bt_azul" href="?id_menu=orcamento/historico_completo_orc&id_orc=<?= $row['id'] ?>" >
                                 <?= $row['situacao_orc'] ?>
                             </a>
                             <?php
@@ -150,10 +150,10 @@ $orcCrtl = new OrcamentoCtrl();
                         ?>
                     </td>   
                     <td><?php if ($row['situacao_orc'] != "concluido") { ?>
-                            <form name="editarOrcamento" action="tecnico.php?id_menu=editar_orcamento&id_orc=<?php echo $row['id']; ?>&msg_erro=" method="POST" enctype="multipart/form-data">
+                            <form name="editarOrcamento" action="?id_menu=orcamento/editar_orcamento&id_orc=<?php echo $row['id']; ?>&msg_erro=" method="POST" enctype="multipart/form-data">
                                 <input class="bt_verde" type="submit" value="Editar" name="editarOrcBtn" />
                             </form>
-                            <form name="excluirOrcamento" action="tecnico.php?id_menu=excluir_orcamento&id_orc=<?php echo $row['id']; ?>&msg_erro=" method="POST" enctype="multipart/form-data">
+                            <form name="excluirOrcamento" action="?id_menu=orcamento/excluir_orcamento&id_orc=<?php echo $row['id']; ?>&msg_erro=" method="POST" enctype="multipart/form-data">
                                 <input class="bt_vermelho" type="submit" value="Exluir" name="excluirOrcBtn" />
                             </form>
                         <?php } ?>
@@ -162,7 +162,7 @@ $orcCrtl = new OrcamentoCtrl();
                         <?php
                         if ($clienteDao && !empty($clienteDao)) {
                             ?>
-                            <a href="tecnico.php?id_menu=perfil_cliente&id_cliente=<?= $clienteDao->getId(); ?>&tipo_cliente=<?= $clienteDao->getTipo(); ?>">
+                            <a href="?id_menu=cliente/perfil&id_cliente=<?= $clienteDao->getId(); ?>&tipo_cliente=<?= $clienteDao->getTipo(); ?>">
                                 <?php
                                 echo $row['razao_social_contr'];
                                 ?>

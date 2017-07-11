@@ -24,7 +24,8 @@ $file_folder = strtoupper(basename(__DIR__));
         <meta name="author" content="Elfi Service">
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="stylesheet" href="../../estilos.css">    
+        <link rel="stylesheet" href="../../css/w3.css">
+        <link rel="stylesheet" href="../../estilos.css"> 
 
         <!-- Menus dorp down  -->
         <?php require_once '../../includes/javascripts/menu_dropdown.php'; ?>
