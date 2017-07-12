@@ -90,10 +90,10 @@
 
 
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Novo</h2>
+    <h2><?php include 'includes/nav_wizard.php' ?> -> Novo</h2>
 </div>
 <hr>
-<div class="" style="       ">
+<div>
 
     <form name="clientForm" method="post" action="?id_menu=orcamento/incluir/salvar_novo_orc"
           onsubmit="return formCheck(this);">

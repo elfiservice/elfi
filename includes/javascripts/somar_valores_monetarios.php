@@ -1,10 +1,9 @@
-<?php
-?>
+
 <!--  SOMA campos  valores -->
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <!--// load jQuery Plug-ins //-->
-<script type="text/javascript" src="./js/calcular/jquery.calculation.js"></script>
+<script type="text/javascript" src="<?= WWW ?>/js/calcular/jquery.calculation.js"></script>
 <script type="text/javascript">
 
 	var bIsFirebugReady = (!!window.console && !!window.console.log);

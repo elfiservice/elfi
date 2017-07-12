@@ -1,5 +1,5 @@
  <div>
-	<h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Novo -> Salvando</h2>
+	<h2><?php include 'orcamento/includes/nav_wizard.php' ?> -> Novo -> Salvando</h2>
 </div>
 <hr>
 

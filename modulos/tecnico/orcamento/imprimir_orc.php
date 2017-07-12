@@ -1,5 +1,5 @@
 <?php
-require '../classes/Config.inc.php';
+require '../../../classes/Config.inc.php';
 
 session_start();
 
@@ -166,7 +166,7 @@ $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
             <table border="0"    CELLPADDING="5" style="border-collapse: collapse"   >
                 <tr bordercolor=""  >
                     <td colspan="" >
-                        <img src="../imagens/logo_elfi.jpg" id="" />
+                        <img src="../../../imagens/logo_elfi.jpg" id="" />
                         <p style="font-size: 10px;"><?= $empresaDao->getRazao_social() ?></p>
                     </td>
                     <td align="center" colspan="8">

@@ -11,7 +11,7 @@
 		var clientId = document.getElementById('clientID').value;
 		if(clientId!=currentClientID){
 			currentClientID = clientId
-			ajax.requestFile = '<?= $www ?>/orcamento/getClient.php?getClientId='+clientId;	// Specifying which file to get
+			ajax.requestFile = '<?= $www ?>/modulos/tecnico/orcamento/getClient.php?getClientId='+clientId;	// Specifying which file to get
 			ajax.onCompletion = showClientData;	// Specify function that will be executed after file has been found
 			ajax.runAJAX();		// Execute AJAX function			
 		}

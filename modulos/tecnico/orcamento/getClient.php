@@ -1,6 +1,6 @@
 <?php
 
-require '../classes/Config.inc.php';
+require '../../../classes/Config.inc.php';
 
 
 if (isset($_GET['getClientId'])) {
