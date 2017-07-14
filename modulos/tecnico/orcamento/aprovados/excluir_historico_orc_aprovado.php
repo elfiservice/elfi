@@ -1,5 +1,5 @@
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -><a href="tecnico.php?id_menu=acompanhar_orcamentos">Aprovados</a> -> <a href="javascript:window.history.go(-1)">Historico</a> -> Excluir</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -><a href="?id_menu=orcamento/aprovados/acompanhar_orcamentos">Aprovados</a> -> <a href="javascript:window.history.go(-1)">Historico</a> -> Excluir</h2>
 </div>
 <hr>
 <?php
@@ -30,7 +30,7 @@ if (filter_has_var(INPUT_POST, 'excluir_editar_historico_orc_apro')) {
         WSErro("Ocorreu algum Erro ao tentar atualizar.", WS_ERROR);
     }
 
-    echo"<a class=\"bt_link\" href=\"tecnico.php?id_menu=hitorico_orc_aprovado&id_orc={$id_orc_acomp}\">Voltar</a>";
+    echo"<a class=\"bt_link\" href=\"?id_menu=orcamento/aprovados/hitorico_orc_aprovado&id_orc={$id_orc_acomp}\">Voltar</a>";
 
     die();
 }
@@ -57,7 +57,7 @@ if ($id_historico) {
 
 <fieldset>
     <legend><b>Dados</b></legend>
-    <form action="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $id_historico ?>" method="post" enctype="multipart/form-data" name="formAgenda">
+    <form action="?id_menu=orcamento/aprovados/excluir_historico_orc_aprovado&id_historico=<?= $id_historico ?>" method="post" enctype="multipart/form-data" name="formAgenda">
         <div>
             Data: 	<b><?= Formatar::formatarDataSemHora($data_hj); ?></b>
         </div>

@@ -107,7 +107,7 @@
             if ($pesquisaCtrl->inserirPesquisa($pesquisaObj)) {
                 $mensagem = WSErro("Salvo com sucesso, Obrigado, sua avaliação é muito importante para nós. Estamos sempre trabalhando para melhor atendê-lo!", WS_ACCEPT);
                 
-                LogCtrl::inserirLog(0, "O Cliente <b>{$orcObj->getRazaoSocialContrat()}</b>, proposta <a target=\"_blank\" href=\"tecnico.php?id_menu=historico_completo_orc&id_orc={$id_orc}\" ><b>N. {$orcObj->getNOrc()}</b></a> respondeu a Pesquisa <b>Pós-venda</b>", "tec");
+                LogCtrl::inserirLog(0, "O Cliente <b>{$orcObj->getRazaoSocialContrat()}</b>, proposta <a target=\"_blank\" href=\"?id_menu=orcamento/historico_completo_orc&id_orc={$id_orc}\" ><b>N. {$orcObj->getNOrc()}</b></a> respondeu a Pesquisa <b>Pós-venda</b>", "tec");
                 
                 $orcamentoObj = new Orcamento($id_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "s", "", "", "", "", "", "");
                 $orcamentoCtrl->atualizarOrcamento($orcamentoObj);

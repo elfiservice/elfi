@@ -1,5 +1,5 @@
     <div>
-        <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> <a href="tecnico.php?id_menu=acompanhar_orcamentos">Aprovados</a> -> Por Mês</h2>
+        <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> <a href="?id_menu=orcamento/aprovados/acompanhar_orcamentos">Aprovados</a> -> Por Mês</h2>
     </div>
     <hr>
 
@@ -9,7 +9,7 @@ $ano_orc_selec = date('Y');
 
 if (filter_has_var(INPUT_GET, 'ano') && filter_has_var(INPUT_GET, 'mes')) {
     $mes_orc_selec = filter_input(INPUT_GET, 'mes');
-$ano_orc_selec = filter_input(INPUT_GET, 'ano');
+    $ano_orc_selec = filter_input(INPUT_GET, 'ano');
 }
 
 if (filter_has_var(INPUT_POST, 'ano')) {
@@ -49,7 +49,7 @@ if(!$controles){
     <div class="alinhamentoHorizontal">
         <ul >
             <li>
-                <form name="orc_aprovado_por_mes" action="tecnico.php?id_menu=orc_aprovado_por_mes" method="POST" enctype="multipart/form-data">
+                <form name="orc_aprovado_por_mes" action="?id_menu=orcamento/aprovados/orc_aprovado_por_mes" method="POST" enctype="multipart/form-data">
                  Mês:
                     <select name="mes" id="mes" >
                         <option id="opcao" value="<?= $mes_orc_selec ?>"><?= $mes_orc_selec ?></option>
@@ -319,8 +319,8 @@ foreach ($n_orc_total as $row){
             $n_orc_check = count($orcHistorico);
     ?>
                 <TR>
-                                    <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><hr>
-                                       <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?=$row['id']?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
+                                    <td><a class="bt_link" href="?id_menu=orcamento/aprovados/editar_orc_aprovado&id_orc=<?=$row['id']?>" >atualizar</a><hr>
+                                       <a class="bt_link" href="?id_menu=orcamento/aprovados/hitorico_orc_aprovado&id_orc=<?=$row['id']?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                     <Td><?php echo $row['razao_social_contr']; ?></Td>
                     <TD><?php echo $row['atividade']; ?></TD>
                     <TD><?php echo $row['classificacao']; ?></TD>

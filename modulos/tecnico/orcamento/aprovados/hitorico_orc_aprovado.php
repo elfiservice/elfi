@@ -1,5 +1,5 @@
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -><a href="tecnico.php?id_menu=acompanhar_orcamentos">Aprovados</a> -> Historico</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -><a href="?id_menu=orcamento/aprovados/acompanhar_orcamentos">Aprovados</a> -> Historico</h2>
 </div>
 <hr>
 <?php
@@ -57,7 +57,7 @@ if (filter_has_var(INPUT_POST, 'salvar_historico_orc_aprov')) {
     } else {
         WSErro("Campo Descrição em branco!", WS_ALERT);
     }
-    echo"<a class=\"bt_link\" href=\"tecnico.php?id_menu=hitorico_orc_aprovado&id_orc={$id_orc}\">Voltar</a>";
+    echo"<a class=\"bt_link\" href=\"?id_menu=orcamento/aprovados/hitorico_orc_aprovado&id_orc={$id_orc}\">Voltar</a>";
 
     die();
 }
@@ -74,7 +74,7 @@ $data_hj = date('Y-m-d');
 
 <fieldset>
     <legend><b>Dados</b></legend>
-    <form action="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?= $orcObj->getId() ?>" method="post" enctype="multipart/form-data" name="formAgenda">
+    <form action="?id_menu=orcamento/aprovados/hitorico_orc_aprovado&id_orc=<?= $orcObj->getId() ?>" method="post" enctype="multipart/form-data" name="formAgenda">
         Data deste Historico: 	<b><?= Formatar::formatarDataSemHora($data_hj); ?></b>
         </br></br>
         <label for="email_orc">Descrição:</label></br>
@@ -114,9 +114,9 @@ $data_hj = date('Y-m-d');
                             <?php
                             if ($row['id_colab'] == $_SESSION['id']) {
                                 ?>
-                                <a class="bt_link bt_verde" href="tecnico.php?id_menu=editar_historico_orc_aprovado&id_historico=<?= $row['id'] ?>" >editar</a>
+                                <a class="bt_link bt_verde" href="?id_menu=orcamento/aprovados/editar_historico_orc_aprovado&id_historico=<?= $row['id'] ?>" >editar</a>
                                 <hr>
-                                <a class="bt_link bt_vermelho" href="tecnico.php?id_menu=excluir_historico_orc_aprovado&id_historico=<?= $row['id'] ?>">excluir</a>
+                                <a class="bt_link bt_vermelho" href="?id_menu=orcamento/aprovados/excluir_historico_orc_aprovado&id_historico=<?= $row['id'] ?>">excluir</a>
                             <?php } ?>
                         </td>
                         <td><?php echo $row['descricao']; ?></td>

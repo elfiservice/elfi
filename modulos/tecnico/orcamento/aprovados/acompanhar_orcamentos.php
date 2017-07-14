@@ -4,7 +4,7 @@ $orcCtrl = new OrcamentoCtrl();
 ?>				
 
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Aprovados</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> Aprovados</h2>
 </div>
 <hr>
 <div class="alinhamentoHorizontal">
@@ -15,7 +15,7 @@ $orcCtrl = new OrcamentoCtrl();
                 </a>-->
 
         <li>        
-            <form name="orc_aprovado_por_mes" action="tecnico.php?id_menu=orc_aprovado_por_mes" method="POST" enctype="multipart/form-data">
+            <form name="orc_aprovado_por_mes" action="?id_menu=orcamento/aprovados/orc_aprovado_por_mes" method="POST" enctype="multipart/form-data">
                 <input class="bt_azul" type="submit" value="Ver por Mês" name="ir_orc_aprovado_por_mes" id="ir_orc_aprovado_por_mes"  />
             </form>                
 
@@ -69,11 +69,11 @@ $orcCtrl = new OrcamentoCtrl();
                             $arrData = explode("-", $row['data_aprovada']);
                             ?>
                             <TR>
-                                <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a><hr>
-                                    <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?= $row['id'] ?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
+                                <td><a class="bt_link" href="?id_menu=orcamento/aprovados/editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a><hr>
+                                    <a class="bt_link" href="?id_menu=orcamento/aprovados/hitorico_orc_aprovado&id_orc=<?= $row['id'] ?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                 <Td><a href="#<?=$row['id']?>" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?= $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                                         <?= $row['razao_social_contr']; ?>
-                                    </a> <br> <a href="tecnico.php?id_menu=orc_aprovado_por_mes&mes=<?= $arrData[1] ?>&ano=<?= $arrData[0] ?>#<?= $row['id'] ?>"><small>mais... </small> </a></Td>
+                                    </a> <br> <a href="?id_menu=orcamento/aprovados/orc_aprovado_por_mes&mes=<?= $arrData[1] ?>&ano=<?= $arrData[0] ?>#<?= $row['id'] ?>"><small>mais... </small> </a></Td>
                                 <TD><?php echo $row['atividade']; ?></TD>
                                 <TD><?php echo $row['classificacao']; ?></TD>
                                 <TD><?php echo Formatar::limita_texto(strip_tags($row['descricao_servico_orc']), 200); ?></TD>
@@ -147,11 +147,11 @@ $orcCtrl = new OrcamentoCtrl();
                             $arrData = explode("-", $row['data_aprovada']);
                             ?>
                             <TR>
-                                <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a><hr>
-                                    <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?= $row['id'] ?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
+                                <td><a class="bt_link" href="?id_menu=orcamento/aprovados/editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a><hr>
+                                    <a class="bt_link" href="?id_menu=orcamento/aprovados/hitorico_orc_aprovado&id_orc=<?= $row['id'] ?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                 <Td><a href="#<?=$row['id']?>" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?= $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                                         <?= $row['razao_social_contr']; ?>
-                                    </a><br> <a href="tecnico.php?id_menu=orc_aprovado_por_mes&mes=<?= $arrData[1] ?>&ano=<?= $arrData[0] ?>#<?= $row['id'] ?>"><small>mais... </small> </a></Td>
+                                    </a><br> <a href="?id_menu=orcamento/aprovados/orc_aprovado_por_mes&mes=<?= $arrData[1] ?>&ano=<?= $arrData[0] ?>#<?= $row['id'] ?>"><small>mais... </small> </a></Td>
                                 <TD><?php echo $row['atividade']; ?></TD>
                                 <TD><?php echo $row['classificacao']; ?></TD>
                                 <TD><?php echo Formatar::limita_texto(strip_tags($row['descricao_servico_orc']), 200); ?></TD>
@@ -221,12 +221,12 @@ $orcCtrl = new OrcamentoCtrl();
                             //var_dump($arrData[1]);
                             ?>
                             <TR>
-                                <td><a class="bt_link" href="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a>
+                                <td><a class="bt_link" href="?id_menu=orcamento/aprovados/editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a>
                                     <hr>
-                                    <a class="bt_link" href="tecnico.php?id_menu=hitorico_orc_aprovado&id_orc=<?= $row['id'] ?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
+                                    <a class="bt_link" href="?id_menu=orcamento/aprovados/hitorico_orc_aprovado&id_orc=<?= $row['id'] ?>" >historico (<?php echo $n_orc_check; ?>)</a></td>
                                 <Td><a class="" href="#<?=$row['id']?>" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?= $row['id']; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                                         <?= $row['razao_social_contr']; ?>
-                                    </a> <br> <a href="tecnico.php?id_menu=orc_aprovado_por_mes&mes=<?= $arrData[1] ?>&ano=<?= $arrData[0] ?>#<?= $row['id'] ?>"><small>mais... </small> </a></Td>
+                                    </a> <br> <a href="?id_menu=orcamento/aprovados/orc_aprovado_por_mes&mes=<?= $arrData[1] ?>&ano=<?= $arrData[0] ?>#<?= $row['id'] ?>"><small>mais... </small> </a></Td>
                                 <TD><?php echo $row['atividade']; ?></TD>
                                 <TD><?php echo $row['classificacao']; ?></TD>
                                 <TD><?php echo Formatar::limita_texto(strip_tags($row['descricao_servico_orc']), 200); ?></TD>

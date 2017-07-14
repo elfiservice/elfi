@@ -1,5 +1,5 @@
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -><a href="tecnico.php?id_menu=acompanhar_orcamentos">Aprovados</a> -> Atualizar</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -><a href="?id_menu=orcamento/aprovados/acompanhar_orcamentos">Aprovados</a> -> Atualizar</h2>
 </div>
 <hr>
 
@@ -268,7 +268,7 @@ if ($form && $form['salvar_orc']) {
 
 <div class="" style="">
 
-    <form name="clientForm" method="post" action="tecnico.php?id_menu=editar_orc_aprovado&id_orc=<?= $orcObj->getId() ?>" onsubmit="return formCheck(this);">       
+    <form name="clientForm" method="post" action="?id_menu=orcamento/aprovados/editar_orc_aprovado&id_orc=<?= $orcObj->getId() ?>" onsubmit="return formCheck(this);">       
 
         <fieldset>
             <legend><b>Dados</b></legend>
