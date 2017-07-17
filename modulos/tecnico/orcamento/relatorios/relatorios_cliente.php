@@ -15,7 +15,7 @@ if (filter_has_var(INPUT_POST, 'ano')) {
 $orcCrtl = new OrcamentoCtrl();
 ?>
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> <a href="tecnico.php?id_menu=relatorios_orc"> Relatórios</a> -> Clientes</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> <a href="?id_menu=orcamento/relatorios/relatorios_orc"> Relatórios</a> -> Clientes</h2>
 </div>
 <hr>
 
@@ -24,7 +24,7 @@ $orcCrtl = new OrcamentoCtrl();
     <legend>Busca por ano</legend>
     <!-- form Trocar ANO -->
     <div><!-- form Trocar ANO -->
-        <form action="tecnico.php?id_menu=relatorios_cliente" method="post" enctype="multipart/form-data" name="formAgenda">
+        <form action="?id_menu=orcamento/relatorios/relatorios_cliente" method="post" enctype="multipart/form-data" name="formAgenda">
             Selecione o ANO:	
             <select name="ano" id="ano" class="formFieldsAno">
                 <option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>
@@ -102,7 +102,7 @@ $orcCrtl = new OrcamentoCtrl();
                     }
 ?>
                     <tr align="center">
-                        <td><a href="tecnico.php?id_menu=perfil_cliente&id_cliente=<?=$id_cliente?>&tipo_cliente=<?=$tipo_cliente?>"><?= $nome_cliente?></a></td>
+                        <td><a href="?id_menu=cliente/perfil&id_cliente=<?=$id_cliente?>&tipo_cliente=<?=$tipo_cliente?>"><?= $nome_cliente?></a></td>
                         <td> <?= $total ?></td>
                         <td> <?= $totalAprovados . " - (" . number_format($em_porcentagem_aprovados, 2, '.', '') . "%)" ?></td>
                         <td> <?= $totalCancelado . " - (" . number_format($em_porcentagem_Can, 2, '.', '') . "%)" ?></td>
@@ -151,7 +151,7 @@ $orcCrtl = new OrcamentoCtrl();
                     }
 ?>
                                     <tr align="center">
-                        <td><a href="tecnico.php?id_menu=perfil_cliente&id_cliente=<?=$id_cliente?>&tipo_cliente=<?=$tipo_cliente?>"><?= $nome_cliente?></a></td>
+                        <td><a href="?id_menu=cliente/perfil&id_cliente=<?=$id_cliente?>&tipo_cliente=<?=$tipo_cliente?>"><?= $nome_cliente?></a></td>
                         <td> <?= $total ?></td>
                         <td> <?= $totalAprovados . " - (" . number_format($em_porcentagem_aprovados, 2, '.', '') . "%)" ?></td>
                         <td> <?= number_format($em_porcentagem_aprovados, 2, '.', '')  ?></td>

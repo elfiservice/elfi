@@ -14,7 +14,7 @@ if (filter_has_var(INPUT_POST, 'ano')) {
 $orcCrtl = new OrcamentoCtrl();
 ?>
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> <a href="tecnico.php?id_menu=relatorios_orc"> Relatórios</a> -> Atividades</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> <a href="?id_menu=orcamento/relatorios/relatorios_orc"> Relatórios</a> -> Atividades</h2>
 </div>
 <hr>
 
@@ -23,7 +23,7 @@ $orcCrtl = new OrcamentoCtrl();
     <legend>Busca por ano</legend>
     <!-- form Trocar ANO -->
     <div><!-- form Trocar ANO -->
-        <form action="tecnico.php?id_menu=relatorios_atividade" method="post" enctype="multipart/form-data" name="formAgenda">
+        <form action="?id_menu=orcamento/relatorios/relatorios_atividade" method="post" enctype="multipart/form-data" name="formAgenda">
             Selecione o ANO:	
             <select name="ano" id="ano" class="formFieldsAno">
                 <option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>
@@ -94,7 +94,7 @@ $orcCrtl = new OrcamentoCtrl();
         <legend>Por Atividade de <span style="color: red;"><?= $atividade_selecionada ?></span> no Ano de <span style="color: red;"><?= $ano_orc_selec ?></span></legend>	
 
         <div id="atividade"><!-- form Trocar ANO -->
-            <form action="tecnico.php?id_menu=relatorios_atividade#atividade" method="post" enctype="multipart/form-data" name="formAgenda">
+            <form action="?id_menu=orcamento/relatorios/relatorios_atividade#atividade" method="post" enctype="multipart/form-data" name="formAgenda">
                 Selecione a Atividade:	
                 <select name="atividade" id="atividade" class="formFieldsAno">
                     <option value="<?php echo $atividade_selecionada; ?>"><?php echo $atividade_selecionada; ?></option>

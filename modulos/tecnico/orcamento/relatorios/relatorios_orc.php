@@ -14,23 +14,23 @@ if (filter_has_var(INPUT_POST, 'ano')) {
 $orcCrtl = new OrcamentoCtrl();
 ?>
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> ->  Relatórios </h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> ->  Relatórios </h2>
 </div>
 <hr>
 <div class="alinhamentoHorizontal">
     <ul>
         <li>
-            <form name="rel_pos_venda" action="tecnico.php?id_menu=relatorios_pos_venda" method="POST" enctype="multipart/form-data">
+            <form name="rel_pos_venda" action="?id_menu=orcamento/relatorios/relatorios_pos_venda" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Pos-venda" name="nrel_pos_venda_btn" />
             </form>
         </li>
         <li>
-            <form name="rel_cliente" action="tecnico.php?id_menu=relatorios_cliente" method="POST" enctype="multipart/form-data">
+            <form name="rel_cliente" action="?id_menu=orcamento/relatorios/relatorios_cliente" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Cliente" name="rel_cliente_btn" />
             </form>
         </li>    
         <li>
-            <form name="rel_atividade" action="tecnico.php?id_menu=relatorios_atividade" method="POST" enctype="multipart/form-data">
+            <form name="rel_atividade" action="?id_menu=orcamento/relatorios/relatorios_atividade" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Atividade" name="rel_atividade_btn" />
             </form>
         </li>            
@@ -43,7 +43,7 @@ $orcCrtl = new OrcamentoCtrl();
     <legend>Busca por ano</legend>
     <!-- form Trocar ANO -->
     <div><!-- form Trocar ANO -->
-        <form action="tecnico.php?id_menu=relatorios_orc" method="post" enctype="multipart/form-data" name="formAgenda">
+        <form action="?id_menu=orcamento/relatorios/relatorios_orc" method="post" enctype="multipart/form-data" name="formAgenda">
             Selecione o ANO:	
             <select name="ano" id="ano" class="formFieldsAno">
                 <option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>

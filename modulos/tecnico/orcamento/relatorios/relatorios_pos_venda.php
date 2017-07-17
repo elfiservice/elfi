@@ -14,7 +14,7 @@ if (filter_has_var(INPUT_POST, 'ano')) {
 $orcCrtl = new OrcamentoCtrl();
 ?>
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> <a href="tecnico.php?id_menu=relatorios_orc"> Relatórios</a> -> Pós-venda</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> <a href="?id_menu=orcamento/relatorios/relatorios_orc"> Relatórios</a> -> Pós-venda</h2>
 </div>
 <hr>
 
@@ -23,7 +23,7 @@ $orcCrtl = new OrcamentoCtrl();
     <legend>Busca por ano</legend>
     <!-- form Trocar ANO -->
     <div><!-- form Trocar ANO -->
-        <form action="tecnico.php?id_menu=relatorios_pos_venda" method="post" enctype="multipart/form-data" name="formAgenda">
+        <form action="?id_menu=orcamento/relatorios/relatorios_pos_venda" method="post" enctype="multipart/form-data" name="formAgenda">
             Selecione o ANO:	
             <select name="ano" id="ano" class="formFieldsAno">
                 <option value="<?php echo $ano_orc_selec; ?>"><?php echo $ano_orc_selec; ?></option>
