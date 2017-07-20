@@ -1,6 +1,6 @@
 <?php
 //include "./../../checkuserlog.php";
-require './../../classes/Config.inc.php';
+require '../../../../classes/Config.inc.php';
 session_start();
 //var_dump($_SESSION);
 ?>
@@ -18,13 +18,13 @@ session_start();
         <meta name="author" content="Elfi Service">
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="stylesheet" href="../../estilos.css">
+        <link rel="stylesheet" href="../../../../estilos.css">
 
-        <?php include_once '../../includes/javascripts/tabela_no_head.php'; ?>
+        <?php include_once '../../../../includes/javascripts/tabela_no_head.php'; ?>
 
     </head>
     <body>
-        <div  style="background: url(../../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"></div>
+        <div  style="background: url(../../../../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"></div>
         <div>
             <h2><a href="javascript:window.close()">Orçamento</a> -> Histórico Orçamento não Aprovado</h2>
         </div>
