@@ -36,7 +36,7 @@ $file_folder = strtoupper(basename(__DIR__));
     </head>
     <body>
 
-        <div  style="background: url(imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"> </div>
+        <div  style="background: url(../../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"> </div>
 
         <?php
 //------ CHECK IF THE USER IS LOGGED IN OR NOT AND GIVE APPROPRIATE OUTPUT -------

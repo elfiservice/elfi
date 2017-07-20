@@ -1,6 +1,6 @@
 ﻿
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Editar -> Salvando</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> Editar -> Salvando</h2>
 </div>
 <hr>
 <?php
@@ -165,13 +165,13 @@ if (filter_has_var(INPUT_POST, "razao_social")) {
                 Imprimir
             </a>
         </p>
-        <a class="bt_link" href="tecnico.php?id_menu=orcamento" target="_self">Voltar</a>
+        <a class="bt_link" href="?id_menu=orcamento/manterOrcamentos" target="_self">Voltar</a>
 
         <?php
     } else {
         WSErro("Resultado desta operação: <b> {$result['resultado']}</b>", WS_ERROR);
         ?>
-        <a class="bt_link bt_azul" href="tecnico.php?id_menu=editar_orcamento&id_orc=<?= $_POST['id_orc_editado'] ?>&msg_erro=" target="_self">Voltar</a>
+        <a class="bt_link bt_azul" href="?id_menu=orcamento/editar_orcamento&id_orc=<?= $_POST['id_orc_editado'] ?>&msg_erro=" target="_self">Voltar</a>
 
         <?php
     }

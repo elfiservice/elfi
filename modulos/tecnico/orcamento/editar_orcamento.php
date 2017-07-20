@@ -1,8 +1,8 @@
 <!--  Busca cliente para Auto Preenchimento  -->
-<?php require 'includes/javascripts/busca_cliente_auto_preenchimento.php'; ?>
+<?php require '../../includes/javascripts/busca_cliente_auto_preenchimento.php'; ?>
 
 <!-- Troca Local da Obra no ORçamento  -->
-<?php require 'includes/javascripts/trocar_local_obra_orc.php'; ?>
+<?php require '../../includes/javascripts/trocar_local_obra_orc.php'; ?>
 
 
 <!--
@@ -14,7 +14,7 @@ MAscaras em campos
 <!--
  SOMA campos
 -->
-<?php require 'includes/javascripts/somar_valores_monetarios.php'; ?>
+<?php require '../../includes/javascripts/somar_valores_monetarios.php'; ?>
 
 <?php
 $orc = filter_input(INPUT_GET, 'id_orc', FILTER_VALIDATE_INT);
@@ -91,7 +91,7 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 ?>
 
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Editar</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> Editar</h2>
 </div>
 <hr>	           
 
@@ -107,10 +107,10 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
         if ($situacao_orc == "Aguardando aprovação" || $_SESSION['id'] == $id_colab && $situacao_orc != "concluido") {
             ?>        
             <li>
-                <form name="alterar_situcao_orc" action="tecnico.php?ano_orc=<?php echo date('Y'); ?>&id_orc=<?php echo $id; ?>&id_menu=editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
+                <form name="alterar_situcao_orc" action="?ano_orc=<?php echo date('Y'); ?>&id_orc=<?php echo $id; ?>&id_menu=orcamento/editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
                     <select onchange="habilitaBtn()" name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
                         <option id="opcao" value=""><?php echo $situacao_orc; ?></option>
-                        <?php include "includes/orcamento/lista_situacao_orc.php"; ?>
+                        <?php include "../../includes/orcamento/lista_situacao_orc.php"; ?>
                     </select>
                     <input type="submit" value="Alterar" name="alterar_situacao" id="salvar_situacao" disabled="disabled" />
 
@@ -217,7 +217,7 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
     </script>
     <div  class="" style="margin-top: 20px;">
 
-        <form name="clientForm" method="post" action="tecnico.php?id_menu=salvar_editar_orcamento" onsubmit="return formCheck(this);">       
+        <form name="clientForm" method="post" action="?id_menu=orcamento/alterar/salvar_editar_orc" onsubmit="return formCheck(this);">       
 
             <fieldset class="fieldsetGeral">
                 <legend ><b>Contratante</b></legend>

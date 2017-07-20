@@ -16,7 +16,7 @@ $orcExcluirObj = $orcCtrlExcluir->buscarOrcamentoPorId("*", "where id = $orc");
 ?>
 
  <div>
-	<h2><a href="tecnico.php?id_menu=orcamento">Orcamentos</a> -> Excluir</h2>
+	<h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> Excluir</h2>
 </div>
 <hr>
 
