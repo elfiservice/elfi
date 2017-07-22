@@ -1,5 +1,5 @@
 <div>
-    <h2><a href="tecnico.php?id_menu=cliente">Cliente</a> -> Perfil </h2>
+    <h2><?php include_once 'cliente/includes/nav_wizard.php'; ?> -> Perfil </h2>
 </div>
 <hr>        
 <?php
@@ -191,14 +191,14 @@ if (!empty($cliente->mediaSatisfacao($clienteFinal->getId()))) {
                                 } else if ($row['situacao_orc'] == "Aprovado") {
                                     ?>
 
-                                    <a class="bt_link bt_azul" href="tecnico.php?id_menu=acompanhar_orcamentos" >
+                                    <a class="bt_link bt_azul" href="?id_menu=orcamento/aprovados/acompanhar_orcamentos" >
                                         <?= $row['situacao_orc'] ?>
                                     </a>
                                     <?php
                                 } else if ($row['situacao_orc'] == "concluido") {
                                     ?>
 
-                                    <a class="bt_link bt_azul" href="tecnico.php?id_menu=historico_completo_orc&id_orc=<?= $row['id'] ?>" >
+                                    <a class="bt_link bt_azul" href="?id_menu=orcamento/historico_completo_orc&id_orc=<?= $row['id'] ?>" >
                                         <?= $row['situacao_orc'] ?>
                                     </a>
                                     <?php
@@ -210,7 +210,7 @@ if (!empty($cliente->mediaSatisfacao($clienteFinal->getId()))) {
                                 } else {
                                     ?>
 
-                                    <a class="bt_link bt_azul" href="tecnico.php?id_menu=historico_completo_orc&id_orc=<?= $row['id'] ?>" >
+                                    <a class="bt_link bt_azul" href="?id_menu=orcamento/historico_completo_orc&id_orc=<?= $row['id'] ?>" >
                                         <?= $row['situacao_orc'] ?>
                                     </a>
                                     <?php

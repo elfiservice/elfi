@@ -18,7 +18,7 @@ if ($id_orc) {
 ?>
 
 <div>
-    <h2><a href="tecnico.php?id_menu=orcamento">Orçamento</a> -> Histórico Orçamento Completo</h2>
+    <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -> Histórico Orçamento Completo</h2>
 </div>
 <hr>
 <fieldset>
