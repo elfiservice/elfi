@@ -312,6 +312,9 @@
 				
 				nPrevious.className = oSettings.oClasses.sPagePrevDisabled;
 				nNext.className = oSettings.oClasses.sPageNextDisabled;
+                                
+//                                nPrevious.append(" Voltar -");
+//                                nNext.append("- Proximo ");
 				
 				nPrevious.title = oSettings.oLanguage.oPaginate.sPrevious;
 				nNext.title = oSettings.oLanguage.oPaginate.sNext;
