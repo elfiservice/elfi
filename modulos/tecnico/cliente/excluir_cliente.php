@@ -1,5 +1,5 @@
 <section>
-    <h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Excluir</h2>
+    <h2><?php include_once 'cliente/includes/nav_wizard.php'; ?> -> Excluir</h2>
 
     <hr>
     <?php
@@ -41,7 +41,7 @@
         <h4 STYLE="font-size: 16px; margin-top: 10px; color: red;">Deseja realmente excluir esse Cliente ?</h4>
 
         <div id="demo">
-            <form method="post" action="tecnico.php?id_menu=excluir_cliente&id_cliente=<?= $id_cliente ?>"  >
+            <form method="post" action="?id_menu=cliente/excluir_cliente&id_cliente=<?= $id_cliente ?>"  >
 
                 <?php
                 if ($cli instanceof ClientePJ) {

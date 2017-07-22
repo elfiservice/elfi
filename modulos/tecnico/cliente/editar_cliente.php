@@ -1,20 +1,20 @@
 <div>
-    <h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Editar</h2>
+    <h2><?php include_once 'cliente/includes/nav_wizard.php'; ?> -> Editar</h2>
 </div>
 <hr>
 
 
 <!-- MAscaras em campos -->
-<?php require 'includes/javascripts/mascaras_campos_valores_monetario.php'; ?>     
+<?php require '../../includes/javascripts/mascaras_campos_valores_monetario.php'; ?>     
 
 
 <!--
 DESABILITAR CAMPOS COM CHECKBOX
 -->
-<?php require 'includes/javascripts/desabilCampoCheckBox.php'; ?>
+<?php require '../../includes/javascripts/desabilCampoCheckBox.php'; ?>
 
-<?php require 'includes/javascripts/testeCnpjeCpf.php'; ?>
-<?php require 'includes/javascripts/testeTelefone.php'; ?>
+<?php require '../../includes/javascripts/testeCnpjeCpf.php'; ?>
+<?php require '../../includes/javascripts/testeTelefone.php'; ?>
 <!-- Campos Obrigatorios -->
 <script language="JavaScript">
 
@@ -127,7 +127,7 @@ if ($cli instanceof ClientePJ) {
 ?>
 
 <div id="demo">
-    <form method="post" action="tecnico.php?id_menu=editar_cliente&id_cliente=<?= $id_cliente ?>" onsubmit="return formCheck(this);">       
+    <form method="post" action="?id_menu=cliente/editar_cliente&id_cliente=<?= $id_cliente ?>" onsubmit="return formCheck(this);">       
         <table>
             <tbody>
                 <tr>
@@ -238,7 +238,7 @@ if ($cli instanceof ClientePJ) {
                                 if ($(this).val()) {
                                     $('#cod_cidades').hide();
                                     $('.carregando').show();
-                                    $.getJSON('ajax/cidades.ajax.php?search=', {cod_estados: $(this).val(), ajax: 'true'}, function (j) {
+                                    $.getJSON('../../ajax/cidades.ajax.php?search=', {cod_estados: $(this).val(), ajax: 'true'}, function (j) {
                                         var options = '<option value=""></option>';
                                         for (var i = 0; i < j.length; i++) {
                                             options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';

@@ -2,19 +2,19 @@
 <!--
 MAscaras em campos
 -->
-<?php require 'includes/javascripts/mascaras_campos_valores_monetario.php'; ?>
+<?php require '../../includes/javascripts/mascaras_campos_valores_monetario.php'; ?>
 
 <!--
 DESABILITAR CAMPOS COM CHECKBOX
 -->
-<?php require 'includes/javascripts/desabilCampoCheckBox.php'; ?>
+<?php require '../../includes/javascripts/desabilCampoCheckBox.php'; ?>
 
 <!-- TESTE do CNPJ e CPF -->
-<?php require 'includes/javascripts/testeCnpjeCpf.php'; ?>
+<?php require '../../includes/javascripts/testeCnpjeCpf.php'; ?>
 
 
 <!-- TESTE campo Telefone -->
-<?php require 'includes/javascripts/testeTelefone.php'; ?>
+<?php require '../../includes/javascripts/testeTelefone.php'; ?>
 
 <!-- Campos Obrigatorios a serem preenchidos -->
 <script language="JavaScript">
@@ -81,7 +81,7 @@ DESABILITAR CAMPOS COM CHECKBOX
 
 
 <div>
-    <h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Novo</h2>
+    <h2><?php include_once 'cliente/includes/nav_wizard.php'; ?> -> Novo</h2>
 </div>
 <hr>
 
@@ -102,7 +102,7 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
 ?>
 
 <div class="" >
-    <form method="post" action="tecnico.php?id_menu=novo_cliente" onsubmit="return formCheck(this);">
+    <form method="post" action="?id_menu=cliente/novo_cliente" onsubmit="return formCheck(this);">
         <table>
             <tbody>
                 <tr>
@@ -195,7 +195,7 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
                                     if ($(this).val()) {
                                         $('#cod_cidades').hide();
                                         $('.carregando').show();
-                                        $.getJSON('ajax/cidades.ajax.php?search=', {cod_estados: $(this).val(), ajax: 'true'}, function (j) {
+                                        $.getJSON('../../ajax/cidades.ajax.php?search=', {cod_estados: $(this).val(), ajax: 'true'}, function (j) {
                                             var options = '<option value=""></option>';
                                             for (var i = 0; i < j.length; i++) {
                                                 options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';

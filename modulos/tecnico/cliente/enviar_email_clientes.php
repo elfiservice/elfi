@@ -1,10 +1,10 @@
 <div>
-    <h2><a href="tecnico.php?id_menu=cliente">Clientes</a> -> Enviar Emails para Todos Clientes</h2>
+    <h2><?php include_once 'cliente/includes/nav_wizard.php'; ?> -> Enviar Emails para Todos Clientes</h2>
 </div>
 <hr>
 
 <?php
-require 'includes/javascripts/editor_texto.php';
+require '../../includes/javascripts/editor_texto.php';
 
 
 $clienteCtrl = new ClienteCtrl();
