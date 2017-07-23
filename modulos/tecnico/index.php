@@ -49,6 +49,7 @@ $file_folder = strtoupper(basename(__DIR__));
         ?>
 
         <h2 style="text-align: center;" ><?= $file_folder ?></h2>
+        <a class="  " href="?id_menu=notificacoes&idc=<?= $userlogin->getId_colaborador() ?>&setor=tec"><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
         <div style="">
             <div id="colaborador_logado">
                 <?php require '../../includes/colaborador_logado.inc.php'; ?>
@@ -60,48 +61,49 @@ $file_folder = strtoupper(basename(__DIR__));
 
         <?php
         $tipo_conta = $userlogin->getTipo();
-        
+
 //ALTERAR MENUS  PARA CADA MODULO
         if ($tipo_conta == "ad" && $userlogin->getId_colaborador() == 1) {
             $rel_menu_link_to_dev = "";
-            
-        }else if ($tipo_conta == "tec") {
+        } else if ($tipo_conta == "tec") {
             $rel_menu_link = "";
         } else {
             WSErro("Acesso Restrito para seu tipo de Usuario!", WS_ALERT);
         }
-        
-        
+
+
         include_once 'menu.php';
-            ?>
-            
+        ?>
 
-            <div style="margin:20px 0px 20px 0px;">
 
-                <div id="painel">
-                    <?php
-                    //QUERY STRING
-                    if (!empty($menu)):
-                        $includepatch = __DIR__ . DIRECTORY_SEPARATOR .  strip_tags(trim($menu) . '.php');
-                    else:
-                        $includepatch = __DIR__ . DIRECTORY_SEPARATOR . $menu .'.php';
-                    endif;
+        <div style="margin:20px 0px 20px 0px;">
 
-                    if (file_exists($includepatch)):
-                        require_once($includepatch);
-                    elseif($menu == "timeline"):
-                        require_once ('../../timeline.php');
-                    else:
-                        echo "<div class=\"content notfound\">";
-                        WSErro("<b>Erro ao incluir tela:</b> Erro ao incluir o controller /{$menu}.php!", WS_ERROR);
-                        echo "</div>";
-                    endif;
-                    ?>
-                </div> <!-- painel -->
+            <div id="painel">
+                <?php
+                //QUERY STRING
+                if (!empty($menu)):
+                    $includepatch = __DIR__ . DIRECTORY_SEPARATOR . strip_tags(trim($menu) . '.php');
+                else:
+                    $includepatch = __DIR__ . DIRECTORY_SEPARATOR . $menu . '.php';
+                endif;
 
-            </div> 
+                if (file_exists($includepatch)):
+                    require_once($includepatch);
+                elseif ($menu == "timeline"):
+                    require_once ('../../timeline.php');
+                elseif ($menu == "notificacoes"):
+                    require_once ('../../notificacoes.php');
+                else:
+                    echo "<div class=\"content notfound\">";
+                    WSErro("<b>Erro ao incluir tela:</b> Erro ao incluir o controller /{$menu}.php!", WS_ERROR);
+                    echo "</div>";
+                endif;
+                ?>
+            </div> <!-- painel -->
 
-	
+        </div> 
 
+
+        <script src="../../js/notificacao.js"></script>    
     </body>
 </html>

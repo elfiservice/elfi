@@ -22,7 +22,7 @@ $(function () {
 
 
     setInterval(function () {
-        var url = "ajax/notificar_setor_tec.php";
+        var url = "../../ajax/notificar_setor_tec.php";
         //var valor = jQuery("#j_notificacao").load(url);
 //         console.log(valor.data(v));
 
