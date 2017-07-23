@@ -127,20 +127,27 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
                     <td><div class="j_ie"></div></td>                                     
                 </tr>
             <script>
+                var checkboxTypeCPF_CNPJ = $("#tipo");
+                var fillTypeCPF_CNPJ = $(".j_tipo");
+                var valueCPF = "";
+                var valueCNPJ = "";
                 var verificaTipo = function () {
-                    if ($("#tipo").attr("checked")) {
-                        $(".j_label_tipo").html('CPF');
-                        $(".j_tipo_c_valor").remove();
-                        $(".j_ie_c_valor").remove();
-                        $(".j_tipo").html('<input value="<?php if (isset($dados['cpf'])) {echo $dados['cpf'];} ?>" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />');
+                    
+                    var labelType = $(".j_label_tipo");
+                   
+                    if (checkboxTypeCPF_CNPJ.attr("checked")) {
+                        labelType.html('CPF');
+                        valueCNPJ = $(".input-cnpj").val();
+                        
+                        fillTypeCPF_CNPJ.html('<input class="input-cpf" value="'+ valueCPF +'" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />');
 
                         $(".j_label_ie").html('');
                         $(".j_ie").html('');
                     } else {
-                        $(".j_label_tipo").html('CNPJ');
-                        $(".j_tipo_c_valor").remove();
-                        $(".j_ie_c_valor").remove();
-                        $(".j_tipo").html('<input value="<?php if (isset($dados['cnpj'])) {echo $dados['cnpj'];} ?>" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />');
+                        labelType.html('CNPJ');
+                        valueCPF = $(".input-cpf").val() || "";
+                        
+                        fillTypeCPF_CNPJ.html('<input class="input-cnpj" value="'+ valueCNPJ +'" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />');
 
                         $(".j_label_ie").html('Inscrição Estadual');
                         $(".j_ie").html('<input type="text" name="ie" value="<?php if (isset($dados['ie'])) {echo $dados['ie'];} ?>" alt="ie" id="ie" size="10" />');
@@ -148,7 +155,7 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
                 };
                 verificaTipo();
 
-                $("#tipo").on("click", verificaTipo);
+                checkboxTypeCPF_CNPJ.on("click", verificaTipo);
 
             </script>               
 
