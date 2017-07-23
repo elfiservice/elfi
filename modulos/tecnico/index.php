@@ -65,10 +65,11 @@ $file_folder = strtoupper(basename(__DIR__));
 //ALTERAR MENUS  PARA CADA MODULO
         if ($tipo_conta == "ad" && $userlogin->getId_colaborador() == 1) {
             $rel_menu_link_to_dev = "";
-        } else if ($tipo_conta == "tec") {
+        } else if ($tipo_conta == "tec" || $tipo_conta == "ad") {
             $rel_menu_link = "";
         } else {
             WSErro("Acesso Restrito para seu tipo de Usuario!", WS_ALERT);
+            die;
         }
 
 
