@@ -107,16 +107,22 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
             <tbody>
                 <tr>
                     <td class="label ">Pessoa Física </td>
-                    <td><input type="checkbox" value="PF" name="tipo" id="tipo" <?php if (isset($dados['tipo'])) {echo "checked";} ?>  />               </td>
+                    <td><input type="checkbox" value="PF" name="tipo" id="tipo" <?php if (isset($dados['tipo'])) {
+    echo "checked";
+} ?>  />               </td>
                 </tr>
                 <tr>
                     <td class="label">Razão Social / Nome</td>
-                    <td class="input" COLSPAN="3"><input type="text" name="razao_social" value="<?php if (isset($dados['razao_social'])) {echo $dados['razao_social'];} ?>" size="50" maxlength="90" onkeyup="this.value = this.value.toUpperCase();" /></td>
-                        
+                    <td class="input" COLSPAN="3"><input type="text" name="razao_social" value="<?php if (isset($dados['razao_social'])) {
+    echo $dados['razao_social'];
+} ?>" size="50" maxlength="90" onkeyup="this.value = this.value.toUpperCase();" /></td>
+
                 </tr>
                 <tr>
                     <td class="label">Nome Fantasia</td>
-                    <td class="input" COLSPAN="3"><input type="text" name="nome_fantasia" value="<?php if (isset($dados['nome_fantasia'])) {echo $dados['nome_fantasia'];} ?>" size="50" onkeyup="this.value = this.value.toUpperCase();" /></td>
+                    <td class="input" COLSPAN="3"><input type="text" name="nome_fantasia" value="<?php if (isset($dados['nome_fantasia'])) {
+    echo $dados['nome_fantasia'];
+} ?>" size="50" onkeyup="this.value = this.value.toUpperCase();" /></td>
                 </tr>
                 <tr>
                     <td class="label j_label_tipo"></td>
@@ -129,28 +135,31 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
             <script>
                 var checkboxTypeCPF_CNPJ = $("#tipo");
                 var fillTypeCPF_CNPJ = $(".j_tipo");
+                var labelType = $(".j_label_tipo");
+                var labelIE = $(".j_label_ie");
+                var fillIE = $(".j_ie");
                 var valueCPF = "";
                 var valueCNPJ = "";
+                var valueIE = "";
                 var verificaTipo = function () {
-                    
-                    var labelType = $(".j_label_tipo");
-                   
+
                     if (checkboxTypeCPF_CNPJ.attr("checked")) {
                         labelType.html('CPF');
                         valueCNPJ = $(".input-cnpj").val();
-                        
-                        fillTypeCPF_CNPJ.html('<input class="input-cpf" value="'+ valueCPF +'" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />');
+                        valueIE = $(".input-ie").val();
 
-                        $(".j_label_ie").html('');
-                        $(".j_ie").html('');
+                        fillTypeCPF_CNPJ.html('<input class="input-cpf" value="' + valueCPF + '" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />');
+
+                        labelIE.html('');
+                        fillIE.html('');
                     } else {
                         labelType.html('CNPJ');
                         valueCPF = $(".input-cpf").val() || "";
-                        
-                        fillTypeCPF_CNPJ.html('<input class="input-cnpj" value="'+ valueCNPJ +'" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />');
 
-                        $(".j_label_ie").html('Inscrição Estadual');
-                        $(".j_ie").html('<input type="text" name="ie" value="<?php if (isset($dados['ie'])) {echo $dados['ie'];} ?>" alt="ie" id="ie" size="10" />');
+                        fillTypeCPF_CNPJ.html('<input class="input-cnpj" value="' + valueCNPJ + '" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />');
+
+                        labelIE.html('Inscrição Estadual');
+                        fillIE.html('<input class="input-ie" type="text" name="ie" value="' + valueIE + '" alt="ie" id="ie" size="10" />');
                     }
                 };
                 verificaTipo();
@@ -162,29 +171,35 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
             <tr>
                 <td class="label">Endereço</td>
                 <td class="input" COLSPAN="3"><input type="text" name="endereco"
-                                                     value="<?php if (isset($dados['endereco'])) {echo $dados['endereco'];} ?>" size="50" maxlength="180"
+                                                     value="<?php if (isset($dados['endereco'])) {
+    echo $dados['endereco'];
+} ?>" size="50" maxlength="180"
                                                      onkeyup="this.value = this.value.toUpperCase();" /></td>
             </tr>
             <tr>
                 <td class="label">Bairro</td>
-                <td class="input"><input type="text" name="bairro" value="<?php if (isset($dados['bairro'])) {echo $dados['bairro'];} ?>"
+                <td class="input"><input type="text" name="bairro" value="<?php if (isset($dados['bairro'])) {
+    echo $dados['bairro'];
+} ?>"
                                          size="30" maxlength="90"
                                          onkeyup="this.value = this.value.toUpperCase();" /></td>
                 <td class="label2">CEP</td>
-                <td class="input2"><input type="text" id="cep" name="cep" alt="cep" value="<?php if (isset($dados['cep'])) {echo $dados['cep'];} ?>" /></td>
+                <td class="input2"><input type="text" id="cep" name="cep" alt="cep" value="<?php if (isset($dados['cep'])) {
+    echo $dados['cep'];
+} ?>" /></td>
             </tr>
             <tr>
                 <td class="label">Estado</td>
                 <td class="input">
                     <select name="cod_estados" id="cod_estados">
                         <option value=""> </option>
-                        <?php
-                        $estados = $clienteCtrl->buscarEstado("cod_estados, sigla", "ORDER BY sigla");
-                        foreach ($estados as $row) {
+<?php
+$estados = $clienteCtrl->buscarEstado("cod_estados, sigla", "ORDER BY sigla");
+foreach ($estados as $row) {
 
-                            echo '<option value="' . $row['cod_estados'] . '">' . $row['sigla'] . '</option>';
-                        }
-                        ?>
+    echo '<option value="' . $row['cod_estados'] . '">' . $row['sigla'] . '</option>';
+}
+?>
                     </select>
                 </td>
                 <td class="label2">Cidade</td>
@@ -219,15 +234,21 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
             </tr>
             <tr>
                 <td class="label">TEL</td>
-                <td class="input"><input value="<?php if (isset($dados['phone'])) {echo $dados['phone'];} ?>" type="text" id="phone" name="phone"
+                <td class="input"><input value="<?php if (isset($dados['phone'])) {
+    echo $dados['phone'];
+} ?>" type="text" id="phone" name="phone"
                                          alt="phone" onchange="Contar(this)" /></td>
                 <td class="label2">CEL</td>
-                <td class="input2"><input value="<?php if (isset($dados['cel'])) {echo $dados['cel'];} ?>" type="text" id="cel" name="cel" alt="cel"
+                <td class="input2"><input value="<?php if (isset($dados['cel'])) {
+    echo $dados['cel'];
+} ?>" type="text" id="cel" name="cel" alt="cel"
                                           onchange="Contar(this)" /></td>
             </tr>
             <tr>
                 <td class="label">FAX</td>
-                <td class="input"><input value="<?php if (isset($dados['fax'])) {echo $dados['fax'];} ?>" type="text" id="fax" name="fax" alt="fax"
+                <td class="input"><input value="<?php if (isset($dados['fax'])) {
+    echo $dados['fax'];
+} ?>" type="text" id="fax" name="fax" alt="fax"
                                          onchange="Contar(this)" /></td>
                 <td></td>
                 <td></td>
@@ -235,7 +256,9 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
 
             <tr>
                 <td class="label">Email Técnico</td>
-                <td class="input"><input value="<?php if (isset($dados['email_tec'])) {echo $dados['email_tec'];} ?>" type="email" id="email_tec"
+                <td class="input"><input value="<?php if (isset($dados['email_tec'])) {
+    echo $dados['email_tec'];
+} ?>" type="email" id="email_tec"
                                          name="email_tec" /></td>
                 <td></td>
                 <td></td>
@@ -243,8 +266,10 @@ if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
             </tr>
             <tr>
                 <td class="label">Email Financ./Admin.</td>
-                <td class="input"><input value="<?php if (isset($dados['email_admin'])) {echo $dados['email_admin'];} ?>"  type="email" id="email_admin"
-                                          name="email_admin" /></td>
+                <td class="input"><input value="<?php if (isset($dados['email_admin'])) {
+    echo $dados['email_admin'];
+} ?>"  type="email" id="email_admin"
+                                         name="email_admin" /></td>
                 <td></td>
                 <td></td>
             </tr>
