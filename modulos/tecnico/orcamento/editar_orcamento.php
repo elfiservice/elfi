@@ -73,8 +73,8 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
         }
 
         $dataHj = date('d/m/Y');
-        //$listaEmailClienteSituacaoOrc = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
-        $listaEmailClienteSituacaoOrc = array("junior@elfiservice.com.br");
+        $listaEmailClienteSituacaoOrc = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
+        //$listaEmailClienteSituacaoOrc = array("junior@elfiservice.com.br");
         $assuntoEmail = "Alteração Situação do Orçamento";
         $textoCorpo = "<p>Olá, <b>{$OrcBd['razao_social_contr']}</b> a proposta de Nº <b>{$OrcBd['n_orc']}.{$OrcBd['ano_orc']}</b> foi alterada:</p> <p> A situação dela agora esta como: <b>\"{$situacao_orc}\"</b> em <b>{$dataHj }</b>. </p> ";
         $email = new EmailGenerico($listaEmailClienteSituacaoOrc, $assuntoEmail, $textoCorpo, array(), $listaEmails);

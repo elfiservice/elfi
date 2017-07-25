@@ -86,8 +86,8 @@ if ($form && $form['salvar_orc']) {
 
             if ($data_inicio != "0000-00-00" && $data_conclusao == "0000-00-00") {
                 $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
-                //$listaEmailCliente = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
-                $listaEmailCliente = array("junior@elfiservice.com.br");
+                $listaEmailCliente = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
+                //$listaEmailCliente = array("junior@elfiservice.com.br");
                 $textoCorpoDataInicio = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br> <p> Data de inicio agendada para: <b>{$dataInicioBr}</b> </p><br>Em breve entraremos em contato para acertar os detalhes. ";
                 $email = new EmailGenerico($listaEmailCliente, "Proposta com Data programada", $textoCorpoDataInicio, array(), $listaEmails);
                 if ($email->enviarEmailSMTP()) {
@@ -101,8 +101,8 @@ if ($form && $form['salvar_orc']) {
                 $dataInicioBr = Formatar::formatarDataSemHora($data_inicio);
                 $dataConcluidoBr = Formatar::formatarDataSemHora($data_conclusao);
                 //WWW/orcamento/aprovados/pesquisa_pos_venda.php?ido=2&idc=23
-                //$listaEmailClienteConcluido = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
-                $listaEmailClienteConcluido = array("junior@elfiservice.com.br");
+                $listaEmailClienteConcluido = array($orcObj->getEmailContrat(),$orcObj->getEmailObra());
+                //$listaEmailClienteConcluido = array("junior@elfiservice.com.br");
                 $textoCorpo = "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> foi alterada:<br>"
                         . "<p> Ela foi marcada como <b>\"Concluída\"</b>, tendo seu inicio em <b>{$dataInicioBr}</b> e seu término em <b>{$dataConcluidoBr}</b> </p><br>"
                         . "Por favor, nos dê seu parecer sobre nosso atendimento, será de grande ajuda para o desenvolvimento de nossa parceria.<br><br>"

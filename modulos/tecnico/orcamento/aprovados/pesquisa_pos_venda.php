@@ -112,10 +112,10 @@
                 $orcamentoObj = new Orcamento($id_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "s", "", "", "", "", "", "");
                 $orcamentoCtrl->atualizarOrcamento($orcamentoObj);
                 //enviar Email confirmando o Envio da Pesquisa e agradecendo o Cliente.
-               // $listaEmailTo = array($orcObj->getEmailContrat(), $orcObj->getEmailObra());
-                $listaEmailTo = array("elfiservice@hotmail.com");
-                               
-                 $email = new EmailGenerico($listaEmailTo, "Recebemos sua pesquisa", "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> recebemos a sua pesquisa. ", array(), array());
+                $listaEmailTo = array($orcObj->getEmailContrat(), $orcObj->getEmailObra());
+                //$listaEmailTo = array("junior@elfiservice.com.br");
+                        
+                 $email = new EmailGenerico($listaEmailTo, "Recebemos sua pesquisa", "Olá, <b>{$orcObj->getRazaoSocialContrat()}</b> a proposta de Nº <b>{$orcObj->getNOrc()}.{$orcObj->getAnoOrc()}</b> recebemos a sua pesquisa. ", array(), array("junior@elfiservice.com.br"));
                          if($email->enviarEmailSMTP()){
                              //WSErro("Enviado email informando Alteração para {$orcObj->getEmailContrat()}, informando a Data de Inicio!", WS_ALERT);
                          } else{
