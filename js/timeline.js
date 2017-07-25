@@ -5,7 +5,7 @@ $(function () {
         var loaded = destino.find('li').length;  //conta quantos article existem na pagina
         //alert(loaded - 1);
         $.ajax({
-            url: 'ajax/timelinemore.php',
+            url: '../../ajax/timelinemore.php',
             data: {action: 'loadmore', offset: loaded - 1},
             type: 'POST',
             dataType: 'json',

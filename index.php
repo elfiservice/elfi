@@ -75,7 +75,7 @@ $nome_arquivo = basename($_SERVER['PHP_SELF'], '.php');
                             </a>
                         </div>
 
-                        <div class="w3-col m4 l3 w3-card-2 w3-margin-right w3-white">
+<!--                        <div class="w3-col m4 l3 w3-card-2 w3-margin-right w3-white">
                             <a href="modulos/rh/?id_menu=timeline"> 
                                 <img width="100%" src="imagens/tecnico.jpg" > 
                                 <div class="w3-container w3-center">
@@ -84,7 +84,7 @@ $nome_arquivo = basename($_SERVER['PHP_SELF'], '.php');
                                     </p>
                                 </div>      
                             </a>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>

@@ -52,8 +52,8 @@
     <!--    <div class="j_insert"></div>-->
     <div class="centro">
         <a rel="j_list" class="j_load loadmore">Carregar mais</a>
-        <img class="form_load" src="imagens/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
+        <img class="form_load" src="../../imagens/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
     </div>
 </div>
-<script src="js/jquery.js"></script>     
-<script src="js/timeline.js"></script>    
+<script src="../../js/jquery.js"></script>     
+<script src="../../js/timeline.js"></script>    
