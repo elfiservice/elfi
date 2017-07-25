@@ -13,7 +13,7 @@
 
 
 <!-- MAscaras em campos valores-->
-<?php //require 'includes/javascripts/mascaras_campos_valores_monetario.php';  ?>
+<?php require '../../includes/javascripts/mascaras_campos_valores_monetario.php';  ?>
 <!-- FIM  MAscaras em campos -->
 
 
@@ -383,10 +383,10 @@
 
                 </tr>
                 <tr align="left">
-                    <td><input  onchange="soma11()" name="sum_vr_servico_orc"
+                    <td><input  name="sum_vr_servico_orc"
                                 id="vr_servico_orc" alt="decimal"  ></td>
 
-                    <td><input onchange="soma11()" name="sum_vr_material_orc"
+                    <td><input name="sum_vr_material_orc"
                                id="vr_material_orc" alt="decimal" size="15" maxlength="15"></td>
 
                     <td>R$ <input type="text" name="totalSum" id="totalSum" value=""
