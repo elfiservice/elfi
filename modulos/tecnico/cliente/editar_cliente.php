@@ -108,18 +108,16 @@ if (filter_has_var(INPUT_POST, "salvar_editar_cliente")) {
     }
 }
 
-
+//Decide se Empresa ou Pessoa Fisica a partir do CheckBox
 if ($cli instanceof ClientePJ) {
-    $cnpj_cpf_label = 'CNPJ';
-    $cnpj_cpf_input = '<input class="j_tipo_c_valor" value="' . $cli->getCnpj() . '" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />';
-    $ie_rg_label = 'Inscrição Estadual';
-    $ie_rg_input = '<input class="j_ie_c_valor" type="text" name="ie" value="' . $cli->getIe() . '" alt="ie" id="ie" size="10" />';
+    $cnpj_input = $cli->getCnpj();
+    $cpf_input = "";
+    $ie_input = $cli->getIe();
     $tipo = "";
 } else if ($cli instanceof ClientePF) {
-    $cnpj_cpf_label = 'CPF';
-    $cnpj_cpf_input = '<input class="j_tipo_c_valor" value="' . $cli->getCpf() . '" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />';
-    $ie_rg_label = '';
-    $ie_rg_input = '';
+    $cnpj_input = "";
+    $cpf_input = $cli->getCpf();
+    $ie_input = "";    
     $tipo = "checked";
 } else {
     WSErro("Ops! Erro no Objeto do Sistema!", WS_ERROR, "die");
@@ -143,37 +141,47 @@ if ($cli instanceof ClientePJ) {
                     <td class="input" COLSPAN="3"><input type="text" name="nome_fantasia" value="<?= $cli->getNomeFantasia() ?>" size="50" onkeyup="this.value = this.value.toUpperCase();"/></td>
                 </tr>
                 <tr>
-                    <td class="label j_label_tipo"><?= $cnpj_cpf_label ?></td>
-                    <td><div class="j_tipo"></div><?= $cnpj_cpf_input ?></td>
+                    <td class="label j_label_tipo"></td>
+                    <td><div class="j_tipo"></div></td>
                 </tr>
                 <tr>
-                    <td class="label j_label_ie"><?= $ie_rg_label ?></td>
-                    <td><div class="j_ie"></div><?= $ie_rg_input ?></td>                                     
+                    <td class="label j_label_ie"></td>
+                    <td><div class="j_ie"></div></td>                                     
                 </tr>
             <script>
+                                
+                var checkboxTypeCPF_CNPJ = $("#tipo");
+                var fillTypeCPF_CNPJ = $(".j_tipo");
+                var labelType = $(".j_label_tipo");
+                var labelIE = $(".j_label_ie");
+                var fillIE = $(".j_ie");
+                var valueCPF = "<?=  $cpf_input ?>";
+                var valueCNPJ = "<?=  $cnpj_input ?>";
+                var valueIE = "<?=  $ie_input ?>";
                 var verificaTipo = function () {
-                    if ($("#tipo").attr("checked")) {
-                        $(".j_label_tipo").html('CPF');
-                        $(".j_tipo_c_valor").remove();
-                        $(".j_ie_c_valor").remove();
-                        $(".j_tipo").html('<input value="" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />');
 
-                        $(".j_label_ie").html('');
-                        $(".j_ie").html('');
+                    if (checkboxTypeCPF_CNPJ.attr("checked")) {
+                        labelType.html('CPF');
+                        valueCNPJ = $(".input-cnpj").val() || "";
+                        valueIE = $(".input-ie").val() || "";
+
+                        fillTypeCPF_CNPJ.html('<input class="input-cpf" value="' + valueCPF + '" type="text" id="cpf" name="cpf" alt="cpf" onBlur="TESTA();" />');
+
+                        labelIE.html('');
+                        fillIE.html('');
                     } else {
-                        $(".j_label_tipo").html('CNPJ');
-                        $(".j_tipo_c_valor").remove();
-                        $(".j_ie_c_valor").remove();
-                        $(".j_tipo").html('<input value="" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />');
+                        labelType.html('CNPJ');
+                        valueCPF = $(".input-cpf").val() || "";
 
-                        $(".j_label_ie").html('Inscrição Estadual');
-                        $(".j_ie").html('<input type="text" name="ie" value="" alt="ie" id="ie" size="10" />');
+                        fillTypeCPF_CNPJ.html('<input class="input-cnpj" value="' + valueCNPJ + '" type="text" id="cnpj" name="cnpj" alt="cnpj" onBlur="TESTA();" />');
+
+                        labelIE.html('Inscrição Estadual');
+                        fillIE.html('<input class="input-ie" type="text" name="ie" value="' + valueIE + '" alt="ie" id="ie" size="10" />');
                     }
                 };
-                //verificaTipo();
+                verificaTipo();
 
-                $("#tipo").on("click", verificaTipo);
-
+                checkboxTypeCPF_CNPJ.on("click", verificaTipo);
             </script>
             <tr>
                 <td class="label">Endereço</td>
@@ -228,9 +236,6 @@ if ($cli instanceof ClientePJ) {
                     </select>
 
                     <script src="http://www.google.com/jsapi"></script>
-                    <script type="text/javascript">
-                        google.load('jquery', '1.3');
-                    </script>		
 
                     <script type="text/javascript">
                         $(function () {

@@ -1,10 +1,10 @@
 <?php
 ?>
 <!-- TESTE do CNPJ e CPF -->
-
+<!--
 <script type="text/javascript"
-	src="http://www.shiguenori.com/jquery/jquery-1.3.1.js"></script>
-<script type="text/javascript" src="./js/validacao/jquery.validate.js"></script>
+	src="../../js/jquery.js"></script>-->
+<script type="text/javascript" src="../../js/validacao/jquery.validate.js"></script>
 
 <script> 
 function isNUMB(c) 
