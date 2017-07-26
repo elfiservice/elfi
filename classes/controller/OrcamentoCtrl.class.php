@@ -254,7 +254,8 @@ class OrcamentoCtrl {
         if ($this->OrcDao->insert($camposBd, $valoresUser, $tabela)) {
             
             $orc = $this->buscarOrcamentoPorId("*", "WHERE id = '$valores[0]' ");
-            LogCtrl::inserirLog($valores[3], "Adicionado <b>Historico</b> no orcamento <b>aprovado</b> <a href=\"?id_menu=hitorico_orc_aprovado&id_orc={$orc->getId()}#{$this->OrcDao->lastID()}\"<b>{$orc->getNOrc()}.{$orc->getAnoOrc()}</b></a>", "tec");
+            LogCtrl::inserirLog($valores[3], "Adicionado <b>Historico</b> no orcamento <b>aprovado</b> <a href=\"?id_menu=orcamento/aprovados/hitorico_orc_aprovado&id_orc={$orc->getId()}#{$this->OrcDao->lastID()}\"<b>{$orc->getNOrc()}.{$orc->getAnoOrc()}</b></a>", "tec");
+            //LogCtrl::inserirLog($valores[3], "Adicionado <b>Historico</b> no orcamento <b>aprovado</b> <a  href=\"#\" onclick=\"window.open(\'orcamento/aprovados/hitorico_orc_aprovado.php?id_orc={$orc->getId()}#{$this->OrcDao->lastID()}\', \'Pagina\', \'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10\');\"><b>{$orc->getNOrc()}.{$orc->getAnoOrc()}</b></a>", "tec");
             return TRUE;
         } else {
             return FALSE;
