@@ -44,8 +44,11 @@ class Login extends Conexao {
         session_destroy();
         unset($_SESSION['userlogin']);
     }
-
-    //PRIVATESZ
+    
+    
+    ////////////////////
+    //PRIVATES
+    ///////////////////
     private function setLogin() {
 
         if (!$this->email || !$this->senha || !Check::email($this->email)) {
@@ -55,30 +58,8 @@ class Login extends Conexao {
             $this->error = array('Os dados informados não são compativeis!', WS_ALERT);
             $this->result = false;
         } else {
-
             $this->execute();
-
-//                    // Create the idx session var
-//                    $_SESSION['idx'] = base64_encode("g4p3h9xfn8sq03hs2234$id");
-//                    // Create session var for their username
-//                    $username = $row["Login"];
-//                    $_SESSION['Login'] = $username;
-            //mysql_query("UPDATE colaboradores SET last_log_date=now() WHERE id_colaborador = '$id' LIMIT 1");
-        } // close while
-        // Remember Me Section
-//                if ($remember == "yes") {
-//                    $encryptedID = base64_encode("g4enm2c0c4y3dn3727553$id");
-//                    setcookie("idCookie", $encryptedID, time() + 60 * 60 * 24 * 100, "/"); // Cookie set to expire in about 30 days
-//                    setcookie("passCookie", $pass, time() + 60 * 60 * 24 * 100, "/"); // Cookie set to expire in about 30 days
-//                }
-        // All good they are logged in, send them to homepage then exit script
-//                $_SESSION['email'] = $email;
-//                $_SESSION['pass'] = $pass;
-//                                    $_SESSION['tipo_user'] = $row["tipo"];
-//                include './classes/Config.inc.php';
-//                LogCtrl::inserirLog($_SESSION['id'], "Colaborador logado", $_SESSION['tipo_user']);
-//
-//                $header = header("location: index.php");
+        } 
     }
 
     private function getUser() {
@@ -101,8 +82,7 @@ class Login extends Conexao {
         }
 
         $_SESSION['userlogin'] = $this->result;
-        //var_dump($_SESSION['userlogin']);
-        //die;
+
         //DEVIDO ao SISTEMA de LOGIN ANTERIOR - Mantive essas variaveis na Sessao
         $_SESSION['id'] = $this->result->getId_colaborador();
         $_SESSION['Login'] = $this->result->getLogin();
@@ -114,11 +94,9 @@ class Login extends Conexao {
         }
         LogCtrl::inserirLog($this->result->getId_colaborador(), "Colaborador logado", $this->result->getTipo());
 
-        //var_dump($this->result);
         $this->error = array("Ola {$this->result->getLogin()}, seja bem vindo(a). Aguarde redirecionamento. ", WS_ACCEPT);
         $this->result = true;
-        // var_dump($_SESSION['userlogin']);
-        // die;
+
     }
 
 }

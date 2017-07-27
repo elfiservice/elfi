@@ -113,7 +113,8 @@
                                 $clienteCtrl = new ClienteCtrl();
                                 $clienteBd = $clienteCtrl->buscarBD("*", "WHERE mostrar = '1' ORDER BY razao_social");
                                 foreach ($clienteBd as $cliente => $row) {
-                                    echo '<option id="clientID" value="' . $row->getId() . '">' . $row->getRazaoSocial() . '</option>';
+                                    $nome_empresa = ($row->getNomeFantasia() == $row->getRazaoSocial() ? $row->getRazaoSocial() : ($row->getNomeFantasia() == "" ? $row->getRazaoSocial() : $row->getRazaoSocial() . ' == ' .$row->getNomeFantasia()));
+                                    echo '<option id="clientID" value="' . $row->getId() . '">' . $nome_empresa . '</option>';
                                 }
                                 ?>
 
