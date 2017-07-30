@@ -2,7 +2,10 @@
     <h2><?php include_once 'orcamento/includes/nav_wizard.php'; ?> -><a href="?id_menu=orcamento/aprovados/acompanhar_orcamentos">Aprovados</a> -> Atualizar</h2>
 </div>
 <hr>
-
+<!--
+MAscaras em campos
+-->
+<?php require '../../includes/javascripts/mascaras_campos_valores_monetario.php';  ?>
 
 <?php
 $id_orc = filter_input(INPUT_GET, 'id_orc', FILTER_VALIDATE_INT);
@@ -198,10 +201,10 @@ if ($form && $form['salvar_orc']) {
         var data = digData;
         var tam = data.length;
 
-        var dia = data.substr(0, 2)
-        var mes = data.substr(3, 2)
-        var ano = data.substr(6, 4)
-        if (tam == 10) {
+        var dia = data.substr(0, 2);
+        var mes = data.substr(3, 2);
+        var ano = data.substr(6, 4);
+        if (tam === 10) {
 
             if ((ano > 1900) || (ano < 2100)) {
                 switch (mes) {
@@ -216,7 +219,7 @@ if ($form && $form['salvar_orc']) {
                             //alert("A Data " + data + " OK!");
                             return true;
                         }
-                        break
+                        break;
                     case '04':
                     case '06':
                     case '09':
@@ -226,26 +229,26 @@ if ($form && $form['salvar_orc']) {
                             //alert("A Data " + data + " OK!");
                             return true;
                         }
-                        break
+                        break;
                     case '02':
                         /* Validando ano Bissexto / fevereiro / dia */
-                        if ((ano % 4 == 0) || (ano % 100 == 0) || (ano % 400 == 0)) {
+                        if ((ano % 4 === 0) || (ano % 100 === 0) || (ano % 400 === 0)) {
                             bissexto = 1;
                         }
-                        if ((bissexto == 1) && (dia <= 29)) {
+                        if ((bissexto === 1) && (dia <= 29)) {
                             //alert("A Data " + data + " OK!");
                             return true;
                         }
-                        if ((bissexto != 1) && (dia <= 28)) {
+                        if ((bissexto !== 1) && (dia <= 28)) {
                             //alert("A Data " + data + " OK!"); 
                             return true;
                         }
-                        break
+                        break;
                 }
             }
         }
 
-        if (ano == 0000 && mes == 00 && dia == 00) {
+        if (ano === 0000 && mes === 00 && dia === 00) {
 
             return true;
         } else

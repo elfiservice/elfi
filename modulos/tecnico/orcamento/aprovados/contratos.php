@@ -82,7 +82,7 @@ $orcCtrl = new OrcamentoCtrl();
                                 <TD><?php echo $row['prazo_exec_orc']; ?> dia(s)</TD>
                                 <TD><?= ($row['data_aprovada'] == "0000-00-00" ? "--" : date('d/m/Y', strtotime($row['data_aprovada'])) ); ?></TD>
                                 <TD><?= ($row['data_inicio'] == "0000-00-00" ? "--" : date('d/m/Y', strtotime($row['data_inicio'])) ); ?></TD>
-                                <TD><?= ($row['data_inicio'] == "0000-00-00" ? "--" : date('d/m/Y', Formatar::addToDate($row['data_aprovada'], "12", "m")) ); ?></TD>
+                                <TD><?= ($row['data_inicio'] == "0000-00-00" ? "--" : date('d/m/Y', Formatar::addToDate($row['data_inicio'], "12", "m")) ); ?></TD>
 
                             </tr>
 
