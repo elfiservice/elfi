@@ -110,7 +110,7 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
                 <form name="alterar_situcao_orc" action="?ano_orc=<?php echo date('Y'); ?>&id_orc=<?php echo $id; ?>&id_menu=orcamento/editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
                     <select onchange="habilitaBtn()" name="itens_situcao_orc" id="itens_situcao_orc" class="formFieldsAno">
                         <option id="opcao" value=""><?php echo $situacao_orc; ?></option>
-                        <?php include "../../includes/orcamento/lista_situacao_orc.php"; ?>
+                        <?php include "includes/lista_situacao_orc.php"; ?>
                     </select>
                     <input type="submit" value="Alterar" name="alterar_situacao" id="salvar_situacao" disabled="disabled" />
 
