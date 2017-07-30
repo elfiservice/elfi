@@ -45,7 +45,7 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
     $situacao_orc = $_POST['itens_situcao_orc'];
     $id_cliente = filter_input(INPUT_POST, 'id_cliente');
     $data_aprovada = "";
-    if ($situacao_orc == "Aprovado") {
+    if ($situacao_orc == "Aprovado" || $situacao_orc == "Contrato") {
         $data_aprovada = date('Y-m-d');
     } else {
         $data_aprovada = date('0000-00-00');

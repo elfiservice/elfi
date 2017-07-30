@@ -1,10 +1,10 @@
 <?php
+
 /**
  * Formatar.class [ utilitario ]
  * Auxilia na Formatação de dados do Sistema
  * @copyright (c) 2016, Armando JR. ELFISERVICE
  */
-
 class Formatar {
 
     /**
@@ -16,7 +16,7 @@ class Formatar {
         return date('d/m/Y, H:i', strtotime($dataBD));
     }
 
-        /**
+    /**
      * Formatar data do Banco de Dados para o Padrão Brasileiro <b>SEM</b> a HORA e MINUTOS inclusos
      * @param date $dataBD = valor da DATA no formato do Banco de Dados <b>0000-00-00 00:00:00</b>
      * @return date  = retorna valor no formato BR <b>00/00/0000</b>
@@ -124,17 +124,16 @@ class Formatar {
         $valor = str_replace($source, $replace, $get_valor); //remove os pontos e substitui a virgula pelo ponto
         return $valor; //retorna o valor formatado para gravar no banco
     }
-    
+
     /**
      * Formatar valor do BD para Monetario Brasileiro
      * @param float $valorDoBancoDados = Valor vindo do Banco de Dados no formato <b>00000.00 </b>
      * @return number = formatado ex: 0.000,00
      */
     public static function moedaBR($valorDoBancoDados) {
-        return number_format($valorDoBancoDados, '2',',','.');
+        return number_format($valorDoBancoDados, '2', ',', '.');
     }
 
-    
     /**
      * Faz a diferença em DIAS das duas datas fornecidas <b>(NOTA: sem as HORAS e formato AMERICANO -> xxxx-xx-xx )</b> 
      * @param date $dataInical = Data no Formato <b>US ( xxxx-xx-xx ) inicial</b> a Menor
@@ -164,13 +163,12 @@ class Formatar {
         return $data->format('Y-m-d');
     }
 
-    
-        /**
-         * Formatar data para formato de <b>Periodo atrás</b>
-         * @param date $date = Formato 0000-00-00 00:00:00
-         * @return string = retorna data amigavel ex: xxminutos atrás, xx dias atrás, xx meses atras, etc..
-         */
-        public static function dataTimeLine($date) {
+    /**
+     * Formatar data para formato de <b>Periodo atrás</b>
+     * @param date $date = Formato 0000-00-00 00:00:00
+     * @return string = retorna data amigavel ex: xxminutos atrás, xx dias atrás, xx meses atras, etc..
+     */
+    public static function dataTimeLine($date) {
         if ($date == "0000-00-00 00:00:00") {
             return '<span style= "color: red;">Nunca Entrou</span>';
         }
@@ -204,15 +202,35 @@ class Formatar {
         if ($difference != 1) {
 
             if ($periods[$j] <> "mes") {
-                $periods[$j].= "s";
+                $periods[$j] .= "s";
             } else {
 
-                $periods[$j].= "es";
+                $periods[$j] .= "es";
             }
         }
 
         return "$difference $periods[$j] {$tense}";
     }
 
-    
+    /**
+     * Formatar data para adicionar <b>Dias</b> ou <b>Mes</b> ou <b>Anos</b> a mesma
+     * @param date $date = Formato 0000-00-00 00:00:00, int $number = Formato numeros inteiros, String $type = <b>Dia "d", Mes "m" e Ano "y"</b> 
+     * @return string = retorna data adicionando dia ou mes ou anos a ela no formato de <b>0000-00-00</b>
+     */
+    public static function addToDate($date, $number, $type) {
+        switch ($type) {
+            case 'd':
+                $type = ' day';
+                break;
+            case 'm':
+                $type = ' month';
+                break;
+            case 'y':
+                $type = ' year';
+                break;
+        }
+
+        return strtotime($date . "+" . $number . $type);
+    }
+
 }

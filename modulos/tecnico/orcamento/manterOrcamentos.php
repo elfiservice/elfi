@@ -29,7 +29,12 @@ $orcCrtl = new OrcamentoCtrl();
             <form name="acomp_aprovados" action="?id_menu=orcamento/aprovados/acompanhar_orcamentos" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Aprovados" name="acomp_aprovados_btn" />
             </form>
-        </li>    
+        </li>
+        <li>
+            <form name="contratos" action="?id_menu=orcamento/aprovados/contratos" method="POST" enctype="multipart/form-data">
+                <input class="bt_incluir"  type="submit" value="Contratos" name="contratos_btn" />
+            </form>
+        </li>          
         <li>
             <form name="relatorios_orc" action="?id_menu=orcamento/relatorios/relatorios_orc" method="POST" enctype="multipart/form-data">
                 <input class="bt_incluir"  type="submit" value="Relatorios" name="arelatorios_orc_btn" />
