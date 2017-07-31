@@ -5,7 +5,7 @@
  * Resp modelar Colaborador herdando de Usuario.class na tabela colaboradores
  * @copyright (c) 2016, Armando JR. ELFISERVICE
  */
-class Colaborador extends Usuario {
+class Colaborador {
 
     private $cpf;
     private $tipo;
