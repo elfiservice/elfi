@@ -38,9 +38,9 @@ switch ($Action) {
                     $class = "  ";
                 }
                 $count++;
-                $colabCtrl = new ColaboradorCtrl();
+                $userCtrl = new UsuarioCtrl();
                 $id_colab = $log->getId_colab();
-                $colab = $colabCtrl->buscarBD("*", "WHERE id_colaborador = '$id_colab' ");
+                $colab = $userCtrl->buscarBD("*", "WHERE id = '$id_colab' ");
                 //var_dump($colab[0]->getLogin());
 
 
