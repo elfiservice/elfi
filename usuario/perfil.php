@@ -43,8 +43,8 @@ $login = new Login();
         $orc_ctrl = new OrcamentoCtrl();
         $histOrcNACtrl = new HistoricoOrcNaoAprovadoCtrl();
 
-        $colabCtrl = new ColaboradorCtrl();
-        $user = $colabCtrl->buscarBD("*", "WHERE id_colaborador = '$id_user' ");
+        $colabCtrl = new UsuarioCtrl();
+        $user = $colabCtrl->buscarBD("*", "WHERE id = '$id_user' ");
 
 
         if ($user) {
@@ -52,17 +52,18 @@ $login = new Login();
                 ?>
 
                 <fieldset>
-                    <legend><b>Dados do Usuario: <?php echo $usuario->getLogin(); ?></b></legend>
+                    <legend><b>Dados do Usuario: <?= Formatar::prefixEmail($usuario->getLogin()); ?></b></legend>
                     <table>
                         <tr>
                             <td>Email:</td>
-                            <td><?php echo $usuario->getEmail(); ?></td>
+                            <td><?php echo $usuario->getLogin(); ?></td>
                         </tr>
                         <tr>
                             <td>CPF:</td>
                             <td><?php
                                 if ($_SESSION['id'] == $id_user) {
-                                    echo $usuario->getCpf();
+                                    //ToDo: pegar dos Dados do Colaborador
+                                    //echo $usuario->getCpf();
                                 }
                                 ?></td>
                         </tr>
@@ -72,7 +73,7 @@ $login = new Login();
                         </tr>
                         <tr>
                             <td>Nº de Orçamentos feitos:</td>
-                            <td><?php echo count($orc_ctrl->buscarOrcamentos("*", "WHERE id_colab = '" . $usuario->getId_colaborador() . "'")); ?></td>
+                            <td><?php echo count($orc_ctrl->buscarOrcamentos("*", "WHERE id_colab = '" . $usuario->getId() . "'")); ?></td>
                         </tr>
                         <tr>
                             <td>Nº de Orçamentos que esta acompanhando:</td>

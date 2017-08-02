@@ -233,4 +233,17 @@ class Formatar {
         return strtotime($date . "+" . $number . $type);
     }
 
+    /**
+     * Formatar <b>Email</b> retirando seu prefixo até o "@"
+     * @param String $email = String $type = <b>prefixo@sufixo</b> 
+     * @return string = retorna o prefixo do email fornecido
+     */
+    public static function prefixEmail($email) {
+
+        $array = explode("@", $email);
+        return $array[0];
+    }    
+    
+    
+
 }
