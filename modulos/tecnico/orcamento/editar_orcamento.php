@@ -104,7 +104,7 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
             </a>
         </li>
         <?php
-        if ($situacao_orc == "Aguardando aprovação" || $_SESSION['id'] == $id_colab && $situacao_orc != "concluido") {
+        if (($situacao_orc == "Aguardando aprovação" || $_SESSION['id'] == $id_colab || $_SESSION['id'] == 1 ) && $situacao_orc != "concluido") {
             ?>        
             <li>
                 <form name="alterar_situcao_orc" action="?ano_orc=<?php echo date('Y'); ?>&id_orc=<?php echo $id; ?>&id_menu=orcamento/editar_orcamento&itens_situcao_orc=" method="POST" enctype="multipart/form-data">
