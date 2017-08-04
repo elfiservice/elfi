@@ -45,9 +45,7 @@
 
         //$novo_colab_obj = new Colaborador("", $Login, md5($Senha), "", "", "0000-00-00 00:00:00", $Email, 0);
         $novo_usuarioObj = new Usuario("", "", $Email, md5($Senha), "", 0);
-//    var_dump($novo_colab_obj);
-//    die;
-        //$colabCtrl = new ColaboradorCtrl();
+
         if ($userCtrl->inserirBD($novo_usuarioObj)) {
             WSErro("Cadastro realizado com Sucesso!", WS_ACCEPT);
             $dados[] = null;

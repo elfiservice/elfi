@@ -1,13 +1,13 @@
 <?php
+$userCtrl = new UsuarioCtrl();
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 if (isset($dados['submitBtn'])) {
     unset($dados['submitBtn']);
 
-    $colabCtrl = new ColaboradorCtrl();
-    $colabCtrl->alterarTipoConta($dados);
+
+    $userCtrl->alterarTipoConta($dados);
 }
 ?>
-
 
 <h2>Controle Tipo de Conta</h2>
 <div id="demo">
@@ -23,14 +23,13 @@ if (isset($dados['submitBtn'])) {
         </thead>
         <tbody>
             <?php
-            $colabCtrl = new ColaboradorCtrl();
-            $colabs = $colabCtrl->buscarBD("*", "");
+            $colabs = $userCtrl->buscarBD("*", "");
 
             foreach ($colabs as $colab) {
                 ?>
                 <tr>
+                    <td>                        <?= Formatar::prefixEmail($colab->getLogin()) ; ?>                    </td>
                     <td>                        <?= $colab->getLogin(); ?>                    </td>
-                    <td>                        <?= $colab->getEmail(); ?>                    </td>
                     <td>                        <?= $colab->getLast_log_date(); ?>                    </td>
                     <td>                        <?= $colab->getTipo(); ?>                    </td>
                     <td>
@@ -48,7 +47,7 @@ if (isset($dados['submitBtn'])) {
                                 <option value="fi_tec_rh">	Todos os Centros	</option>
 
                             </select> 
-                            <input type="hidden" name="id_user" value="<?= $colab->getId_colaborador(); ?>" />
+                            <input type="hidden" name="id_user" value="<?= $colab->getId(); ?>" />
                             <input type="submit" value="Atualizar" name="submitBtn" />
                         </form>
                     </td>                                        

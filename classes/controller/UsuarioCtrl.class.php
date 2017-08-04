@@ -112,8 +112,8 @@ class UsuarioCtrl {
             $obj = new Usuario($id_user, "", "", $senha_nova_md5);
             if ($this->atualizarBD($obj)) {
                 //$userlogin->getEmail()
-                $textoCorpo = "<div> <p>Senha alterada com sucesso, segue abaixo:</p></div> <div> <p>Login: {$userlogin->getEmail()} <br> Nova Senha: <b>{$senha_nova}</b> </p></div>";
-                $email = new EmailGenerico(array($userlogin->getEmail()), "Senha Alterada no Sistema", $textoCorpo, array(), array(), 1);
+                $textoCorpo = "<div> <p>Senha alterada com sucesso, segue abaixo:</p></div> <div> <p>Login: {$userlogin->getLogin()} <br> Nova Senha: <b>{$senha_nova}</b> </p></div>";
+                $email = new EmailGenerico(array($userlogin->getLogin()), "Senha Alterada no Sistema", $textoCorpo, array(), array(), 1);
                 if($email->enviarEmailSMTP()){
                     $textoWSerro = "Atualizada a senha com sucesso!<br>Foi enviado um Email com seus novos dados.";
                 }else{

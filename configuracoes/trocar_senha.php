@@ -3,8 +3,8 @@
         if (isset($dados['submitBtn'])) {
             unset($dados['submitBtn']);
             
-            $colabCtrl = new ColaboradorCtrl();
-            $colabCtrl->alterarSenha($dados, $userlogin);
+            $userCtrl = new UsuarioCtrl();
+            $userCtrl->alterarSenha($dados, $userlogin);
               
         }
         ?>
