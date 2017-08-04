@@ -116,7 +116,6 @@ class ColaboradorCtrl {
             $senha_nova_md5 = md5($senha_nova);
             $obj = new Colaborador($id_user, "", $senha_nova_md5, "", "", "", "", "");
             if ($this->atualizarBD($obj)) {
-                //$userlogin->getEmail()
                 $textoCorpo = "<div> <p>Senha alterada com sucesso, segue abaixo:</p></div> <div> <p>Login: {$userlogin->getEmail()} <br> Nova Senha: <b>{$senha_nova}</b> </p></div>";
                 $email = new EmailGenerico(array($userlogin->getEmail()), "Senha Alterada no Sistema", $textoCorpo, array(), array(), 1);
                 if($email->enviarEmailSMTP()){
