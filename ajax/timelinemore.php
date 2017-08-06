@@ -47,7 +47,7 @@ switch ($Action) {
                 if ($colab == null) {
                     $colab = "Sistema";
                 } else {
-                    $colab = $colab[0]->getLogin();
+                    $colab = Formatar::prefixEmail($colab[0]->getLogin());
                 }
                 $data = Formatar::dataTimeLine($log->getData());
 

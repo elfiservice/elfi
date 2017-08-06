@@ -8,7 +8,7 @@ if ($userlogin) {
     $user = new UsuarioCtrl();
     $colabObj = $user->buscarBD("*", "WHERE id = '". $userlogin->getId() ."' ");
 foreach ($colabObj as $usuario){
-    echo 'Colaborador: <b>' . $userlogin->getLogin() . '</b> em ' . date(' j \d\e F \d\e Y, \a\s H:i', strtotime($usuario->getLast_log_date()));
+    echo 'Colaborador: <b>' . Formatar::prefixEmail($userlogin->getLogin()) . '</b> em ' . date(' j \d\e F \d\e Y, \a\s H:i', strtotime($usuario->getLast_log_date()));
 }
 } else {
 
