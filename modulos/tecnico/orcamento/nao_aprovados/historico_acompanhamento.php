@@ -112,7 +112,7 @@ session_start();
                     </tr>
                     <tr>
                         <td>Colaborador ELFI: </td>
-                        <td><input type="text" value="<?= $_SESSION['Login'] ?>" name="colab_elfi" readonly="readonly" /></td>
+                        <td><input type="text" value="<?= Formatar::prefixEmail($_SESSION['Login']) ?>" name="colab_elfi" readonly="readonly" /></td>
                     </tr>
                     <tr>
                         <td>Nome do contato:</td>

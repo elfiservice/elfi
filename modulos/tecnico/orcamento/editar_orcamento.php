@@ -53,7 +53,7 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 
 
     $data_ultima_alteracao = date('Y-m-d H:i:s');
-    $nome_usuario = $_SESSION['Login'];
+    $nome_usuario = Formatar::prefixEmail($_SESSION['Login']);
     $id_user = $_SESSION['id'];
     $orcObj = new Orcamento($orc, $id_cliente, $id_user, "", "", $nome_usuario, $situacao_orc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", $data_ultima_alteracao, "", $data_aprovada, "", "", "", "", "", "", "", "", "", "", "", "", "");
     $orcCrtlObj = new OrcamentoCtrl();
@@ -66,7 +66,7 @@ if (filter_has_var(INPUT_GET, 'itens_situcao_orc')) {
 
         $historicoNAproCtrl = new HistoricoOrcNaoAprovadoCtrl();
         $conversa = "Alterado situação do Orçamento para <b>{$situacao_orc}</b>";
-        $histOrcNAproOb = new HistoricoOrcNaoAprovado("", $orc, $data_ultima_alteracao, $id_user, $_SESSION['Login'], $contato_clint, $telefone_contr, $conversa);
+        $histOrcNAproOb = new HistoricoOrcNaoAprovado("", $orc, $data_ultima_alteracao, $id_user, $nome_usuario, $contato_clint, $telefone_contr, $conversa);
         if (!$historicoNAproCtrl->inserirBD($histOrcNAproOb)) {
 
             WSErro("Não foi possível Atualizar no historico, favor informar ao Administrador do sistema.", WS_ALERT);
