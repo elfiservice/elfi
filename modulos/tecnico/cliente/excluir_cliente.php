@@ -23,7 +23,7 @@
             $clienteUp = new $classFilha($id_cliente);
             $clienteUp->setMostrar('0');
            if( $clienteCtrl->atualizarBD($clienteUp)){
-               LogCtrl::inserirLog($userlogin->getId_colaborador(), "Cliente <b>{$cli->getRazaoSocial()}</b> <b><span>excluido</span></b> do Sistema", "tec");
+               LogCtrl::inserirLog($userlogin->getId(), "Cliente <b>{$cli->getRazaoSocial()}</b> <b><span>excluido</span></b> do Sistema", "tec");
                WSErro("OK! Cliente excluido do Sistema.", WS_ACCEPT, "die");
            }
         }

@@ -10,7 +10,7 @@ if (!$login->checkLogin()) {
     $userlogin = $login->getSession();
 }
 
-LogCtrl::inserirLog($userlogin->getId_colaborador(), "Colaborador saiu do sistema", $userlogin->getTipo());
+LogCtrl::inserirLog($userlogin->getId(), "Colaborador saiu do sistema", $userlogin->getTipo());
 
 $login->destroySession();
 header("Location: conectar.php");

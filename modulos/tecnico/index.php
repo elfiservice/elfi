@@ -49,7 +49,7 @@ $file_folder = strtoupper(basename(__DIR__));
         ?>
 
         <h2 style="text-align: center;" ><?= $file_folder ?></h2>
-        <a class="  " href="?id_menu=notificacoes&idc=<?= $userlogin->getId_colaborador() ?>&setor=tec"><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
+        <a class="  " href="?id_menu=notificacoes&idc=<?= $userlogin->getId() ?>&setor=tec"><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
         <div style="">
             <div id="colaborador_logado">
                 <?php require '../../includes/colaborador_logado.inc.php'; ?>

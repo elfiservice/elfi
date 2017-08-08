@@ -81,11 +81,11 @@ $login = new Login();
                         </tr>
                         <tr>
                             <td>Nº de Hitoricos em Orçamentos Não Aprovados:</td>
-                            <td><?php echo count($histOrcNACtrl->buscarBD("*", "WHERE id_colab = '" . $usuario->getId_colaborador() . "'")); ?></td>
+                            <td><?php echo count($histOrcNACtrl->buscarBD("*", "WHERE id_colab = '" . $usuario->getId() . "'")); ?></td>
                         </tr>
                         <tr>
                             <td>Nº de Historicos em Orçamentos Aprovados:</td>
-                            <td><?php echo count($orc_ctrl->buscarHistoricoOrcamento("*", "WHERE id_colab = '" . $usuario->getId_colaborador() . "'", "historico_orc_aprovado")); ?></td>
+                            <td><?php echo count($orc_ctrl->buscarHistoricoOrcamento("*", "WHERE id_colab = '" . $usuario->getId() . "'", "historico_orc_aprovado")); ?></td>
                         </tr>
 
                     </table>

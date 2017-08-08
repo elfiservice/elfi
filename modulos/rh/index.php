@@ -61,7 +61,7 @@ $file_folder = strtoupper(basename(__DIR__));
         $tipo_conta = $userlogin->getTipo();
         
 //ALTERAR MENUS  PARA CADA MODULO
-        if ($tipo_conta == "ad" && $userlogin->getId_colaborador() == 1) {
+        if ($tipo_conta == "ad" && $userlogin->getId() == 1) {
             $rel_menu_link = "cadastro_configuracao";
             
         }else if ($tipo_conta == "ad") {

@@ -281,7 +281,7 @@ foreach ($estados as $row) {
         </table>
         <hr>
         <input type="submit" value="Salvar" name="salvar_novo_cliente" /> 
-        <input type="hidden" name="usuario" value="<?= $userlogin->getId_colaborador(); ?>" />
+        <input type="hidden" name="usuario" value="<?= $userlogin->getId(); ?>" />
 
     </form>
 

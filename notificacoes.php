@@ -14,7 +14,7 @@
 
         <?php
         //$id_colab_logado = filter_input(INPUT_GET, 'idc');
-        $id_colab_logado = $userlogin->getId_colaborador();
+        $id_colab_logado = $userlogin->getId();
         $setor = filter_input(INPUT_GET, 'setor');
 
         $notiCtrl = new NotificacaoCtrl();

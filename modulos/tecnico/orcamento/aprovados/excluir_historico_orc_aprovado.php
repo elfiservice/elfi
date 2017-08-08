@@ -70,7 +70,7 @@ if ($id_historico) {
             <p>			    
                 <input class="bt_vermelho"  type="submit" name="excluir_editar_historico_orc_apro" value="Exluir"  />
                 <input type="hidden" value="<?= $data_hj; ?>" name="dia_hoje" hidden="hidden" />
-                <input type="hidden" name="usuario" value="<?= $userlogin->getId_colaborador(); ?>"  />
+                <input type="hidden" name="usuario" value="<?= $userlogin->getId(); ?>"  />
                 <input type="hidden" name="descricao_historico" value="<?= strip_tags($orcHistObj[0]['descricao']); ?>"  />
                 <input type="hidden" name="id_orc_acomp" value="<?= $orcHistObj[0]['id_acompanhamento']; ?>" />
                 <input type="hidden" name="id_historico" value="<?= $orcHistObj[0]['id']; ?>" />

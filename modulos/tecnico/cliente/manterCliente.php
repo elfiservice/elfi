@@ -11,7 +11,7 @@
             </form>
         </li>
         <?php
-        if ($userlogin->getId_colaborador() == 1) {
+        if ($userlogin->getId() == 1) {
             ?>
             <li>
                 <form name="enviar_email_clientes" action="?id_menu=cliente/enviar_email_clientes" method="POST" enctype="multipart/form-data">
