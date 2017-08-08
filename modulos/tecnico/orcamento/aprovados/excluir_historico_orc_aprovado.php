@@ -18,8 +18,8 @@ if (filter_has_var(INPUT_POST, 'excluir_editar_historico_orc_apro')) {
     $id_orc_acomp = filter_input(INPUT_POST, 'id_orc_acomp', FILTER_DEFAULT);
     $descricao_historico = filter_input(INPUT_POST, 'descricao_historico', FILTER_DEFAULT);
 
-    $id_colab = $userlogin->getId_colaborador();
-    $colab = $userlogin->getLogin();
+    $id_colab = $userlogin->getId();
+    $colab = Formatar::prefixEmail($userlogin->getLogin());
     $mostrar = '1'; //1 = a não mostrar no sistema
 
     $orcamentoCtrl = new OrcamentoCtrl();

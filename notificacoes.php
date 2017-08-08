@@ -32,13 +32,12 @@
             $colabCtrl = new UsuarioCtrl();
             $id_colab = $log->getId_colab();
             $colab = $colabCtrl->buscarBD("*", "WHERE id = '$id_colab' ");
-            //var_dump($colab[0]->getLogin());
 
 
             if ($colab == null) {
                 $colab = "Sistema";
             } else {
-                $colab = $colab[0]->getLogin();
+                $colab = Formatar::prefixEmail($colab[0]->getLogin());
             }
             ?>
             <li <?= $class ?>>

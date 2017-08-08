@@ -77,7 +77,7 @@ $login = new Login();
                         </tr>
                         <tr>
                             <td>Nº de Orçamentos que esta acompanhando:</td>
-                            <td><?php echo count($orc_ctrl->buscarOrcamentos("*", "WHERE colab_ultimo_contato_client = '" . $usuario->getLogin() . "'")); ?></td>
+                            <td><?php echo count($orc_ctrl->buscarOrcamentos("*", "WHERE colab_ultimo_contato_client = '" . Formatar::prefixEmail($usuario->getLogin()) . "'")); ?></td>
                         </tr>
                         <tr>
                             <td>Nº de Hitoricos em Orçamentos Não Aprovados:</td>
