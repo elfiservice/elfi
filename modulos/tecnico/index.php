@@ -49,7 +49,7 @@ $file_folder = strtoupper(basename(__DIR__));
         ?>
 
         <h2 style="text-align: center;" ><?= $file_folder ?></h2>
-        <a class="  " href="?id_menu=notificacoes&idc=<?= $userlogin->getId_colaborador() ?>&setor=tec"><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
+        <a class="  " href="?id_menu=notificacoes&idc=<?= $userlogin->getId() ?>&setor=tec"><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
         <div style="">
             <div id="colaborador_logado">
                 <?php require '../../includes/colaborador_logado.inc.php'; ?>
@@ -63,7 +63,7 @@ $file_folder = strtoupper(basename(__DIR__));
         $tipo_conta = $userlogin->getTipo();
         $tipo_conta_array = explode("_", $tipo_conta);
 //GESTÃO DE NIVEIS DE ACESSO DE USUARIOS
-        if ($tipo_conta == "ad" && $userlogin->getId_colaborador() == 1) {
+        if ($tipo_conta == "ad" && $userlogin->getId() == 1) {
             $rel_menu_link_to_dev = "";
         } else if ($tipo_conta == "ad" || in_array("tec", $tipo_conta_array)) {
             $rel_menu_link = "";

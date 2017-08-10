@@ -5,24 +5,19 @@
  * Resp modelar Colaborador herdando de Usuario.class na tabela colaboradores
  * @copyright (c) 2016, Armando JR. ELFISERVICE
  */
-class Colaborador extends Usuario {
+class Colaborador {
 
     private $cpf;
     private $tipo;
     private $Email;
 
-    public function __construct($id_colaborador, $Login, $Senha, $cpf, $tipo, $last_log_date, $Email, $email_activated) {
-        $this->setId_colaborador($id_colaborador);
-        $this->setLogin($Login);
-        $this->setSenha($Senha);
+    public function __construct($cpf, $tipo, $Email) {
         $this->cpf = $cpf;
         $this->tipo = $tipo;
-        $this->setLast_log_date($last_log_date);
         $this->Email = $Email;
-        $this->setEmail_activated($email_activated);
     }
 
-    public function getCpf() {
+        public function getCpf() {
         return $this->cpf;
     }
 

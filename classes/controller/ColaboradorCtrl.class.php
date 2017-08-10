@@ -13,7 +13,7 @@ class ColaboradorCtrl {
         $this->ColaboradorDao = new ColaboradorDAO();
     }
 
-        /**
+     /**
      * Fazer INSERT no BD na tabela = colaboradores
      * @param Colaborador $Obj = passar uma Instancia deste tipo para inserir no BD
      * @return boolean = TRUE se Sucesso ao inserir dados no BD e FALSE se houver algum problema na INSERÇÃO ou se o OBJETO não foi passado corretamente
@@ -102,13 +102,11 @@ class ColaboradorCtrl {
      * @return Mensagem de Erro ou Sucesso
      */
     public function alterarSenha($dados, $userlogin) {
-
         $senha_atual = md5($dados['passatual']);
         $senha_nova = $dados['passnova'];
         $senha_nova2 = $dados['passnova2'];
         $id_user = $dados['id_user'];
         if ((!$senha_atual) || (!$senha_nova) || (!$senha_nova2)) {
-
             return WSErro("Favor preencher todos os campos!", WS_ERROR);
         } else if ($senha_atual <> $userlogin->getSenha()) {
             return WSErro("Senha atual incorreta!", WS_ERROR);
@@ -118,7 +116,6 @@ class ColaboradorCtrl {
             $senha_nova_md5 = md5($senha_nova);
             $obj = new Colaborador($id_user, "", $senha_nova_md5, "", "", "", "", "");
             if ($this->atualizarBD($obj)) {
-                //$userlogin->getEmail()
                 $textoCorpo = "<div> <p>Senha alterada com sucesso, segue abaixo:</p></div> <div> <p>Login: {$userlogin->getEmail()} <br> Nova Senha: <b>{$senha_nova}</b> </p></div>";
                 $email = new EmailGenerico(array($userlogin->getEmail()), "Senha Alterada no Sistema", $textoCorpo, array(), array(), 1);
                 if($email->enviarEmailSMTP()){

@@ -6,13 +6,13 @@ $orcCtrl = new OrcamentoCtrl();
 $orc = $orcCtrl->buscarOrcamentos(" id, colaborador_orc", "");
 
 
-$colabCtrl = new ColaboradorCtrl();
+$colabCtrl = new UsuarioCtrl();
 $colaboradores = $colabCtrl->buscarBD("*", "");
 
 foreach ($colaboradores as $linha){
 
-   
-   echo $linha->getLogin()."<br>";
+   $usuarioLogin = Formatar::prefixEmail($linha->getLogin());
+   echo $usuarioLogin."<br>";
 
     $count = 0;
     $countCheck = 0;
@@ -21,7 +21,7 @@ foreach ($colaboradores as $linha){
 
        // echo $linhaORC['colaborador_orc'];
         
-        if($linha->getLogin() == $linhaORC['colaborador_orc'] ){
+        if($usuarioLogin == $linhaORC['colaborador_orc'] ){
           //  echo "- ".$linhaORC['razao_social_contr']."<br>";
             $count++;
             $orcmento = new Orcamento($linhaORC['id'], "" , $linha->getId(), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
@@ -33,7 +33,7 @@ foreach ($colaboradores as $linha){
             if($orcAtualizado[0]){
                 $countCheck++;
             }
-            echo "{$linha->getLogin() } ID {$linha->getId()} =  ORC {$linhaORC['colaborador_orc']} ID {$linhaORC['id']} -> tem {$count} orcamentos e foram Atualizados {$countCheck} <br>";
+            echo "{$usuarioLogin } ID {$linha->getId()} =  ORC {$linhaORC['colaborador_orc']} ID {$linhaORC['id']} -> tem {$count} orcamentos e foram Atualizados {$countCheck} <br>";
         }
        
     }

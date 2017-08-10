@@ -14,7 +14,7 @@
 
         <?php
         //$id_colab_logado = filter_input(INPUT_GET, 'idc');
-        $id_colab_logado = $userlogin->getId_colaborador();
+        $id_colab_logado = $userlogin->getId();
         $setor = filter_input(INPUT_GET, 'setor');
 
         $notiCtrl = new NotificacaoCtrl();
@@ -29,16 +29,15 @@
                 $class = "  ";
             }
             $count++;
-            $colabCtrl = new ColaboradorCtrl();
+            $colabCtrl = new UsuarioCtrl();
             $id_colab = $log->getId_colab();
-            $colab = $colabCtrl->buscarBD("*", "WHERE id_colaborador = '$id_colab' ");
-            //var_dump($colab[0]->getLogin());
+            $colab = $colabCtrl->buscarBD("*", "WHERE id = '$id_colab' ");
 
 
             if ($colab == null) {
                 $colab = "Sistema";
             } else {
-                $colab = $colab[0]->getLogin();
+                $colab = Formatar::prefixEmail($colab[0]->getLogin());
             }
             ?>
             <li <?= $class ?>>

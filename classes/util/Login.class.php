@@ -65,8 +65,8 @@ class Login extends Conexao {
     private function getUser() {
         $this->senha = md5($this->senha);
 
-        $colabCtrl = new ColaboradorCtrl();
-        $colab = $colabCtrl->buscarBD("*", "WHERE Email='$this->email' AND Senha='$this->senha' ");
+        $colabCtrl = new UsuarioCtrl();
+        $colab = $colabCtrl->buscarBD("*", "WHERE Login='$this->email' AND Senha='$this->senha' ");
 
         if (!empty($colab)) {
             $this->result = $colab[0];
@@ -84,15 +84,15 @@ class Login extends Conexao {
         $_SESSION['userlogin'] = $this->result;
 
         //DEVIDO ao SISTEMA de LOGIN ANTERIOR - Mantive essas variaveis na Sessao
-        $_SESSION['id'] = $this->result->getId_colaborador();
+        $_SESSION['id'] = $this->result->getId();
         $_SESSION['Login'] = $this->result->getLogin();
 
-        $colab = new Colaborador($this->result->getId_colaborador(), null, null, null, null, date('Y-m-d H:i:s'), null, null);
-        $colabCtrl = new ColaboradorCtrl();
-        if ($colabCtrl->atualizarBD($colab)) {
+        $user = new Usuario($this->result->getId(), null, null, null, null, null, date('Y-m-d H:i:s'));
+        $colabCtrl = new UsuarioCtrl();
+        if ($colabCtrl->atualizarBD($user)) {
             $this->result->setLast_log_date(date('Y-m-d H:i:s'));
         }
-        LogCtrl::inserirLog($this->result->getId_colaborador(), "Colaborador logado", $this->result->getTipo());
+        LogCtrl::inserirLog($this->result->getId(), "Colaborador logado", $this->result->getTipo());
 
         $this->error = array("Ola {$this->result->getLogin()}, seja bem vindo(a). Aguarde redirecionamento. ", WS_ACCEPT);
         $this->result = true;

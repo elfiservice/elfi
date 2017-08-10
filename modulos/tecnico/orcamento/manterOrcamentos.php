@@ -8,7 +8,7 @@ if (isSet($_POST['ano'])) {
 
 
 
-$colabCtrl = new ColaboradorCtrl();
+$colabCtrl = new UsuarioCtrl();
 $orcCrtl = new OrcamentoCtrl();
 ?>
 
@@ -97,7 +97,6 @@ $orcCrtl = new OrcamentoCtrl();
                 $clienteCtrl = new ClienteCtrl();
                 $arrayClienteDao = $clienteCtrl->buscarBD("*", "WHERE razao_social = '" . $row['razao_social_contr'] . "' ");
                 $clienteDao = $arrayClienteDao[0];
-
                 ?>
                 <tr>
                     <td>
@@ -111,11 +110,16 @@ $orcCrtl = new OrcamentoCtrl();
                     <td>
                         <?php
                         //echo $row['colaborador_orc'];
-                        $user = $colabCtrl->buscarBD("*", "WHERE Login = '" . $row['colaborador_orc'] . "' ");
-                        ?>                                                  
-                        <a  href="#" onclick="window.open('../../usuario/perfil.php?id_user=<?php echo $user[0]->getId_colaborador(); ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
-                            <?php echo $row['colaborador_orc']; ?>
-                        </a>                                            
+                        $user = $colabCtrl->buscarBD("*", "WHERE id = '" . $row['id_colab'] . "' ");
+                        //$user = $colabCtrl->buscarBD("*", "WHERE Login = '" . $row['colaborador_orc'] . "' ");
+                        if (empty($user)) {
+                            echo "Usuario nao esta mais no sistema";
+                        } else {
+                            ?>                                                  
+                            <a  href="#" onclick="window.open('../../usuario/perfil.php?id_user=<?php echo $user[0]->getId(); ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+                                <?php echo $row['colaborador_orc']; ?>
+                            </a> 
+                        <?php } ?>
                     </td>                                        
                     <td>
                         <?php

@@ -55,7 +55,7 @@ $menu = filter_input(INPUT_GET, 'id_menu', FILTER_DEFAULT);
         <?php
         $tipo_conta = $userlogin->getTipo();
 
-        if ($tipo_conta == "ad" && $userlogin->getId_colaborador() == 1) {
+        if ($tipo_conta == "ad" && $userlogin->getId() == 1) {
             ?>
             <div style="margin:20px 0px 20px 0px;">
                 <div class="barra_menu" style="background: #012B8B; text-align:center; padding:5px 0px 0px 0px;">           </div>

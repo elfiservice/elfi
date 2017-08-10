@@ -3,8 +3,8 @@
         if (isset($dados['submitBtn'])) {
             unset($dados['submitBtn']);
             
-            $colabCtrl = new ColaboradorCtrl();
-            $colabCtrl->alterarSenha($dados, $userlogin);
+            $userCtrl = new UsuarioCtrl();
+            $userCtrl->alterarSenha($dados, $userlogin);
               
         }
         ?>
@@ -29,7 +29,7 @@
                         <td></td>
                         <td>
                             <input type="submit" value="Atualizar" name="submitBtn" style="cursor:pointer; padding: 5px 10px; color:#fff; border:1px solid #000; background-color: rgb(59, 89, 152); "/>
-                            <input type="hidden" name="id_user" value="<?= $userlogin->getId_colaborador(); ?>"  />
+                            <input type="hidden" name="id_user" value="<?= $userlogin->getId(); ?>"  />
                         </td>
                     </tr>
 

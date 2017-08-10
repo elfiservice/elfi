@@ -98,8 +98,8 @@ if (!empty($id_cliente)) {
 if (filter_has_var(INPUT_POST, "salvar_editar_cliente")) {
     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
     $dados['id_cliente'] = $id_cliente;
-    $dados['Login'] = $userlogin->getLogin();
-    $dados['id_colab_logado'] = $userlogin->getId_colaborador();
+    $dados['Login'] = Formatar::prefixEmail($userlogin->getLogin()) ;
+    $dados['id_colab_logado'] = $userlogin->getId();
 
     if ($clienteCtrl->atualizarCliente($dados)) {
          WSErro($clienteCtrl->getResult()[0], $clienteCtrl->getResult()[1], "die");

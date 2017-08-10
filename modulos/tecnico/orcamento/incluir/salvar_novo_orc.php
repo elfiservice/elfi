@@ -11,7 +11,7 @@ if (filter_has_var(INPUT_POST, "razao_social"))
     
     $id_colab = $_SESSION['id'];
     $id_cliente = filter_input(INPUT_POST, 'id_cliente');
-    $colaborador_orc =  $_SESSION['Login'];
+    $colaborador_orc = Formatar::prefixEmail($_SESSION['Login']);
     $ano_orc         = $_POST['ano_atual_orc'];
     $dataAdicionadoOrc = date('Y-m-d H:i:s');
 //dados contratada

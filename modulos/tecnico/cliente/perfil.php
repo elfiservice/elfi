@@ -117,11 +117,19 @@ if (!empty($cliente->mediaSatisfacao($clienteFinal->getId()))) {
                     $orcPorClienteSituacaoPerdido = $orcCtrl->buscarOrcamentos("situacao_orc", "WHERE id_cliente = '$id_cliente' AND situacao_orc = 'Perdido' ");
 
                     $totalOrcCliente = count($orcPorClienteSituacaoPerdido) + count($orcPorClienteSituacaoCancelado) + count($orcPorClienteSituacaoConcluido) + count($orcPorClienteSituacaoAprovado) + count($orcPorClienteSituacaoAguardando);
-                    $aguardandoPercent = (count($orcPorClienteSituacaoAguardando) / $totalOrcCliente) * 100;
-                    $aprovadoPercent = (count($orcPorClienteSituacaoAprovado) / $totalOrcCliente) * 100;
-                    $concluidoPercent = (count($orcPorClienteSituacaoConcluido) / $totalOrcCliente) * 100;
-                    $canceladoPercent = (count($orcPorClienteSituacaoCancelado) / $totalOrcCliente) * 100;
-                    $perdidoPercent = (count($orcPorClienteSituacaoPerdido) / $totalOrcCliente) * 100;
+                    $aguardandoPercent = 0;
+                    $aprovadoPercent = 0;
+                    $concluidoPercent = 0;
+                    $canceladoPercent = 0;
+                    $perdidoPercent = 0;
+                    
+                    if($totalOrcCliente > 0) {
+                        $aguardandoPercent = (count($orcPorClienteSituacaoAguardando) / $totalOrcCliente) * 100;
+                        $aprovadoPercent = (count($orcPorClienteSituacaoAprovado) / $totalOrcCliente) * 100;
+                        $concluidoPercent = (count($orcPorClienteSituacaoConcluido) / $totalOrcCliente) * 100;
+                        $canceladoPercent = (count($orcPorClienteSituacaoCancelado) / $totalOrcCliente) * 100;
+                        $perdidoPercent = (count($orcPorClienteSituacaoPerdido) / $totalOrcCliente) * 100;
+                    }
                     ?>
 
                     <ul class="w3-ul w3-border w3-col l4 m5">

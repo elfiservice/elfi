@@ -14,7 +14,7 @@ else:
     die;
 endif;
 
-echo "<span class=\"w3-badge w3-red bt-notificacao\">". $notCtrl->notificar($userlogin->getId_colaborador(), "tec") . "</span>";
+echo "<span class=\"w3-badge w3-red bt-notificacao\">". $notCtrl->notificar($userlogin->getId(), "tec") . "</span>";
 //$jSon ['result'] =  $notCtrl->notificar(1, "tec");
 //
 //echo json_encode($jSon);

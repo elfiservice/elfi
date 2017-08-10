@@ -35,7 +35,7 @@ if (filter_has_var(INPUT_POST, 'salvar_historico_orc_aprov')) {
     $descricao_hist = filter_input(INPUT_POST, 'descricao_historico', FILTER_DEFAULT);
     $descricao_historico = nl2br($descricao_hist);
     $id_colab = $_SESSION['id'];
-    $colab = $_SESSION['Login'];
+    $colab = Formatar::prefixEmail($_SESSION['Login']);
 
     if ($descricao_historico) {
         $orcamentoCtrl = new OrcamentoCtrl();
