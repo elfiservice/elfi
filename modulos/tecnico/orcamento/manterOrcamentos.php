@@ -111,6 +111,7 @@ $orcCrtl = new OrcamentoCtrl();
                         <?php
                         //echo $row['colaborador_orc'];
                         $user = $colabCtrl->buscarBD("*", "WHERE id = '" . $row['id_colab'] . "' ");
+                        //$user = $colabCtrl->buscarBD("*", "WHERE Login = '" . $row['colaborador_orc'] . "' ");
                         if (empty($user)) {
                             echo "Usuario nao esta mais no sistema";
                         } else {
