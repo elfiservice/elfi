@@ -10,7 +10,7 @@ $orcCtrl = new OrcamentoCtrl();
 <div class="alinhamentoHorizontal">
     <ul>
 
-<!--                <a href="#" onclick="window.open('acompanhamento.php?mes=jan&ano_orc=<?php //echo $ano_atual;           ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
+<!--                <a href="#" onclick="window.open('acompanhamento.php?mes=jan&ano_orc=<?php //echo $ano_atual;            ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=1250, HEIGHT=500');">
                     JAN
                 </a>-->
 
@@ -45,6 +45,7 @@ $orcCtrl = new OrcamentoCtrl();
                         <TH>Data Aprovada</TH>
                         <TH>Data Inicio / Assinatura</TH>
                         <TH>Data conclusão</TH>
+                        <TH>Dias restantes</TH>
 
                     </TR>
                 </thead>
@@ -67,6 +68,16 @@ $orcCtrl = new OrcamentoCtrl();
                                 echo "Error";
                             }
                             $arrData = explode("-", $row['data_aprovada']);
+                            //Logica para mostrar Datas e dias restantes do Contrato
+                            if ($row['data_inicio'] != "0000-00-00"):
+                                $data_assinatura = date('d/m/Y', strtotime($row['data_inicio']));
+                                $data_venc_contrato = date('d/m/Y', Formatar::addToDate($row['data_inicio'], "12", "m"));
+                                $dias_restantes = $row['prazo_exec_orc'] - (Formatar::diffDuasDatas($row['data_inicio'], $data_hj));
+                            else:
+                                $data_assinatura = "--";
+                                $data_venc_contrato = "--";
+                                $dias_restantes = "--";
+                            endif;
                             ?>
                             <TR>
                                 <td><a class="bt_link" href="?id_menu=orcamento/aprovados/editar_orc_aprovado&id_orc=<?= $row['id'] ?>" >atualizar</a><hr>
@@ -77,13 +88,13 @@ $orcCtrl = new OrcamentoCtrl();
                                 <TD><?php echo $row['atividade']; ?></TD>
                                 <TD><?php echo $row['classificacao']; ?></TD>
                                 <TD><?php echo Formatar::limita_texto(strip_tags($row['descricao_servico_orc']), 200); ?></TD>
-                                <TD><?php //echo $row['novo_cliente'];             ?></TD>
+                                <TD><?php //echo $row['novo_cliente'];              ?></TD>
                                 <TD ><div id="<?= $row['id'] ?>"><?php echo $row['n_orc'] . "." . $row['ano_orc']; ?></div></TD>
                                 <TD><?php echo $row['prazo_exec_orc']; ?> dia(s)</TD>
                                 <TD><?= ($row['data_aprovada'] == "0000-00-00" ? "--" : date('d/m/Y', strtotime($row['data_aprovada'])) ); ?></TD>
-                                <TD><?= ($row['data_inicio'] == "0000-00-00" ? "--" : date('d/m/Y', strtotime($row['data_inicio'])) ); ?></TD>
-                                <TD><?= ($row['data_inicio'] == "0000-00-00" ? "--" : date('d/m/Y', Formatar::addToDate($row['data_inicio'], "12", "m")) ); ?></TD>
-
+                                <TD><?= $data_assinatura ?></TD>
+                                <TD><?= $data_venc_contrato ?></TD>
+                                <TD><?= $dias_restantes ?></TD>
                             </tr>
 
 
