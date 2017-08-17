@@ -38,7 +38,7 @@ if ($form && $form['salvar_orc']) {
     $id_cliente = filter_input(INPUT_POST, 'id_cliente');
     $colaborador_ultim_alteracao = filter_input(INPUT_POST, 'id_colab'); //colaborador_ultim_alteracao na TAbela 
     $data_ultima_alteracao = date('Y-m-d H:i:s');
-    $situacao_orc = "Aprovado";
+    $situacao_orc = "";
     $serv_concluido = 'n';
     
 
