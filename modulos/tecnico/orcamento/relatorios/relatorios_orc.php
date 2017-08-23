@@ -85,7 +85,8 @@ $orcCrtl = new OrcamentoCtrl();
 
                 $total = 0;
                 $total_orc_feitos = 0;
-
+                $vr_acumulado_todos_orc_aprovados_meses = 0;
+                $vr_acumulado_todos_orc_concluidos_meses = 0;
                 for ($i = 1; $i <= 12; $i++) {
 
 
@@ -102,6 +103,7 @@ $orcCrtl = new OrcamentoCtrl();
                             $vr_acumulado_orc_aprovado += (int) $orcs["vr_total_orc"];
 //                            echo (int) $orcs["vr_total_orc"] . " <br>";
                         }
+                        $vr_acumulado_todos_orc_aprovados_meses = $vr_acumulado_todos_orc_aprovados_meses + $vr_acumulado_orc_aprovado;
                     }
 
 //consulta Nºde ORC cancelados no mes 
@@ -122,7 +124,7 @@ $orcCrtl = new OrcamentoCtrl();
                         foreach ($orcs_Perdidas as $orcs) {
                             $vr_acumulado_orc_perdidos += (int) $orcs["vr_total_orc"];
                         }
-                    }                    
+                    }
 
 //consulta Nºde ORC CONCLUIDOS no mes 
                     $orcs_concluidos = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_conclusao) = '$i' AND YEAR(data_conclusao) = '$ano_orc_selec' AND situacao_orc LIKE 'concluido' ");
@@ -132,7 +134,8 @@ $orcCrtl = new OrcamentoCtrl();
                         foreach ($orcs_concluidos as $orcs) {
                             $vr_acumulado_orc_concluidos += (int) $orcs["vr_total_orc"];
                         }
-                    }                     
+                        $vr_acumulado_todos_orc_concluidos_meses = $vr_acumulado_todos_orc_concluidos_meses + $vr_acumulado_orc_concluidos;
+                    }
 
 
                     $mes_atual = date('m');
@@ -165,21 +168,28 @@ $orcCrtl = new OrcamentoCtrl();
                     <tr align="center">
                         <td  class="indiceTabelaComum"><?= $i ?></td>
                         <td> <?= $n_orc_feitos_no_mes ?></td>
-                        <td> <?= $n_linhas_orc_aprovados . " - (" . number_format($em_porcentagem, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_aprovado, '2','.',',') ?></td>
-                        <td> <?= $n_linhas_orc_cancelados . " - (" . number_format($em_porcentagem_Can, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_cancelados, '2','.',',')  ?></td>
-                        <td> <?= $n_linhas_orc_Perdidas . " - (" . number_format($em_porcentagem_perd, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_perdidos, '2','.',',')  ?></td>
-                        <td> <?= $n_linhas_orc_concluidos . " - (" . number_format($em_porcentagem_conc, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_concluidos, '2','.',',')  ?></td>
+                        <td> <?= $n_linhas_orc_aprovados . " - (" . number_format($em_porcentagem, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_aprovado, '2', '.', ',') ?></td>
+                        <td> <?= $n_linhas_orc_cancelados . " - (" . number_format($em_porcentagem_Can, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_cancelados, '2', '.', ',') ?></td>
+                        <td> <?= $n_linhas_orc_Perdidas . " - (" . number_format($em_porcentagem_perd, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_perdidos, '2', '.', ',') ?></td>
+                        <td> <?= $n_linhas_orc_concluidos . " - (" . number_format($em_porcentagem_conc, 2, '.', '') . "%) - Total R$ " . number_format($vr_acumulado_orc_concluidos, '2', '.', ',') ?></td>
                     </tr>
                     <?php
                     $total = $total + $n_linhas_orc_aprovados;
                     $total_orc_feitos = $total_orc_feitos + $n_orc_feitos_no_mes;
                 }
+                
+                $a_receber = $vr_acumulado_todos_orc_aprovados_meses - $vr_acumulado_todos_orc_concluidos_meses;
                 ?>	
-
-
-
             </tbody>
-        </TABLE>	
+        </TABLE>
+        <hr>
+        <div>
+            <ul class="w3-ul w3-border w3-col l4 m5">
+                <li>Total de Orc Aprovados: <span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto w3-right">R$ <?= Formatar::moedaBR($vr_acumulado_todos_orc_aprovados_meses) ?></span></li>
+                <li>Total de Orc Concluidos: <span class="w3-badge elfi_cor_fundo_tabela elfi_cor_padrao_texto w3-right">R$ <?= Formatar::moedaBR($vr_acumulado_todos_orc_concluidos_meses) ?></span></li>
+                <li class="elfi_cor_fundo_indice elfi_cor_padrao_texto">Total à receber: <span class="w3-badge elfi_cor_fundo_tabela w3-white w3-right">R$ <?= Formatar::moedaBR($a_receber) ?></span></li>
+            </ul>
+        </div>
     </fieldset>
 
     <fieldset>
