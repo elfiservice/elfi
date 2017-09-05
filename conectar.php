@@ -37,6 +37,8 @@ if ($login->checkLogin()) {
         <meta name="author" content="Elfi Service">
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="estilos.css">    
 
         <script src="js/jquery.min.js" type="text/javascript"></script>
@@ -47,30 +49,46 @@ if ($login->checkLogin()) {
         <div >
             <h2 style="text-align: center;" >Acesso ao Sistema Integrado da ELFI SERVICE para os Colaboradores  </h2>
         </div>
-        <form name="AdminLoginForm" action="" method="post">
-            <table align="center">
-                <tr>
-                    <td><span>Email </span>                    </td>
-                    <td><span>Senha </span>                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input name="login" type="email" id="login" maxlength="200"  />                    </td>
-                    <td><input name="senha" type="password" id="senha" maxlength="16"  />                    </td>
-                    <td> <input type="submit" name="logar" value="Entrar" id="logar"   />                    </td>								
-                </tr>						
-                <tr>
-<!--                    <td>
-                        <input name="remember" type="checkbox" id="remember" value="yes" />
-                        <span>Mantenha-me conectado</span>
-                    </td>-->
-                    <td>
-                        <a href="#" >Esqueceu sua Senha?</a>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </form>
+
+
+
+
+        <section class="w3-container">
+            <div class="w3-content">       
+                <form class="w3-container" name="AdminLoginForm" action="" method="post">
+                    <div class="w3-row-padding">
+                        <div class="w3-half">
+                            <label>Email</label>
+                            <input class="w3-input w3-border" name="login" type="email" id="login" maxlength="200" >
+                        </div>
+                        <div class="w3-half">
+                            <label>Senha</label>
+                            <input class="w3-input w3-border" name="senha" type="password" id="senha" maxlength="16" >
+                        </div>
+                        <div class="w3-col w3-center w3-margin-top">
+                            <input class="w3-btn" type="submit" name="logar" value="Entrar" id="logar"   />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <div class="w3-container w3-center w3-margin-top">
+            <div class="w3-row-padding">
+                <div class="w3-col">
+                    <button onclick="document.getElementById('id01').style.display = 'block'" class="w3-button w3-black w3-small">Esqueceu a senha ?</button>
+
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                                <span onclick="document.getElementById('id01').style.display = 'none'" class="w3-button w3-display-topright">&times;</span>
+                                <p>Some text. Some text. Some text.</p>
+                                <p>Some text. Some text. Some text.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
