@@ -562,6 +562,11 @@ legend.scheduler-border {
 .bt-notificacao:hover{background: #09f;}
 
 /*CONECTAR.PHP*/
+
+.form_load {
+    display: none;
+}
+
 .w3-black, .w3-hover-black:hover {
     background-color: #012b8b!important;
 }

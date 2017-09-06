@@ -42,6 +42,7 @@ if ($login->checkLogin()) {
         <link rel="stylesheet" href="estilos.css">    
 
         <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script src="js/recuperar-senha.js"></script>
     </head>
     <body>
         <div  style="background: url(imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;">
@@ -49,9 +50,6 @@ if ($login->checkLogin()) {
         <div >
             <h2 style="text-align: center;" >Acesso ao Sistema Integrado da ELFI SERVICE para os Colaboradores  </h2>
         </div>
-
-
-
 
         <section class="w3-container">
             <div class="w3-content">       
@@ -79,16 +77,35 @@ if ($login->checkLogin()) {
 
                     <div id="id01" class="w3-modal">
                         <div class="w3-modal-content">
-                            <div class="w3-container">
-                                <span onclick="document.getElementById('id01').style.display = 'none'" class="w3-button w3-display-topright">&times;</span>
-                                <p>Some text. Some text. Some text.</p>
-                                <p>Some text. Some text. Some text.</p>
-                            </div>
+                            <section class="w3-container">
+                                <span onclick="document.getElementById('id01').style.display = 'none'" 
+                                      class="w3-button w3-display-topright">&times;</span>
+                                <div class="w3-content w3-margin-bottom">
+                                    <p class="w3-padding-top">Esqueceu a Senha, entre com seu Email de Login e te enviaremos uma senha temporaria!</p>
+                                    <form class="w3-container" name="EsqueciSenhaForm" action="" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="callback" value="Recuperar-senha"/>
+                                        <input type="hidden" name="callback_action" value="enviar-senha-temp"/>
+                  
+
+                                        <div class="w3-row-padding">
+                                            <div class="w3-col">
+                                                <label>Email</label>
+                                                <input class="w3-input w3-border" name="email-recuperar" type="email" id="email-recuperar" maxlength="200" >
+                                            </div>
+
+                                            <div class="w3-col w3-center w3-margin-top">
+                                                <input class="w3-btn" type="submit" name="recuperar-senha-btn" value="Enviar" id="recuperar-senha-btn"   />
+                                                <img class="form_load" style="margin-left: 10px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="imagens/load.gif"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </section>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
     </body>
 </html>

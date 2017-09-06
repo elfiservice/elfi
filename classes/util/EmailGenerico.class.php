@@ -27,7 +27,7 @@ class EmailGenerico extends EmailModel {
      * @param string $textoCorpo
      * @param array $emailCopia
      * @param array $emailCopiaOculta
-     * @param int $tipoEmail = deixar NULL para envio Cliente e macar com 1 para envio Colaboradores (interno)
+     * @param int $tipoEmail = deixar NULL para copro do Email formato para Clientes OU Marcar com 1 para corpo do Email ser no formato para os Colaboradores (interno)
      */
     public function __construct(array $emailTo, $assunto, $textoCorpo, array $emailCopia = array(), array $emailCopiaOculta = array(), $tipoEmail = NULL) {
         $this->setEmailTo($emailTo);
