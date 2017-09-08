@@ -1,4 +1,4 @@
-
+<script src="js/configuracoes.js"></script>
 <h2>Usuários Cadastrados no Sistema</h2>
 <div id="demo">
     <table class="display" id="example">
@@ -8,7 +8,7 @@
                 <th>Colaborador</th>                
                 <th>Ultimo Login</th>
                 <th>Tipo Conta</th>
-                <th>Ativo</th>                
+                <th>Ativo para Receber Emails</th>                
                 <th>Alterar Conta</th>
             </tr>
         </thead>
@@ -24,7 +24,7 @@
                     <td><?= $colab->getId_colaborador(); ?> </td>
                     <td><?= $colab->getLast_log_date(); ?></td>
                     <td><?= $colab->getTipo(); ?></td>
-                    <td><?= ($colab->getAtivo() == "0" ? "Não" : "Sim") ?></td>                    
+                    <td><?= ($colab->getAtivo() == "0" ? "<button id='ativar-{$colab->getId()}' class='j_btn_rec_email'> Ativar </button>" : "<button id='desativar-{$colab->getId()}' class='j_btn_rec_email'> Desativar </button>") ?><img class="form_load" style="margin-left: 10px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="imagens/load.gif"/></td>                    
                     <td>
                     </td>                                        
                 </tr>
