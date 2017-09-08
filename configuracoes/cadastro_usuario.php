@@ -24,7 +24,15 @@
                     <td><?= $colab->getId_colaborador(); ?> </td>
                     <td><?= $colab->getLast_log_date(); ?></td>
                     <td><?= $colab->getTipo(); ?></td>
-                    <td><?= ($colab->getAtivo() == "0" ? "<button id='ativar-{$colab->getId()}' class='j_btn_rec_email'> Ativar </button>" : "<button id='desativar-{$colab->getId()}' class='j_btn_rec_email'> Desativar </button>") ?><img class="form_load" style="margin-left: 10px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="imagens/load.gif"/></td>                    
+                    <td><?php 
+                            if ( $colab->getAtivo() == "0" ){
+                                $action = "ativar";
+                            }else {
+                                $action = "desativar"; 
+                            }         
+                            ?>
+                        <button id='<?= $action."-".$colab->getId() ?>' class='j_btn_rec_email'> <?= $action ?> </button>
+                        <img id="<?= $action."-".$colab->getId() ?>" class="form_load" style="margin-left: 10px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="imagens/load.gif"/></td>                    
                     <td>
                     </td>                                        
                 </tr>
