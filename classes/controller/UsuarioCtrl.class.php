@@ -8,9 +8,11 @@
 class UsuarioCtrl {
 
     private $usuarioDao;
+    private $usuario;
 
     public function __construct() {
         $this->usuarioDao = new UsuarioDAO();
+        $this->usuario = new Usuario();
     }
 
     /**
@@ -144,6 +146,22 @@ class UsuarioCtrl {
             }
         }else{
             return WSErro("Campo vazio, Não atualizado!", WS_ALERT);
+        }
+    }
+    
+     /**
+     * Ativar/Desativar Email do Usuario no Sistema
+     * @param array $dados = inteiro com o numero do ID do Usuario
+     * @return String = com Mensagem de Sucesso ou Erro
+     */
+    public function ativarDesativarEmail($dados) {
+        $this->usuario->setId($dados["id"]);
+        $this->usuario->setAtivo($dados["ativo"]);
+        
+        if( $this->atualizarBD($this->usuario) ){
+            return true;
+        } else {
+            return false;
         }
     }
 

@@ -22,7 +22,17 @@ switch ($Action) {
 
 
     case 'desativar':
-            $jSon['result'] = 'ok id-> ' . $ActionArr[1];
+        $ativo = 0;
+        $userId = $ActionArr[1];
+        $dados = ["id" => $userId, "ativo" => $ativo];
+        
+        $userCtrl = new UsuarioCtrl();
+        if ( $userCtrl->ativarDesativarEmail($dados) ) {
+            //$jSon['result'] = "";
+            $jSon['result'] = 'ok id-> ' . $userId;
+        }
+
+        
         break;
 
     default :
