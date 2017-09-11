@@ -5,8 +5,8 @@
         <group>
             <file>file:/Applications/XAMPP/htdocs/elfi/classes/Config.inc.php</file>
             <file>file:/Applications/XAMPP/htdocs/elfi/configuracoes/cadastro_usuario.php</file>
+            <file>file:/Applications/XAMPP/htdocs/elfi/classes/controller/UsuarioCtrl.class.php</file>
             <file>file:/Applications/XAMPP/htdocs/elfi/js/configuracoes.js</file>
-            <file>file:/Applications/XAMPP/htdocs/elfi/conectar.php</file>
             <file>file:/Applications/XAMPP/htdocs/elfi/ajax/configuracoes.ajax.php</file>
         </group>
     </open-files>

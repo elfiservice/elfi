@@ -151,12 +151,13 @@ class UsuarioCtrl {
     
      /**
      * Ativar/Desativar Email do Usuario no Sistema
-     * @param array $dados = inteiro com o numero do ID do Usuario
-     * @return String = com Mensagem de Sucesso ou Erro
+     * @param INT $id = inteiro com o numero do ID do Usuario
+     * @param INT $ativo =  valor informando a alteracao, Ativo = 1 ou Desativar = 0
+     * @return Boolean = True para sucesso, False para Erro na Alteração no BD
      */
-    public function ativarDesativarEmail($dados) {
-        $this->usuario->setId($dados["id"]);
-        $this->usuario->setAtivo($dados["ativo"]);
+    public function ativarDesativarEmail($id, $ativo) {
+        $this->usuario->setId($id);
+        $this->usuario->setAtivo($ativo);
         
         if( $this->atualizarBD($this->usuario) ){
             return true;

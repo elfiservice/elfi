@@ -2,11 +2,9 @@ $(function () {
 
     $('#example button').click(function () {
 
-//console.log(btnClicado.currentTarget.id);
-        console.log($(this).attr('id'));
         var action = $(this).attr('id');
         var btnClicked = $(this);
-        
+
         $.ajax({
             url: 'ajax/configuracoes.ajax.php',
             data: {callback_action: action},
@@ -20,7 +18,8 @@ $(function () {
             },
 
             success: function (data) {
-                $('#' + action + '.form_load').fadeOut(function () {
+                var formLoadImg = $('#' + action + '.form_load');
+                formLoadImg.fadeOut(function () {
                     //EXIBE CALLBACKS
                     if (data.erro) {
                         //mensagem de sucesso
@@ -29,20 +28,19 @@ $(function () {
 
                     if (data.result) {
                         alert(data.result);
-                       
-                       
+//                        console.log(data.ativo);
+                        btnClicked.text(data.ativo);
+                        btnClicked.attr('id', data.ativo + '-' + data.id);
+                        action = data.ativo + '-' + data.id;
+
+                        formLoadImg.attr('id', action);
+
                     }
-                    
+
                     $('button#' + action).fadeIn();
 
                 });
-
-
             }
         });
-
-
     });
-
-
 });
