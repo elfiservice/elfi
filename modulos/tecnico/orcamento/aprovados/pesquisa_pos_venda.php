@@ -10,8 +10,8 @@
         <meta name="author" content="Elfiservice">
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="stylesheet" href="../../estilos.css">
-        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../../../estilos.css">
+        <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
         <style>
             .linhaPontuacao{
                 margin-left: 210px;
@@ -51,7 +51,7 @@
     <body>
         <?php
         //session_start();
-        require '../../classes/Config.inc.php';
+        require '../../../../classes/Config.inc.php';
         $id_orc = filter_input(INPUT_GET, 'ido', FILTER_VALIDATE_INT);
         $id_cliente = filter_input(INPUT_GET, 'idc', FILTER_VALIDATE_INT);
 

@@ -40,8 +40,8 @@ foreach ($anosOrcamentosArr as $orc => $l) {
                     $textoCorpo = "Olá, <b>{$row ['razao_social_contr']}</b> a proposta de Nº <b>{$row ['n_orc']}.{$row ['ano_orc']}</b> foi <b>concluida</b> à <b>{$dias} dias.</b> <br>"
                             . "Por favor, nos dê seu parecer sobre nosso atendimento, será de grande ajuda para o desenvolvimento de nossa parceria.<br><br>"
                             . "Apenas acesse o Link abaixo ou copie e cole no navegar:<br>"
-                            . "<a href=\"{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$row ['id']}&idc={$row ['id_cliente']}\" >"
-                            . "{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$row ['id']}&idc={$row ['id_cliente']} </a> <br>";
+                            . "<a href=\"{$www}/modulos/tecnico/orcamento/aprovados/pesquisa_pos_venda.php?ido={$row ['id']}&idc={$row ['id_cliente']}\" >"
+                            . "{$www}/modulos/tecnico/orcamento/aprovados/pesquisa_pos_venda.php?ido={$row ['id']}&idc={$row ['id_cliente']} </a> <br>";
 
                     //$emailCopiaOculta = array();
                     $emailCopiaOculta = array(EMAIL_ADMIN);

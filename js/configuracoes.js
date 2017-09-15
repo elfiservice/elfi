@@ -22,7 +22,7 @@ $(function () {
                 formLoadImg.fadeOut(function () {
                     //EXIBE CALLBACKS
                     if (data.erro) {
-                        //mensagem de sucesso
+                        //mensagem de erro
                         alert(data.erro);
                     }
 
