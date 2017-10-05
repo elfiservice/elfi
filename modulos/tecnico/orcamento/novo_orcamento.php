@@ -13,7 +13,7 @@
 
 
 <!-- MAscaras em campos valores-->
-<?php require '../../includes/javascripts/mascaras_campos_valores_monetario.php';  ?>
+<?php require '../../includes/javascripts/mascaras_campos_valores_monetario.php'; ?>
 <!-- FIM  MAscaras em campos -->
 
 
@@ -113,7 +113,7 @@
                                 $clienteCtrl = new ClienteCtrl();
                                 $clienteBd = $clienteCtrl->buscarBD("*", "WHERE mostrar = '1' ORDER BY razao_social");
                                 foreach ($clienteBd as $cliente => $row) {
-                                    $nome_empresa = ($row->getNomeFantasia() == $row->getRazaoSocial() ? $row->getRazaoSocial() : ($row->getNomeFantasia() == "" ? $row->getRazaoSocial() : $row->getRazaoSocial() . ' == ' .$row->getNomeFantasia()));
+                                    $nome_empresa = ($row->getNomeFantasia() == $row->getRazaoSocial() ? $row->getRazaoSocial() : ($row->getNomeFantasia() == "" ? $row->getRazaoSocial() : $row->getRazaoSocial() . ' == ' . $row->getNomeFantasia()));
                                     echo '<option id="clientID" value="' . $row->getId() . '">' . $nome_empresa . '</option>';
                                 }
                                 ?>
@@ -304,8 +304,7 @@
             </legend>
 
 
-            <textarea onfocus=""
-                      style="height: 10em; width: 100%;" id="text" name="descricao_servicos"></textarea>
+            <textarea onfocusout="persistData()" style="height: 10em; width: 100%;" id="text" name="descricao_servicos"></textarea>
 
 
         </fieldset>
@@ -349,7 +348,7 @@
             </legend>
 
 
-            <textarea onfocus="init2();" rows="1" cols="100"
+            <textarea onfocus="init2()" rows="1" cols="100" onfocusout="persistData()"
                       style="height: 5em; width: 100%;"  id="text2" name="observacoes_servico"></textarea>
 
 
@@ -416,3 +415,27 @@
 
 </div>	
 
+<script>
+    function persistData() {
+        var descricaoOrc = document.getElementById("text").value;
+        var observOrc = document.getElementById("text2").value;
+//                    document.getElementById("demo").innerHTML = "You wrote: " + x;
+
+        localStorage.setItem("descricao_orc", descricaoOrc);
+        localStorage.setItem("observacao_orc", observOrc);
+
+    }
+
+    var descOrc = localStorage.getItem("descricao_orc");
+    var obsOrc = localStorage.getItem("observacao_orc");
+    if (descOrc != null)
+    {
+        document.getElementById("text").innerHTML = descOrc;
+    }
+
+    if (obsOrc != null)
+    {
+        document.getElementById("text2").innerHTML = obsOrc;
+    }
+
+</script> 
