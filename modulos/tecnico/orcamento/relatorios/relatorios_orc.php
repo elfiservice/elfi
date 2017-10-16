@@ -95,7 +95,7 @@ $orcCrtl = new OrcamentoCtrl();
                     $n_linhas_orc_aguardando = count($orcs_aguardando);
 
 //consulta Nºde ORC aprovados no mes 
-                    $orcs_aprovados = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_aprovada) = '$i' AND YEAR(data_aprovada) = '$ano_orc_selec' ");
+                    $orcs_aprovados = $orcCrtl->buscarOrcamentos("*", "WHERE MONTH(data_aprovada) = '$i' AND YEAR(data_aprovada) = '$ano_orc_selec' AND situacao_orc NOT LIKE 'Contrato'");
                     $n_linhas_orc_aprovados = count($orcs_aprovados);
                     $vr_acumulado_orc_aprovado = 0;
                     if (!empty($orcs_aprovados)) {
