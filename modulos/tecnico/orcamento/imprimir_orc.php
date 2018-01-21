@@ -20,6 +20,9 @@ if (empty($id_orcamento)) {
 
 $empresaCtrl = new EmpresaCtrl();
 $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
+
+ // INCLUDE THE phpToPDF.php FILE
+require("../../../classes/util/phpToPDF.php");
 ?>
 
 <!doctype html>
@@ -41,7 +44,7 @@ $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
     </head>
 
     <body>
-        <div style="margin:20px 0px 20px 0px;">
+        <div id="conteudo" style="margin:20px 0px 20px 0px;">
 
             <?php
             $orcCtrl = new OrcamentoCtrl();
@@ -154,6 +157,96 @@ $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
 
 //duvidas
             $duvida_orc = $orcamento->getDuvida();
+            
+//logica da estruruda do orçamento
+if ($email_obra == "" && $razao_obra == "") {
+    $dados_obra = "<tr  style = \"border-style: solid; border-width: 1px;\" >
+                        <td align=\"center\" colspan=\"10\">
+                            <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
+                                Dados da Obra igual aos da Contratante
+                            </div>
+                        </td>
+                    </tr>";
+} else {
+    $dados_obra = "<tr style = \"border-style: solid; border-width: 1px;\" >
+                        <td align=\"center\" colspan=\"10\">
+                            <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
+                                Dados da Obra
+                            </div>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td width=\"100\">
+                            <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\" >
+                                Razão social:
+                            </div>
+                        </td>
+                        <Td colspan=\"4\" width=\"1000\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                                {$razao_obra}
+                            </div>
+                        </td>
+                        <td width=\"50\"> <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                                CNPJ:
+                            </div></td>
+                        <Td colspan=\"4\" width=\"1000\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                                {$orcamento->getCnpjObra()}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=\"100\">
+                            <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                                Endereço:
+                            </div>
+                        </td>
+                        <Td colspan=\"9\" width=\"800\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                                {$endereco_completo_obra}
+                            </div>
+                        </td>
+                    </tr>               
+                    <tr>
+                        <td width=\"100\">
+                            <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                                Contato:
+                            </div>
+                        </td>
+                        <Td colspan=\"9\" width=\"800\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                                {$contato_completo_obra}
+                            </div>
+                        </td>
+                    </tr> ";
+                                
+}
+
+if ($obs_orc == "") {                    
+    $observacao = "";
+    
+} else {
+   $observacao = "<tr  style = \"border-style: solid; border-width: 1px;\" >
+                        <td align=\"center\" colspan=\"10\">
+                            <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
+                               Observações
+                            </div>
+                        </td>
+                    </tr>                 
+                    <tr>
+                        <Td colspan=\"10\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$obs_orc}
+                            </div>
+                        </td>
+                    </tr>"; 
+}
+
+if ($orcamento->getDataUltimaAlteracao() == "0000-00-00 00:00:00") {
+    $data_alterado = "Fortaleza, Ce em  " . Formatar::formatarDataComHora($orcamento->getDataDoOrc());
+} else {
+    $data_alterado = "Fortaleza, Ce em  " . Formatar::formatarDataComHora($orcamento->getDataUltimaAlteracao());
+}
+
+$cnpj_formatado = Formatar::formatTelCnpjCpf($empresaDao->getCnpj());
+$cep_formatado = Formatar::formatTelCnpjCpf($empresaDao->getCep());
+$tel_formatado = Formatar::formatTelCnpjCpf($empresaDao->getTel());
+
             ?>    
 
 
@@ -161,242 +254,163 @@ $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
 
                 document.title = "<?php echo $title; ?>";
             </script>   
-
-
-            <table border="0"    CELLPADDING="5" style="border-collapse: collapse"   >
-                <tr bordercolor=""  >
-                    <td colspan="" >
-                        <img src="../../../imagens/logo_elfi.jpg" id="" />
-                        <p style="font-size: 10px;"><?= $empresaDao->getRazao_social() ?></p>
+<?php
+$html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: collapse\"   >
+                <tr bordercolor=\"\"  >
+                    <td colspan=\"\" >
+                        <img src=\"{$www}/imagens/logo_elfi.jpg\" id=\"\" />
+                        <p style=\"font-size: 10px;\">{$empresaDao->getRazao_social()}</p>
                     </td>
-                    <td align="center" colspan="8">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px; color: #3E4B95;">
+                    <td align=\"center\" colspan=\"8\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px; color: #3E4B95;\">
 
 
                             Montagens e Manutenções de: Subestações, Transformadores, Grupo Geradores, Disjuntores Banco de Capacitores Fixo e Automático, Quadros de Comando, Força e Luz, S.P.D.A., Tratamento de Óleo Isolante pelo processo Termo-Vácuo, Comissionamento de Subestação, Termografia.
                             Desde 1993 trazendo soluções para sua empresa.
                         </div>
                     </td>
-                    <td align="center" >
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 16px;">
+                    <td align=\"center\" >
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 16px;\">
                             <div >                                Proposta                            </div>
-                            <b><?php echo $n_da_proposta; ?></b>
+                            <b>{$n_da_proposta}</b>
                         </div>
-     </td>
-  </tr>
-  <tr  style = "border-style: solid; border-width: 1px;" >
-                    <td align="center" colspan="10">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
+                    </td>
+                </tr>
+                <tr  style = \"border-style: solid; border-width: 1px;\" >
+                    <td align=\"center\" colspan=\"10\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Dados da Contratante
                         </div>
                     </td>
                 </tr>
                 <tr >
-                    <td width="100">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;" >
+                    <td width=\"100\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\" >
                             Razão social:
                         </div>
                     </td>
-                    <Td colspan="4" width="1000">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $razao_contra; ?>
+                    <Td colspan=\"4\" width=\"1000\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$razao_contra}
                         </div>
                     </td>
-                    <td width="50"> <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
+                    <td width=\"50\"> <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             CNPJ:
                         </div></td>
-                    <Td colspan="4" width="">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?= $orcamento->getCnpjContrat(); ?>
+                    <Td colspan=\"4\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$orcamento->getCnpjContrat()}
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td width="100">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
+                    <td width=\"100\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             Endereço:
                         </div>
                     </td>
-                    <Td colspan="9" width="800">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $endereco_completo; ?>
+                    <Td colspan=\"9\" width=\"800\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$endereco_completo}
                         </div>
                     </td>
                 </tr>               
                 <tr>
-                    <td width="100">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
+                    <td width=\"100\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             Contato:
                         </div>
                     </td>
-                    <Td colspan="9" width="800">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $contato_completo; ?>
+                    <Td colspan=\"9\" width=\"800\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$contato_completo}
                         </div>
                     </td>
-           </tr> 
-                <?php
-                if ($email_obra == "" && $razao_obra == "") {
-                    ?>
+                </tr> 
+                
+                {$dados_obra}
 
-                    <tr  style = "border-style: solid; border-width: 1px;" >
-                        <td align="center" colspan="10">
-                            <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
-                                Dados da Obra igual aos da Contratante
-                            </div>
-                        </td>
-                    </tr>
-                    <?php
-                } else {
-                    ?>
-                    <tr style = "border-style: solid; border-width: 1px;" >
-                        <td align="center" colspan="10">
-                            <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
-                                Dados da Obra
-                            </div>
-                        </td>
-                    </tr>
-                    <tr >
-                        <td width="100">
-                            <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;" >
-                                Razão social:
-                            </div>
-                        </td>
-                        <Td colspan="4" width="1000">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                <?=  $razao_obra; ?>
-                            </div>
-                        </td>
-                        <td width="50"> <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                CNPJ:
-                            </div></td>
-                        <Td colspan="4" width="1000">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                <?php echo $orcamento->getCnpjObra(); ?>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100">
-                            <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                Endereço:
-                            </div>
-                        </td>
-                        <Td colspan="9" width="800">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                <?php echo $endereco_completo_obra; ?>
-                            </div>
-                        </td>
-                    </tr>               
-                    <tr>
-                        <td width="100">
-                            <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                Contato:
-                            </div>
-                        </td>
-                        <Td colspan="9" width="800">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                <?php echo $contato_completo_obra; ?>
-                            </div>
-                        </td>
-                    </tr>                 
-                    <?php
-                }
-                ?>
-                <tr  style = "border-style: solid; border-width: 1px;" >
-                    <td align="center" colspan="10">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
-                           Atividade / Classificação
+               
+                <tr  style = \"border-style: solid; border-width: 1px;\" >
+                    <td align=\"center\" colspan=\"10\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
+                            Atividade / Classificação
                         </div>
                     </td>
                 </tr>              
                 <tr>
-                    <Td colspan="10" width="">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $atividade_completo; ?>
+                    <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$atividade_completo}
                         </div>
                     </td>
                 </tr>                   
-                <tr style = "border-style: solid; border-width: 1px;" >
-                    <td align="center" colspan="10">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
+                <tr style = \"border-style: solid; border-width: 1px;\" >
+                    <td align=\"center\" colspan=\"10\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Descrição dos Serviços
                         </div>
                     </td>
                 </tr> 
                 <tr>
-                    <Td colspan="10" width="">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $descricao_orc; ?>
+                    <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$descricao_orc}
                         </div>
                     </td>
                 </tr>                 
-                <tr style = "border-style: solid; border-width: 1px;" >
-                    <td align="center" colspan="10">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
+                <tr style = \"border-style: solid; border-width: 1px;\" >
+                    <td align=\"center\" colspan=\"10\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Valor da Proposta
                         </div>
                     </td>
                 </tr>                 
                 <tr>
-                    <Td colspan="10" width="">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $valor_completo_orc; ?>
+                    <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$valor_completo_orc}
                         </div>
                     </td>
                 </tr>                
-                <tr  style = "border-style: solid; border-width: 1px;" >
-                    <td align="center" colspan="10">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
+                <tr  style = \"border-style: solid; border-width: 1px;\" >
+                    <td align=\"center\" colspan=\"10\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Condições
                         </div>
                     </td>
                 </tr>                 
                 <tr>
-                    <Td colspan="10" width="">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $prazo_validade_completo_orc; ?>
+                    <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$prazo_validade_completo_orc}
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <Td colspan="10" width="">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $pagamento_completo_orc; ?>
+                    <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$pagamento_completo_orc}
                         </div>
                     </td>
                 </tr> 
-                <?php
-                if ($obs_orc == "") {
+                
+                {$observacao}
                     
-                } else {
-                    ?>
-                    <tr  style = "border-style: solid; border-width: 1px;" >
-                        <td align="center" colspan="10">
-                            <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
-                               Observações
-                            </div>
-                        </td>
-                    </tr>                 
-                    <tr>
-                        <Td colspan="10" width="">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                                <?php echo $obs_orc; ?>
-                            </div>
-                        </td>
-                    </tr>     
-                    <?php
-                }
-                ?>
-                <tr style = "border-style: solid; border-width: 1px;" >
-                    <td align="center" colspan="10">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
+                <tr style = \"border-style: solid; border-width: 1px;\" >
+                    <td align=\"center\" colspan=\"10\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Dúvidas / Negociações
                         </div>
                     </td>
                 </tr>                 
                 <tr>
-                    <Td colspan="10" width="">  <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            <?php echo $duvida_orc; ?>
+                    <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            {$duvida_orc}
                         </div>
                     </td>
                 </tr>                  
-                <tr bordercolor="" style = "border-style: solid; border-width: 1px;" >
-                    <td align="center" colspan="10">
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;">
+                <tr bordercolor=\"\" style = \"border-style: solid; border-width: 1px;\" >
+                    <td align=\"center\" colspan=\"10\">
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Assinaturas
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <Td colspan="4" width="" align="center">  
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
+                    <Td colspan=\"4\" width=\"\" align=\"center\">  
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             <br>
                             <br>
                             <br>
@@ -407,8 +421,8 @@ $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
                             <br>
                         </div>
                     </td>
-                    <Td colspan="6" width="" align="center">  
-                        <div style="font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
+                    <Td colspan=\"6\" width=\"\" align=\"center\">  
+                        <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             <br>
                             <br>
                             <br>
@@ -421,28 +435,36 @@ $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
                     </td>                    
                 </tr>                 
                 <tr>
-                    <td colspan="10" width="" align="center">
+                    <td colspan=\"10\" width=\"\" align=\"center\">
                         <div>
-                            <?php
-                            if ($orcamento->getDataUltimaAlteracao() == "0000-00-00 00:00:00") {
-
-                                echo "Fortaleza, Ce em  " . Formatar::formatarDataComHora($orcamento->getDataDoOrc());
-                            } else {
-                                echo "Fortaleza, Ce em  " . Formatar::formatarDataComHora($orcamento->getDataUltimaAlteracao());
-                            }
-                            ?>
+                            {$data_alterado}
                         </div>
                         <br>
                     </td>
                 </tr>
                 <tr>
-                    <Td colspan="10" width="" align="center">  <div style="color: #3E4B95; font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;">
-                            CNPJ <?= Formatar::formatTelCnpjCpf($empresaDao->getCnpj()) ?> - <?= $empresaDao->getEndereco() ?> – <?= $empresaDao->getBairro() ?>  – <?= $empresaDao->getCidade() ?> -<?= $empresaDao->getEstado() ?>  – Fone: <?= Formatar::formatTelCnpjCpf($empresaDao->getTel()) ?> – Fax: (85) 3227.6068
-                            CEP: <?= Formatar::formatTelCnpjCpf($empresaDao->getCep()) ?> – <?= $empresaDao->getEmail_tec() ?> – www.elfiservice.com.br
+                    <Td colspan=\"10\" width=\"\" align=\"center\">  <div style=\"color: #3E4B95; font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
+                            CNPJ {$cnpj_formatado} - {$empresaDao->getEndereco()} – {$empresaDao->getBairro()}  – {$empresaDao->getCidade()} -{$empresaDao->getEstado()}  – Fone: {$tel_formatado} – Fax: (85) 3227.6068
+                            CEP: {$cep_formatado} – {$empresaDao->getEmail_tec()} – www.elfiservice.com.br
                         </div>
                     </td>
                 </tr>                 
-            </table>   
+            </table>";
+ 
+// SET YOUR PDF OPTIONS -- FOR ALL AVAILABLE OPTIONS, VISIT HERE:  http://phptopdf.com/documentation/
+$pdf_options = array(
+  "source_type" => 'html',
+  "source" => $html,
+  "action" => 'save',
+  "save_directory" => 'orc_pdfs',
+  "file_name" => $title . '.pdf');
+
+// CALL THE phpToPDF FUNCTION WITH THE OPTIONS SET ABOVE
+phptopdf($pdf_options);
+
+// OPTIONAL - PUT A LINK TO DOWNLOAD THE PDF YOU JUST CREATED
+echo ("<a href='orc_pdfs/{$title}.pdf'>Salvar PDF do Orçamento</a>");
+        ?>
         </div>
     </body>
 </html>
