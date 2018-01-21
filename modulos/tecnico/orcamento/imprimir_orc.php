@@ -21,32 +21,10 @@ if (empty($id_orcamento)) {
 $empresaCtrl = new EmpresaCtrl();
 $empresaDao = $empresaCtrl->buscarEmpresa("*", "WHERE id = 2");
 
- // INCLUDE THE phpToPDF.php FILE
-require("../../../classes/util/phpToPDF.php");
-?>
+require('../../../classes/util/fpdf/fpdf.php');
 
-<!doctype html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="pt"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="pt"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="pt"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="pt"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
 
-        <meta name="description" content="">
-        <meta name="author" content="Elfi Service">
 
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="stylesheet" href=".css">    
-
-    </head>
-
-    <body>
-        <div id="conteudo" style="margin:20px 0px 20px 0px;">
-
-            <?php
             $orcCtrl = new OrcamentoCtrl();
             $orcamento = $orcCtrl->buscarOrcamentoPorId("*", "WHERE id = '$id_orcamento' LIMIT 1");
             //   var_dump($orcamento);
@@ -158,6 +136,9 @@ require("../../../classes/util/phpToPDF.php");
 //duvidas
             $duvida_orc = $orcamento->getDuvida();
             
+
+            
+      
 //logica da estruruda do orçamento
 if ($email_obra == "" && $razao_obra == "") {
     $dados_obra = "<tr  style = \"border-style: solid; border-width: 1px;\" >
@@ -247,14 +228,12 @@ $cnpj_formatado = Formatar::formatTelCnpjCpf($empresaDao->getCnpj());
 $cep_formatado = Formatar::formatTelCnpjCpf($empresaDao->getCep());
 $tel_formatado = Formatar::formatTelCnpjCpf($empresaDao->getTel());
 
-            ?>    
 
+//Footer
+            $rodape_pg = "CNPJ {$cnpj_formatado} - {$empresaDao->getEndereco()} – {$empresaDao->getBairro()}  – {$empresaDao->getCidade()} -{$empresaDao->getEstado()}  – Fone: {$tel_formatado} – Fax: (85) 3227.6068"
+            . "CEP: {$cep_formatado} – {$empresaDao->getEmail_tec()} – www.elfiservice.com.br";
+            
 
-            <script>
-
-                document.title = "<?php echo $title; ?>";
-            </script>   
-<?php
 $html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: collapse\"   >
                 <tr bordercolor=\"\"  >
                     <td colspan=\"\" >
@@ -450,21 +429,136 @@ $html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: colla
                     </td>
                 </tr>                 
             </table>";
- 
-// SET YOUR PDF OPTIONS -- FOR ALL AVAILABLE OPTIONS, VISIT HERE:  http://phptopdf.com/documentation/
-$pdf_options = array(
-  "source_type" => 'html',
-  "source" => $html,
-  "action" => 'save',
-  "save_directory" => 'orc_pdfs',
-  "file_name" => $title . '.pdf');
+                            
+                                        
 
-// CALL THE phpToPDF FUNCTION WITH THE OPTIONS SET ABOVE
-phptopdf($pdf_options);
 
-// OPTIONAL - PUT A LINK TO DOWNLOAD THE PDF YOU JUST CREATED
-echo ("<a href='orc_pdfs/{$title}.pdf'>Salvar PDF do Orçamento</a>");
-        ?>
-        </div>
-    </body>
-</html>
+class PDF extends FPDF
+{
+
+
+
+// Page header
+    function Header()
+    {
+        // Logo
+        $this->Image('../../../imagens/logo_elfi.jpg',10,12,30);
+        // Arial bold 15
+        $this->SetFont('Arial','',10);
+        // Move to the right
+        $this->Cell(40);
+        // Title
+        $this->MultiCell(0,4, utf8_decode('Montagens e Manutenções de: Subestações, Transformadores, Grupo Geradores, Disjuntores Banco de Capacitores Fixo e Automático, Quadros de Comando, Força e Luz, S.P.D.A., Tratamento de Óleo Isolante pelo processo Termo-Vácuo, Comissionamento de Subestação, Termografia. Desde 1993 trazendo soluções para sua empresa.'),0,'L');
+        $this->Ln(8);
+    }
+    
+    function Footer()
+    {
+        // Position at 1.5 cm from bottom
+        $this->SetY(-15);
+        // Arial italic 8
+        $this->SetFont('Arial','',8);
+        
+        $this->MultiCell(190, 4, utf8_decode('CNPJ 73.624.165/0001-08 - RUA QUINTINO CUNHA 731 - JARDIM AMERICA - FORTALEZA-CE - Fone: (85) 3227-6307 - Fax: (85) 3227-6068 CEP: 60416-104 - elfi@elfiservice.com.br - www.elfiservice.com.br'),0,'C');
+        // Page number
+        $this->Cell(0,5,'Pg '.$this->PageNo().'/{nb}',0,0,'R');
+    }
+    
+    function divisorHeader($texto) {
+        $this->Ln(2);
+        $this->SetFont('Arial','B',10);
+        $this->Cell(0,6,$texto,1,1,'C');
+        $this->SetFont('Arial','',9);
+        $this->Ln(2);
+    }
+}
+
+$pdf = new PDF();
+$pdf->AliasNbPages();
+$pdf->AddPage();
+
+$pdf->SetFont('Arial','',7);
+$pdf->Cell(100,5,$empresaDao->getRazao_social(),0,0,'L');
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(90,5,'Proposta ' . $n_da_proposta,0,0,'R');
+$pdf->Ln(10);
+//dados do contratante
+$pdf->divisorHeader('Dados do Contratante');
+//linha 1
+$pdf->Cell(25,5,'Razao Social:',0,0,'L');
+$pdf->Cell(120,5,utf8_decode($razao_contra),0,0,'L');
+$pdf->Cell(15,5,'CNPJ:',0,0,'L');
+$pdf->Cell(30,5,$orcamento->getCnpjContrat(),0,1,'L');
+//linha 2 endereco
+$pdf->Cell(25,5,'Endereco:',0,0,'L');
+$pdf->Cell(165,5, utf8_decode($endereco_completo),0,1,'L');
+//linha 3 contatos
+$pdf->Cell(25,5,'Contato:',0,0,'L');
+$pdf->Cell(165,5, utf8_decode($contato_completo),0,1,'L');
+
+//dados da OBRA
+$pdf->divisorHeader('Dados da Obra');
+if ($email_obra == "" && $razao_obra == "") {
+    $pdf->Cell(0,5,'Dados da Obra iguais aos do Contratante',0,1,'C');
+} else {
+    //linha 1
+    $pdf->Cell(25,5,'Razao Social:',0,0,'L');
+    $pdf->Cell(120,5,utf8_decode($razao_obra),0,0,'L');
+    $pdf->Cell(15,5,'CNPJ:',0,0,'L');
+    $pdf->Cell(30,5,$orcamento->getCnpjObra(),0,1,'L');
+    //linha 2 endereco
+    $pdf->Cell(25,5,'Endereco:',0,0,'L');
+    $pdf->Cell(165,5, utf8_decode($endereco_completo_obra),0,1,'L');
+    //linha 3 contatos
+    $pdf->Cell(25,5,'Contato:',0,0,'L');
+    $pdf->Cell(165,5, utf8_decode($contato_completo_obra),0,1,'L');
+}
+
+//Atividade / classificacao
+$pdf->divisorHeader("Atividade / Classificacao");
+$pdf->Cell(190,5, utf8_decode($atividade_completo),0,1,'L');
+
+//descricao do servico
+$pdf->divisorHeader("Descricao dos Servicos");
+$pdf->MultiCell(190, 4, utf8_decode(strip_tags($descricao_orc)), 0, 'L');
+
+//valor da propota
+$pdf->divisorHeader('Valor da Proposta');
+$pdf->Cell(190,5, utf8_decode(str_replace("&nbsp;", " ", $valor_completo_orc)),0,1,'L');
+
+//condicoes
+$pdf->divisorHeader('Condicoes');
+$pdf->Cell(190,5, utf8_decode(str_replace("&nbsp;", " ", $prazo_validade_completo_orc)),0,1,'L');
+$pdf->Cell(190,5, utf8_decode(str_replace("&nbsp;", " ", $pagamento_completo_orc)),0,1,'L');
+
+//observao
+if ($obs_orc != "") {                    
+   $pdf->divisorHeader('Observacao');
+   $pdf->MultiCell(190, 5, utf8_decode(strip_tags($obs_orc)), 0, 'L');
+   
+}
+
+//duvidas e necogiacoes
+$pdf->divisorHeader('Duvidas / Negociacoes');
+$pdf->MultiCell(190, 5, utf8_decode(strip_tags($duvida_orc)), 0, 'L');
+
+//assinaturas
+$pdf->divisorHeader('Assinaturas');
+$pdf->Ln(20);
+$pdf->Cell(10,1,'',0,0,'C');
+$pdf->Cell(80,1,'','B',0,'C');
+$pdf->Cell(10,1,'',0,0,'C');
+$pdf->Cell(80,1,'','B',0,'C');
+$pdf->Cell(10,1,'',0,0,'C');
+$pdf->Ln(5);
+$pdf->Cell(100,1,'Elfi / Carimbo',0,0,'C');
+$pdf->Cell(90,1,'De acordo / Carimbo',0,0,'C');
+
+$pdf->Ln(15);
+//Data
+$pdf->SetFont('Arial','',10);
+$pdf->MultiCell(190, 5, utf8_decode(strip_tags($data_alterado)), 0, 'C');
+
+
+$pdf->Output('I', utf8_decode(strip_tags($title)) .'.pdf');            
+      
