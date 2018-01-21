@@ -135,10 +135,10 @@ require('../../../classes/util/fpdf/fpdf.php');
 
 //duvidas
             $duvida_orc = $orcamento->getDuvida();
-            
 
-            
-      
+
+
+
 //logica da estruruda do orçamento
 if ($email_obra == "" && $razao_obra == "") {
     $dados_obra = "<tr  style = \"border-style: solid; border-width: 1px;\" >
@@ -184,7 +184,7 @@ if ($email_obra == "" && $razao_obra == "") {
                                 {$endereco_completo_obra}
                             </div>
                         </td>
-                    </tr>               
+                    </tr>
                     <tr>
                         <td width=\"100\">
                             <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
@@ -196,12 +196,12 @@ if ($email_obra == "" && $razao_obra == "") {
                             </div>
                         </td>
                     </tr> ";
-                                
+
 }
 
-if ($obs_orc == "") {                    
+if ($obs_orc == "") {
     $observacao = "";
-    
+
 } else {
    $observacao = "<tr  style = \"border-style: solid; border-width: 1px;\" >
                         <td align=\"center\" colspan=\"10\">
@@ -209,13 +209,13 @@ if ($obs_orc == "") {
                                Observações
                             </div>
                         </td>
-                    </tr>                 
+                    </tr>
                     <tr>
                         <Td colspan=\"10\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             {$obs_orc}
                             </div>
                         </td>
-                    </tr>"; 
+                    </tr>";
 }
 
 if ($orcamento->getDataUltimaAlteracao() == "0000-00-00 00:00:00") {
@@ -232,7 +232,7 @@ $tel_formatado = Formatar::formatTelCnpjCpf($empresaDao->getTel());
 //Footer
             $rodape_pg = "CNPJ {$cnpj_formatado} - {$empresaDao->getEndereco()} – {$empresaDao->getBairro()}  – {$empresaDao->getCidade()} -{$empresaDao->getEstado()}  – Fone: {$tel_formatado} – Fax: (85) 3227.6068"
             . "CEP: {$cep_formatado} – {$empresaDao->getEmail_tec()} – www.elfiservice.com.br";
-            
+
 
 $html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: collapse\"   >
                 <tr bordercolor=\"\"  >
@@ -290,7 +290,7 @@ $html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: colla
                             {$endereco_completo}
                         </div>
                     </td>
-                </tr>               
+                </tr>
                 <tr>
                     <td width=\"100\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
@@ -301,57 +301,57 @@ $html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: colla
                             {$contato_completo}
                         </div>
                     </td>
-                </tr> 
-                
+                </tr>
+
                 {$dados_obra}
 
-               
+
                 <tr  style = \"border-style: solid; border-width: 1px;\" >
                     <td align=\"center\" colspan=\"10\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Atividade / Classificação
                         </div>
                     </td>
-                </tr>              
+                </tr>
                 <tr>
                     <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             {$atividade_completo}
                         </div>
                     </td>
-                </tr>                   
+                </tr>
                 <tr style = \"border-style: solid; border-width: 1px;\" >
                     <td align=\"center\" colspan=\"10\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Descrição dos Serviços
                         </div>
                     </td>
-                </tr> 
+                </tr>
                 <tr>
                     <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             {$descricao_orc}
                         </div>
                     </td>
-                </tr>                 
+                </tr>
                 <tr style = \"border-style: solid; border-width: 1px;\" >
                     <td align=\"center\" colspan=\"10\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Valor da Proposta
                         </div>
                     </td>
-                </tr>                 
+                </tr>
                 <tr>
                     <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             {$valor_completo_orc}
                         </div>
                     </td>
-                </tr>                
+                </tr>
                 <tr  style = \"border-style: solid; border-width: 1px;\" >
                     <td align=\"center\" colspan=\"10\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Condições
                         </div>
                     </td>
-                </tr>                 
+                </tr>
                 <tr>
                     <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             {$prazo_validade_completo_orc}
@@ -363,23 +363,23 @@ $html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: colla
                             {$pagamento_completo_orc}
                         </div>
                     </td>
-                </tr> 
-                
+                </tr>
+
                 {$observacao}
-                    
+
                 <tr style = \"border-style: solid; border-width: 1px;\" >
                     <td align=\"center\" colspan=\"10\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
                             Dúvidas / Negociações
                         </div>
                     </td>
-                </tr>                 
+                </tr>
                 <tr>
                     <Td colspan=\"10\" width=\"\">  <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             {$duvida_orc}
                         </div>
                     </td>
-                </tr>                  
+                </tr>
                 <tr bordercolor=\"\" style = \"border-style: solid; border-width: 1px;\" >
                     <td align=\"center\" colspan=\"10\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 13px;\">
@@ -388,31 +388,31 @@ $html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: colla
                     </td>
                 </tr>
                 <tr>
-                    <Td colspan=\"4\" width=\"\" align=\"center\">  
+                    <Td colspan=\"4\" width=\"\" align=\"center\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             <br>
                             <br>
                             <br>
-                            ________________________________________<br>         
+                            ________________________________________<br>
                             Elfi / carimbo
                             <br>
                             <br>
                             <br>
                         </div>
                     </td>
-                    <Td colspan=\"6\" width=\"\" align=\"center\">  
+                    <Td colspan=\"6\" width=\"\" align=\"center\">
                         <div style=\"font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 12px;\">
                             <br>
                             <br>
                             <br>
-                            ________________________________________<br>         
+                            ________________________________________<br>
                             De acordo / carimbo
                             <br>
                             <br>
                             <br>
                         </div>
-                    </td>                    
-                </tr>                 
+                    </td>
+                </tr>
                 <tr>
                     <td colspan=\"10\" width=\"\" align=\"center\">
                         <div>
@@ -427,10 +427,10 @@ $html = "<table border=\"0\"    CELLPADDING=\"5\" style=\"border-collapse: colla
                             CEP: {$cep_formatado} – {$empresaDao->getEmail_tec()} – www.elfiservice.com.br
                         </div>
                     </td>
-                </tr>                 
+                </tr>
             </table>";
-                            
-                                        
+
+
 
 
 class PDF extends FPDF
@@ -451,19 +451,19 @@ class PDF extends FPDF
         $this->MultiCell(0,4, utf8_decode('Montagens e Manutenções de: Subestações, Transformadores, Grupo Geradores, Disjuntores Banco de Capacitores Fixo e Automático, Quadros de Comando, Força e Luz, S.P.D.A., Tratamento de Óleo Isolante pelo processo Termo-Vácuo, Comissionamento de Subestação, Termografia. Desde 1993 trazendo soluções para sua empresa.'),0,'L');
         $this->Ln(8);
     }
-    
+
     function Footer()
     {
         // Position at 1.5 cm from bottom
         $this->SetY(-15);
         // Arial italic 8
         $this->SetFont('Arial','',8);
-        
+
         $this->MultiCell(190, 4, utf8_decode('CNPJ 73.624.165/0001-08 - RUA QUINTINO CUNHA 731 - JARDIM AMERICA - FORTALEZA-CE - Fone: (85) 3227-6307 - Fax: (85) 3227-6068 CEP: 60416-104 - elfi@elfiservice.com.br - www.elfiservice.com.br'),0,'C');
         // Page number
         $this->Cell(0,5,'Pg '.$this->PageNo().'/{nb}',0,0,'R');
     }
-    
+
     function divisorHeader($texto) {
         $this->Ln(2);
         $this->SetFont('Arial','B',10);
@@ -532,10 +532,10 @@ $pdf->Cell(190,5, utf8_decode(str_replace("&nbsp;", " ", $prazo_validade_complet
 $pdf->Cell(190,5, utf8_decode(str_replace("&nbsp;", " ", $pagamento_completo_orc)),0,1,'L');
 
 //observao
-if ($obs_orc != "") {                    
+if ($obs_orc != "") {
    $pdf->divisorHeader('Observacao');
    $pdf->MultiCell(190, 5, utf8_decode(strip_tags($obs_orc)), 0, 'L');
-   
+
 }
 
 //duvidas e necogiacoes
@@ -560,5 +560,4 @@ $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(190, 5, utf8_decode(strip_tags($data_alterado)), 0, 'C');
 
 
-$pdf->Output('I', utf8_decode(strip_tags($title)) .'.pdf');            
-      
+$pdf->Output('I', utf8_decode(strip_tags($title)) .'.pdf');
