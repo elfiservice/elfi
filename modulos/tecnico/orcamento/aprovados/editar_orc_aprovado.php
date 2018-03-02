@@ -206,7 +206,7 @@ if ($form && $form['salvar_orc']) {
         var ano = data.substr(6, 4);
         if (tam === 10) {
 
-            if ((ano > 1900) || (ano < 2100)) {
+            if ((ano > 1900) && (ano < 2100)) {
                 switch (mes) {
                     case '01':
                     case '03':
@@ -248,23 +248,15 @@ if ($form && $form['salvar_orc']) {
             }
         }
 
-        if (ano === 0000 && mes === 00 && dia === 00) {
+
+        if (ano === '0000' && mes === '00' && dia === '00') {
 
             return true;
-        } else
-        {
-
-
-            if (document.getElementById(idData).id === 'data_inicio') {
-                document.getElementById("data_inicio").value = "00/00/0000";
-                alert("A Data " + data + " e invalida!");
-                return false;
-            } else if (document.getElementById(idData).id === 'data_conclusao') {
-                document.getElementById("data_conclusao").value = "00/00/0000";
-                alert("A Data " + data + " e invalida!");
-                return false;
-            }
-
+        } else {
+            alert("A Data " + data + " e invalida!");
+            let inputData = document.getElementById(idData);
+            inputData.value = "00/00/0000";
+            inputData.focus();
         }
     }</script>
 
