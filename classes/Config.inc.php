@@ -27,7 +27,7 @@ define('SITEDESCRICAO', ' Sistema de gestão da empresa ELFI  ');    // SEO desc
 //AUTO LOAD DE CALSSES ###################
 spl_autoload_register(function ($pClass) {
 
-    $cDir = array('model', 'controller', 'dao', 'util', 'util/FPDF');
+    $cDir = array('model', 'controller', 'dao', 'util', 'util/fpdf');
     $iDir = null;   //se houve a inclusao do diretorio caso não, lança um ERRO
 //__DIR__ => pega o nome do diretorio deste Arquivo Config.inc.php no caso _app
 
