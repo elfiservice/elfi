@@ -90,7 +90,8 @@ $orcCrtl = new OrcamentoCtrl();
         <tbody>
             <?php
             $orcamentosArray = $orcCrtl->buscarOrcamentos("*", "WHERE ano_orc = '$ano_orc_selec' ORDER BY id DESC");
-            foreach ($orcamentosArray as $orc => $row) {
+            if($orcamentosArray) {
+                foreach ($orcamentosArray as $orc => $row) {
                 $id_orc = $row['id'];
                 $id_cliente = $row['id_cliente'];
                 //Buscar ID do CLIENTE
@@ -199,6 +200,7 @@ $orcCrtl = new OrcamentoCtrl();
                 </tr>
 
                 <?php
+            }
             }
             ?>
 
