@@ -93,7 +93,7 @@
     <h2><?php include 'includes/nav_wizard.php' ?> -> Novo</h2>
 </div>
 <hr>
-<div>
+<div class="novo_orc_content">
 
     <form name="clientForm" method="post" action="?id_menu=orcamento/incluir/salvar_novo_orc"
           onsubmit="return formCheck(this);">
@@ -106,7 +106,7 @@
                 <tbody>
 
                     <tr align="left">
-                        <td><label for="clientID">Cliente:</label></br> 
+                        <td colspan="3"><label for="clientID">Cliente:</label></br> 
                             <select id="clientID" name="clientID">
                                 <option value=""></option>
                                 <?php
@@ -125,11 +125,11 @@
                                 name="razao_social" id="razao_social" size="60" maxlength="255" readonly="readonly">
                         </td>
 
-                        <td><label for="cnpj">CNPJ:</label></br> <input name="cnpj"
+                        <td  colspan="2"><label for="cnpj">CNPJ:</label></br> <input name="cnpj"
                                                                         id="cnpj" alt="" size="20" maxlength="255" readonly="readonly"></td>
                     </tr>
                     <tr align="left">
-                        <td><label for="endereco">Endereço:</label></br> <input
+                        <td  colspan="3"><label for="endereco">Endereço:</label></br> <input
                                 name="endereco" id="endereco" size="60" maxlength="255" readonly="readonly"></td>
                     </tr>
                     <tr align="left">

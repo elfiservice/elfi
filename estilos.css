@@ -51,6 +51,10 @@ select, input, textarea, checkbox{
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
+/*.novo_orc_content input, .novo_orc_content select, .novo_orc_content textarea, .novo_orc_content checkbox {
+    width: 100%
+}*/
+
 input:focus,select:focus,textarea:focus{
     background-color: #DAE2F5;
     box-sizing: border-box;
@@ -129,8 +133,6 @@ legend{    font-size: 18px;   font-weight: bold;  }
     background-color: #C6CFE4;
 }
 
-
-
 .iframeStyle{
 
     width: 100%;
@@ -138,18 +140,10 @@ legend{    font-size: 18px;   font-weight: bold;  }
     frameborder: 1;
 }
 
-
-
-
-
-
-
 #menu {
     float: right;
 
 }
-
-
 
 #menu ul {
     padding:0px 0px 0px 0px;
@@ -211,12 +205,6 @@ legend{    font-size: 18px;   font-weight: bold;  }
 
     text-decoration: none; 
     display: inline-block;
-}
-
-
-#menu_paginas ul li a:hover  {
-
-
 }
 
 
@@ -571,10 +559,23 @@ legend.scheduler-border {
     background-color: #012b8b!important;
 }
 
+@media screen and (max-width: 789px) {
+
+    
+    .novo_orc_content input, .novo_orc_content select, .novo_orc_content textarea, .novo_orc_content checkbox {
+        width: 100%;
+    }
+
+}
+
 @media screen and (min-width: 790px) {
     .w3-content {
         max-width: 70%;
 
     }
+    
+/*    .novo_orc_content input, .novo_orc_content select, .novo_orc_content textarea, .novo_orc_content checkbox {
+        width: 70%;
+    }*/
 
 }
