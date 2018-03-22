@@ -107,7 +107,7 @@
 
                     <tr align="left">
                         <td colspan="3"><label for="clientID">Cliente:</label></br> 
-                            <select id="clientID" name="clientID">
+                            <select id="clientID" class="width100" name="clientID">
                                 <option value=""></option>
                                 <?php
                                 $clienteCtrl = new ClienteCtrl();

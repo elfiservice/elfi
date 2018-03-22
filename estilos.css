@@ -51,9 +51,9 @@ select, input, textarea, checkbox{
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-/*.novo_orc_content input, .novo_orc_content select, .novo_orc_content textarea, .novo_orc_content checkbox {
+.width100 {
     width: 100%
-}*/
+}
 
 input:focus,select:focus,textarea:focus{
     background-color: #DAE2F5;
