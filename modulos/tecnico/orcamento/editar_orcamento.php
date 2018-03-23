@@ -471,7 +471,7 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
                 <legend><b>Descrição dos Serviços</b></legend>
 
 
-                <textarea onfocus="" style="height: 10em; width: 100%;"  id="text" name="descricao_servicos"><?php echo strip_tags($descricao_servico_orc); ?></textarea>
+                <textarea onfocusout="persistData()" style="height: 10em; width: 100%;"  id="text" name="descricao_servicos"><?php echo strip_tags($descricao_servico_orc); ?></textarea>
 
 
             </fieldset>
@@ -518,7 +518,7 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
                 <legend><b>Observações</b></legend>
 
 
-                <textarea onfocus="" style="height: 5em; width: 100%;" id="text2" name="observacoes_servico"><?php echo strip_tags($obs_orc); ?></textarea>
+                <textarea onfocusout="persistData()" style="height: 5em; width: 100%;" id="text2" name="observacoes_servico"><?php echo strip_tags($obs_orc); ?></textarea>
 
 
             </fieldset>                    
@@ -605,6 +605,32 @@ if ($situacao_orc != "Aprovado" && $situacao_orc != "Cancelado" && $situacao_orc
 
     </div>	  
 
+    <script>
+                        var idORC = <?= $id  ?>;
+        function persistData() {
+            var descricaoOrc = document.getElementById("text").value;
+            var observOrc = document.getElementById("text2").value;
+            
+    //                    document.getElementById("demo").innerHTML = "You wrote: " + x;
+console.log(idORC);
+            localStorage.setItem("descricao_editar_orc_" + idORC, descricaoOrc);
+            localStorage.setItem("observacao_editar_orc" + idORC, observOrc);
+
+        }
+
+        var descOrc = localStorage.getItem("descricao_editar_orc_" + idORC);
+        var obsOrc = localStorage.getItem("observacao_editar_orc" + idORC);
+        if (descOrc != null)
+        {
+            document.getElementById("text").innerHTML = descOrc;
+        }
+
+        if (obsOrc != null)
+        {
+            document.getElementById("text2").innerHTML = obsOrc;
+        }
+
+    </script> 
 
     <?php
 } else {

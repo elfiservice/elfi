@@ -167,6 +167,9 @@ if (filter_has_var(INPUT_POST, "razao_social")) {
             </a>
         </p>
         <a class="bt_link" href="?id_menu=orcamento/manterOrcamentos" target="_self">Voltar</a>
+        <script>
+            localStorage.clear();
+        </script>
 
         <?php
     } else {
