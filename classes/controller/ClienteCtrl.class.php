@@ -75,7 +75,7 @@ class ClienteCtrl {
      * @param array $dados = Dados do cliente
      * @return boolean = Retorna True ou False
      */
-    public function atualizarCliente(Array $dados) {
+    public function atualizarCliente(Array $dados, Array $dadosClienteAntigoObj) {
         $estado = $this->buscarEstado("*", "where cod_estados = '" . $dados['cod_estados'] . "'");
         $cidade = $this->buscarCidade("*", "where cod_cidades = '" . $dados['cod_cidades'] . "'");
         $dados['estado'] = $estado[0]['nome'];
@@ -84,10 +84,33 @@ class ClienteCtrl {
         if ($dados["salvar_editar_cliente"]) {
             unset($dados["salvar_editar_cliente"]);
             $arrayFilha[] = $this->selecionaFilha($dados);
-
+            
             if ($arrayFilha[0][1] == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
+                //ToDO: fazer o teste do dado q foi alterado entre o $dados e $dadosClienteAntigo
+                //var_dump($dados["nome_fantasia"]);
+                $dadosClienteAntigoArray = (array) $dadosClienteAntigoObj[0];
+                // unset($dadosClienteAntigoArray["Clientemostrar"]);
+                foreach ($dadosClienteAntigoArray as $campo => $valor) {
+                    
+                    $campo = str_replace("\0Cliente\0", "", $campo);
+                    $campo = str_replace("\0ClientePJ\0", "", $campo);
+                    $campo = str_replace("\0ClientePF\0", "", $campo);
+                    // $campo = str_replace("\0{$filha}\0", "", $campo);
+                    $novaArrayDadosAntigos[$campo] = $valor;
+
+                    if (array_key_exists($campo, $dados)) {
+                        echo "novo " . $dados[$campo] . " = ANtigo " . $novaArrayDadosAntigos[$campo] ."</br>";
+                    } else {
+                        echo "novo " . $dados[$campo] . " != ANtigo " . $novaArrayDadosAntigos[$campo] ."</br>";
+                    }
+                    
+                }
+                
+                // unset($novaArrayDadosAntigos['mostrar']);
+                // var_dump($novaArrayDadosAntigos);
+
                 if ($this->atualizarBD($arrayFilha[0][0])) {
-                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id_cliente']}</b> <b><span>Alterado</span></b> no Sistema", "tec");
+                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id']}</b> <b><span>Alterado</span></b> no Sistema", "tec");
                     $this->result = array("<b>OK!</b> Cliente <b>Atualizado</b> com sucesso.", WS_ACCEPT);
                     return TRUE;
                 } else {
@@ -110,7 +133,7 @@ class ClienteCtrl {
         $cidade = $this->buscarCidade("*", "where cod_cidades = '" . $dados['cod_cidades'] . "'");
         $dados['estado'] = $estado[0]['nome'];
         $dados['cidade'] = $cidade[0]['nome'];
-        $dados['id_cliente'] = 0; //apenas para fazer o TESTE no metodo checkRazaoFantasia() 
+        $dados['id'] = 0; //apenas para fazer o TESTE no metodo checkRazaoFantasia() 
         if ($dados["salvar_novo_cliente"]) {
             unset($dados["salvar_novo_cliente"]);
             
@@ -211,7 +234,7 @@ class ClienteCtrl {
     private function checkCNPJ(Array $dados) {
         $cnpj = $this->buscarBD("*", "WHERE cnpj_cpf = '" . Formatar::limpaCPF_CNPJ($dados['cnpj']) . "' AND mostrar = '1'");
         if (!empty($cnpj)) {
-            if (count($cnpj) > 0 && $dados['id_cliente'] <> (int) $cnpj[0]->getId()) {
+            if (count($cnpj) > 0 && $dados['id'] <> (int) $cnpj[0]->getId()) {
                 $this->result = array("<b>Ops!!</b> CNPJ <b>{$dados['cnpj']}</b> já cadastrado no Sistema.", WS_ERROR);
                 return TRUE;
             } else {
@@ -225,7 +248,7 @@ class ClienteCtrl {
     private function checkCPF(Array $dados) {
         $consulta = $this->buscarBD("*", "WHERE cpf = '" . Formatar::limpaCPF_CNPJ($dados['cpf']) . "' AND mostrar = '1'");
         if (!empty($consulta)) {
-            if (count($consulta) > 0 && $dados['id_cliente'] <> (int) $consulta[0]->getId()) {
+            if (count($consulta) > 0 && $dados['id'] <> (int) $consulta[0]->getId()) {
                 $this->result = array("<b>Ops!!</b> CPF <b>{$dados['cpf']}</b> já cadastrado no Sistema.", WS_ERROR);
                 return TRUE;
             } else {
@@ -241,14 +264,14 @@ class ClienteCtrl {
         $nome_fantasia = $this->buscarBD("*", "WHERE nome_fantasia = '" . $dados['nome_fantasia'] . "' AND mostrar = '1'");
 
         if (!empty($razao_social)) {
-            if (count($razao_social) > 0 && $dados['id_cliente'] <> (int) $razao_social[0]->getId()) {
+            if (count($razao_social) > 0 && $dados['id'] <> (int) $razao_social[0]->getId()) {
                 $this->result = array("<b>Ops!!</b> Razão Social <b>{$dados['razao_social']}</b> já cadastrado no Sistema.", WS_ERROR);
                 return TRUE;
             }
         }
 
         if (!empty($nome_fantasia)) {
-            if (count($nome_fantasia) > 0 && $dados['id_cliente'] <> (int) $nome_fantasia[0]->getId()) {
+            if (count($nome_fantasia) > 0 && $dados['id'] <> (int) $nome_fantasia[0]->getId()) {
                 $this->result = array("<b>Ops!!</b> Nome Fantasia <b>{$dados['nome_fantasia']}</b> já cadastrado no Sistema.", WS_ERROR);
                 return TRUE;
             }
@@ -259,12 +282,12 @@ class ClienteCtrl {
 
     private function selecionaFilha(Array $dados) {
         if (empty($dados['tipo'])) { //se tipo esta embranco é PJ se existe é PF
-            $obj = new ClientePJ($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $obj = new ClientePJ($dados['id'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
             $flag_teste = $this->checkCNPJ($dados);
             //$array[] = array($obj, $flag_teste);
             return array($obj, $flag_teste);
         } else {
-            $obj = new ClientePF($dados['id_cliente'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $obj = new ClientePF($dados['id'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
             $flag_teste = $this->checkCPF($dados);
             return array($obj, $flag_teste);
         }
