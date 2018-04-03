@@ -103,7 +103,7 @@ if (!empty($id_cliente)) {
 if (filter_has_var(INPUT_POST, "salvar_editar_cliente")) {
     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
     $dados['id'] = $id_cliente;
-    $dados['Login'] = Formatar::prefixEmail($userlogin->getLogin()) ;
+    $dados['usuario'] = Formatar::prefixEmail($userlogin->getLogin()) ;
     $dados['id_colab_logado'] = $userlogin->getId();
  
     if ($clienteCtrl->atualizarCliente($dados, $clienteObjInicial)) {

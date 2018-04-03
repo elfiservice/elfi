@@ -86,28 +86,22 @@ class ClienteCtrl {
             $arrayFilha[] = $this->selecionaFilha($dados);
             
             if ($arrayFilha[0][1] == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
-                //ToDO: fazer o teste do dado q foi alterado entre o $dados e $dadosClienteAntigo
-                //var_dump($dados["nome_fantasia"]);
-                $dadosClienteAntigoArray = (array) $dadosClienteAntigoObj[0];
-                // unset($dadosClienteAntigoArray["Clientemostrar"]);
-                foreach ($dadosClienteAntigoArray as $campo => $valor) {
-                    
-                    $campo = str_replace("\0Cliente\0", "", $campo);
-                    $campo = str_replace("\0ClientePJ\0", "", $campo);
-                    $campo = str_replace("\0ClientePF\0", "", $campo);
-                    // $campo = str_replace("\0{$filha}\0", "", $campo);
-                    $novaArrayDadosAntigos[$campo] = $valor;
 
-                    if (array_key_exists($campo, $dados)) {
-                        echo "novo " . $dados[$campo] . " = ANtigo " . $novaArrayDadosAntigos[$campo] ."</br>";
-                    } else {
-                        echo "novo " . $dados[$campo] . " != ANtigo " . $novaArrayDadosAntigos[$campo] ."</br>";
+                //ToDo: checar que Dado Mudou para salvar no Log do sistema (fazer uma função)
+                $novosDadosClienteArr = $this->buildArray($arrayFilha[0]);
+                $velhorDadosClienteArr = $this->buildArray($dadosClienteAntigoObj);
+                unset($novosDadosClienteArr['mostrar']);
+                unset($velhorDadosClienteArr['mostrar']);
+                unset($novosDadosClienteArr['data_inclusao']);
+                unset($velhorDadosClienteArr['data_inclusao']);
+
+                foreach ($novosDadosClienteArr as $campo => $valor) {
+                    if ($novosDadosClienteArr[$campo] != $velhorDadosClienteArr[$campo]) {
+                       
+                        //ToDo: lançar o dado Alterado no LOG do sistema
+                        echo "O campo ".$novosDadosClienteArr[$campo]  ." SÂO diferentes " .$velhorDadosClienteArr[$campo] . "</br>";
                     }
-                    
                 }
-                
-                // unset($novaArrayDadosAntigos['mostrar']);
-                // var_dump($novaArrayDadosAntigos);
 
                 if ($this->atualizarBD($arrayFilha[0][0])) {
                     LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id']}</b> <b><span>Alterado</span></b> no Sistema", "tec");
@@ -282,12 +276,12 @@ class ClienteCtrl {
 
     private function selecionaFilha(Array $dados) {
         if (empty($dados['tipo'])) { //se tipo esta embranco é PJ se existe é PF
-            $obj = new ClientePJ($dados['id'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $obj = new ClientePJ($dados['id'], $dados['usuario'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
             $flag_teste = $this->checkCNPJ($dados);
             //$array[] = array($obj, $flag_teste);
             return array($obj, $flag_teste);
         } else {
-            $obj = new ClientePF($dados['id'], $dados['Login'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $obj = new ClientePF($dados['id'], $dados['usuario'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
             $flag_teste = $this->checkCPF($dados);
             return array($obj, $flag_teste);
         }
@@ -326,6 +320,22 @@ class ClienteCtrl {
         } else {
             return FALSE;
         }
+    }
+    /**
+     * Montar uma Nova Array com Dados do Objeto Cliente
+     * @param Cliente $obj = passar uma Instancia deste tipo para inserir no BD
+     * @return Array = retorna uma nova Array
+     */
+    private function buildArray($obj) {
+        $novaArray[] = "";
+        $objArray = (array) $obj[0];
+        foreach ($objArray as $campo => $valor) {               
+            $campo = str_replace("\0Cliente\0", "", $campo);
+            $campo = str_replace("\0ClientePJ\0", "", $campo);
+            $campo = str_replace("\0ClientePF\0", "", $campo);
+            $novaArray[$campo] = $valor;
+        }
+        return $novaArray;
     }
 
 }
