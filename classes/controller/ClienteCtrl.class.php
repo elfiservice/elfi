@@ -87,24 +87,13 @@ class ClienteCtrl {
             
             if ($arrayFilha[0][1] == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
 
-                //ToDo: checar que Dado Mudou para salvar no Log do sistema (fazer uma função)
-                $novosDadosClienteArr = $this->buildArray($arrayFilha[0]);
-                $velhorDadosClienteArr = $this->buildArray($dadosClienteAntigoObj);
-                unset($novosDadosClienteArr['mostrar']);
-                unset($velhorDadosClienteArr['mostrar']);
-                unset($novosDadosClienteArr['data_inclusao']);
-                unset($velhorDadosClienteArr['data_inclusao']);
+                //checa qualis Dados Mudarão para salvar no Log do sistema
+                $stringDadosAlterados =  $this->registrarAlteracao($arrayFilha, $dadosClienteAntigoObj);
 
-                foreach ($novosDadosClienteArr as $campo => $valor) {
-                    if ($novosDadosClienteArr[$campo] != $velhorDadosClienteArr[$campo]) {
-                       
-                        //ToDo: lançar o dado Alterado no LOG do sistema
-                        echo "O campo ".$novosDadosClienteArr[$campo]  ." SÂO diferentes " .$velhorDadosClienteArr[$campo] . "</br>";
-                    }
-                }
+                //ToDo: Salvar Dados Alterados em uma tabela de Historico Clientes.
 
                 if ($this->atualizarBD($arrayFilha[0][0])) {
-                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id']}</b> <b><span>Alterado</span></b> no Sistema", "tec");
+                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id']}</b> <b><span>Alterado</span></b> no Sistema:<br>{$stringDadosAlterados}", "tec");
                     $this->result = array("<b>OK!</b> Cliente <b>Atualizado</b> com sucesso.", WS_ACCEPT);
                     return TRUE;
                 } else {
@@ -336,6 +325,26 @@ class ClienteCtrl {
             $novaArray[$campo] = $valor;
         }
         return $novaArray;
+    }
+
+    private function registrarAlteracao($objAlterado, $objAnterior) {
+        $novosDadosClienteArr = $this->buildArray($objAlterado[0]);
+        $velhorDadosClienteArr = $this->buildArray($objAnterior);
+        unset($novosDadosClienteArr['mostrar']);
+        unset($velhorDadosClienteArr['mostrar']);
+        unset($novosDadosClienteArr['data_inclusao']);
+        unset($velhorDadosClienteArr['data_inclusao']);
+
+        $dadosAlterados = "";
+        foreach ($novosDadosClienteArr as $campo => $valor) {
+            if ($novosDadosClienteArr[$campo] != $velhorDadosClienteArr[$campo]) {
+               
+                //ToDo: lançar o dado Alterado no LOG do sistema
+                $dadosAlterados .= "- O campo <i>" . $campo . "</i> passou de " . $velhorDadosClienteArr[$campo] . " para <b>" . $novosDadosClienteArr[$campo] . "</b></br>";
+               
+            }
+        }
+       return $dadosAlterados;
     }
 
 }
