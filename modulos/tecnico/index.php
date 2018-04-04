@@ -1,6 +1,15 @@
 <?php
 require '../../classes/Config.inc.php';
-session_start();
+if (!session_id()) {
+    session_start();
+}
+
+$login = new Login();
+if (!$login->checkLogin()) {
+    header("Location: ../../conectar.php");
+} else {
+    $userlogin = $login->getSession();
+}
 
 $menu = filter_input(INPUT_GET, 'id_menu', FILTER_DEFAULT);
 $modulo = filter_input(INPUT_GET, 'modulo', FILTER_DEFAULT);
@@ -38,15 +47,7 @@ $file_folder = strtoupper(basename(__DIR__));
 
         <div  style="background: url(../../imagens/topo1.png) repeat-x;  padding:5px 0px 30px 0px;"> </div>
 
-        <?php
-//------ CHECK IF THE USER IS LOGGED IN OR NOT AND GIVE APPROPRIATE OUTPUT -------
-        $login = (!empty($login) ? $login : $login = new Login());
-        if (!$login->checkLogin()) {
-            header("Location: conectar.php");
-        } else {
-            $userlogin = $login->getSession();
-        }
-        ?>
+
 
         <h2 style="text-align: center;" ><?= $file_folder ?></h2>
         <a class="  " href="?id_menu=notificacoes&idc=<?= $userlogin->getId() ?>&setor=tec"><div id="j_notificacao" class="w3-badge w3-red"> </div></a>
