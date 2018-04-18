@@ -163,10 +163,6 @@ if (!empty($cliente->mediaSatisfacao($clienteFinal->getId()))) {
                     <th>Serviço</th>
                     <TH>Valor</TH>
 
-
-
-
-
                 </TR>
             </thead>
             <tbody>
@@ -240,7 +236,40 @@ if (!empty($cliente->mediaSatisfacao($clienteFinal->getId()))) {
         </TABLE>
         <?php echo "Valor Total dos Orçamentos Executados: <b>R$ " . number_format($valor_total, 2, ',', '.') . "</b>"; ?>
     </fieldset>	
-
+    <fieldset>
+        <legend><b>Histórico de Alterações </b></legend>
+        
+        <table class="display" id="example2"  >
+            <thead>
+                <TR>
+                    <TH>Cod</TH>
+                    <TH>Alteração</TH>
+                    <th>Data</th>
+                </TR>
+            </thead>
+            <tbody>
+                <?php
+                    $historicoClientesCtrl = new HistoricoClientesCtrl();
+                    $historicoDoCliente = $historicoClientesCtrl->buscarBD("*", "WHERE id_cliente = '" . $clienteFinal->getId() . "' ORDER BY id Desc");
+                                       
+                    if ($historicoDoCliente) {
+                        foreach ($historicoDoCliente as $historico) {
+                ?>
+                <tr>
+                    <td><?= $historico->getId() ?></td>
+                    <td><?= $historico->getAlteracao() ?></td>
+                    <td><?= Formatar::formatarDataComHora($historico->getData())  ?></td>                   
+                </tr>
+                
+                <?php
+                            
+                        }
+                    }
+                ?>
+                
+            </tbody>
+        </table>
+    </fieldset>
 </section>
 
 

@@ -93,11 +93,11 @@ class ClienteCtrl {
                 $stringDadosAlterados =  $this->registrarAlteracao($arrayFilha, $dadosClienteAntigoObj);
 
                 if ($this->atualizarBD($arrayFilha[0][0])) {
-                    $idColab = $dados['id'];
-                    $alteracaoCliente = "<b><span>Alterado</span></b> no Sistema:<br>{$stringDadosAlterados}";
-                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$idColab}</b> {$alteracaoCliente}", "tec");
+                    $idCliente = $dados['id'];
+                    $alteracaoCliente = "<b><span>Alterado</span></b> pelo colaborador <b> {$dados['usuario']} </b> no Sistema:<br>{$stringDadosAlterados}";
+                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$idCliente}</b> {$alteracaoCliente}", "tec");
                     
-                    $this->historicoClienteCtrl->inserirBD(new HistoricoClientes("", $idColab, $alteracaoCliente, date('Y-m-d H:i:s')));
+                    $this->historicoClienteCtrl->inserirBD(new HistoricoClientes("", $idCliente, $alteracaoCliente, date('Y-m-d H:i:s')));
                     
                     $this->result = array("<b>OK!</b> Cliente <b>Atualizado</b> com sucesso.", WS_ACCEPT);
                     return TRUE;
