@@ -4,9 +4,11 @@ class ClienteCtrl {
 
     private $clienteDao;
     private $result;
+    private $historicoClienteCtrl;
 
     public function ClienteCtrl() {
         $this->clienteDao = new ClienteDAO();
+        $this->historicoClienteCtrl = new HistoricoClientesCtrl();
     }
 
     public function getResult() {

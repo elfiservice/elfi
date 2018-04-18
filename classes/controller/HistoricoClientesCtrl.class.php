@@ -11,7 +11,7 @@
  *
  * @author armandojunior
  */
-class HistoricoClientes extends CRUDAbstractCtrl {
+class HistoricoClientesCtrl extends CRUDAbstractCtrl {
     
     private $clienteDao;
 
