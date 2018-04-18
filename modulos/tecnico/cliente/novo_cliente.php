@@ -90,7 +90,7 @@ DESABILITAR CAMPOS COM CHECKBOX
 $clienteCtrl = new ClienteCtrl();
 if (filter_has_var(INPUT_POST, "salvar_novo_cliente")) {
     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-    $dados['Login'] = Formatar::prefixEmail($userlogin->getLogin());
+    $dados['usuario'] = Formatar::prefixEmail($userlogin->getLogin());
     $dados['id_colab_logado'] = $userlogin->getId();
 
     if ($clienteCtrl->inserirCliente($dados)) {
@@ -281,7 +281,7 @@ foreach ($estados as $row) {
         </table>
         <hr>
         <input type="submit" value="Salvar" name="salvar_novo_cliente" /> 
-        <input type="hidden" name="usuario" value="<?= $userlogin->getId(); ?>" />
+<!--        <input type="hidden" name="usuario" value="<?= $userlogin->getId(); ?>" />-->
 
     </form>
 
