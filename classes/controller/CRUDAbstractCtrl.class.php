@@ -7,7 +7,16 @@
  * @author Armando JR. ELFISERVICE
  */
 abstract class CRUDAbstractCtrl {
-    //put your code here
+    
+     /**
+     * Fazer SELECT no BD na tabela
+     * @param string $campos = Campos do BD a serem pesquisados
+     * @param string $termos = Termos para Filtrar a Busca no BD (WHERE, etc)
+     * @return Array do tipo --><b>Entidade (model)</b><-- se encontrar resultados, se não retorna NULL
+     */
+    public function buscarBD($campos, $termos, $dao) {
+        return $dao->select($campos, $termos);
+    }
     
      /**
      * Fazer INSERT no BD
