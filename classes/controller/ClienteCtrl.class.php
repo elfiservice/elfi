@@ -92,10 +92,13 @@ class ClienteCtrl {
                 //checa qualis Dados Mudarão para salvar no Log do sistema
                 $stringDadosAlterados =  $this->registrarAlteracao($arrayFilha, $dadosClienteAntigoObj);
 
-                //ToDo: Salvar Dados Alterados em uma tabela de Historico Clientes.
-
                 if ($this->atualizarBD($arrayFilha[0][0])) {
-                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$dados['id']}</b> <b><span>Alterado</span></b> no Sistema:<br>{$stringDadosAlterados}", "tec");
+                    $idColab = $dados['id'];
+                    $alteracaoCliente = "<b><span>Alterado</span></b> no Sistema:<br>{$stringDadosAlterados}";
+                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$idColab}</b> {$alteracaoCliente}", "tec");
+                    
+                    $this->historicoClienteCtrl->inserirBD(new HistoricoClientes("", $idColab, $alteracaoCliente, date('Y-m-d H:i:s')));
+                    
                     $this->result = array("<b>OK!</b> Cliente <b>Atualizado</b> com sucesso.", WS_ACCEPT);
                     return TRUE;
                 } else {

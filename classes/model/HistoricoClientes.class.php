@@ -1,6 +1,4 @@
 <?php
-echo 'aqui';
-
 /**
  * HistoricoClientes.class [ MODEL ]
  * Modelar dados da Tablea historico_clientes

@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of HistoricoClientes
  *
@@ -15,12 +9,29 @@ class HistoricoClientesCtrl extends CRUDAbstractCtrl {
     
     private $clienteDao;
 
-    public function HistoricoClientes() {
+    public function HistoricoClientesCtrl() {
         $this->clienteDao = new HistoricoClientesDAO();
     }
     
-    public function inserirBD($obj) {
-        return parent::inserirBD($obj, $this->clienteDao);
+    public function inserirBD($obj, $dao = null) {
+        $daoResult = $this->clienteDao;
+        if($dao) {
+            $daoResult = $dao;
+        }
+        return parent::inserirBD($obj, $daoResult);
+    }
+    
+    //--------------------------------------------------
+    //----------------PRIVATES---------------------
+    //--------------------------------------------------
+    private function montarObjeto($arrayDados) {
+        $arrayObj = array();
+        foreach ($arrayDados as $dado) {
+            extract($dado);
+            $arrayObj[] = new HistoricoClientes($id, $id_cliente, $alteracao, $data);
+        }
+
+        return $arrayObj;
     }
 
 }

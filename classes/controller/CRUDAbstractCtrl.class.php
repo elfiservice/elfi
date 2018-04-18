@@ -10,8 +10,8 @@ abstract class CRUDAbstractCtrl {
     //put your code here
     
      /**
-     * Fazer INSERT no BD na tabela = logs
-     * @param Log $obj = passar uma Instancia deste tipo para inserir no BD
+     * Fazer INSERT no BD
+     * @param Object $obj = passar uma Instancia de um Objeto para inserir no BD
      * @return boolean = TRUE se Sucesso ao inserir dados no BD e FALSE se houver algum problema na INSERÇÃO ou se o OBJETO não foi passado corretamente
      */
     public function inserirBD($obj, $dao) {
@@ -22,16 +22,11 @@ abstract class CRUDAbstractCtrl {
                 $campo = str_replace("\0{$nomeDaClasse}\0", "", $campo);
                 $campoArr[$campo] = $campo;
             }
-            //  var_dump($campoArr);
-            //unset($campoArr['id']);
-            $arrObj = array_values((array) $obj);
 
-            //unset($arrObj[0]);
+            $arrObj = array_values((array) $obj);
 
             $campoArr = implode(', ', array_keys($campoArr));
             $valores = " '" . implode("','", array_values($arrObj)) . "' ";
-            //var_dump($campoArr,$valores);
-            //$logDao = new LogDAO();
 
             if ($dao->insert($campoArr, $valores)) {
                 return TRUE;
