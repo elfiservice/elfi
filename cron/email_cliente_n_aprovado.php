@@ -51,7 +51,7 @@ foreach ($anosOrcamentosArr as $orc => $l) {
                         fwrite($f, $linha, strlen($linha));
                         fclose($f);
                     } else {
-                        $echoResult .= "ERROr - {$row ['razao_social_contr']} ORC {$row ['n_orc']}<br>";
+                        $echoResult .= "<span style='color: red' >ERROr</span> - {$row ['razao_social_contr']} ORC {$row ['n_orc']}<br>";
                         $countErr++;
                     }
                 }
@@ -72,6 +72,8 @@ $emailToAdmin = new EmailGenerico(array(EMAIL_ADMIN), "Relatório Orçamento Agu
 
 if ($emailToAdmin->enviarEmailSMTP()) {
     echo "email com relatorio enviado para " . EMAIL_ADMIN . "<br>";
+} else {
+    echo "ERROr ao tentar enviar email com relatorio enviado para " . EMAIL_ADMIN . "<br>";
 }
 echo $echoResult;
 
