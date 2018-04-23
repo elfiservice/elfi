@@ -110,9 +110,9 @@ if ($form && $form['salvar_orc']) {
                         . "<p> Ela foi marcada como <b>\"Concluída\"</b>, tendo seu inicio em <b>{$dataInicioBr}</b> e seu término em <b>{$dataConcluidoBr}</b> </p><br>"
                         . "Por favor, nos dê seu parecer sobre nosso atendimento, será de grande ajuda para o desenvolvimento de nossa parceria.<br><br>"
                         . "Apenas acesse o Link abaixo ou copie e cole no navegar:<br>"
-                        . "<a href=\"{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente}\" >"
-                        . "{$www}/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente} </a> <br>";
-                $email = new EmailGenerico($listaEmailClienteConcluido, "Proposta Concluida!", $textoCorpo, array(), $listaEmails);
+                        . "<a href=\"{$www}/modulos/tecnico/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente}\" >"
+                        . "{$www}/modulos/tecnico/orcamento/aprovados/pesquisa_pos_venda.php?ido={$id_orc}&idc={$id_cliente} </a> <br>";
+                $email = new EmailGenerico($listaEmailClienteConcluido, "Proposta Concluida!", $textoCorpo, array(), array("junior@elfiservice.com.br"));
                 if ($email->enviarEmailSMTP()) {
                     WSErro("Enviado email informando Alteração para {$orcObj->getEmailContrat()}, informando Data da Conclusão!", WS_ALERT);
                 } else {
