@@ -38,7 +38,7 @@ class ClienteCtrl {
             $id = $obj->getId();
 
             foreach ((array) $obj as $campo => $valor) {
-                if (!$valor == NULL || !$valor == "" || $valor == "0") {
+                if (!$valor == NULL || $valor == "" || $valor == "0") {
                     $campo = str_replace("\0Cliente\0", "", $campo);
                     $campo = str_replace("\0{$filha}\0", "", $campo);
                     $camposDados[] = $campo . " = '" . $valor . "'";
@@ -84,11 +84,12 @@ class ClienteCtrl {
         $dados['cidade'] = $cidade[0]['nome'];
 
         if ($dados["salvar_editar_cliente"]) {
+            $dados['mostrar'] = "1";
             unset($dados["salvar_editar_cliente"]);
             $arrayFilha[] = $this->selecionaFilha($dados);
             
             if ($arrayFilha[0][1] == FALSE && $this->checkRazaoFantasia($dados) == FALSE) {
-
+                
                 //checa qualis Dados Mudarão para salvar no Log do sistema
                 $stringDadosAlterados =  $this->registrarAlteracao($arrayFilha, $dadosClienteAntigoObj);
 
@@ -270,12 +271,12 @@ class ClienteCtrl {
 
     private function selecionaFilha(Array $dados) {
         if (empty($dados['tipo'])) { //se tipo esta embranco é PJ se existe é PF
-            $obj = new ClientePJ($dados['id'], $dados['usuario'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $obj = new ClientePJ($dados['id'], $dados['usuario'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PJ", "", Formatar::limpaCPF_CNPJ($dados['cnpj']), Formatar::limpaCPF_CNPJ($dados['ie']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], ($dados['mostrar'] ? $dados['mostrar'] : NULL));
             $flag_teste = $this->checkCNPJ($dados);
             //$array[] = array($obj, $flag_teste);
             return array($obj, $flag_teste);
         } else {
-            $obj = new ClientePF($dados['id'], $dados['usuario'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], NULL);
+            $obj = new ClientePF($dados['id'], $dados['usuario'], $dados['razao_social'], $dados['nome_fantasia'], "padrao", "PF", "", Formatar::limpaCPF_CNPJ($dados['cpf']), $dados['endereco'], $dados['bairro'], $dados['estado'], $dados['cidade'], $dados['cep'], $dados['phone'], $dados['cel'], $dados['fax'], $dados['email_tec'], $dados['email_admin'], ($dados['mostrar'] ? $dados['mostrar'] : NULL));
             $flag_teste = $this->checkCPF($dados);
             return array($obj, $flag_teste);
         }
