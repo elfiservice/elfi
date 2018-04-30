@@ -113,6 +113,16 @@ legend{    font-size: 18px;   font-weight: bold;  }
 .trigger.alert{background-color: #FFF6BF; border-color: #FCEB77;}
 .trigger.error{background-color: #FAD0D0; border-color: #F6ABAB;}
 
+/**************************************
+/************ CSS TEXTs - stilos para textos *************
+**************************************/
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-line-through {
+    text-decoration: line-through;
+}
 
 .text-left{text-align: left;}
 .tableComum{

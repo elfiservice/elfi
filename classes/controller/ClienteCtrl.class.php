@@ -94,8 +94,8 @@ class ClienteCtrl {
 
                 if ($this->atualizarBD($arrayFilha[0][0])) {
                     $idCliente = $dados['id'];
-                    $alteracaoCliente = "<b><span>Alterado</span></b> pelo colaborador <b> {$dados['usuario']} </b> no Sistema:<br>{$stringDadosAlterados}";
-                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente Cod <b>{$idCliente}</b> {$alteracaoCliente}", "tec");
+                    $alteracaoCliente = "<b><span>Alterado</span></b> no Sistema:<br>{$stringDadosAlterados}";
+                    LogCtrl::inserirLog($dados['id_colab_logado'], "Cliente {$dados['razao_social']} de Cod <b>{$idCliente}</b> foi {$alteracaoCliente}", "tec");
                     
                     $this->historicoClienteCtrl->inserirBD(new HistoricoClientes("", $idCliente, $alteracaoCliente, date('Y-m-d H:i:s')));
                     
@@ -344,8 +344,7 @@ class ClienteCtrl {
         foreach ($novosDadosClienteArr as $campo => $valor) {
             if ($novosDadosClienteArr[$campo] != $velhorDadosClienteArr[$campo]) {
                
-                //ToDo: lançar o dado Alterado no LOG do sistema
-                $dadosAlterados .= "- O campo <i>" . $campo . "</i> passou de " . $velhorDadosClienteArr[$campo] . " para <b>" . $novosDadosClienteArr[$campo] . "</b></br>";
+                $dadosAlterados .= "- O campo <i>" . $campo . "</i> passou de <span class=\"text-line-through\">" . ($velhorDadosClienteArr[$campo] != "" ?  $velhorDadosClienteArr[$campo] : "<i>em branco</i>") . "</span> para <span class=\"text-underline\"><b>" . ($novosDadosClienteArr[$campo] != "" ?  $novosDadosClienteArr[$campo] : "<i>em branco</i>") . "</b></span></br>";
                
             }
         }

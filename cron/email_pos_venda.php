@@ -43,8 +43,8 @@ foreach ($anosOrcamentosArr as $orc => $l) {
                                 . "<a href=\"{$www}/modulos/tecnico/orcamento/aprovados/pesquisa_pos_venda.php?ido={$row ['id']}&idc={$row ['id_cliente']}\" >"
                                 . "{$www}/modulos/tecnico/orcamento/aprovados/pesquisa_pos_venda.php?ido={$row ['id']}&idc={$row ['id_cliente']} </a> <br>";
 
-                        //$emailCopiaOculta = array();
-                        $emailCopiaOculta = array(EMAIL_ADMIN);
+                        $emailCopiaOculta = array();
+                        //$emailCopiaOculta = array(EMAIL_ADMIN);
                         $email2 = new EmailGenerico($emailTo, $assunto, $textoCorpo, array(), $emailCopiaOculta);
                         
                         $textoNomeClienteEOrc = "{$row ['razao_social_contr']} ORC {$row ['n_orc']}";
