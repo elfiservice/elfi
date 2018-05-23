@@ -305,8 +305,6 @@ td.input2 {
 }
 
 
-
-
 /*Campo de Procurar na Tabela de dados */
 .inputProcurar {
     width: 50%;
@@ -434,8 +432,6 @@ fieldset{
 /* -------- formatação BOtão LINK geral --------------*/
 
 .bt_link:link, .bt_link:visited{
-
-
     padding: 8px 10px 10px 10px;
     text-align: center;	
     text-decoration: none;

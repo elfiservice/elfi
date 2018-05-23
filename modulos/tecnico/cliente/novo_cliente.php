@@ -83,6 +83,15 @@ DESABILITAR CAMPOS COM CHECKBOX
 <div>
     <h2><?php include_once 'cliente/includes/nav_wizard.php'; ?> -> Novo</h2>
 </div>
+
+<div style="padding-bottom: 0px;" class="alinhamentoHorizontal">
+    <ul>
+        <li>
+            <a class="bt_link"  href="https://elfiservice.github.io/clean-cnpj-app/" target="_blank" title="Consultar CNPJ">Consultar CNPJ</a>
+        </li>
+    </ul>
+</div>
+
 <hr>
 
 
