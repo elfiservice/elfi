@@ -183,7 +183,11 @@ if (!empty($cliente->mediaSatisfacao($clienteFinal->getId()))) {
                         $valor_total = $valor_total + $valor_orc;
                         ?>
                         <TR>
-                            <TD align="center"> <?= $n_orc . '.' . $ano_orc ?> </TD>
+                            <td align="center">
+                                <a href="#" class="" onclick="window.open('orcamento/imprimir_orc.php?id_orc=<?= $id_orc; ?>', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=yes, SCROLLBARS=YES, TOP=10, LEFT=10');">
+                                    <?= $n_orc . '.' . $ano_orc ?> 
+                                </a>
+                            </td>
                             <td>
                                 <?php
                                 if ($row['situacao_orc'] == "Aguardando aprovação") {
